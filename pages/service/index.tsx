@@ -1,5 +1,13 @@
-const ServicePage = () => {
-  return <div>SERVICE PAGE</div>;
+import withLayoutBasic from "@/libs/components/layout/LayoutBasic";
+import { Container, Stack } from "@mui/material";
+import { NextPage } from "next";
+
+const ServicePage: NextPage = () => {
+  return (
+    <>
+      <Container>SERVICE PAGE</Container>
+    </>
+  );
 };
 
-export default ServicePage;
+export default withLayoutBasic(ServicePage);

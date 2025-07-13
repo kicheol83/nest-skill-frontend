@@ -1,5 +1,13 @@
-const ServicePageDetail = () => {
-  return <div>SERVICE PAGE DETAIL</div>;
+import withLayoutOther from "@/libs/components/layout/LayoutOther";
+import { Container, Stack } from "@mui/material";
+import { NextPage } from "next";
+
+const ServicePageDetail: NextPage = () => {
+  return (
+    <>
+      <Container>SERVICE PAGE DETAIL</Container>
+    </>
+  );
 };
 
-export default ServicePageDetail;
+export default withLayoutOther(ServicePageDetail);
