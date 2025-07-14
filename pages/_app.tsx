@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { dark, light } from "../scss/MaterialTheme";
 import { useEffect, useMemo, useState } from "react";
+import "../scss/app.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [mode, setMode] = useState<"light" | "dark">("light");
