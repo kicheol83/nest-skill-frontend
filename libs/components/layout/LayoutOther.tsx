@@ -3,6 +3,9 @@ import Head from "next/head";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import Footer from "../Footer";
+import Top from "../Top";
+import HeaderFilter from "../homepage/HeaderFilter";
 
 const withLayoutOther = (Component: any) => {
   return (props: any) => {
@@ -13,11 +16,10 @@ const withLayoutOther = (Component: any) => {
         </Head>
         <Stack id="pc-wrap">
           <Stack id={"top"}>
-            {/* <Top /> */}
-            Header Other
+            <Top />
           </Stack>
           <Stack className="header-main">
-            <Stack className="container">{/* <HeaderFilter /> */}</Stack>
+            <Stack className="container"><HeaderFilter /></Stack>
           </Stack>
 
           <Stack id="main">
@@ -25,8 +27,7 @@ const withLayoutOther = (Component: any) => {
           </Stack>
 
           <Stack id={"footer"}>
-            {/* <Footer /> */}
-            Footer
+            <Footer />
           </Stack>
         </Stack>
       </>

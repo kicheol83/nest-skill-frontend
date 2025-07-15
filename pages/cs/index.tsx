@@ -2,12 +2,12 @@ import withLayoutBasic from "@/libs/components/layout/LayoutBasic";
 import { Container, Stack } from "@mui/material";
 import { NextPage } from "next";
 
-const ServicePage: NextPage = () => {
+const CS: NextPage = () => {
   return (
     <>
-      <Container></Container>
+      <Container>CS PAGE</Container>
     </>
   );
 };
 
-export default withLayoutBasic(ServicePage);
+export default withLayoutBasic(CS);
