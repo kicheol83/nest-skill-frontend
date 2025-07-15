@@ -118,7 +118,7 @@ const Top = () => {
                     height={17}
                   />
                 </Box>
-                <CaretDown size={15} color="#333" />
+                <CaretDown size={15} color="#fff" />
               </Button>
 
               <Menu
