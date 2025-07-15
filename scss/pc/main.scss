@@ -385,8 +385,256 @@
         }
       }
     }
-    #footer {
-      background: rgb(15, 160, 152);
+  }
+  #footer {
+    .footer-main {
+      .footer-frame {
+        position: relative;
+        width: auto;
+        height: 497px;
+        flex: none;
+        order: 6;
+        flex-grow: 0;
+        margin: 0px 0px;
+        background: rgb(32, 36, 48);
+        .container {
+          margin-top: 64px;
+          flex-direction: row;
+          //   justify-content: space-around;
+          .app-name {
+            display: flex;
+            flex-direction: column;
+            .skill-logo {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+            }
+            p {
+              width: 120px;
+              height: 36px;
+              margin-left: 7px;
+              color: rgb(255, 255, 255);
+              font-family: $font-heading;
+              font-size: 24px;
+              font-weight: 700;
+              line-height: 150%;
+              letter-spacing: -1%;
+              text-align: left;
+            }
+            .title {
+              position: relative;
+              width: 376px;
+              height: 78px;
+              margin-top: 40px;
+
+              color: rgb(214, 221, 235);
+              font-family: $font-body;
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: left;
+            }
+          }
+          .about {
+            margin-left: 88px;
+            display: flex;
+            flex-direction: column;
+            .about-txt {
+              position: relative;
+              width: 55px;
+              height: 29px;
+              color: rgb(255, 255, 255);
+              font-family: $font-body;
+              font-size: 18px;
+              font-weight: 600;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: left;
+            }
+            .text {
+              margin-top: 17px;
+              position: static;
+              width: auto;
+              height: 26px;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              padding: 0px;
+              flex: none;
+              order: 0;
+              flex-grow: 0;
+              color: rgb(214, 221, 235);
+              font-family: $font-body;
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: left;
+            }
+          }
+          .get-job {
+            display: flex;
+            flex-direction: column;
+            margin-left: 71px;
+            position: relative;
+            width: auto;
+            height: auto;
+            .job-title {
+              width: auto;
+              height: 29px;
+              color: rgb(255, 255, 255);
+              font-family: $font-body;
+              font-size: 18px;
+              font-weight: 600;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: left;
+            }
+            .text {
+              margin-top: 60px;
+              position: absolute;
+              width: 306px;
+              height: 52px;
+              color: rgb(214, 221, 235);
+              font-family: $font-body;
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: left;
+            }
+            .subscribe-wrapper {
+              margin-top: 120px;
+              width: fit-content;
+              height: 45px;
+              border-radius: 20px;
+              padding: 5px;
+              display: flex;
+              align-items: center;
+              background-color: #fff;
+            }
+            .subscribe-icon {
+              width: 30px;
+              fill: rgb(0, 0, 0);
+              color: rgb(0, 0, 0);
+              margin-left: 8px;
+              transition: all 0.3s;
+            }
+            .subscribe-input {
+              max-width: 170px;
+              height: 100%;
+              border: none;
+              outline: none;
+              padding-left: 15px;
+              background-color: transparent;
+              color: rgb(0, 0, 0);
+              font-size: 1em;
+              &:-webkit-autofill {
+                -webkit-box-shadow: 0 0 0px 1000px #292524 inset;
+                -webkit-text-fill-color: #000000;
+              }
+            }
+            .subscribe-btn {
+              height: 100%;
+              width: 95px;
+              border: none;
+              border-radius: 15px;
+              background-color: rgb(221, 219, 219);
+              color: black;
+              font-weight: 500;
+              cursor: pointer;
+              position: relative;
+              overflow: hidden;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.3s;
+              &:hover {
+                color: white;
+                background-color: #444;
+                .subscribe-arrow {
+                  margin-right: 0;
+                  animation: jello-vertical 0.9s both;
+                  transform-origin: right;
+                }
+              }
+              &:active {
+                transform: scale(0.9);
+              }
+            }
+            .subscribe-arrow {
+              position: absolute;
+              margin-right: 150px;
+              transition: all 0.3s;
+              fill: currentColor;
+            }
+            .subscribe-wrapper:active .subscribe-icon {
+              transform: scale(1.3);
+            }
+            @keyframes jello-vertical {
+              0% {
+                transform: scale3d(1, 1, 1);
+              }
+              30% {
+                transform: scale3d(0.75, 1.25, 1);
+              }
+              40% {
+                transform: scale3d(1.25, 0.75, 1);
+              }
+              50% {
+                transform: scale3d(0.85, 1.15, 1);
+              }
+              65% {
+                transform: scale3d(1.05, 0.95, 1);
+              }
+              75% {
+                transform: scale3d(0.95, 1.05, 1);
+              }
+              100% {
+                transform: scale3d(1, 1, 1);
+              }
+            }
+          }
+        }
+
+        .container {
+          .bot-line {
+            position: relative;
+            width: 1300px;
+            height: 0;
+            border: 2px solid rgb(255, 255, 255);
+            opacity: 0.1;
+          }
+          .bot {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            span {
+              margin-top: 43px;
+              position: relative;
+              width: auto;
+              height: 26px;
+              color: rgb(255, 255, 255);
+              font-family: $font-body;
+              font-size: 16px;
+              font-weight: 500;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: left;
+            }
+            .icons {
+              margin-top: 43px;
+              position: relative;
+              width: 256px;
+              height: 32px;
+              
+            }
+          }
+        }
+      }
     }
   }
 }
