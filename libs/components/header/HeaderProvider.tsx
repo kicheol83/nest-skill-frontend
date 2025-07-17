@@ -2,14 +2,14 @@ import { Box, Stack } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined";
 
-const HeaderBasic = () => {
+const HeaderProvider = () => {
   return (
     <>
       <Stack className="header-frame">
         <Box className="header-title">
           <div className="txt">
             <span className="find">Find your</span>
-            <span className="provider">dream service</span>
+            <span className="provider">dream provider</span>
           </div>
           <img
             src="/img/profile/blue-bottom-line.svg"
@@ -46,4 +46,4 @@ const HeaderBasic = () => {
   );
 };
 
-export default HeaderBasic;
+export default HeaderProvider;

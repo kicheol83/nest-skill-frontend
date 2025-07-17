@@ -453,7 +453,7 @@
             order: 1;
             flex-grow: 0;
             margin: 24px 0px;
-            color:#fff;
+            color: #fff;
             font-family: $font-body;
             font-size: 18px;
             font-weight: 400;
@@ -528,6 +528,156 @@
           }
           .search-button:hover {
             background-color: #4338ca;
+          }
+        }
+      }
+    }
+  }
+  .header-other {
+    position: static;
+    width: auto;
+    height: 514px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 0px;
+    background: rgba(222, 222, 241, 0.718);
+    .header-other-frame {
+      .container {
+        .router {
+          font-family: $font-body;
+          font-size: 25px;
+          font-weight: 400;
+          line-height: 160%;
+          letter-spacing: 0%;
+          text-align: left;
+          opacity: 0.80;
+        }
+        position: relative;
+        justify-content: center;
+        .job-apply-frame {
+          position: relative;
+          width: 1187px;
+          height: 139.24px;
+          left: 123.67px;
+          top: 210px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 16px;
+          padding: 24px;
+          box-sizing: border-box;
+          border: 1px solid rgb(214, 221, 235);
+          background: rgb(255, 255, 255);
+          .job.svg {
+            position: relative;
+            width: 80px;
+            height: 82.94px;
+            left: 4px;
+            top: 4.15px;
+          }
+          .job-title {
+            position: relative;
+            width: auto;
+            height: 78px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8;
+            padding: 0px;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+            .sc-txt {
+              position: relative;
+              width: 351px;
+              height: 38px;
+              gap: 8;
+              padding: 0px;
+              order: 0;
+              flex-grow: 0;
+              margin: 8px 0px;
+              color: rgb(37, 50, 75);
+              font-family: $font-heading;
+              font-size: 32px;
+              font-weight: 600;
+              line-height: 120%;
+              letter-spacing: 0%;
+              text-align: left;
+            }
+            .location-txt {
+              position: relative;
+              white-space: nowrap;
+              display: flex;
+              width: 60px;
+              height: 32px;
+              gap: 8;
+              padding: 0px;
+              order: 0;
+              flex-grow: 0;
+              color: rgb(81, 91, 111);
+              font-family: $font-body;
+              font-size: 20px;
+              font-weight: 400;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: left;
+            }
+          }
+          .icon-button {
+            position: relative;
+            width: 256px;
+            height: 58.06px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 30;
+            padding: 0px;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+            margin-left: 36%;
+            .share-icon {
+              position: relative;
+              width: 41px;
+              height: 36.29px;
+              left: 19px;
+              top: 0.74px;
+            }
+            div {
+              position: static;
+              width: 58.06px;
+              height: 0;
+              flex: none;
+              order: 1;
+              flex-grow: 0;
+              margin: 0px 9px;
+              transform: rotate(90deg);
+              border: 1px solid rgb(214, 221, 235);
+            }
+            .aplly-button {
+              position: relative;
+              width: 164px;
+              height: 57px;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              gap: 10;
+              padding: 14px 56px 14px 56px;
+              flex: none;
+              order: 2;
+              flex-grow: 0;
+              background: rgb(70, 64, 222);
+              color: rgb(255, 255, 255);
+              font-family: $font-body;
+              font-size: 18px;
+              font-weight: 700;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: center;
+            }
           }
         }
       }

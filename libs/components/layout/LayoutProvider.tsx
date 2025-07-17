@@ -5,10 +5,9 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Footer from "../Footer";
 import Top from "../Top";
-import HeaderFilter from "../header/HeaderFilter";
-import HeaderOther from "../header/HeaderOther";
+import HeaderProvider from "../header/HeaderProvider";
 
-const withLayoutOther = (Component: any) => {
+const withLayoutProvider = (Component: any) => {
   return (props: any) => {
     return (
       <>
@@ -19,9 +18,9 @@ const withLayoutOther = (Component: any) => {
           <Stack id={"top"}>
             <Top />
           </Stack>
-          <Stack className="header-other">
+          <Stack className="header-basic">
             <Stack className="container">
-              <HeaderOther />
+              <HeaderProvider />
             </Stack>
           </Stack>
 
@@ -38,4 +37,4 @@ const withLayoutOther = (Component: any) => {
   };
 };
 
-export default withLayoutOther;
+export default withLayoutProvider;
