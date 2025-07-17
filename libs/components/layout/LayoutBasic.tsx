@@ -4,8 +4,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Footer from "../Footer";
-import HeaderFilter from "../homepage/HeaderFilter";
+import HeaderFilter from "../header/HeaderFilter";
 import Top from "../Top";
+import HeaderBasic from "../header/HeaderBasic";
 
 const withLayoutBasic = (Component: any) => {
   return (props: any) => {
@@ -18,9 +19,9 @@ const withLayoutBasic = (Component: any) => {
           <Stack id={"top"}>
             <Top />
           </Stack>
-          <Stack className="header-main">
+          <Stack className="header-basic">
             <Stack className="container">
-              <HeaderFilter />
+              <HeaderBasic />
             </Stack>
           </Stack>
 

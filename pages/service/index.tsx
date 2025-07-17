@@ -5,7 +5,19 @@ import { NextPage } from "next";
 const ServicePage: NextPage = () => {
   return (
     <>
-      <Container></Container>
+      <Container>
+        <Stack flexDirection={"column"}>
+          <Stack>
+            <Stack className="container">BOX 1</Stack>
+          </Stack>
+          <Stack>
+            <Stack className="container">BOX 2</Stack>
+          </Stack>
+          <Stack>
+            <Stack className="container">BOX 3</Stack>
+          </Stack>
+        </Stack>
+      </Container>
     </>
   );
 };
