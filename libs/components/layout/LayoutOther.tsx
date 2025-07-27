@@ -5,7 +5,6 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Footer from "../Footer";
 import Top from "../Top";
-import HeaderFilter from "../header/HeaderFilter";
 import HeaderOther from "../header/HeaderOther";
 
 const withLayoutOther = (Component: any) => {
@@ -13,7 +12,7 @@ const withLayoutOther = (Component: any) => {
     return (
       <>
         <Head>
-          <title>Nest Skill</title>
+          <title>Skill Nest</title>
         </Head>
         <Stack id="pc-wrap">
           <Stack id={"top"}>

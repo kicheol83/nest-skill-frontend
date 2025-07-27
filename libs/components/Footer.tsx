@@ -78,7 +78,7 @@ const Footer = () => {
             <div className="bot-line"></div>
 
             <div className="bot">
-              <span>2025 @ Nest Skill. All rights reserved.</span>
+              <span>2025 @ Skill Nest. All rights reserved.</span>
               <div className="icons">
                 <FacebookOutlinedIcon
                   sx={{ color: "white", marginLeft: "80px" }}

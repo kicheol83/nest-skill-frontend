@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { CaretDown } from "phosphor-react";
 import React, { useEffect, useState, useCallback } from "react";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Top = () => {
   const router = useRouter();
@@ -94,7 +94,9 @@ const Top = () => {
             {/* Auth Links */}
             <Box className="auth-box">
               <Box className="user-avatar">
-                <AccountCircleIcon sx={{ color: "white", marginTop: "5px", marginRight: "5px"}} />
+                <AccountCircleIcon
+                  sx={{ color: "white", marginTop: "5px", marginRight: "5px" }}
+                />
               </Box>
 
               <Link href="/account/login" className="auth-link">

@@ -13,7 +13,7 @@ const withLayoutBasic = (Component: any) => {
     return (
       <>
         <Head>
-          <title>Nest Skill</title>
+          <title>Skill Nest</title>
         </Head>
         <Stack id="pc-wrap">
           <Stack id={"top"}>
