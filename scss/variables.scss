@@ -1,13 +1,14 @@
 /** VARIABLES **/
 
-@font-face {
-  font-family: "Clash Display";
-  src: url("/fonts/ClashDisplay-Variable.woff2") format("woff2");
-  font-weight: 200 700;
-  font-display: swap;
-}
+// @font-face {
+//   font-family: "Clash Display";
+//   src: url("/fonts/ClashDisplay-Variable.woff2") format("woff2");
+//   font-weight: 200 700;
+//   font-display: swap;
+// }
 
 @import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&display=swap");
 
-$font-heading: "Clash Display", sans-serif;
+$font-heading: "Space Grotesk", sans-serif;
 $font-body: "Epilogue", sans-serif;

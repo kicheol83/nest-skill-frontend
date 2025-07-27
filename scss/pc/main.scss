@@ -141,253 +141,204 @@
     position: relative;
     width: auto;
     height: 794px;
-    background-image: url("/img/banner/banner.webp");
+    background: rgb(248, 248, 253);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    overflow: hidden;
+    .rectangle {
+      position: absolute;
+      width: 283.38px;
+      height: 716.25px;
+      left: 1525.76px;
+      top: 555px;
+      transform: rotate(64deg);
+      background: rgb(255, 255, 255);
+      z-index: 1;
+    }
     .container {
       position: relative;
       margin-top: 20px;
       flex-direction: column;
-      align-items: center;
-      .search-box {
+      // align-items: center;
+      .header-title {
         position: relative;
-        margin-top: 615px;
-        padding: 16px 29px;
-        width: 1094px;
-        height: 96px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        box-shadow: 0px 2.71px 4.4px 0px rgba(192, 192, 192, 0.03),
-          0px 6.86px 11.12px 0px rgba(192, 192, 192, 0.04),
-          0px 14px 22.68px 0px rgba(192, 192, 192, 0.05),
-          0px 28.84px 46.72px 0px rgba(192, 192, 192, 0.06),
-          0px 79px 128px 0px rgba(192, 192, 192, 0.09);
-        background: #e0e0e0;
-        border-radius: 12px;
-        .select-box {
-          width: 712px;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-          .box {
-            padding: 24px 22px;
-            width: 213px;
-            margin-left: 20px;
-            height: 56px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.575);
-            box-sizing: border-box;
-            cursor: pointer;
-            &.on {
-              background: #ffffff;
-              border: 1px solid #000;
-              color: #181a20;
-            }
-            .span {
-              color: #181a20;
-              font-family: $font-body;
-              font-size: 14px;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 26px;
-            }
+        width: 533px;
+        height: 211px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        margin: 160px 0px;
+        .big-text {
+          position: relative;
+          width: 533px;
+          height: 237px;
+          left: 0;
+          top: 0;
+          font-family: $font-heading;
+          font-size: 72px;
+          font-weight: 600;
+          line-height: 110%;
+          letter-spacing: 0%;
+          text-align: left;
+          .blue-text {
+            color: rgb(38, 164, 255);
           }
         }
-        .search-box-other {
+        .small-text {
+          position: relative;
+          width: 521px;
+          height: 64px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          gap: 23;
+          padding: 0px;
+          flex: none;
+          order: 1;
+          flex-grow: 0;
+          margin: 23px 0px;
+          opacity: 0.7;
+          color: rgb(81, 91, 111);
+          font-family: $font-body;
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 160%;
+          letter-spacing: 0%;
+          text-align: left;
+        }
+      }
+      .banner {
+        position: absolute;
+        width: 860px;
+        height: 794px;
+        left: 700px;
+        top: 0;
+        z-index: 0;
+        .rec1 {
+          position: absolute;
+          width: 283.38px;
+          height: 716.25px;
+          left: 300.77px;
+          top: 400px;
+          transform: rotate(64deg);
+          box-sizing: border-box;
+          border: 4px solid rgb(204, 204, 245);
+          opacity: 0.7;
+          z-index: -1;
+        }
+        .rec2 {
+          position: absolute;
+          width: 319.78px;
+          height: 778.51px;
+          left: 380.77px;
+          top: 200px;
+          transform: rotate(64deg);
+          box-sizing: border-box;
+          border: 4px solid rgb(204, 204, 245);
+          opacity: 0.7;
+          z-index: -1;
+        }
+        .rec3 {
+          position: absolute;
+          width: 328.32px;
+          height: 796.2px;
+          left: 450.92px;
+          top: 10.56px;
+          transform: rotate(64deg);
+          box-sizing: border-box;
+          border: 4px solid rgb(204, 204, 245);
+          opacity: 0.7;
+          z-index: -1;
+        }
+        .rec4 {
+          position: absolute;
+          width: 192.2px;
+          height: 416.47px;
+          left: 330.75px;
+          top: 30.75px;
+          transform: rotate(64deg);
+          box-sizing: border-box;
+          border: 4px solid rgb(204, 204, 245);
+          opacity: 0.6;
+          z-index: -1;
+        }
+        img {
+          position: absolute;
+          width: 501px;
+          height: 707px;
+          left: 250px;
+          top: 87px;
+          z-index: 1;
+        }
+      }
+      .job-search-bar {
+        width: 100%;
+        max-width: 900px;
+        margin-top: 20px;
+        .search-fields {
           display: flex;
           flex-direction: row;
           align-items: center;
-          margin-left: 92px;
-          .advanced-filter {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            img {
-              margin-right: 10px;
-              width: 25px;
-              height: 22px;
-              cursor: pointer;
-            }
-            span {
-              color: #000000;
-              font-family: $font-body;
-              font-size: 20px;
-              font-style: normal;
-              font-weight: 600;
-              line-height: normal;
-              cursor: pointer;
+          justify-content: space-between;
+          gap: 1rem;
+          background: white;
+          padding: 1rem 1.5rem;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+          z-index: 2;
+          .search-input,
+          .location-select {
+            flex: 1;
+            min-width: 0;
+            .MuiOutlinedInput-root {
+              border-radius: 8px;
+              background-color: #f5f5fa;
+              height: 56px;
             }
           }
-          .search-btn {
-            margin-left: 12px;
-            width: 62px;
-            height: 62px;
+          .location-icon {
+            margin-right: 8px;
+            color: #666;
+          }
+          .search-button {
+            padding: 0 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 55px;
-            background: #f17742;
-            cursor: pointer;
-            img {
-              width: 20px;
-              height: 20px;
-              color: #ffffff;
-            }
-          }
-        }
-        .filter-location {
-          position: absolute;
-          padding: 40px 60px;
-          width: 1094px;
-          min-height: 120px;
-          height: auto;
-          top: 96px;
-          right: 0;
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          gap: 40px;
-          visibility: hidden;
-          border-radius: 12px;
-          background: #ffffff;
-          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-          box-sizing: border-box;
-          z-index: 2;
-          &.on {
-            visibility: visible;
-            transition: 0.2s ease-out;
-            background: #fffdfd;
-          }
-          div {
-            width: 295px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            img {
-              width: 122px;
-              height: 85px;
-              border-radius: 15px;
-              cursor: pointer;
-            }
-            span {
-              margin-left: 22px;
-              color: #181a20;
-              font-family: $font-body;
-              font-size: 20px;
-              font-style: 20px;
-              font-weight: 400px;
-              line-height: 26px;
-              cursor: pointer;
-              text-transform: capitalize;
-            }
-            label {
-              line-height: 13px;
-            }
-          }
-        }
-        .filter-type {
-          position: absolute;
-          padding: 50px;
-          width: 1094px;
-          min-height: 120px;
-          height: auto;
-          top: 96px;
-          right: 0px;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          visibility: hidden;
-          border-radius: 12px;
-          background: #fff;
-          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-          box-sizing: border-box;
-          z-index: 1;
-          &.on {
-            visibility: visible;
-            transition: 0.2 ease-out;
-            background: #fffdfd;
-          }
-          div {
-            position: relative;
-            width: 272px;
-            height: 168px;
-            border-radius: 15px;
-            cursor: pointer;
-            background-size: cover;
-            span {
-              position: absolute;
-              top: 13px;
-              right: 12px;
-              padding: 1px 5px 5px 5px;
-              border-radius: 2px 2px 0px 0px;
-              font-family: $font-body;
-              font-size: 20px;
-              font-style: normal;
-              font-weight: 700;
-              line-height: 26px;
-              background: linear-gradient(
-                180deg,
-                #fff 0%,
-                rgba(255, 255, 255, 0) 100%
-              );
-            }
-          }
-        }
-        .filter-rooms {
-          position: relative;
-          padding: 10px 92px;
-          width: 1094px;
-          min-height: 120px;
-          height: auto;
-          top: 96px;
-          right: 0;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-          visibility: hidden;
-          border-radius: 12px;
-          background: #fff;
-          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-          box-sizing: border-box;
-          z-index: 1;
-          &.on {
-            visibility: visible;
-            transition: 0.2s ease-out;
-            background: #fffdfd;
-          }
-          span {
-            display: flex;
-            align-items: center;
-            padding: 10px 30px;
-            border: 1px solid #fffdfd;
-            color: #181a20;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
             font-family: $font-body;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 26px;
+            background-color: #f0f0f0;
+            border: none;
             cursor: pointer;
+            line-height: 1;
+            box-sizing: border-box;
+            margin-bottom: 5px;
+            background-color: #f0f0f0;
             &:hover {
-              border-radius: 5px;
-              border: 1px solid #b9b9b9;
-              box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+              background: #007aff;
             }
           }
+        }
+        .popular-keywords {
+          margin-top: 0.75rem;
+          font-size: 0.9rem;
+          color: #666;
+          color: rgb(32, 36, 48);
+          font-family: $font-body;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 160%;
+          letter-spacing: 0%;
+          text-align: left;
         }
       }
     }
   }
   .header-basic {
-    position: static;
+    position: relative;
     width: auto;
     height: 514px;
     flex: none;
@@ -646,7 +597,7 @@
               top: 0.74px;
             }
             div {
-              position: static;
+              position: relative;
               width: 58.06px;
               height: 0;
               flex: none;
@@ -771,7 +722,7 @@
               flex-grow: 0;
               margin-top: 15px;
               .info-box {
-                position: static;
+                position: relative;
                 width: auto;
                 height: 52px;
                 display: flex;
@@ -907,7 +858,7 @@
             }
             .text {
               margin-top: 17px;
-              position: static;
+              position: relative;
               width: auto;
               height: 26px;
               display: flex;

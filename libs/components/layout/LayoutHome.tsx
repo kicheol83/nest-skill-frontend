@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import Head from "next/head";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -20,7 +20,30 @@ const withLayoutMain = (Component: any) => {
           </Stack>
 
           <Stack className="header-main">
+            <div className="rectangle"></div>
             <Stack className="container">
+              <Box className="header-title">
+                <div className="big-text">
+                  Discover <br />
+                  more than <div className="blue-text">5000+ Jobs</div>
+                </div>
+                <img
+                  src="/img/profile/blue-bottom-line2.svg"
+                  alt=""
+                  style={{ marginTop: "5px" }}
+                />
+                <span className="small-text">
+                  Great platform for the job seeker that searching for new
+                  career heights and passionate about startups.
+                </span>
+              </Box>
+              <Box className="banner">
+                <img src="/img/banner/banner-people.png" alt="" />
+                <img className="rec1" src="/rectangle/rec1.svg" alt="" />
+                <img className="rec2" src="/rectangle/rec2.svg" alt="" />
+                <img className="rec3" src="/rectangle/rec3.svg" alt="" />
+                <img className="rec4" src="/rectangle/rec4.svg" alt="" />
+              </Box>
               <HeaderFilter />
             </Stack>
           </Stack>
