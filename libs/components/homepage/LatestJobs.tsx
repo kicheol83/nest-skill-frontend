@@ -1,32 +1,41 @@
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Box, Stack } from "@mui/material";
-import CategoryCard from "./CategoryCard";
 import { useState } from "react";
 import Pagination from "@mui/material/Pagination";
+import LatestJobsCard from "./LatestJobsCard";
 
-const Category = () => {
+const LatestJobs = () => {
   const device = useDeviceDetect();
-  const [category, setCategory] = useState<number[]>([]);
+  const [latestJobs, setLatestJobs] = useState<number[]>([
+    1, 2, 3, 4, 5, 6, 7, 8,
+  ]);
 
   if (device === "mobile") {
     return <div>CATEGORY</div>;
   } else {
     return (
-      <Stack className="category">
+      <Stack className="latest">
         <Stack className="container">
-          <Box className="category-title">
+          <Box className="latest-title">
             <span>
-              Explore by<span className="category-txt">category</span>{" "}
+              Latest<span className="latest-txt">jobs open</span>{" "}
             </span>
             <Box className="show-all">
               <span>Show all jobs </span>
               <img src="/icons/Stroke.svg" alt="" />
             </Box>
           </Box>
-          <Box className="category-card">
-            <Box className="category-frame">
-              <CategoryCard />
+          <Box className="latest-card">
+            <Box className="latest-frame">
+              {latestJobs.map((category, index) => (
+                <LatestJobsCard key={index} />
+              ))}
             </Box>
+            <img className="rec1" src="/img/rectangle/rec1.svg" alt="" />
+            <img className="rec2" src="/img/rectangle/rec2.svg" alt="" />
+            <img className="rec3" src="/img/rectangle/rec3.svg" alt="" />
+            <img className="rec4" src="/rectangle/rec4.svg" alt="" />
+            <img className="rec5" src="/img/rectangle/rec1.svg" alt="" />
           </Box>
           <Stack className="pagination" spacing={2}>
             <Pagination
@@ -49,4 +58,4 @@ const Category = () => {
   }
 };
 
-export default Category;
+export default LatestJobs;

@@ -30,7 +30,7 @@ const Featured = () => {
               ))}
             </Box>
           </Box>
-          {/* <Stack className="pagination" spacing={2}>
+          <Stack className="pagination" spacing={2}>
             <Pagination
               className="pagi-count"
               count={10}
@@ -44,7 +44,7 @@ const Featured = () => {
                 },
               }}
             />
-          </Stack> */}
+          </Stack>
         </Stack>
       </Stack>
     );

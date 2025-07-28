@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   IconButton,
+  Pagination,
   Stack,
   Typography,
 } from "@mui/material";
@@ -51,7 +52,9 @@ const FeaturedCard = () => {
           <Typography className="view-cnt">120</Typography>
           <IconButton color="default"></IconButton>
           <FavoriteIcon />
-          <Typography className="view-cnt" sx={{marginLeft: "8px"}}>200</Typography>
+          <Typography className="view-cnt" sx={{ marginLeft: "8px" }}>
+            200
+          </Typography>
         </Box>
       </Stack>
     );

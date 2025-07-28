@@ -171,7 +171,10 @@
               box-sizing: border-box;
               transition: background 0.3s ease;
               &:hover {
-                background: rgb(248, 248, 253);
+                background: url("/img/service-img/white.avif");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
               }
               .box-icon {
                 width: 60.66px;
@@ -329,7 +332,7 @@
     .featured-job-post {
       position: relative;
       width: 100%;
-      height: 780px;
+      height: 888px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -416,7 +419,7 @@
         .featured-card {
           position: relative;
           width: auto;
-          height: 606px;
+          height: auto;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
@@ -440,7 +443,6 @@
             flex: none;
             order: 1;
             flex-grow: 0;
-            margin: 48px 0px;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
@@ -621,6 +623,375 @@
               }
             }
           }
+        }
+        .pagination {
+          width: auto;
+          height: auto;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          order: 1;
+        }
+      }
+    }
+    .latest {
+      position: relative;
+      width: auto;
+      height: 1030px;
+      left: 0;
+      top: 0;
+      background: url("/img/banner/BG.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      order: 4;
+      overflow: hidden;
+      .container {
+        .latest-title {
+          margin-top: 72px;
+          position: relative;
+          width: 100%;
+          height: 53px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-end;
+          padding: 0px;
+          .latest-txt {
+            margin-left: 10px;
+            color: rgb(38, 164, 255);
+          }
+          span {
+            position: relative;
+            width: auto;
+            height: 53px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-end;
+            gap: 10;
+            padding: 0px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            font-family: $font-heading;
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 110%;
+            letter-spacing: 0%;
+            text-align: left;
+          }
+          .show-all {
+            position: relative;
+            width: auto;
+            height: 26px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: center;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            span {
+              margin-bottom: 22px;
+              margin-right: 15px;
+              color: rgb(70, 64, 222);
+              font-family: $font-body;
+              font-size: 16px;
+              font-weight: 600;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: center;
+              transition: color 0.3s ease;
+            }
+            img {
+              margin-top: 5px;
+              transition: filter 0.3s ease;
+            }
+            &:hover {
+              span {
+                color: rgb(38, 164, 255);
+              }
+              img {
+                filter: brightness(0) saturate(100%) invert(42%) sepia(73%)
+                  saturate(750%) hue-rotate(176deg) brightness(103%)
+                  contrast(101%);
+              }
+            }
+          }
+        }
+        .latest-card {
+          z-index: 1;
+          overflow: hidden;
+          .latest-frame {
+            position: relative;
+            width: auto;
+            height: auto;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 32px;
+            padding: 0px;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+            margin: 48px 0px;
+            .latest-card {
+              width: calc(50% - 16px);
+              position: relative;
+              height: 153px;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              gap: 24;
+              padding: 24px 40px 24px 40px;
+              flex: none;
+              order: 0;
+              align-self: stretch;
+              flex-grow: 0;
+              background: rgb(255, 255, 255);
+              .latest-box {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                .box-title {
+                  position: relative;
+                  width: auto;
+                  height: auto;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  gap: 8;
+                  padding: 0px;
+                  flex: none;
+                  order: 1;
+                  flex-grow: 0;
+                  margin: 0px 24px;
+                  .p-type {
+                    position: relative;
+                    width: auto;
+                    height: 24px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    gap: 8;
+                    padding: 0px;
+                    flex: none;
+                    order: 0;
+                    flex-grow: 0;
+                    margin: 8px 0px;
+                    color: rgb(37, 50, 75);
+                    font-family: $font-body;
+                    font-size: 20px;
+                    font-weight: 600;
+                    line-height: 120%;
+                    letter-spacing: 0%;
+                    text-align: left;
+                  }
+                  .title-location {
+                    position: relative;
+                    width: auto;
+                    height: 26px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 0px;
+                    flex: none;
+                    order: 0;
+                    flex-grow: 0;
+                    color: rgb(81, 91, 111);
+                    font-family: $font-body;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 160%;
+                    letter-spacing: 0%;
+                    text-align: left;
+                  }
+                }
+              }
+              .bot-buttons {
+                position: relative;
+                width: 268px;
+                height: 34px;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 8;
+                padding: 0px;
+                flex: none;
+                order: 2;
+                flex-grow: 0;
+                margin: 8px 82px;
+                .button1 {
+                  position: relative;
+                  width: auto;
+                  height: 34px;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 8;
+                  padding: 6px 10px 6px 10px;
+                  flex: none;
+                  order: 0;
+                  flex-grow: 0;
+                  margin: 0px 8px;
+                  border-radius: 80px;
+                  background: rgba(86, 205, 173, 0.1);
+                  color: rgb(86, 205, 173);
+                  font-family: $font-body;
+                  font-size: 14px;
+                  font-weight: 600;
+                  line-height: 160%;
+                  letter-spacing: 0%;
+                  text-align: left;
+                  &:hover {
+                    color: white;
+                    background: green;
+                  }
+                }
+                .line {
+                  position: relative;
+                  width: 1px;
+                  height: auto;
+                  flex: none;
+                  order: 1;
+                  align-self: stretch;
+                  flex-grow: 0;
+                  margin: 0px 8px;
+                  background: rgb(214, 221, 235);
+                }
+                .button2 {
+                  position: relative;
+                  width: auto;
+                  height: 34px;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 8;
+                  padding: 6px 10px 6px 10px;
+                  flex: none;
+                  order: 2;
+                  flex-grow: 0;
+                  margin: 0px 8px;
+                  box-sizing: border-box;
+                  border: 1px solid rgb(255, 184, 54);
+                  border-radius: 80px;
+                  color: rgb(255, 184, 54);
+                  font-family: $font-body;
+                  font-size: 14px;
+                  font-weight: 600;
+                  line-height: 160%;
+                  letter-spacing: 0%;
+                  text-align: left;
+                }
+                .button3 {
+                  position: relative;
+                  width: auto;
+                  height: 34px;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 8;
+                  padding: 6px 10px 6px 10px;
+                  flex: none;
+                  order: 3;
+                  flex-grow: 0;
+                  margin: 0px 8px;
+                  box-sizing: border-box;
+                  border: 1px solid rgb(70, 64, 222);
+                  border-radius: 80px;
+                  color: rgb(70, 64, 222);
+                  font-family: $font-body;
+                  font-size: 14px;
+                  font-weight: 600;
+                  line-height: 160%;
+                  letter-spacing: 0%;
+                  text-align: left;
+                }
+              }
+            }
+          }
+          .rec1 {
+            position: absolute;
+            width: 192.2px;
+            height: 416.47px;
+            left: 480.75px;
+            top: -298.25px;
+            transform: rotate(64deg);
+            box-sizing: border-box;
+            border: 4px solid rgb(204, 204, 245);
+            background: rgb(248, 248, 253);
+            opacity: 0.6;
+            z-index: -1;
+          }
+          .rec2 {
+            position: absolute;
+            width: 319.78px;
+            height: 778.51px;
+            left: 1300.77px;
+            top: 50px;
+            transform: rotate(64deg);
+            box-sizing: border-box;
+            border: 4px solid rgb(204, 204, 245);
+            background: rgb(248, 248, 253);
+            z-index: -1;
+            opacity: 0.6;
+          }
+          .rec3 {
+            position: absolute;
+            width: 283.38px;
+            height: 716.25px;
+            left: 1300.77px;
+            top: 600px;
+            transform: rotate(64deg);
+            box-sizing: border-box;
+            border: 4px solid rgb(204, 204, 245);
+            background: rgb(248, 248, 253);
+            z-index: -1;
+            opacity: 0.6;
+          }
+          .rec4 {
+            position: absolute;
+            width: 192.2px;
+            height: 416.47px;
+            left: 1500.75px;
+            top: -80.75px;
+            transform: rotate(64deg);
+            box-sizing: border-box;
+            border: 4px solid rgb(204, 204, 245);
+            opacity: 0.6;
+            z-index: -1;
+          }
+          .rec5 {
+            position: absolute;
+            width: 328.32px;
+            height: 400.2px;
+            left: 1200.92px;
+            top: -10.56px;
+            transform: rotate(64deg);
+            box-sizing: border-box;
+            border: 4px solid rgb(204, 204, 245);
+            opacity: 0.7;
+            z-index: -1;
+          }
+        }
+        .pagination {
+          width: auto;
+          height: auto;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
         }
       }
     }
