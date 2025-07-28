@@ -1,3 +1,4 @@
+import Afisha from "@/libs/components/homepage/Afisha";
 import Category from "@/libs/components/homepage/Category";
 import Company from "@/libs/components/homepage/Company";
 import withLayoutMain from "@/libs/components/layout/LayoutHome";
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
       <Stack className={"home-page"}>
         <Company />
         <Category />
+        <Afisha />
       </Stack>
     );
   }

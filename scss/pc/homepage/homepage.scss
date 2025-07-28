@@ -225,5 +225,106 @@
         }
       }
     }
+    .afisha {
+      position: relative;
+      width: 100%;
+      height: 558px;
+      flex: none;
+      order: 3;
+      flex-grow: 0;
+      margin: 0px 0px;
+      background: rgb(255, 255, 255);
+      .container {
+        .afisha-frame {
+          margin-top: 72px;
+          position: relative;
+          width: auto;
+          height: 414px;
+          background: url("/img/banner/afisha.png");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          .afisha-title {
+            display: flex;
+            flex-direction: column;
+            margin: 70px 93px;
+            .bold-text {
+              position: relative;
+              width: 364px;
+              height: 106px;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 24;
+              padding: 0px;
+              flex: none;
+              order: 0;
+              flex-grow: 0;
+              margin: 24px 0px;
+              color: rgb(255, 255, 255);
+              font-family: $font-heading;
+              font-size: 48px;
+              font-weight: 600;
+              line-height: 110%;
+              letter-spacing: 0%;
+              text-align: left;
+            }
+            .title-center {
+              position: relative;
+              width: 364px;
+              height: 26px;
+              display: flex;
+              flex-direction: column;
+              gap: 24;
+              padding: 0px;
+              flex: none;
+              order: 1;
+              flex-grow: 0;
+              color: rgb(255, 255, 255);
+              font-family: $font-body;
+              font-size: 16px;
+              font-weight: 500;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: left;
+            }
+            .button {
+              position: relative;
+              width: 188px;
+              height: 50px;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              gap: 10;
+              padding: 12px 24px 12px 24px;
+              flex: none;
+              order: 2;
+              flex-grow: 0;
+              margin: 24px 0px;
+              background: rgb(255, 255, 255);
+              color: rgb(70, 64, 222);
+              font-family: $font-body;
+              font-size: 16px;
+              font-weight: 700;
+              line-height: 160%;
+              letter-spacing: 0%;
+              text-align: center;
+              &:hover {
+                color: rgb(255, 255, 255);
+                background-color: rgb(38, 164, 255);
+              }
+            }
+            img {
+              position: absolute;
+              width: 564px;
+              height: 344px;
+              left: 650px;
+            }
+          }
+        }
+      }
+    }
   }
 }
