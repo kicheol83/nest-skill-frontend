@@ -1,6 +1,7 @@
 import Afisha from "@/libs/components/homepage/Afisha";
 import Category from "@/libs/components/homepage/Category";
 import Company from "@/libs/components/homepage/Company";
+import Featured from "@/libs/components/homepage/FeaturedJobPost";
 import withLayoutMain from "@/libs/components/layout/LayoutHome";
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Stack } from "@mui/material";
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
         <Company />
         <Category />
         <Afisha />
+        <Featured />
       </Stack>
     );
   }
