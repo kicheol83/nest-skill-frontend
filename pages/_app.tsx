@@ -5,7 +5,6 @@ import { dark, light } from "../scss/MaterialTheme";
 import { useEffect, useMemo, useState } from "react";
 import "../scss/app.scss";
 import "../scss/pc/main.scss";
-import "../scss/variables.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [mode, setMode] = useState<"light" | "dark">("light");
