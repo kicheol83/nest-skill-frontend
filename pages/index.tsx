@@ -1,3 +1,4 @@
+import Category from "@/libs/components/homepage/Category";
 import Company from "@/libs/components/homepage/Company";
 import withLayoutMain from "@/libs/components/layout/LayoutHome";
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
     return (
       <Stack className={"home-page"}>
         <Company />
+        <Category />
       </Stack>
     );
   }
