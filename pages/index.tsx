@@ -7,6 +7,7 @@ import withLayoutMain from "@/libs/components/layout/LayoutHome";
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Stack } from "@mui/material";
 import { NextPage } from "next";
+import CommunityBoard from "@/libs/components/homepage/Community";
 
 const Home: NextPage = () => {
   const device = useDeviceDetect();
@@ -21,6 +22,7 @@ const Home: NextPage = () => {
         <Afisha />
         <Featured />
         <LatestJobs />
+        <CommunityBoard />
       </Stack>
     );
   }

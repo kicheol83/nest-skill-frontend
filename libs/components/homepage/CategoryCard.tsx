@@ -9,7 +9,7 @@ const CategoryCard = () => {
     return <div>CATEGORY CARD</div>;
   } else {
     return (
-      <Stack display={"flex"} gap={"17px"} justifyContent={"space-between"} flexWrap={"wrap"}>
+      <Stack display={"flex"} gap={"17px"} justifyContent={"space-between"} flexWrap={"wrap"} flexDirection={"row"}>
         <Box className="category-box">
           <img className="box-icon" src="/icons/categorys/carpet1.svg" alt="" />
           <span className="text-top">FURNITURE SERVICE</span>
