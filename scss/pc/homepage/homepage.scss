@@ -1186,5 +1186,169 @@
         }
       }
     }
+    .review {
+      position: relative;
+      width: 100%;
+      height: 652px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 50px;
+      background: rgb(241, 242, 244);
+      order: 5;
+      .container {
+        .review-title {
+          width: 1320px;
+          height: 48px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 50px 0;
+          span {
+            color: rgb(25, 31, 51);
+            font-family: $font-heading;
+            font-size: 40px;
+            font-weight: 500;
+            line-height: 48px;
+            text-align: center;
+            .review-txt {
+              margin-left: 10px;
+              color: rgb(38, 164, 255);
+            }
+          }
+        }
+        .review-card-box {
+          width: 100%;
+          margin: 50px 0;
+          .empty-list {
+            height: 280px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .popular-review-swiper {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: row;
+            .review-cards-slide {
+              display: flex;
+              justify-content: center;
+              .review-box {
+                width: 424px;
+                height: 294px;
+                border-radius: 12px;
+                box-shadow: 0px 12px 80px rgba(0, 44, 109, 0.05);
+                background: #fff;
+                .review-info {
+                  position: relative;
+                  width: auto;
+                  height: 116px;
+                  left: 24px;
+                  top: 24px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  gap: 16;
+                  padding: 0px;
+                  .title-review {
+                    position: relative;
+                    width: 204px;
+                    height: 72px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    gap: 16;
+                    padding: 0px;
+                    flex: none;
+                    order: 1;
+                    flex-grow: 0;
+                    margin: 16px 0px;
+                    color: rgb(70, 77, 97);
+                    font-family: $font-heading;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 24px;
+                    letter-spacing: 0%;
+                    text-align: left;
+                  }
+                }
+                .avatar {
+                  position: relative;
+                  width: auto;
+                  height: auto;
+                  left: 24px;
+                  top: 114px;
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  padding: 0px;
+                  .name {
+                    position: relative;
+                    width: auto;
+                    height: 48px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    gap: 4;
+                    padding: 0px;
+                    flex: none;
+                    order: 1;
+                    flex-grow: 0;
+                    margin: 0px 12px;
+                    .user-name {
+                      color: rgb(25, 31, 51);
+                      font-family: $font-heading;
+                      font-size: 16px;
+                      font-weight: 500;
+                      line-height: 24px;
+                      letter-spacing: 0%;
+                      text-align: center;
+                    }
+                    .user-title {
+                      color: rgb(118, 126, 148);
+                      font-family: $font-heading;
+                      font-size: 14px;
+                      font-weight: 400;
+                      line-height: 20px;
+                      letter-spacing: 0%;
+                      text-align: left;
+                    }
+                    img {
+                      position: absolute;
+                      width: 36px;
+                      height: 36px;
+                      left: 157px;
+                      top: 6px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .pagination-box {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            .swiper-review-prev,
+            .swiper-review-next {
+              cursor: pointer;
+            }
+            .swiper-review-pagination {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
   }
 }

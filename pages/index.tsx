@@ -8,6 +8,7 @@ import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Stack } from "@mui/material";
 import { NextPage } from "next";
 import CommunityBoard from "@/libs/components/homepage/Community";
+import Review from "@/libs/components/homepage/Review";
 
 const Home: NextPage = () => {
   const device = useDeviceDetect();
@@ -23,6 +24,7 @@ const Home: NextPage = () => {
         <Featured />
         <LatestJobs />
         <CommunityBoard />
+        <Review />
       </Stack>
     );
   }
