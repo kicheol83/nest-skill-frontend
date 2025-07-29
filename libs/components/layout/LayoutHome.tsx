@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Top from "../Top";
 import Footer from "../Footer";
-import HeaderFilter from "../header/HeaderFilter";
+import HeaderFilter from "../common/HeaderFilter";
 
 const withLayoutMain = (Component: any) => {
   return (props: any) => {
