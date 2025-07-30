@@ -1,6 +1,5 @@
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Box, Stack } from "@mui/material";
-import ChildFriendlyOutlinedIcon from "@mui/icons-material/ChildFriendlyOutlined";
 
 const CategoryCard = () => {
   const device = useDeviceDetect();
