@@ -7,8 +7,8 @@ export default function Document() {
         <meta name="robots" content="index,follow" />
         <link
           rel="icon"
-          type="image/png"
-          href="/skill-nest-icons/nest-skill-logo.svg"
+          type="image/svg"
+          href="/icons/nest-logo.svg"
         />
 
         {/* SEO */}

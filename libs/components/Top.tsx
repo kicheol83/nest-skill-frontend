@@ -62,7 +62,7 @@ const Top = () => {
           <Box component="div" className="logo-box">
             <Link href="/" className="logo">
               <img
-                src="/skill-nest-icons/nest-skill-logo-with-text-v2.svg"
+                src="/icons/nest-logo.svg"
                 alt="Logo"
               />
               <p>Skill Nest</p>

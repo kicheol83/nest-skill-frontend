@@ -41,6 +41,7 @@
 		"i18next": "^21.6.11",
 		"js-cookie": "^3.0.1",
 		"jwt-decode": "^3.1.2",
+		"lucide-react": "^0.534.0",
 		"material-ui-pickers": "^2.2.4",
 		"material-ui-popup-state": "^4.0.1",
 		"moment": "^2.29.3",
