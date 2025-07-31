@@ -18,7 +18,7 @@ const withLayoutProviderDetail = (Component: any) => {
           <Stack id={"top"}>
             <Top />
           </Stack>
-          <Stack className="header-provider">
+          <Stack className="header-provider-detail">
             <Stack className="container">
               <HeaderProviderDetail />
             </Stack>
