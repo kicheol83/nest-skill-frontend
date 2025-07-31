@@ -1,3 +1,226 @@
 #pc-wrap {
-    
+  .provider-page {
+    position: relative;
+    width: auto;
+    height: 940px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 32;
+    padding: 72px 124px 0px 124px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 0px;
+    .container {
+      flex-direction: column;
+      justify-content: space-between;
+      .right-left {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .right {
+          position: relative;
+          width: auto;
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          gap: 4;
+          padding: 0px;
+          flex: none;
+          order: 0;
+          flex-grow: 0;
+          .text-top {
+            color: rgb(37, 50, 75);
+            font-family: $font-heading;
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 120%;
+            letter-spacing: 0%;
+            text-align: left;
+          }
+          .text-bott {
+            width: 163px;
+            color: rgb(124, 132, 147);
+            font-family: $font-body;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 160%;
+            letter-spacing: 0%;
+            text-align: left;
+          }
+        }
+        .left {
+          position: relative;
+          width: auto;
+          height: 40px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 22;
+          padding: 0px;
+          flex: none;
+          order: 1;
+          flex-grow: 0;
+        }
+      }
+      .card-frame {
+        position: relative;
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 60px;
+        padding: 0px;
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+        margin: 32px 0px;
+        .provider-card {
+          width: 280px;
+          border-radius: 20px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+          transition: all 0.3s ease;
+          overflow: hidden;
+
+          &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+          }
+        }
+        .image-wrapper {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          padding-top: 16px;
+          .avatar {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          }
+          .status-chip {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            font-weight: 500;
+            font-size: 12px;
+          }
+        }
+        .card-content {
+          text-align: center;
+          padding: 16px;
+          .name {
+            font-weight: 600;
+          }
+          .title {
+            color: #666;
+            margin-top: 4px;
+          }
+          .type-chip {
+            margin-top: 8px;
+            background-color: #f0f0f0;
+            font-size: 12px;
+          }
+          .stats {
+            margin-top: 12px;
+            justify-content: center;
+            align-items: end;
+            .statsWrapper {
+              display: flex;
+              gap: 12px;
+              margin-top: 16px;
+              .statItem {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 4px 10px;
+                border: 1px solid #444;
+                border-radius: 24px;
+                color: #ccc;
+                background: rgba(255, 255, 255, 0.05);
+                font-size: 14px;
+                p {
+                  color: #181a20;
+                  text-align: right;
+                  font-family: $font-heading;
+                  font-size: 18px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: normal;
+                  letter-spacing: 0.52px;
+                  text-transform: capitalize;
+                }
+                .icon {
+                  font-size: 23px;
+                  transition: all 0.3s ease;
+                  cursor: pointer;
+                  color: #616161;
+                  &:hover {
+                    border-color: #888;
+                    background: rgba(255, 255, 255, 0.1);
+                  }
+                }
+              }
+            }
+            .statItem1 {
+              margin-top: 15px;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              padding: 4px 10px;
+              border: 1px solid #444;
+              border-radius: 24px;
+              color: #ccc;
+              background: rgba(255, 255, 255, 0.05);
+              font-size: 14px;
+              p {
+                color: #181a20;
+                text-align: right;
+                font-family: $font-heading;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                letter-spacing: 0.52px;
+                text-transform: capitalize;
+              }
+              .icon {
+                font-size: 23px;
+                transition: all 0.3s ease;
+                color: #616161;
+                &:hover {
+                  border-color: #888;
+                  background: rgba(255, 255, 255, 0.1);
+                }
+              }
+            }
+          }
+          .message-input {
+            margin-top: 12px;
+            .MuiTextField-root {
+              background-color: #fafafa;
+              border-radius: 8px;
+            }
+          }
+        }
+      }
+      .MuiPagination-root {
+        margin-bottom: 32px;
+        margin-top: 16px;
+        order: 2;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
 }

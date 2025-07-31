@@ -592,6 +592,7 @@
                 flex-grow: 0;
                 margin-top: 100px;
                 padding: 4px 16px 4px 0;
+
                 .level {
                   position: relative;
                   width: auto;
@@ -620,6 +621,79 @@
                     background-color: green;
                   }
                 }
+                .view-like {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 6px;
+                  .statItem {
+                    width: auto;
+                    height: 29px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 4px 10px;
+                    border: 1px solid #dedede;
+                    border-radius: 24px;
+                    color: #ccc;
+                    background: rgba(255, 255, 255, 0.05);
+                    font-size: 14px;
+                    p {
+                      color: #181a20;
+                      text-align: right;
+                      font-family: $font-heading;
+                      font-size: 18px;
+                      font-style: normal;
+                      font-weight: 400;
+                      line-height: normal;
+                      letter-spacing: 0.52px;
+                      text-transform: capitalize;
+                    }
+                    .icon {
+                      font-size: 23px;
+                      transition: all 0.3s ease;
+                      cursor: pointer;
+                      color: #616161;
+                      &:hover {
+                        border-color: #888;
+                        background: rgba(255, 255, 255, 0.1);
+                      }
+                    }
+                  }
+                  .statItem1 {
+                    width: auto;
+                    height: 29px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 4px 10px;
+                    border: 1px solid #dedede;
+                    border-radius: 24px;
+                    color: #ccc;
+                    background: rgba(255, 255, 255, 0.05);
+                    font-size: 14px;
+                    p {
+                      color: #181a20;
+                      text-align: right;
+                      font-family: $font-heading;
+                      font-size: 18px;
+                      font-style: normal;
+                      font-weight: 400;
+                      line-height: normal;
+                      letter-spacing: 0.52px;
+                      text-transform: capitalize;
+                    }
+                    .icon {
+                      font-size: 23px;
+                      transition: all 0.3s ease;
+                      color: #616161;
+                      &:hover {
+                        border-color: #888;
+                        background: rgba(255, 255, 255, 0.1);
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -639,7 +713,7 @@
       width: auto;
       height: 1030px;
       left: 0;
-      top: 0;
+      margin-top: 0;
       background: url("/img/banner/BG.png");
       background-size: cover;
       background-position: center;

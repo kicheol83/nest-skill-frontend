@@ -9,13 +9,12 @@ import {
   Typography,
 } from "@mui/material";
 import { Pagination as MuiPagination } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import StarsOutlinedIcon from "@mui/icons-material/StarsOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
 import EditCalendarOutlinedIcon from "@mui/icons-material/EditCalendarOutlined";
-import LatestJobs from "@/libs/components/homepage/LatestJobs";
 import LatestJobsCard from "@/libs/components/homepage/LatestJobsCard";
 import { useState } from "react";
 
@@ -326,6 +325,8 @@ const ServiceDetailPage = () => {
                         count={10}
                         shape="circular"
                         color="primary"
+                        
+
                       />
                     </Box>
                   </Stack>
@@ -495,13 +496,14 @@ const ServiceDetailPage = () => {
                 className="pagi-count"
                 count={10}
                 variant="outlined"
-                shape="rounded"
+                shape="circular"
                 sx={{
                   "& .MuiPaginationItem-root": {
-                    fontSize: "1.2rem",
-                    width: "48px",
-                    height: "48px",
+                    fontSize: "1rem",
+                    width: "38px",
+                    height: "38px",
                   },
+                  
                 }}
               />
             </Stack>

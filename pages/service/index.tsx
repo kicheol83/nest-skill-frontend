@@ -80,9 +80,9 @@ const ServicePage: NextPage = () => {
               shape="circular"
               sx={{
                 "& .MuiPaginationItem-root": {
-                  fontSize: "1.2rem",
-                  width: "48px",
-                  height: "48px",
+                  fontSize: "1rem",
+                  width: "38px",
+                  height: "38px",
                 },
               }}
             />

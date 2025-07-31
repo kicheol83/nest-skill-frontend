@@ -1,15 +1,7 @@
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
-import {
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  Pagination,
-  Stack,
-  Typography,
-} from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
 const FeaturedCard = () => {
   const device = useDeviceDetect();
@@ -46,15 +38,16 @@ const FeaturedCard = () => {
         </Box>
         <Box className="button">
           <Button className="level">BRONZE</Button>
-          <IconButton color="default">
-            <RemoveRedEyeIcon />
-          </IconButton>
-          <Typography className="view-cnt">120</Typography>
-          <IconButton color="default"></IconButton>
-          <FavoriteIcon />
-          <Typography className="view-cnt" sx={{ marginLeft: "8px" }}>
-            200
-          </Typography>
+          <Box className="view-like">
+            <Box className="statItem">
+              <FavoriteBorderOutlinedIcon className="icon" fontSize="small" />
+              <Typography>11</Typography>
+            </Box>
+            <Box className="statItem1">
+              <VisibilityOutlinedIcon className="icon" fontSize="small" />
+              <Typography>10</Typography>
+            </Box>
+          </Box>
         </Box>
       </Stack>
     );

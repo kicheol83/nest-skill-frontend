@@ -8,7 +8,6 @@ import {
   TextField,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined";
 import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
 
 const HeaderProvider = () => {

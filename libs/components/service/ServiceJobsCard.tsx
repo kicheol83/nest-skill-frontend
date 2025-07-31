@@ -3,12 +3,11 @@ import {
   Avatar,
   Box,
   Button,
-  IconButton,
   Stack,
   Typography,
 } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
 const ServiceJobsCard = () => {
   const device = useDeviceDetect();
@@ -46,15 +45,14 @@ const ServiceJobsCard = () => {
             <Button className="button2">SILVER</Button>
             <Button className="button3">ELECTRICIAN</Button>
             <Box className="view-like">
-              <IconButton color="default">
-                <RemoveRedEyeIcon />
-              </IconButton>
-              <Typography className="view-cnt">120</Typography>
-              <IconButton color="default"></IconButton>
-              <FavoriteIcon sx={{color: "red"}} />
-              <Typography className="view-cnt" sx={{ marginLeft: "8px" }}>
-                200
-              </Typography>
+              <Box className="statItem">
+                <FavoriteBorderOutlinedIcon className="icon" fontSize="small" />
+                <Typography>11</Typography>
+              </Box>
+              <Box className="statItem1">
+                <VisibilityOutlinedIcon className="icon" fontSize="small" />
+                <Typography>10</Typography>
+              </Box>
             </Box>
           </Box>
         </Box>
