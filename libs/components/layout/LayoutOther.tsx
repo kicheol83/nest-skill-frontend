@@ -6,7 +6,6 @@ import "swiper/css/navigation";
 import Footer from "../Footer";
 import Top from "../Top";
 import HeaderOther from "../header/HeaderOther";
-import LatestJobs from "../homepage/LatestJobs";
 
 const withLayoutOther = (Component: any) => {
   return (props: any) => {

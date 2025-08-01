@@ -16,7 +16,7 @@ const HeaderProvider = () => {
       <Stack className="header-frame">
         <Box className="header-title">
           <div className="big-text">
-            Find your<div className="blue-text">dreamjob</div>
+            Find your<div className="blue-text">providers</div>
           </div>
           <img
             src="/img/profile/blue-bottom-line2.svg"
@@ -60,9 +60,9 @@ const HeaderProvider = () => {
               displayEmpty
               startAdornment={<RoomOutlinedIcon className="location-icon" />}
             >
-              <MenuItem value="Florence, Italy">Florence, Italy</MenuItem>
-              <MenuItem value="Tashkent">Tashkent</MenuItem>
-              <MenuItem value="Seoul">Seoul</MenuItem>
+              <MenuItem value="Florence, Italy">Provider Type</MenuItem>
+              <MenuItem value="Tashkent">PHOTOGRAPH</MenuItem>
+              <MenuItem value="Seoul">BABYSITTING</MenuItem>
             </Select>
 
             <Button
@@ -78,7 +78,7 @@ const HeaderProvider = () => {
                 fontSize: "16px",
               }}
             >
-              Search my job
+              Search provider
             </Button>
           </Box>
 

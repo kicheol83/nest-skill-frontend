@@ -9,10 +9,10 @@ const HeaderProviderDetail = () => {
         <Stack className="container">
           <span className="router">Provider/Detail</span>
           <Stack className="provider-frame">
-            <img src="/img/job/job-apply.svg" alt="" />
+            <img src="/img/banner/d.avif" alt="" />
             <Box className="provider-info">
               <Box className="provider-name">
-                <span>Stripe</span>
+                <span>David Johns</span>
                 <Stack
                   direction="row"
                   spacing={1}
@@ -28,14 +28,16 @@ const HeaderProviderDetail = () => {
                   </Typography>
                 </Stack>
               </Box>
-              <a href="https://chatgpt.com">https://chatgpt.com</a>
+              <Typography className="title-header">
+                Harkat maglubiyat va yana harakat va galaba
+              </Typography>
               <Box className="information-wrapper">
                 <Box className="information-bot">
                   <Box className="info-box">
                     <img src="/img/job/fire.svg" alt="" />
                     <div className="text">
                       <span className="title-top">Founded</span>
-                      <span className="title-bot">July 31, 2021</span>
+                      <span className="title-bot">Avgust 1, 2025</span>
                     </div>
                   </Box>
                 </Box>
@@ -55,7 +57,7 @@ const HeaderProviderDetail = () => {
                     <img src="/img/job/location.svg" alt="" />
                     <div className="text">
                       <span className="title-top">Location</span>
-                      <span className="title-bot">20 countries</span>
+                      <span className="title-bot">SEOUL</span>
                     </div>
                   </Box>
                 </Box>
@@ -68,6 +70,12 @@ const HeaderProviderDetail = () => {
                       <span className="title-bot">Payment, Gatway</span>
                     </div>
                   </Box>
+                </Box>
+                <Box className="banner">
+                <div className="rec1"></div>
+                <div className="rec2"></div>
+                <div className="rec3"></div>
+                <div className="rec4"></div>
                 </Box>
               </Box>
             </Box>
