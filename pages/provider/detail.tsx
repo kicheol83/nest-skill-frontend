@@ -9,6 +9,7 @@ import withLayoutProviderDetail from "@/libs/components/layout/LayoutProviderDet
 import ProviderPostCard from "@/libs/components/common/ProviderBigCard";
 import { useState } from "react";
 import CommentBox from "@/libs/components/provider/Comment";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 const AgentDetail: NextPage = () => {
   const device = useDeviceDetect();
@@ -16,6 +17,7 @@ const AgentDetail: NextPage = () => {
 
   const [providerCard, setProviderCard] = useState<number[]>([1, 2, 3]);
   const [comment, setComment] = useState<number[]>([1, 2]);
+  const [isOnline, setIsOnline] = useState(true);
 
   /** HANDLERS **/
 
@@ -26,14 +28,73 @@ const AgentDetail: NextPage = () => {
       <Stack className={"provider-detail-page"}>
         <Stack className={"container"}>
           <Stack className={"provider-info"}>
-            <img src="/img/banner/d.avif" alt="" />
-            <Box component={"div"} className={"info"}>
-              <strong>Ned</strong>
-              <div>
-                <CallIcon />
-                <span style={{ marginLeft: "10px" }}>01082333848</span>
-              </div>
-            </Box>
+            <Stack className="provider-frame">
+              <Box className="provider-info1">
+                <img src="/img/banner/d.avif" alt="" />
+
+                <Box className="provider-name">
+                  <span>David Johns</span>
+                  <Stack
+                    direction="row"
+                    spacing={1}
+                    alignItems="center"
+                    marginLeft={2}
+                  >
+                    <FiberManualRecordIcon
+                      fontSize="small"
+                      sx={{ color: isOnline ? "green" : "gray" }}
+                    />
+                    <Typography variant="body2">
+                      {isOnline ? "Online" : "Offline"}
+                    </Typography>
+                  </Stack>
+                </Box>
+                <Typography className="title-header">
+                  Harkat maglubiyat va yana harakat va galaba
+                </Typography>
+                <Box className="information-wrapper">
+                  <Box className="information-bot">
+                    <Box className="info-box">
+                      <img src="/img/job/fire.svg" alt="" />
+                      <div className="text">
+                        <span className="title-top">Founded</span>
+                        <span className="title-bot">Avgust 1, 2025</span>
+                      </div>
+                    </Box>
+                  </Box>
+
+                  <Box className="information-bot">
+                    <Box className="info-box">
+                      <img src="/img/job/people.svg" alt="" />
+                      <div className="text">
+                        <span className="title-top">Employees</span>
+                        <span className="title-bot">4000</span>
+                      </div>
+                    </Box>
+                  </Box>
+
+                  <Box className="information-bot">
+                    <Box className="info-box">
+                      <img src="/img/job/location.svg" alt="" />
+                      <div className="text">
+                        <span className="title-top">Location</span>
+                        <span className="title-bot">SEOUL</span>
+                      </div>
+                    </Box>
+                  </Box>
+
+                  <Box className="information-bot">
+                    <Box className="info-box">
+                      <img src="/img/job/industry.svg" alt="" />
+                      <div className="text">
+                        <span className="title-top">Industry</span>
+                        <span className="title-bot">Payment, Gatway</span>
+                      </div>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+            </Stack>
           </Stack>
           <Stack className={"provider-home-list"}>
             <Stack className={"card-wrap"}>
@@ -52,9 +113,7 @@ const AgentDetail: NextPage = () => {
                   color="primary"
                 />
               </Stack>
-              <span style={{ order: 2 }}>
-                Total 1 provider post available
-              </span>
+              <span style={{ order: 2 }}>Total 1 provider post available</span>
               <div className={"no-data"} style={{ order: -1 }}>
                 <img src="/img/icons/icoAlert.svg" alt="" />
                 <p>No provider post found!</p>
