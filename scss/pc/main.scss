@@ -9,6 +9,7 @@
 @import "/scss/pc/community/communitypage.scss";
 @import "/scss/pc/community/detail.scss";
 @import "/scss/pc/general.scss";
+@import "/scss/pc/cs/cspage.scss";
 
 #pc-wrap {
   #top {
@@ -1230,7 +1231,7 @@
         order: 0;
         flex-grow: 0;
         margin: 0px 0px;
-        color: rgba(0, 0, 0, 0.653);
+        color: rgba(255, 255, 255, 0.653);
         font-size: 25px;
       }
       .small-text {
@@ -1244,7 +1245,7 @@
         order: -1;
         flex-grow: 0;
         margin: 24px 0px;
-        color: rgba(0, 0, 0, 0.74);
+        color: rgba(255, 254, 254, 0.74);
         font-family: $font-heading;
         font-size: 18px;
         font-weight: 400;

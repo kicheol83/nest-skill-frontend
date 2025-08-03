@@ -22,15 +22,17 @@ export default function PriceSlider() {
   };
 
   return (
-    <Box width="100%">
+    <Box className="price" width="250px">
       <Box
-      mt={4}
+        mt={4}
         display="flex"
         justifyContent="space-between"
         alignItems="center"
         mb={1}
       >
-        <Typography fontWeight="bold">PRICE</Typography>
+        <Typography className="price-title" fontWeight="bold">
+          PRICE
+        </Typography>
 
         <Box>
           <IconButton size="small" onClick={handleDecrease}>

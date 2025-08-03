@@ -105,7 +105,12 @@ const Community: NextPage = () => {
 
         <Stack className="pagination-config">
           <Stack className="pagination-box">
-            <Pagination count={10} page={1} shape="circular" color="primary" />
+            <Pagination
+              count={10}
+              page={1}
+              shape="circular"
+              color="primary"
+            />
           </Stack>
           <Stack className="total-result">
             <Typography>Total 1 article available</Typography>

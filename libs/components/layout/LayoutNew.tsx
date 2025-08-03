@@ -35,9 +35,9 @@ const withLayoutNew = (Component: any) => {
           bgImage = "/img/banner/header1.svg";
           break;
         case "/community":
-          title = "Community !!!";
-          desc = "Home / Community";
-          bgImage = "/img/banner/community.jpg";
+          // title = "Community !!!";
+          // desc = "Home / Community";
+          bgImage = "/img/banner/com.webp";
           break;
         case "/community/detail":
           title = "Community Detail";
@@ -46,8 +46,9 @@ const withLayoutNew = (Component: any) => {
           break;
         case "/cs":
           title = "CS";
-          desc = "We are glad to see you again!";
-          bgImage = "/img/banner/header2.svg";
+          desc =
+            "Welcome to Our Customer Service Center!";
+          bgImage = "/img/banner/header12.jpg";
           break;
         case "/account/join":
           title = "Login/Signup";

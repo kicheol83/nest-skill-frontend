@@ -23,7 +23,7 @@ const ServicePage: NextPage = () => {
   };
   return (
     <Stack className="service-page">
-      <Stack className="container">
+      <Stack className="container" marginTop={"78px"}>
         <Stack className="filter">
           <Filter />
         </Stack>

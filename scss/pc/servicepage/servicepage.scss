@@ -1,5 +1,6 @@
 #pc-wrap {
   .service-page {
+    top: 78px;
     position: relative;
     width: 100%;
     height: 1900px;
@@ -8,7 +9,6 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 40;
-    padding: 72px 123px 72px 124px;
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -16,9 +16,10 @@
     background: rgb(255, 255, 255);
     .container {
       flex-direction: row;
+      justify-content: space-between;
       .filter {
         position: relative;
-        width: 234px;
+        width: 301px;
         height: auto;
         display: flex;
         flex-direction: column;
@@ -29,7 +30,6 @@
         flex: none;
         order: 0;
         flex-grow: 0;
-        margin: 0px 40px;
         .filter-frame {
           width: 234px;
           height: 1228px;
