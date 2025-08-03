@@ -12,6 +12,7 @@ import {
   IconButton,
   Backdrop,
   Pagination,
+  Box,
 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Moment from "react-moment";
@@ -23,6 +24,9 @@ import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineR
 
 import EditIcon from "@mui/icons-material/Edit";
 import withLayoutNew from "@/libs/components/layout/LayoutNew";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
 const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
   const device = useDeviceDetect();
@@ -188,25 +192,33 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
                     </Stack>
                     <Stack className="info">
                       <Stack className="icon-info">
-                        <ThumbUpAltIcon />
-                        <ThumbUpOffAltIcon />
-
-                        <Typography className="text">11</Typography>
+                        <Box className="statItem">
+                          <FavoriteBorderOutlinedIcon
+                            className="icon"
+                            fontSize="small"
+                          />
+                          <Typography>11</Typography>
+                        </Box>
                       </Stack>
                       <Stack className="divider"></Stack>
                       <Stack className="icon-info">
-                        <VisibilityIcon />
-                        <Typography className="text">12</Typography>
+                        <Box className="statItem1">
+                          <VisibilityOutlinedIcon
+                            className="icon"
+                            fontSize="small"
+                          />
+                          <Typography>10</Typography>
+                        </Box>
                       </Stack>
                       <Stack className="divider"></Stack>
                       <Stack className="icon-info">
-                        {total > 0 ? (
-                          <ChatIcon />
-                        ) : (
-                          <ChatBubbleOutlineRoundedIcon />
-                        )}
-
-                        <Typography className="text">5</Typography>
+                        <Box className="statItem">
+                          <ChatBubbleOutlineOutlinedIcon
+                            className="icon"
+                            fontSize="small"
+                          />
+                          <Typography>5</Typography>
+                        </Box>
                       </Stack>
                     </Stack>
                   </Stack>

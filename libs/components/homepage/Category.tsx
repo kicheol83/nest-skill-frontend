@@ -28,21 +28,6 @@ const Category = () => {
               <CategoryCard />
             </Box>
           </Box>
-          <Stack className="pagination" spacing={2}>
-            <Pagination
-              className="pagi-count"
-              count={10}
-              variant="outlined"
-              shape="circular"
-              sx={{
-                "& .MuiPaginationItem-root": {
-                  fontSize: "1rem",
-                  width: "38px",
-                  height: "38px",
-                },
-              }}
-            />
-          </Stack>
         </Stack>
       </Stack>
     );

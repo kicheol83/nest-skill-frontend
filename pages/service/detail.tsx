@@ -17,6 +17,7 @@ import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
 import EditCalendarOutlinedIcon from "@mui/icons-material/EditCalendarOutlined";
 import LatestJobsCard from "@/libs/components/homepage/LatestJobsCard";
 import { useState } from "react";
+import HeaderOther from "@/libs/components/header/HeaderOther";
 
 const ServiceDetailPage = () => {
   const device = useDeviceDetect();
@@ -325,8 +326,6 @@ const ServiceDetailPage = () => {
                         count={10}
                         shape="circular"
                         color="primary"
-                        
-
                       />
                     </Box>
                   </Stack>
@@ -485,11 +484,6 @@ const ServiceDetailPage = () => {
                   <LatestJobsCard key={index} />
                 ))}
               </Box>
-              <img className="rec1" src="/img/rectangle/rec1.svg" alt="" />
-              <img className="rec2" src="/img/rectangle/rec2.svg" alt="" />
-              <img className="rec3" src="/img/rectangle/rec3.svg" alt="" />
-              <img className="rec4" src="/rectangle/rec4.svg" alt="" />
-              <img className="rec5" src="/img/rectangle/rec1.svg" alt="" />
             </Box>
             <Stack className="pagination" spacing={2}>
               <Pagination
@@ -503,7 +497,6 @@ const ServiceDetailPage = () => {
                     width: "38px",
                     height: "38px",
                   },
-                  
                 }}
               />
             </Stack>

@@ -22,7 +22,9 @@ const Community: NextPage = () => {
               <Stack className={"image-info"}>
                 <img src={"/icons/nest-logo.svg"} />
                 <Stack className={"community-name"}>
-                  <Typography className={"name"}>Nestar Community</Typography>
+                  <Typography className={"name"}>
+                    Skill Nest Community
+                  </Typography>
                 </Stack>
               </Stack>
 
@@ -105,12 +107,7 @@ const Community: NextPage = () => {
 
         <Stack className="pagination-config">
           <Stack className="pagination-box">
-            <Pagination
-              count={10}
-              page={1}
-              shape="circular"
-              color="primary"
-            />
+            <Pagination count={10} page={1} shape="circular" color="primary" />
           </Stack>
           <Stack className="total-result">
             <Typography>Total 1 article available</Typography>

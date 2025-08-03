@@ -10,6 +10,7 @@ import ProviderPostCard from "@/libs/components/common/ProviderBigCard";
 import { useState } from "react";
 import CommentBox from "@/libs/components/provider/Comment";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import withLayoutNew from "@/libs/components/layout/LayoutNew";
 
 const AgentDetail: NextPage = () => {
   const device = useDeviceDetect();
@@ -184,4 +185,4 @@ const AgentDetail: NextPage = () => {
   }
 };
 
-export default withLayoutProviderDetail(AgentDetail);
+export default withLayoutNew(AgentDetail);

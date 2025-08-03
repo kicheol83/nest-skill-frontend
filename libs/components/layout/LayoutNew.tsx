@@ -23,10 +23,16 @@ const withLayoutNew = (Component: any) => {
         bgImage = "";
 
       switch (router.pathname) {
-        case "/provider/detail":
-          title = "provider detail page";
+        case "/provider":
+          title = "Provider Page";
           desc = "Home / Provider / Detail";
-          bgImage = "/img/banner/community.jpg";
+          bgImage = "/img/banner/banner-new.avif";
+
+          break;
+        case "/provider/detail":
+          title = "Provider Detail Page";
+          desc = "Home / Provider / Detail";
+          bgImage = "/img/banner/banner1.png";
 
           break;
         case "/mypage":
@@ -35,19 +41,18 @@ const withLayoutNew = (Component: any) => {
           bgImage = "/img/banner/header1.svg";
           break;
         case "/community":
-          // title = "Community !!!";
-          // desc = "Home / Community";
-          bgImage = "/img/banner/com.webp";
+          title = "Community !!!";
+          desc = "Home / Community";
+          bgImage = "/img/banner/banner1.png";
           break;
         case "/community/detail":
           title = "Community Detail";
           desc = "Home / Community / Detail";
-          bgImage = "/img/banner/community.jpg";
+          bgImage = "/img/banner/banner1.png";
           break;
         case "/cs":
           title = "CS";
-          desc =
-            "Welcome to Our Customer Service Center!";
+          desc = "Welcome to Our Customer Service Center!";
           bgImage = "/img/banner/header12.jpg";
           break;
         case "/account/join":
@@ -76,8 +81,8 @@ const withLayoutNew = (Component: any) => {
       return (
         <>
           <Head>
-            <title>Nestar</title>
-            <meta name={"title"} content={`Nestar`} />
+            <title>Skill Nest</title>
+            <meta name={"title"} content={`Skill Nest`} />
           </Head>
           <Stack id="mobile-wrap">
             <Stack id={"top"}>
@@ -98,8 +103,8 @@ const withLayoutNew = (Component: any) => {
       return (
         <>
           <Head>
-            <title>Nestar</title>
-            <meta name={"title"} content={`Nestar`} />
+            <title>Skill Nest</title>
+            <meta name={"title"} content={`Skill Nest`} />
           </Head>
           <Stack id="pc-wrap">
             <Stack id={"top"}>

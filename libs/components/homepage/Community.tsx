@@ -1,12 +1,12 @@
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
-import { Link, Stack, Typography } from "@mui/material";
+import { Box, Link, Pagination, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import CommunityCard from "./CommunityCard";
+import MediaCard from "./CommunityCard";
+import FlippingCards from "./CommunityCard";
 
 const CommunityBoard = () => {
   const device = useDeviceDetect();
-  const [communityFree, setCommunityFree] = useState<number[]>([1, 2, 3]);
-  const [communityNew, setCommunityNew] = useState<number[]>([1, 2, 3]);
 
   if (device === "mobile") {
     return <div>COMMUNITY BOARDS (MOBILE)</div>;
@@ -19,33 +19,23 @@ const CommunityBoard = () => {
               COMMUNITY BOARD<span className="board-txt">HIGHLIGHTS</span>{" "}
             </span>
           </Stack>
-          <Stack className="community-main">
-            <Stack className={"community-left"}>
-              <Stack className={"content-top"}>
-                <Link href={""}>
-                  <span>News</span>
-                </Link>
-                <img src="/icons/category/arrow-left.svg" alt="" />
-              </Stack>
-              <Stack className={"card-wrap"}>
-                {communityNew.map((article, index) => {
-                  return <CommunityCard vertical={true} index={index} />;
-                })}
-              </Stack>
-            </Stack>
-            <Stack className={"community-right"}>
-              <Stack className={"content-top"}>
-                <Link href={"/community?articleCategory=FREE"}>
-                  <span>Free</span>
-                </Link>
-                <img src="/icons/category/arrow-left.svg" alt="" />
-              </Stack>
-              <Stack className={"card-wrap vertical"}>
-                {communityFree.map((article, index) => {
-                  return <CommunityCard vertical={false} index={index} />;
-                })}
-              </Stack>
-            </Stack>
+          <div>
+            <FlippingCards />
+          </div>
+          <Stack className="pagination" spacing={2}>
+            <Pagination
+              className="pagi-count"
+              count={10}
+              variant="outlined"
+              shape="circular"
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  fontSize: "1rem",
+                  width: "38px",
+                  height: "38px",
+                },
+              }}
+            />
           </Stack>
         </Stack>
       </Stack>

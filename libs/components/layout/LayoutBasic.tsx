@@ -38,12 +38,6 @@ const withLayoutBasic = (Component: any) => {
                   Dropbox
                 </span>
               </Box>
-              <Box className="banner">
-                <img className="rec1" src="/rectangle/rec1.svg" alt="" />
-                <img className="rec2" src="/rectangle/rec2.svg" alt="" />
-                <img className="rec3" src="/rectangle/rec3.svg" alt="" />
-                <img className="rec4" src="/rectangle/rec4.svg" alt="" />
-              </Box>
               <HeaderFilter />
             </Stack>
           </Stack>

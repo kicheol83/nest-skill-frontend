@@ -25,12 +25,6 @@ const HeaderOther = () => {
               <Button className="aplly-button">Apply</Button>
             </Box>
           </Stack>
-          <span className="router">Home/Service/Detail</span>
-          <img className="rec1" src="/img/rectangle/rec1.svg" alt="" />
-          <img className="rec2" src="/img/rectangle/rec2.svg" alt="" />
-          <img className="rec3" src="/img/rectangle/rec3.svg" alt="" />
-          <img className="rec4" src="/rectangle/rec4.svg" alt="" />
-          <img className="rec5" src="/img/rectangle/rec1.svg" alt="" />
         </Stack>
       </Stack>
     </>

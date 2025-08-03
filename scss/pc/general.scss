@@ -25,6 +25,10 @@
     padding: 4px 8px;
     text-align: center;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
     .month {
       font-size: 12px;
       color: #666;

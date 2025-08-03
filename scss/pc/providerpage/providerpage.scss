@@ -2,21 +2,167 @@
   .provider-page {
     position: relative;
     width: auto;
-    height: 940px;
+    height: 1310px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 32;
-    padding: 72px 124px 0px 124px;
+    // padding: 72px 124px 0px 124px;
     flex: none;
     order: 1;
     flex-grow: 0;
     margin: 0px 0px;
+    background: rgb(248, 248, 253);
     .container {
       flex-direction: column;
       justify-content: space-between;
+      .header-frame {
+        display: flex;
+        align-items: center;
+        .header-title {
+          margin-top: 160px;
+          position: relative;
+          width: auto;
+          height: 120px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 24;
+          padding: 0px;
+          .big-text {
+            position: relative;
+            width: 483px;
+            height: 67px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 16;
+            padding: 0px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            color: rgb(37, 50, 75);
+            font-family: $font-heading;
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 110%;
+            letter-spacing: 0%;
+            text-align: center;
+            .blue-text {
+              top: 6px;
+              left: 12px;
+              position: relative;
+              width: auto;
+              height: 53px;
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              padding: 0px;
+              flex: none;
+              order: 0;
+              flex-grow: 0;
+              margin: 0px 0px;
+              color: rgb(38, 164, 255);
+            }
+          }
+          .small-text {
+            position: relative;
+            width: auto;
+            height: 29px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 24;
+            padding: 0px;
+            flex: none;
+            order: 1;
+            flex-grow: 0;
+            margin: 24px 0px;
+            color: rgb(81, 91, 111);
+            font-family: $font-heading;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 160%;
+            letter-spacing: 0%;
+            text-align: center;
+          }
+        }
+
+        .job-search-bar {
+          width: 100%;
+          width: 900px;
+          margin-top: 20px;
+          border-radius: 20px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+          transition: all 0.3s ease;
+          overflow: hidden;
+          .search-fields {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            z-index: 2;
+            .search-input,
+            .location-select {
+              flex: 1;
+              min-width: 0;
+              .MuiOutlinedInput-root {
+                border-radius: 8px;
+                background-color: #f5f5fa;
+                height: 56px;
+              }
+            }
+            .location-icon {
+              margin-right: 8px;
+              color: #666;
+            }
+            .search-button {
+              padding: 0 24px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 8px;
+              font-size: 16px;
+              font-weight: 600;
+              font-family: $font-body;
+              background-color: #f0f0f0;
+              border: none;
+              cursor: pointer;
+              line-height: 1;
+              box-sizing: border-box;
+              margin-bottom: 5px;
+              background-color: #f0f0f0;
+              &:hover {
+                color: #fff;
+                background: #007aff;
+              }
+            }
+          }
+          .popular-keywords {
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: #666;
+            color: rgb(32, 36, 48);
+            font-family: $font-body;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 160%;
+            letter-spacing: 0%;
+            text-align: left;
+          }
+        }
+      }
       .right-left {
+        margin-top: 60px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
