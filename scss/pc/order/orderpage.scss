@@ -1,0 +1,59 @@
+.animated-bg {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#pc-wrap {
+  .css-1yhuqfx-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+    color: green;
+  }
+  .css-1ptjqov-MuiButtonBase-root-MuiButton-root {
+    background: green;
+    color: #fff;
+  }
+  .css-gkg5uc-MuiButtonBase-root-MuiButton-root {
+    background: green;
+    color: #fff;
+  }
+  .card {
+    margin-top: 15px;
+    gap: 8px;
+    .css-1i0pakp-MuiInputBase-root-MuiOutlinedInput-root {
+      width: 311px;
+    }
+  }
+  .css-1i0pakp-MuiInputBase-root-MuiOutlinedInput-root {
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  .form {
+    gap: 12px;
+  }
+  .css-9ttsl3-MuiFormLabel-root {
+    color: black;
+  }
+
+  .css-1uj8g6v-MuiGrid-root {
+    // background: url("/img/banner/header83.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+}

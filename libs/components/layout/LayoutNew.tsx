@@ -66,6 +66,12 @@ const withLayoutNew = (Component: any) => {
           desc = "Home / For Rent";
           bgImage = "/img/banner/header1.svg";
           break;
+              break;
+        case "/order":
+          title = "Order Page";
+          desc = "Home / For Rent";
+          bgImage = "/img/banner/banner-login.avif";
+          break;
         default:
           break;
       }

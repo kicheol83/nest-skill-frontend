@@ -320,7 +320,7 @@
             .jobs-card {
               position: relative;
               width: 100%;
-              height: auto;
+              height: 180px;
               display: flex;
               flex-direction: row;
               justify-content: space-between;
@@ -598,6 +598,7 @@
                 }
               }
               .payment {
+                margin-top: 14px;
                 position: relative;
                 width: 164px;
                 height: 78px;

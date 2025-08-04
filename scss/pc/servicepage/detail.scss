@@ -999,13 +999,12 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
-                align-items: flex-start;
                 gap: 8;
                 padding: 0px;
                 flex: none;
                 order: 2;
                 flex-grow: 0;
-                margin: 8px 82px;
+                margin: 15px 0;
                 .button1 {
                   position: relative;
                   width: auto;
@@ -1094,6 +1093,81 @@
                   line-height: 160%;
                   letter-spacing: 0%;
                   text-align: left;
+                }
+                .view-like {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 6px;
+                  order: 3;
+                  margin-left: 60px;
+                  .statItem {
+                    width: auto;
+                    height: 29px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 4px 10px;
+                    border: 1px solid #dedede;
+                    border-radius: 24px;
+                    color: #ccc;
+                    background: rgba(255, 255, 255, 0.05);
+                    font-size: 14px;
+                    p {
+                      color: #181a20;
+                      text-align: right;
+                      font-family: $font-heading;
+                      font-size: 18px;
+                      font-style: normal;
+                      font-weight: 400;
+                      line-height: normal;
+                      letter-spacing: 0.52px;
+                      text-transform: capitalize;
+                    }
+                    .icon {
+                      font-size: 23px;
+                      transition: all 0.3s ease;
+                      cursor: pointer;
+                      color: #616161;
+                      &:hover {
+                        border-color: #888;
+                        background: rgba(255, 255, 255, 0.1);
+                      }
+                    }
+                  }
+                  .statItem1 {
+                    width: auto;
+                    height: 29px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 4px 10px;
+                    border: 1px solid #dedede;
+                    border-radius: 24px;
+                    color: #ccc;
+                    background: rgba(255, 255, 255, 0.05);
+                    font-size: 14px;
+                    p {
+                      color: #181a20;
+                      text-align: right;
+                      font-family: $font-heading;
+                      font-size: 18px;
+                      font-style: normal;
+                      font-weight: 400;
+                      line-height: normal;
+                      letter-spacing: 0.52px;
+                      text-transform: capitalize;
+                    }
+                    .icon {
+                      font-size: 23px;
+                      transition: all 0.3s ease;
+                      color: #616161;
+                      &:hover {
+                        border-color: #888;
+                        background: rgba(255, 255, 255, 0.1);
+                      }
+                    }
+                  }
                 }
               }
             }

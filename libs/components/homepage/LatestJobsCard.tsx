@@ -1,5 +1,7 @@
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
-import { Avatar, Box, Button, Stack } from "@mui/material";
+import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
 const LatestJobsCard = () => {
   const device = useDeviceDetect();
@@ -35,6 +37,16 @@ const LatestJobsCard = () => {
           <div className="line"></div>
           <Button className="button2">SILVER</Button>
           <Button className="button3">ELECTRICIAN</Button>
+          <Box className="view-like">
+            <Box className="statItem">
+              <FavoriteBorderOutlinedIcon className="icon" fontSize="small" />
+              <Typography>11</Typography>
+            </Box>
+            <Box className="statItem1">
+              <VisibilityOutlinedIcon className="icon" fontSize="small" />
+              <Typography>10</Typography>
+            </Box>
+          </Box>
         </Box>
       </Stack>
     );
