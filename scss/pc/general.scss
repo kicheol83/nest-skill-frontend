@@ -1,11 +1,9 @@
-.postCard {
+.post-card {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  &:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  }
+ 
 }
 .imageWrapper {
   position: relative;
@@ -26,7 +24,7 @@
     text-align: center;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     &:hover {
-      transform: scale(1.05);
+      transform: scale(1.01);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
     .month {
@@ -129,6 +127,199 @@
           background: rgba(255, 255, 255, 0.1);
         }
       }
+    }
+  }
+}
+
+.recently-card {
+  margin-top: 5px;
+  width: calc(50% - 16px);
+  position: relative;
+  height: 153px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24;
+  padding: 24px 40px 24px 40px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  background: rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  .latest-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    .box-title {
+      position: relative;
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 8;
+      padding: 0px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+      margin: 0px 24px;
+      .p-type {
+        position: relative;
+        width: auto;
+        height: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 8;
+        padding: 0px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        margin: 8px 0px;
+        color: rgb(37, 50, 75);
+        font-family: $font-body;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 120%;
+        letter-spacing: 0%;
+        text-align: left;
+      }
+      .title-location {
+        position: relative;
+        width: auto;
+        height: 26px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        padding: 0px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        color: rgb(81, 91, 111);
+        font-family: $font-body;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 160%;
+        letter-spacing: 0%;
+        text-align: left;
+      }
+    }
+  }
+  .bot-buttons {
+    position: relative;
+    width: 268px;
+    height: 34px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8;
+    padding: 0px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    margin: 17px 0px;
+    .button1 {
+      position: relative;
+      width: auto;
+      height: 34px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 8;
+      padding: 6px 10px 6px 10px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      margin: 0px 8px;
+      border-radius: 80px;
+      background: rgba(86, 205, 173, 0.1);
+      color: rgb(86, 205, 173);
+      font-family: $font-body;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 160%;
+      letter-spacing: 0%;
+      text-align: left;
+      &:hover {
+        color: white;
+        background: green;
+      }
+    }
+    .line {
+      position: relative;
+      width: 1px;
+      height: auto;
+      flex: none;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0;
+      margin: 0px 8px;
+      background: rgb(214, 221, 235);
+    }
+    .button2 {
+      position: relative;
+      width: auto;
+      height: 34px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 8;
+      padding: 6px 10px 6px 10px;
+      flex: none;
+      order: 2;
+      flex-grow: 0;
+      margin: 0px 8px;
+      box-sizing: border-box;
+      border: 1px solid rgb(255, 184, 54);
+      border-radius: 80px;
+      color: rgb(255, 184, 54);
+      font-family: $font-body;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 160%;
+      letter-spacing: 0%;
+      text-align: left;
+    }
+    .button3 {
+      position: relative;
+      width: auto;
+      height: 34px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 8;
+      padding: 6px 10px 6px 10px;
+      flex: none;
+      order: 3;
+      flex-grow: 0;
+      margin: 0px 8px;
+      box-sizing: border-box;
+      border: 1px solid rgb(70, 64, 222);
+      border-radius: 80px;
+      color: rgb(70, 64, 222);
+      font-family: $font-body;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 160%;
+      letter-spacing: 0%;
+      text-align: left;
     }
   }
 }

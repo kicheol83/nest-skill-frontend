@@ -36,9 +36,9 @@ const withLayoutNew = (Component: any) => {
 
           break;
         case "/mypage":
-          title = "my page";
-          desc = "Home / For Rent";
-          bgImage = "/img/banner/header1.svg";
+          title = "My Page";
+          desc = "Home / My Page";
+          bgImage = "/img/banner/dash.avif";
           break;
         case "/community":
           title = "Community !!!";

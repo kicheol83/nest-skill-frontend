@@ -5,7 +5,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
 const CommunityCard = () => {
   return (
-    <Card className="postCard">
+    <Card className="post-card">
       <Box className="imageWrapper">
         <img src="/img/banner/d.avif" alt="" className="cardImage" />
         <Box className="dateBox">
