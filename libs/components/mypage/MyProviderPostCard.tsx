@@ -14,8 +14,7 @@ export const MyProviderCard = () => {
   const open = Boolean(anchorEl);
 
   /** HANDLERS **/
-  const pushEditProperty = async (id: string) => {
-    console.log("+pushEditProperty: ", id);
+  const pushEditProviderPost = async (id: string) => {
     await router.push({
       pathname: "/mypage",
       query: { category: "addPost", propertyId: id },
