@@ -42,8 +42,8 @@ const MyPage: NextPage = () => {
               </Stack>
               <Stack className="main-config" mb={"76px"}>
                 <Stack className={"list-config"}>
-                  {category === "addProperty" && <AddProperty />}
-                  {category === "myProperties" && <MyPosts />}
+                  {category === "addPost" && <AddProperty />}
+                  {category === "myPosts" && <MyPosts />}
                   {category === "myFavorites" && <MyFavorites />}
                   {category === "recentlyVisited" && <RecentlyVisited />}
                   {category === "myArticles" && <MyArticles />}

@@ -7,7 +7,8 @@ import PortraitIcon from "@mui/icons-material/Portrait";
 import IconButton from "@mui/material/IconButton";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCheckoutOutlined";
-import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 
 const MyMenu = () => {
   const device = useDeviceDetect();
@@ -52,84 +53,87 @@ const MyMenu = () => {
               MANAGE LISTINGS
             </Typography>
             <List className={"sub-section"}>
-              {/* {user.memberType === "AGENT" && (
-                <>
-                  <ListItem
-                    className={pathname === "addProperty" ? "focus" : ""}
+              <>
+                <ListItem className={pathname === "addPost" ? "focus" : ""}>
+                  <Link
+                    href={{
+                      pathname: "/mypage",
+                      query: { category: "addPost" },
+                    }}
+                    scroll={false}
                   >
-                    <Link
-                      href={{
-                        pathname: "/mypage",
-                        query: { category: "addProperty" },
-                      }}
-                      scroll={false}
-                    >
-                      <div className={"flex-box"}>
-                        {category === "addProperty" ? (
-                          <img
-                            className={"com-icon"}
-                            src={"/img/icons/whiteTab.svg"}
-                            alt={"com-icon"}
-                          />
-                        ) : (
-                          <img
-                            className={"com-icon"}
-                            src={"/img/icons/newTab.svg"}
-                            alt={"com_icon"}
-                          />
-                        )}
-                        <Typography
-                          className={"sub-title"}
-                          variant={"subtitle1"}
-                          component={"p"}
-                        >
-                          Add Property
-                        </Typography>
-                        <IconButton aria-label="delete" sx={{ ml: "40px" }}>
-                          <PortraitIcon style={{ color: "red" }} />
-                        </IconButton>
-                      </div>
-                    </Link>
-                  </ListItem>
-                  <ListItem
-                    className={pathname === "myProperties" ? "focus" : ""}
+                    <div className={"flex-box"}>
+                      {category === "addPost" ? (
+                        <img
+                          className={"com-icon"}
+                          src={"/img/icons/whiteTab.svg"}
+                          alt={"com-icon"}
+                        />
+                      ) : (
+                        <img
+                          className={"com-icon"}
+                          src={"/img/icons/newTab.svg"}
+                          alt={"com_icon"}
+                        />
+                      )}
+                      <Typography
+                        className={"sub-title"}
+                        variant={"subtitle1"}
+                        component={"p"}
+                      >
+                        Add Post
+                      </Typography>
+                      <IconButton aria-label="delete" sx={{ ml: "40px" }}>
+                        <PortraitIcon style={{ color: "red" }} />
+                      </IconButton>
+                    </div>
+                  </Link>
+                </ListItem>
+
+                <ListItem
+                  className={pathname === "myPosts" ? "focus" : ""}
+                >
+                  <Link
+                    href={{
+                      pathname: "/mypage",
+                      query: { category: "myPosts" },
+                    }}
+                    scroll={false}
                   >
-                    <Link
-                      href={{
-                        pathname: "/mypage",
-                        query: { category: "myProperties" },
-                      }}
-                      scroll={false}
-                    >
-                      <div className={"flex-box"}>
-                        {category === "myProperties" ? (
-                          <img
-                            className={"com-icon"}
-                            src={"/img/icons/homeWhite.svg"}
-                            alt={"com-icon"}
-                          />
-                        ) : (
-                          <img
-                            className={"com-icon"}
-                            src={"/img/icons/home.svg"}
-                            alt={"com-icon"}
-                          />
-                        )}
-                        <Typography
-                          className={"sub-title"}
-                          variant={"subtitle1"}
-                          component={"p"}
-                        >
-                          My Properties
-                        </Typography>
-                        <IconButton aria-label="delete" sx={{ ml: "36px" }}>
-                          <PortraitIcon style={{ color: "red" }} />
-                        </IconButton>
-                      </div>
-                    </Link>
-                  </ListItem>
-                </>
-              )} */}
+                    <div className={"flex-box"}>
+                      {category === "myPosts" ? (
+                        <WorkOutlineIcon
+                          sx={{
+                            width: "16px",
+                            height: "16px",
+                            color: "#fff",
+                            marginLeft: "11px",
+                          }}
+                        />
+                      ) : (
+                        <WorkOutlineIcon
+                          sx={{
+                            width: "16px",
+                            height: "16px",
+                            color: "black",
+                            marginLeft: "11px",
+                          }}
+                        />
+                      )}
+                      <Typography
+                        className={"sub-title"}
+                        variant={"subtitle1"}
+                        component={"p"}
+                      >
+                        My Posts
+                      </Typography>
+                      <IconButton aria-label="delete" sx={{ ml: "36px" }}>
+                        <PortraitIcon style={{ color: "red", marginLeft: "2px" }} />
+                      </IconButton>
+                    </div>
+                  </Link>
+                </ListItem>
+              </>
 
               <ListItem className={pathname === "myFavorites" ? "focus" : ""}>
                 <Link

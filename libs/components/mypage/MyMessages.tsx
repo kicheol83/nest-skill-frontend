@@ -23,11 +23,11 @@ const MyMessages = () => {
           <ul className="people">
             <li className="person">
               <Avatar src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" />
-              <span className="name">Thomas</span>
+              <span className="name-txt">Thomas</span>
             </li>
             <li className="person">
               <Avatar src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/adam.jpg" />
-              <span className="name">Adam</span>
+              <span className="name-txt">Adam</span>
             </li>
           </ul>
         </Box>

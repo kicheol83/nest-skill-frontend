@@ -3,6 +3,8 @@ import { NextPage } from "next";
 import { Pagination, Stack, Typography } from "@mui/material";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { useRouter } from "next/router";
+import ProviderPostCard from "../common/ProviderBigCard";
+import { MyProviderCard } from "./MyProviderPostCard";
 
 const MyPosts: NextPage = ({ initialInput, ...props }: any) => {
   const device = useDeviceDetect();
@@ -42,7 +44,7 @@ const MyPosts: NextPage = ({ initialInput, ...props }: any) => {
               //       : "tab-name"
               //   }
             >
-              On Sale
+            Activeted
             </Typography>
             <Typography
               className="tab-name"
@@ -53,7 +55,7 @@ const MyPosts: NextPage = ({ initialInput, ...props }: any) => {
               //       : "tab-name"
               //   }
             >
-              On Sold
+              Deactiveted
             </Typography>
           </Stack>
           <Stack className="list-box">
@@ -65,13 +67,12 @@ const MyPosts: NextPage = ({ initialInput, ...props }: any) => {
               <Typography className="title-text">Action</Typography>
             </Stack>
 
-            <div className={"no-data"}>
+            {/* <div className={"no-data"}>
               <img src="/img/icons/icoAlert.svg" alt="" />
               <p>No Property found!</p>
-            </div>
+            </div> */}
 
-            {/* <PropertyCard /> */}
-
+            <MyProviderCard />
             <Stack className="pagination-config">
               <Stack className="pagination-box">
                 <Pagination
