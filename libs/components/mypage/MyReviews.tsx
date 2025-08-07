@@ -39,7 +39,7 @@ const ReviewDashboard = () => {
       {/* NAVBAR */}
       <Box className="review-navbar">
         <Typography className="review-post-title">
-          Plumber Faucet Fixing
+         My Post Reviews
         </Typography>
         <Box className="review-info">
           <Typography className="review-count">3 Reviews</Typography>

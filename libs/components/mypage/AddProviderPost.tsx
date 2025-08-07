@@ -1,14 +1,33 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import axios from "axios";
+import { Checkbox, FormControlLabel } from "@mui/material";
+
+const weekdays = [
+  { label: "MONDAY", value: "mon" },
+  { label: "TUESDAY", value: "tue" },
+  { label: "WEDNESDAY", value: "wed" },
+  { label: "THURSDAY", value: "thu" },
+  { label: "FRIDAY", value: "fri" },
+  { label: "SATURDAY", value: "sat" },
+  { label: "SUNDAY", value: "sun" },
+];
 
 const AddProperty = ({ initialValues, ...props }: any) => {
   const device = useDeviceDetect();
   const router = useRouter();
   const inputRef = useRef<any>(null);
+  const [open, setOpen] = useState(false);
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+
   /** HANDLERS **/
+  const toggleDay = (value: string) => {
+    setSelectedDays((prev) =>
+      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+    );
+  };
 
   if (device === "mobile") {
     return <div>ADD NEW PROPERTY MOBILE PAGE</div>;
@@ -16,7 +35,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
     return (
       <div id="add-property-page">
         <Stack className="main-title-box">
-          <Typography className="main-title">Add New Property</Typography>
+          <Typography className="main-title">Add New Provider Post</Typography>
           <Typography className="sub-title">
             We are glad to see you again!
           </Typography>
@@ -36,7 +55,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 
               <Stack className="config-row">
                 <Stack className="price-year-after-price">
-                  <Typography className="title">Price</Typography>
+                  <Typography className="title">Work Price</Typography>
                   <input
                     type="text"
                     className="description-input"
@@ -50,10 +69,18 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                       <option selected={true} disabled={true} value={"select"}>
                         Select
                       </option>
+                      <option value={""}>CLEANING</option>
+                      <option value={""}>BABYSITTING</option>
+                      <option value={""}>TUTORING</option>
+                      <option value={""}>GARDENING</option>
                     </>
                   </select>
-                  <div className={"divider"}></div>
-                  <img src={"/img/icons/Vector.svg"} className={"arrow-down"} />
+                  <div className={"divider"} style={{ top: "38px" }}></div>
+                  <img
+                    src={"/img/icons/Vector.svg"}
+                    className={"arrow-down"}
+                    style={{ top: "58px" }}
+                  />
                 </Stack>
               </Stack>
 
@@ -65,9 +92,18 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                       <option selected={true} disabled={true} value={"select"}>
                         Select
                       </option>
+                      <option value="seoul">SEOUL</option>
+                      <option value="pusan">PUSAN</option>
+                      <option value="incheon">INCHEON</option>
+                      <option value="deagu">DEAGU</option>
+                      <option value="gyeongju">GYEONGJU</option>
+                      <option value="gwangju">GWANGJU</option>
+                      <option value="chonju">CHONJU</option>
+                      <option value="deajon">DAEJON</option>
+                      <option value="jeju">JEJU</option>
                     </>
                   </select>
-                  <div className={"divider"}></div>
+                  <div className={"divider"} style={{ top: "38px" }}></div>
                   <img src={"/img/icons/Vector.svg"} className={"arrow-down"} />
                 </Stack>
                 <Stack className="price-year-after-price">
@@ -80,74 +116,125 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                 </Stack>
               </Stack>
 
-              <Stack className="config-row">
-                <Stack className="price-year-after-price">
-                  <Typography className="title">Barter</Typography>
+              <Stack className="config-row1">
+                <Stack className="price-year-after-price1">
+                  <Typography className="title">Work Week Day</Typography>
                   <select className={"select-description"}>
                     <option disabled={true} selected={true}>
                       Select
                     </option>
-                    <option value={"yes"}>Yes</option>
-                    <option value={"no"}>No</option>
+                    <option value={"weekdays"}>WEEKDAYS</option>
+                    <option value={"weekends"}>WEEKENDS</option>
+                    <option value={"full-week"}>FULL_WEEK</option>
+                    <option value={"custom"}>CUSTOM</option>
                   </select>
-                  <div className={"divider"}></div>
-                  <img src={"/img/icons/Vector.svg"} className={"arrow-down"} />
+                  <div className={"divider"} style={{ top: "38px" }}></div>
+                  <img
+                    src={"/img/icons/Vector.svg"}
+                    className={"arrow-down"}
+                    style={{ top: "58px" }}
+                  />
                 </Stack>
-                <Stack className="price-year-after-price">
-                  <Typography className="title">Rent</Typography>
-                  <select className={"select-description"}>
-                    <option disabled={true} selected={true}>
-                      Select
-                    </option>
-                    <option value={"yes"}>Yes</option>
-                    <option value={"no"}>No</option>
-                  </select>
-                  <div className={"divider"}></div>
-                  <img src={"/img/icons/Vector.svg"} className={"arrow-down"} />
+                <Stack className="price-year-after-price2">
+                  <Typography className="title">Week Day</Typography>
+
+                  <div className="dropdown" onClick={() => setOpen(!open)}>
+                    <div className="placeholder">
+                      {selectedDays.length
+                        ? selectedDays.join(", ").toUpperCase()
+                        : "Select"}
+                    </div>
+                    <img
+                      src="/img/icons/Vector.svg"
+                      className="arrow-down"
+                      style={{ top: "58px" }}
+                    />
+                  </div>
+
+                  {open && (
+                    <div className="menu">
+                      {weekdays.map((day) => (
+                        <FormControlLabel
+                          key={day.value}
+                          control={
+                            <Checkbox
+                              checked={selectedDays.includes(day.value)}
+                              onChange={() => toggleDay(day.value)}
+                            />
+                          }
+                          label={day.label}
+                          className="checkboxItem"
+                        />
+                      ))}
+                    </div>
+                  )}
+
+                  <div
+                    className="divider"
+                    style={{ top: "36.5px", height: "47px" }}
+                  />
                 </Stack>
               </Stack>
 
               <Stack className="config-row">
                 <Stack className="price-year-after-price">
-                  <Typography className="title">Rooms</Typography>
+                  <Typography className="title">Rate Type</Typography>
                   <select className={"select-description"}>
                     <option disabled={true} selected={true} value={"select"}>
                       Select
                     </option>
-                    {[1, 2, 3, 4, 5].map((room: number) => (
-                      <option value={`${room}`}>{room}</option>
-                    ))}
+                    <option value="hourly">HOURLY</option>
+                    <option value="fixed">FIXED</option>
+                    <option value="negotiable">NEGOTIABLE</option>
                   </select>
-                  <div className={"divider"}></div>
-                  <img src={"/img/icons/Vector.svg"} className={"arrow-down"} />
+                  <div className={"divider"} style={{ top: "38px" }}></div>
+                  <img
+                    src={"/img/icons/Vector.svg"}
+                    className={"arrow-down"}
+                    style={{ top: "58px" }}
+                  />
                 </Stack>
                 <Stack className="price-year-after-price">
-                  <Typography className="title">Bed</Typography>
+                  <Typography className="title">Work Day Limit</Typography>
                   <select className={"select-description"}>
-                    <option disabled={true} selected={true} value={"select"}>
-                      Select
+                    <option selected={true} value={"one"}>
+                      1
                     </option>
-                    {[1, 2, 3, 4, 5].map((bed: number) => (
-                      <option value={`${bed}`}>{bed}</option>
-                    ))}
+                    <option value="two">2</option>
+                    <option value="three">3</option>
+                    <option value="four">4</option>
+                    <option value="five">5</option>
+                    <option value="six">6</option>
+                    <option value="seven">7</option>
                   </select>
-                  <div className={"divider"}></div>
-                  <img src={"/img/icons/Vector.svg"} className={"arrow-down"} />
+                  <div className={"divider"} style={{ top: "38px" }}></div>
+                  <img
+                    src={"/img/icons/Vector.svg"}
+                    className={"arrow-down"}
+                    style={{ top: "58px", right: "18px" }}
+                  />
                 </Stack>
                 <Stack className="price-year-after-price">
-                  <Typography className="title">Square</Typography>
-                  <select className={"select-description"}>
-                    <option disabled={true} selected={true} value={"select"}>
-                      Select
-                    </option>
-                  </select>
-                  <div className={"divider"}></div>
-                  <img src={"/img/icons/Vector.svg"} className={"arrow-down"} />
+                  <Stack className="time-wrapper">
+                    <Typography className="time">Start Time</Typography>
+                    <input
+                      type="time"
+                      className="input"
+                      defaultValue="09:00"
+                    />
+
+                    <Typography className="time">End Time</Typography>
+                    <input
+                      type="time"
+                      className="input"
+                      defaultValue="18:00"
+                    />
+                  </Stack>
                 </Stack>
               </Stack>
 
               <Typography className="property-title">
-                Property Description
+                Provider Post Description
               </Typography>
               <Stack className="config-column">
                 <Typography className="title">Description</Typography>
@@ -156,7 +243,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
             </Stack>
 
             <Typography className="upload-title">
-              Upload photos of your property
+              Upload photos of your post
             </Typography>
             <Stack className="images-box">
               <Stack className="upload-box">
