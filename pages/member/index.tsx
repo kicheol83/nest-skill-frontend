@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { NextPage } from "next";
 import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
-import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
 import { Stack } from "@mui/material";
-
 
 import withLayoutNew from "@/libs/components/layout/LayoutNew";
 import { useRouter } from "next/router";
@@ -12,8 +10,13 @@ import MemberArticles from "@/libs/components/member/MemberArticles";
 import MemberFollowers from "@/libs/components/member/MemberFollowers";
 import MemberMenu from "@/libs/components/member/MemberMenu";
 import MemberPosts from "@/libs/components/member/MemberPost";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
 
 const MemberPage: NextPage = () => {
   const device = useDeviceDetect();

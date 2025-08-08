@@ -12,6 +12,13 @@ import {
 import { NextPage } from "next";
 import { useState } from "react";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
 
 const ServicePage: NextPage = () => {
   const [sortOption, setSortOption] = useState("most_relevant");

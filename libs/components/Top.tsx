@@ -1,28 +1,31 @@
-import { Box, Button, Link, Menu, MenuItem, Stack } from "@mui/material";
-import { useRouter } from "next/router";
+import { Box, Button, Menu, MenuItem, Stack } from "@mui/material";
+import { useRouter, withRouter } from "next/router";
 import { CaretDown } from "phosphor-react";
 import React, { useEffect, useState, useCallback } from "react";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
 
 const Top = () => {
   const router = useRouter();
+  const { t, i18n } = useTranslation("common");
   const [anchorEl2, setAnchorEl2] = useState<null | HTMLElement>(null);
-  const [lang, setLang] = useState<string>("en"); // Default 'en'
+  const [lang, setLang] = useState<string | null>("en");
   const drop = Boolean(anchorEl2);
   const [colorChange, setColorChange] = useState(false);
 
-  // Load language from localStorage on first render
   useEffect(() => {
-    const savedLang = localStorage.getItem("locale");
-    if (savedLang) {
-      setLang(savedLang);
-    } else {
+    if (localStorage.getItem("locale") === null) {
       localStorage.setItem("locale", "en");
+      setLang("en");
+    } else {
+      setLang(localStorage.getItem("locale"));
     }
-  }, []);
+  }, [router]);
 
-  const langClick = (e: React.MouseEvent<HTMLElement>) => {
+  /** HANDLERS **/
+  const langClick = (e: any) => {
     setAnchorEl2(e.currentTarget);
   };
 
@@ -32,11 +35,10 @@ const Top = () => {
 
   const langChoice = useCallback(
     async (e: any) => {
-      const selectedLang = e.target.id;
-      setLang(selectedLang);
-      localStorage.setItem("locale", selectedLang);
+      setLang(e.target.id);
+      localStorage.setItem("locale", e.target.id);
       setAnchorEl2(null);
-      await router.push(router.asPath, router.asPath, { locale: selectedLang });
+      await router.push(router.asPath, router.asPath, { locale: e.target.id });
     },
     [router]
   );
@@ -60,31 +62,33 @@ const Top = () => {
         <Stack className="container">
           {/* Logo */}
           <Box component="div" className="logo-box">
-            <Link href="/" className="logo">
-              <img
-                src="/icons/nest-logo.svg"
-                alt="Logo"
-              />
+            <Link href="" className="logo">
+              <img src="/icons/nest-logo.svg" alt="Logo" />
               <p>Skill Nest</p>
             </Link>
           </Box>
 
           {/* Router links */}
           <Box component="div" className="router-box">
-            {["Home", "Service", "Provider", "Community", "My Page", "CS"].map(
-              (label) => (
-                <Link
-                  key={label}
-                  href={
-                    label === "Home"
-                      ? "/"
-                      : `/${label.toLowerCase().replace(" ", "-")}`
-                  }
-                >
-                  <div>{label}</div>
-                </Link>
-              )
-            )}
+            <Link href={"/"}>
+              <div>{t("Home")}</div>
+            </Link>
+            <Link href={"/service"}>
+              <div>{t("Service")}</div>
+            </Link>
+            <Link href={"/provider"}>
+              <div> {t("Provider")} </div>
+            </Link>
+            <Link href={"/community?articleCategory=FREE"}>
+              <div> {t("Community")} </div>
+            </Link>
+
+            <Link href={"/mypage"}>
+              <div> {t("My Page")} </div>
+            </Link>
+            <Link href={"/cs"}>
+              <div> {t("CS")} </div>
+            </Link>
           </Box>
 
           {/* User and Language Selector */}
@@ -100,11 +104,11 @@ const Top = () => {
               </Box>
 
               <Link href="/account/join" className="auth-link">
-                Login
+                {t("Login")}
               </Link>
               <span className="divider">|</span>
               <Link href="/account/join" className="auth-link">
-                Signup
+                {t("Signup")}
               </Link>
             </Box>
 
@@ -140,30 +144,36 @@ const Top = () => {
               >
                 <MenuItem onClick={langChoice} id="en" sx={{ gap: 1 }}>
                   <img
+                    id="en"
                     src="/img/flag/langen.png"
                     width={24}
                     height={17}
                     alt="English"
+                    onClick={langChoice}
                   />
-                  English
+                  {t("English")}
                 </MenuItem>
                 <MenuItem onClick={langChoice} id="kr" sx={{ gap: 1 }}>
                   <img
+                    id="kr"
                     src="/img/flag/langkr.png"
                     width={24}
                     height={17}
                     alt="Korean"
+                    onClick={langChoice}
                   />
-                  Korean
+                  {t("Korean")}
                 </MenuItem>
                 <MenuItem onClick={langChoice} id="ru" sx={{ gap: 1 }}>
                   <img
+                    id="ru"
                     src="/img/flag/langru.png"
                     width={24}
                     height={17}
                     alt="Russian"
+                    onClick={langChoice}
                   />
-                  Russian
+                  {t("Russian")}
                 </MenuItem>
               </Menu>
             </Box>
@@ -174,4 +184,4 @@ const Top = () => {
   );
 };
 
-export default Top;
+export default withRouter(Top);

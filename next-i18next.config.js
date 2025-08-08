@@ -1,9 +1,8 @@
-// next-i18next.config.js
-const nextI18NextConfig = {
+module.exports = {
   i18n: {
-    locales: ["en", "kr", "ru"],
     defaultLocale: "en",
+    locales: ["en", "kr", "ru"],
+    localeDetection: false,
   },
+  trailingSlash: true,
 };
-
-export default nextI18NextConfig;

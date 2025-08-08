@@ -18,6 +18,13 @@ import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
 import ProviderCard from "@/libs/components/provider/ProviderCard";
 import withLayoutNew from "@/libs/components/layout/LayoutNew";
 import HeaderFilter from "@/libs/components/common/HeaderFilter";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
 
 const Provider: NextPage = () => {
   const device = useDeviceDetect();

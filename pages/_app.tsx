@@ -5,8 +5,8 @@ import { dark, light } from "../scss/MaterialTheme";
 import { useEffect, useMemo, useState } from "react";
 import "../scss/app.scss";
 import "../scss/pc/main.scss";
-
-export default function App({ Component, pageProps }: AppProps) {
+import { appWithTranslation } from "next-i18next";
+const App = ({ Component, pageProps }: AppProps) => {
   const [mode, setMode] = useState<"light" | "dark">("light");
 
   useEffect(() => {
@@ -41,4 +41,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
     </ThemeProvider>
   );
-}
+};
+
+export default appWithTranslation(App);

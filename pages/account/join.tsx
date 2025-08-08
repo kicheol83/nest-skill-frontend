@@ -2,6 +2,13 @@ import withLayoutNew from "@/libs/components/layout/LayoutNew";
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Box, Button, Stack } from "@mui/material";
 import { useState } from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
 
 type Mode = "signup" | "login" | "forgot";
 

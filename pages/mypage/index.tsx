@@ -17,6 +17,13 @@ import MemberFollowings from "@/libs/components/mypage/MemberFollowings";
 import ReviewDashboard from "@/libs/components/mypage/MyReviews";
 import MyOrder from "@/libs/components/mypage/MyOrder";
 import MyMessages from "@/libs/components/mypage/MyMessages";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
 
 const MyPage: NextPage = () => {
   const device = useDeviceDetect();
@@ -54,9 +61,6 @@ const MyPage: NextPage = () => {
                   {category === "reviews" && <ReviewDashboard />}
                   {category === "myOrder" && <MyOrder />}
                   {category === "myMessage" && <MyMessages />}
-
-
-
                 </Stack>
               </Stack>
             </Stack>

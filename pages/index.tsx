@@ -9,6 +9,13 @@ import { Stack } from "@mui/material";
 import { NextPage } from "next";
 import Review from "@/libs/components/homepage/Review";
 import CommunityBoard from "@/libs/components/homepage/Community";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
 
 const Home: NextPage = () => {
   const device = useDeviceDetect();

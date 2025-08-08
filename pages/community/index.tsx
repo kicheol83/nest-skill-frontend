@@ -6,6 +6,13 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useRouter } from "next/router";
 import CommunityCard from "@/libs/components/common/CommunityCard";
 import { useState } from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
 
 const Community: NextPage = () => {
   const router = useRouter();

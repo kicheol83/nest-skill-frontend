@@ -5,7 +5,6 @@ import Head from "next/head";
 import Top from "../Top";
 import Footer from "../Footer";
 import { Stack } from "@mui/material";
-import { useReactiveVar } from "@apollo/client";
 import { useTranslation } from "next-i18next";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,6 +13,7 @@ import "swiper/css/navigation";
 const withLayoutNew = (Component: any) => {
   return (props: any) => {
     const router = useRouter();
+    const { t, i18n } = useTranslation("common");
     const device = useDeviceDetect();
     const [authHeader, setAuthHeader] = useState<boolean>(false);
 
@@ -41,7 +41,7 @@ const withLayoutNew = (Component: any) => {
           bgImage = "/img/banner/dash.avif";
           break;
         case "/community":
-          title = "Community !!!";
+          title = "Community Page";
           desc = "Home / Community";
           bgImage = "/img/banner/banner1.png";
           break;
@@ -51,25 +51,25 @@ const withLayoutNew = (Component: any) => {
           bgImage = "/img/banner/banner1.png";
           break;
         case "/cs":
-          title = "CS";
+          title = "CS Page";
           desc = "Welcome to Our Customer Service Center!";
           bgImage = "/img/banner/header12.jpg";
           break;
         case "/account/join":
-          title = "Login/Signup";
+          title = "Login / Signup";
           desc = "Authentication Process";
           bgImage = "/img/banner/banner-login.avif";
           setAuthHeader(true);
           break;
         case "/member":
           title = "Member Page";
-          desc = "Home / For Rent";
+          desc = "Home / Member";
           bgImage = "/img/banner/header1.svg";
           break;
-              break;
+          break;
         case "/order":
           title = "Order Page";
-          desc = "Home / For Rent";
+          desc = "Home / Order";
           bgImage = "/img/banner/banner-login.avif";
           break;
         default:
@@ -126,8 +126,8 @@ const withLayoutNew = (Component: any) => {
               }}
             >
               <Stack className={"container"}>
-                <strong className="blue-text">{memoizedValues.title}</strong>
-                <span className="small-text">{memoizedValues.desc}</span>
+                <strong className="blue-text">{t(memoizedValues.title)}</strong>
+                <span className="small-text">{t(memoizedValues.desc)}</span>
               </Stack>
             </Stack>
 

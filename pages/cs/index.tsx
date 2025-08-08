@@ -6,6 +6,13 @@ import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import withLayoutNew from "@/libs/components/layout/LayoutNew";
 import Notice from "@/libs/components/cs/Notice";
 import Faq from "@/libs/components/cs/Faq";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
 
 const CS: NextPage = () => {
   const device = useDeviceDetect();
