@@ -99,7 +99,7 @@ const Top = () => {
                 />
               </Box>
 
-              <Link href="/account/login" className="auth-link">
+              <Link href="/account/join" className="auth-link">
                 Login
               </Link>
               <span className="divider">|</span>

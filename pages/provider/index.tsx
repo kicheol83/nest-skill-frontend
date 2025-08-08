@@ -1,4 +1,3 @@
-import withLayoutProvider from "@/libs/components/layout/LayoutProvider";
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import {
   Box,

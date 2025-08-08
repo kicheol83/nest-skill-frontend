@@ -5,7 +5,6 @@ import StarIcon from "@mui/icons-material/Star";
 import CallIcon from "@mui/icons-material/Call";
 
 import { useRouter } from "next/router";
-import withLayoutProviderDetail from "@/libs/components/layout/LayoutProviderDetail";
 import ProviderPostCard from "@/libs/components/common/ProviderBigCard";
 import { useState } from "react";
 import CommentBox from "@/libs/components/provider/Comment";

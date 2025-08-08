@@ -8,7 +8,7 @@ type Mode = "signup" | "login" | "forgot";
 const JoinPage = () => {
   const device = useDeviceDetect();
   const [selectedRole, setSelectedRole] = useState<"USER" | "PROVIDER">("USER");
-  const [mode, setMode] = useState<Mode>("signup");
+  const [mode, setMode] = useState<Mode>("login");
 
   if (device === "mobile") {
     return <div>AFISHA</div>;
