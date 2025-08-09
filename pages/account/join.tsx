@@ -1,8 +1,12 @@
+import { Box, Button, Stack } from "@mui/material";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useCallback, useState } from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import withLayoutNew from "@/libs/components/layout/LayoutNew";
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
-import { Box, Button, Stack } from "@mui/material";
-import { useState } from "react";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { logIn, signUp } from "@/libs/auth";
+import { sweetMixinErrorAlert } from "@/libs/sweetAlert";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -10,12 +14,48 @@ export const getStaticProps = async ({ locale }: any) => ({
   },
 });
 
-type Mode = "signup" | "login" | "forgot";
+type Role = "USER" | "PROVIDER";
 
-const JoinPage = () => {
+const JoinPage: NextPage = () => {
+  const router = useRouter();
   const device = useDeviceDetect();
-  const [selectedRole, setSelectedRole] = useState<"USER" | "PROVIDER">("USER");
-  const [mode, setMode] = useState<Mode>("login");
+  const [loginView, setLoginView] = useState<boolean>(true);
+
+  const [input, setInput] = useState({
+    nick: "",
+    password: "",
+    phone: "",
+    role: "USER" as Role,
+  });
+  const [isLogin, setIsLogin] = useState(true);
+
+  /** ROLE CHANGE */
+  const changeRole = (role: Role) => {
+    setInput((prev) => ({ ...prev, role }));
+  };
+
+  /** HANDLERS */
+  const handleInput = useCallback((name: string, value: string) => {
+    setInput((prev) => ({ ...prev, [name]: value }));
+  }, []);
+
+  const doLogin = useCallback(async () => {
+    try {
+      await logIn(input.nick, input.password);
+      await router.push(`${router.query.referrer ?? "/"}`);
+    } catch (err: any) {
+      await sweetMixinErrorAlert(err.message);
+    }
+  }, [input]);
+
+  const doSignUp = useCallback(async () => {
+    try {
+      await signUp(input.nick, input.password, input.phone, input.role);
+      await router.push(`${router.query.referrer ?? "/"}`);
+    } catch (err: any) {
+      await sweetMixinErrorAlert(err.message);
+    }
+  }, [input]);
 
   if (device === "mobile") {
     return <div>AFISHA</div>;
@@ -25,7 +65,6 @@ const JoinPage = () => {
     <Stack className="join-page">
       <Stack className="container">
         <Stack className="main">
-          {/* LEFT SIDE */}
           <Box className="left">
             <Box className="logo">
               <img src="/icons/nest-logo.svg" alt="Logo" />
@@ -39,24 +78,23 @@ const JoinPage = () => {
             <img className="men-img" src="/img/profile/men1.png" alt="" />
           </Box>
 
-          {/* RIGHT SIDE */}
           <Box className="right">
             <Box className="top-main">
-              {mode === "signup" && (
+              {!isLogin && (
                 <Box className="role">
                   <Button
                     className={`role-check ${
-                      selectedRole === "USER" ? "active" : ""
+                      input.role === "USER" ? "active" : ""
                     }`}
-                    onClick={() => setSelectedRole("USER")}
+                    onClick={() => changeRole("USER")}
                   >
                     USER
                   </Button>
                   <Button
                     className={`role-check ${
-                      selectedRole === "PROVIDER" ? "active" : ""
+                      input.role === "PROVIDER" ? "active" : ""
                     }`}
-                    onClick={() => setSelectedRole("PROVIDER")}
+                    onClick={() => changeRole("PROVIDER")}
                   >
                     PROVIDER
                   </Button>
@@ -65,131 +103,121 @@ const JoinPage = () => {
 
               <Box className="top-title">
                 <span className="txt">
-                  {mode === "signup"
-                    ? "Get more opportunities"
-                    : mode === "login"
-                    ? "Welcome back!"
-                    : "Reset your password"}
+                  {isLogin ? "Welcome back!" : "Get more opportunities"}
                 </span>
-
-                {mode !== "forgot" && (
-                  <Button className="google-button">
-                    <img src="/icons/home/google.svg" alt="" />
-                    {mode === "signup" ? "Sign Up" : "Login"} with Google
-                  </Button>
-                )}
+                <Button className="google-button">
+                  <img src="/icons/home/google.svg" alt="" />
+                  {isLogin ? "Login" : "Sign Up"} with Google
+                </Button>
               </Box>
 
-              {mode !== "forgot" && (
-                <Box className="bott-line">
-                  <div className="line"></div>
-                  <span className="text">
-                    Or {mode === "signup" ? "sign up" : "login"} with email
-                  </span>
-                  <div className="line"></div>
-                </Box>
-              )}
+              <Box className="bott-line">
+                <div className="line"></div>
+                <span className="text">
+                  Or {isLogin ? "login" : "sign up"} with email
+                </span>
+                <div className="line"></div>
+              </Box>
 
-              {/* FORMS */}
               <Box className="forms">
-                {mode === "signup" && (
-                  <>
-                    <Box className="form">
-                      <span className="input-title">Nickname</span>
-                      <input
-                        type="text"
-                        placeholder="Enter Nickname"
-                        className="input"
-                      />
-                    </Box>
-                  </>
-                )}
-
                 <Box className="form">
-                  <span className="input-title">Email Address</span>
+                  <span className="input-title">Nickname</span>
                   <input
-                    type="email"
-                    placeholder="Enter email address"
-                    className="input"
+                    className="input-frame"
+                    type="text"
+                    placeholder="Enter Nickname"
+                    value={input.nick}
+                    onChange={(e) => handleInput("nick", e.target.value)}
+                    required={true}
+                    onKeyDown={(event) => {
+                      if (event.key == "Enter" && loginView) doLogin();
+                      if (event.key == "Enter" && !loginView) doSignUp();
+                    }}
                   />
                 </Box>
 
-                {mode !== "forgot" && (
+                {!isLogin && (
                   <Box className="form">
-                    <span className="input-title">Password</span>
+                    <span className="input-title">Phone</span>
                     <input
-                      type="password"
-                      placeholder="Enter password"
-                      className="input"
+                      className="input-frame"
+                      type="text"
+                      placeholder="Enter phone number"
+                      value={input.phone}
+                      onChange={(e) => handleInput("phone", e.target.value)}
+                      required={true}
+                      onKeyDown={(event) => {
+                        if (event.key == "Enter" && loginView) doLogin();
+                        if (event.key == "Enter" && !loginView) doSignUp();
+                      }}
                     />
                   </Box>
                 )}
 
-                <Button className="continue">
-                  {mode === "signup"
-                    ? "Continue"
-                    : mode === "login"
-                    ? "Login"
-                    : "Reset Password"}
+                <Box className="form">
+                  <span className="input-title">Password</span>
+                  <input
+                    className="input-frame"
+                    type="password"
+                    placeholder="Enter password"
+                    value={input.password}
+                    onChange={(e) => handleInput("password", e.target.value)}
+                    required={true}
+                    onKeyDown={(event) => {
+                      if (event.key == "Enter" && loginView) doLogin();
+                      if (event.key == "Enter" && !loginView) doSignUp();
+                    }}
+                  />
+                </Box>
+
+                <Button
+                  className="continue"
+                  onClick={isLogin ? doLogin : doSignUp}
+                  disabled={
+                    isLogin
+                      ? !input.nick || !input.password
+                      : !input.nick ||
+                        !input.phone ||
+                        !input.password ||
+                        !input.role
+                  }
+                >
+                  {isLogin ? "Login" : "Continue"}
                 </Button>
               </Box>
 
-              {/* BOTTOM LINKS */}
               <Box className="bottom-text">
-                {mode === "signup" && (
+                {isLogin ? (
+                  <Box className="already">
+                    <span className="first">Don't have an account?</span>
+                    <span
+                      className="login-text"
+                      onClick={() => setIsLogin(false)}
+                    >
+                      Sign Up
+                    </span>
+                  </Box>
+                ) : (
                   <Box className="already">
                     <span className="first">Already have an account?</span>
                     <span
                       className="login-text"
-                      onClick={() => setMode("login")}
+                      onClick={() => setIsLogin(true)}
                     >
                       Login
                     </span>
                   </Box>
                 )}
-                {mode === "login" && (
-                  <>
-                    <Box className="already">
-                      <span className="first">Don't have an account?</span>
-                      <span
-                        className="login-text"
-                        onClick={() => setMode("signup")}
-                      >
-                        Sign Up
-                      </span>
-                    </Box>
-                    <Box className="already">
-                      <span
-                        className="login-text"
-                        onClick={() => setMode("forgot")}
-                      >
-                        Forgot Password?
-                      </span>
-                    </Box>
-                  </>
-                )}
-                {mode === "forgot" && (
-                  <Box className="already">
-                    <span
-                      className="login-text"
-                      onClick={() => setMode("login")}
-                    >
-                      Back to Login
-                    </span>
-                  </Box>
-                )}
 
-                {mode !== "forgot" && (
-                  <Box className="policy">
-                    <span className="second">
-                      By clicking '{mode === "signup" ? "Continue" : "Login"}',
-                      you acknowledge that you have read and accept the
-                    </span>
-                    <span className="txt">
-                      Terms of Service and Privacy Policy.
-                    </span>
-                  </Box>
-                )}
+                <Box className="policy">
+                  <span className="second">
+                    By clicking '{isLogin ? "Login" : "Continue"}', you
+                    acknowledge that you have read and accept the
+                  </span>
+                  <span className="txt">
+                    Terms of Service and Privacy Policy.
+                  </span>
+                </Box>
               </Box>
             </Box>
           </Box>

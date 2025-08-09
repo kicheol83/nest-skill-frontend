@@ -1,4 +1,13 @@
-import { Box, Button, Menu, MenuItem, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Stack,
+} from "@mui/material";
 import { useRouter, withRouter } from "next/router";
 import { CaretDown } from "phosphor-react";
 import React, { useEffect, useState, useCallback } from "react";
@@ -6,14 +15,27 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
+import { getJwtToken, logOut, updateUserInfo } from "../auth";
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "@/apollo/store";
+import { REACT_APP_API_URL } from "../config";
+import { AccountCircle, Logout } from "@mui/icons-material";
 
 const Top = () => {
   const router = useRouter();
-  const { t, i18n } = useTranslation("common");
-  const [anchorEl2, setAnchorEl2] = useState<null | HTMLElement>(null);
+  const user = useReactiveVar(userVar);
+  const { t } = useTranslation("common");
   const [lang, setLang] = useState<string | null>("en");
-  const drop = Boolean(anchorEl2);
   const [colorChange, setColorChange] = useState(false);
+  const [anchorElLang, setAnchorElLang] = useState<null | HTMLElement>(null);
+  const langOpen = Boolean(anchorElLang);
+  const [anchorElProfile, setAnchorElProfile] = useState<null | HTMLElement>(
+    null
+  );
+  const langClick = (e: any) => setAnchorElLang(e.currentTarget);
+  const langClose = () => setAnchorElLang(null);
+  const profileOpen = Boolean(anchorElProfile);
+  const [bgColor, setBgColor] = useState<boolean>(false);
 
   useEffect(() => {
     if (localStorage.getItem("locale") === null) {
@@ -24,34 +46,45 @@ const Top = () => {
     }
   }, [router]);
 
-  /** HANDLERS **/
-  const langClick = (e: any) => {
-    setAnchorEl2(e.currentTarget);
-  };
+  useEffect(() => {
+    switch (router.pathname) {
+      case "/provider/detail":
+        setBgColor(true);
+        break;
+      default:
+        break;
+    }
+  }, [router]);
 
-  const langClose = () => {
-    setAnchorEl2(null);
-  };
+  useEffect(() => {
+    const jwt = getJwtToken();
+    if (jwt) updateUserInfo(jwt);
+  }, []);
 
   const langChoice = useCallback(
     async (e: any) => {
       setLang(e.target.id);
       localStorage.setItem("locale", e.target.id);
-      setAnchorEl2(null);
+      setAnchorElLang(null);
       await router.push(router.asPath, router.asPath, { locale: e.target.id });
     },
     [router]
   );
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setColorChange(true);
-      } else {
-        setColorChange(false);
-      }
-    };
+  const handleProfileClick = (e: React.MouseEvent<HTMLElement>) => {
+    setAnchorElProfile(e.currentTarget);
+  };
+  const handleProfileClose = () => {
+    setAnchorElProfile(null);
+  };
 
+  const handleLogout = () => {
+    handleProfileClose();
+    logOut();
+  };
+
+  useEffect(() => {
+    const handleScroll = () => setColorChange(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -62,59 +95,136 @@ const Top = () => {
         <Stack className="container">
           {/* Logo */}
           <Box component="div" className="logo-box">
-            <Link href="" className="logo">
+            <Link href="/" className="logo">
               <img src="/icons/nest-logo.svg" alt="Logo" />
               <p>Skill Nest</p>
             </Link>
           </Box>
 
-          {/* Router links */}
+          {/* Menu Links */}
           <Box component="div" className="router-box">
-            <Link href={"/"}>
+            <Link href="/">
               <div>{t("Home")}</div>
             </Link>
-            <Link href={"/service"}>
+            <Link href="/service">
               <div>{t("Service")}</div>
             </Link>
-            <Link href={"/provider"}>
-              <div> {t("Provider")} </div>
+            <Link href="/provider">
+              <div>{t("Provider")}</div>
             </Link>
-            <Link href={"/community?articleCategory=FREE"}>
-              <div> {t("Community")} </div>
+            <Link href="/community?articleCategory=FREE">
+              <div>{t("Community")}</div>
             </Link>
-
-            <Link href={"/mypage"}>
-              <div> {t("My Page")} </div>
-            </Link>
-            <Link href={"/cs"}>
-              <div> {t("CS")} </div>
+            {user?._id && (
+              <Link href={"/mypage"}>
+                <div>{t("My Page")}</div>
+              </Link>
+            )}
+            <Link href="/cs">
+              <div>{t("CS")}</div>
             </Link>
           </Box>
 
-          {/* User and Language Selector */}
+          {/* User Box */}
           <Box className="user-box">
-            {/* Avatar (if logged in) */}
+            {user?._id ? (
+              <>
+                {/* Avatar va nickname */}
+                <Box
+                  className="auth-box"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    cursor: "pointer",
+                  }}
+                  onClick={handleProfileClick}
+                >
+                  <div className="login-user">
+                    <img
+                      src={
+                        user?.memberImage
+                          ? `${REACT_APP_API_URL}/${user?.memberImage}`
+                          : "/img/profile/defaultUser.svg"
+                      }
+                      alt="avatar"
+                      style={{
+                        width: 32,
+                        height: 32,
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
+                </Box>
 
-            {/* Auth Links */}
-            <Box className="auth-box">
-              <Box className="user-avatar">
-                <AccountCircleIcon
-                  sx={{ color: "white", marginTop: "5px", marginRight: "5px" }}
-                />
+                {/* Profil menu */}
+                <Menu
+                  anchorEl={anchorElProfile}
+                  open={profileOpen}
+                  onClose={handleProfileClose}
+                  PaperProps={{
+                    sx: { minWidth: 150, paddingY: 1, borderRadius: 2, ml: 4 },
+                  }}
+                >
+                  <MenuItem
+                    onClick={() => router.push("/mypage")}
+                    sx={{
+                      borderRadius: 1,
+                      "&:hover": {
+                        backgroundColor: "rgba(9, 110, 242, 0.23)",
+                      },
+                    }}
+                  >
+                    <ListItemIcon>
+                      <AccountCircle
+                        fontSize="small"
+                        sx={{ color: "#1976d2" }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary={t("My Page")} />
+                  </MenuItem>
+
+                  <Divider sx={{ my: 0.5 }} />
+
+                  <MenuItem
+                    onClick={handleLogout}
+                    sx={{
+                      borderRadius: 1,
+                      "&:hover": {
+                        backgroundColor: "rgba(255,0,0,0.08)",
+                      },
+                    }}
+                  >
+                    <ListItemIcon>
+                      <Logout fontSize="small" sx={{ color: "red" }} />
+                    </ListItemIcon>
+                    <ListItemText primary={t("Logout")} />
+                  </MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <Box className="auth-box">
+                <Box className="user-avatar">
+                  <AccountCircleIcon
+                    sx={{ color: "white", marginRight: "5px" }}
+                  />
+                </Box>
+                <Link href="/account/join" className="auth-link">
+                  {t("Login")}
+                </Link>
+                <span className="divider">|</span>
+                <Link href="/account/join" className="auth-link">
+                  {t("Signup")}
+                </Link>
               </Box>
+            )}
 
-              <Link href="/account/join" className="auth-link">
-                {t("Login")}
-              </Link>
-              <span className="divider">|</span>
-              <Link href="/account/join" className="auth-link">
-                {t("Signup")}
-              </Link>
-            </Box>
-
-            {/* Language Selector */}
+            {/* Til tanlash */}
             <Box className="lang-box">
-              <NotificationsOutlinedIcon className={"notification-icon"} />
+              {user?._id && (
+                <NotificationsOutlinedIcon className="notification-icon" />
+              )}
               <Button disableRipple className="lang-btn" onClick={langClick}>
                 <Box className="flag" sx={{ marginLeft: "8px" }}>
                   <img
@@ -128,19 +238,12 @@ const Top = () => {
               </Button>
 
               <Menu
-                anchorEl={anchorEl2}
-                open={drop}
+                anchorEl={anchorElLang}
+                open={langOpen}
                 onClose={langClose}
                 PaperProps={{
-                  sx: {
-                    minWidth: 150,
-                    paddingY: 1,
-                    boxShadow: 2,
-                    borderRadius: 2,
-                  },
+                  sx: { minWidth: 150, paddingY: 1, borderRadius: 2 },
                 }}
-                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                transformOrigin={{ vertical: "top", horizontal: "right" }}
               >
                 <MenuItem onClick={langChoice} id="en" sx={{ gap: 1 }}>
                   <img
@@ -149,7 +252,6 @@ const Top = () => {
                     width={24}
                     height={17}
                     alt="English"
-                    onClick={langChoice}
                   />
                   {t("English")}
                 </MenuItem>
@@ -160,7 +262,6 @@ const Top = () => {
                     width={24}
                     height={17}
                     alt="Korean"
-                    onClick={langChoice}
                   />
                   {t("Korean")}
                 </MenuItem>
@@ -171,7 +272,6 @@ const Top = () => {
                     width={24}
                     height={17}
                     alt="Russian"
-                    onClick={langChoice}
                   />
                   {t("Russian")}
                 </MenuItem>

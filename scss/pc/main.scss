@@ -105,6 +105,7 @@
           gap: 24px;
           margin-left: 60px;
           .user-avatar {
+            margin-top: 4px;
             cursor: pointer;
             img {
               width: 32px;
@@ -122,6 +123,14 @@
             border-radius: 30px;
             padding: 6px 16px;
             border: 1px solid #ccc;
+            .login-user {
+              img {
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                object-fit: cover;
+              }
+            }
             .auth-link {
               color: #ffffff;
               font-weight: 600;
