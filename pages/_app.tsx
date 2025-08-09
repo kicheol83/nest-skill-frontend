@@ -6,8 +6,12 @@ import { useEffect, useMemo, useState } from "react";
 import "../scss/app.scss";
 import "../scss/pc/main.scss";
 import { appWithTranslation } from "next-i18next";
+import { ApolloProvider } from "@apollo/client";
+import { useApollo } from "@/apollo/client";
+
 const App = ({ Component, pageProps }: AppProps) => {
   const [mode, setMode] = useState<"light" | "dark">("light");
+  const client = useApollo(pageProps.initialApolloState);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -36,10 +40,12 @@ const App = ({ Component, pageProps }: AppProps) => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </ApolloProvider>
   );
 };
 

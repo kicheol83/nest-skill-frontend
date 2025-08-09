@@ -7,7 +7,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { TabContext } from "@mui/lab";
 import TablePagination from "@mui/material/TablePagination";
-import { PropertyPanelList } from "../../../libs/components/admin/properties/PropertyList";
+import { PropertyPanelList } from "../../../libs/components/admin/provider-posts/PropertyList";
 import withAdminLayout from "@/libs/components/layout/LayoutAdmin";
 
 const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
