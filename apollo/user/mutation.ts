@@ -1,6 +1,17 @@
 import { gql } from "@apollo/client";
 
 /**************************
+ *         GOOGLE         *
+ *************************/
+export const GOOGLE_LOGIN = gql`
+  mutation GoogleLogin($input: GoogleLoginInput!) {
+    googleLogin(input: $input) {
+      accessToken
+    }
+  }
+`;
+
+/**************************
  *         MEMBER         *
  *************************/
 export const SIGN_UP = gql`

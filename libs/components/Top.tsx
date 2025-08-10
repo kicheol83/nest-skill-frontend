@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Divider,
   ListItemIcon,
   ListItemText,
@@ -36,6 +37,23 @@ const Top = () => {
   const langClose = () => setAnchorElLang(null);
   const profileOpen = Boolean(anchorElProfile);
   const [bgColor, setBgColor] = useState<boolean>(false);
+  const [userLoading, setUserLoading] = useState(true);
+
+  const avatarSrc = user?.memberImage
+    ? user.memberImage.startsWith("http") // yoki "https"
+      ? user.memberImage
+      : `${REACT_APP_API_URL}/${user.memberImage}`
+    : "/img/profile/defaultUser.svg";
+
+  useEffect(() => {
+    const token = getJwtToken();
+    if (token) {
+      updateUserInfo(token);
+      setUserLoading(false);
+    } else {
+      setUserLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("locale") === null) {
@@ -88,7 +106,8 @@ const Top = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+  console.log("user:", user);
+  console.log("userVar", userVar);
   return (
     <Stack className="navbar">
       <Stack className={`navbar-main ${colorChange ? "scrolled" : ""}`}>
@@ -125,11 +144,22 @@ const Top = () => {
             </Link>
           </Box>
 
-          {/* User Box */}
           <Box className="user-box">
-            {user?._id ? (
+            {!user?._id && userLoading ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: 32,
+                  width: 32,
+                }}
+              >
+                <CircularProgress size={24} />
+              </Box>
+            ) : user?._id ? (
               <>
-                {/* Avatar va nickname */}
+                {/* Avatar va profil menyu */}
                 <Box
                   className="auth-box"
                   sx={{
@@ -142,12 +172,8 @@ const Top = () => {
                 >
                   <div className="login-user">
                     <img
-                      src={
-                        user?.memberImage
-                          ? `${REACT_APP_API_URL}/${user?.memberImage}`
-                          : "/img/profile/defaultUser.svg"
-                      }
-                      alt="avatar"
+                      src={avatarSrc}
+                      alt=""
                       style={{
                         width: 32,
                         height: 32,
@@ -157,8 +183,6 @@ const Top = () => {
                     />
                   </div>
                 </Box>
-
-                {/* Profil menu */}
                 <Menu
                   anchorEl={anchorElProfile}
                   open={profileOpen}
@@ -220,7 +244,6 @@ const Top = () => {
               </Box>
             )}
 
-            {/* Til tanlash */}
             <Box className="lang-box">
               {user?._id && (
                 <NotificationsOutlinedIcon className="notification-icon" />

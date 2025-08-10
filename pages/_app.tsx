@@ -8,6 +8,7 @@ import "../scss/pc/main.scss";
 import { appWithTranslation } from "next-i18next";
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "@/apollo/client";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [mode, setMode] = useState<"light" | "dark">("light");
@@ -40,12 +41,14 @@ const App = ({ Component, pageProps }: AppProps) => {
   };
 
   return (
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </ApolloProvider>
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ApolloProvider>
+    </GoogleOAuthProvider>
   );
 };
 
