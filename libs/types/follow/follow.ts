@@ -1,92 +1,42 @@
-import { Field, ObjectType } from '@nestjs/graphql';
-import { ObjectId } from 'mongoose';
-import { Member, TotalCounter } from '../member/member';
-import { MeLiked } from '../like/like';
+import { Member, TotalCounter } from "../member/member";
+import { MeLiked } from "../like/like";
 
-@ObjectType()
-export class MeFollowed {
-	@Field(() => String)
-	followingId: ObjectId;
-
-	@Field(() => String)
-	followerId: ObjectId;
-
-	@Field(() => Boolean)
-	myFollowing: boolean;
+export interface MeFollowed {
+  followingId: string;
+  followerId: string;
+  myFollowing: boolean;
 }
 
-@ObjectType()
-export class Follower {
-	@Field(() => String)
-	_id: ObjectId;
-
-	@Field(() => String)
-	followingId: ObjectId;
-
-	@Field(() => String)
-	followerId: ObjectId;
-
-	@Field(() => Date)
-	createdAt: Date;
-
-	@Field(() => Date)
-	updatedAt: Date;
-
-	/** from aggregation **/
-
-	@Field(() => [MeLiked], { nullable: true })
-	meLiked?: MeLiked[];
-
-	@Field(() => [MeFollowed], { nullable: true })
-	meFollowed?: MeFollowed[];
-
-	@Field(() => Member, { nullable: true })
-	followerData?: Member;
+export interface Follower {
+  _id: string;
+  followingId: string;
+  followerId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  /** from aggregation **/
+  meLiked?: MeLiked[];
+  meFollowed?: MeFollowed[];
+  followerData?: Member;
 }
 
-@ObjectType()
-export class Following {
-	@Field(() => String)
-	_id: ObjectId;
-
-	@Field(() => String)
-	followingId: ObjectId;
-
-	@Field(() => String)
-	followerId: ObjectId;
-
-	@Field(() => Date)
-	createdAt: Date;
-
-	@Field(() => Date)
-	updatedAt: Date;
-
-	/** from aggregation **/
-
-	@Field(() => [MeLiked], { nullable: true })
-	meLiked?: MeLiked[];
-
-	@Field(() => [MeFollowed], { nullable: true })
-	meFollowed?: MeFollowed[];
-
-	@Field(() => Member, { nullable: true })
-	followingData?: Member;
+export interface Following {
+  _id: string;
+  followingId: string;
+  followerId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  /** from aggregation **/
+  meLiked?: MeLiked[];
+  meFollowed?: MeFollowed[];
+  followingData?: Member;
 }
 
-@ObjectType()
-export class Followings {
-	@Field(() => [Following])
-	list: Following[];
-
-	@Field(() => [TotalCounter], { nullable: true })
-	metaCounter: TotalCounter[];
+export interface Followings {
+  list: Following[];
+  metaCounter: TotalCounter[];
 }
 
-@ObjectType()
-export class Followers {
-	@Field(() => [Follower])
-	list: Follower[];
-
-	@Field(() => [TotalCounter], { nullable: true })
-	metaCounter: TotalCounter[];
+export interface Followers {
+  list: Follower[];
+  metaCounter: TotalCounter[];
 }

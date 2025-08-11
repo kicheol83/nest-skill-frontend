@@ -106,8 +106,7 @@ const Top = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  console.log("user:", user);
-  console.log("userVar", userVar);
+
   return (
     <Stack className="navbar">
       <Stack className={`navbar-main ${colorChange ? "scrolled" : ""}`}>

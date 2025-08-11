@@ -1,78 +1,28 @@
-import { InputType, Field, Int } from '@nestjs/graphql';
-import { IsNotEmpty, IsOptional, Min, Max, IsIn } from 'class-validator';
-import { availableReviewSorts } from '../../config';
-import { Direction } from '../../enums/common.enum';
-import { ObjectId } from 'mongoose';
+import { Direction } from "../../enums/common.enum";
 
-@InputType()
-export class CreateReviewInput {
-	@IsNotEmpty()
-	@Min(1)
-	@Max(5)
-	@Field(() => Int)
-	reviewRating: number;
-
-	@IsOptional()
-	@Field(() => String, { nullable: true })
-	reviewComments?: string;
-
-	@IsOptional()
-	@Field(() => [String], { nullable: true })
-	reviewImages?: string[];
-
-	@IsOptional()
-	@Field(() => String, { nullable: true })
-	providerId?: string;
-
-	@IsOptional()
-	@Field(() => String, { nullable: true })
-	orderItemId?: string;
-	memberId?: ObjectId;
+export interface CreateReviewInput {
+  reviewRating: number;
+  reviewComments?: string;
+  reviewImages?: string[];
+  providerId?: string;
+  orderItemId?: string;
+  memberId?: string;
 }
 
-@InputType()
-class RSearch {
-	@IsOptional()
-	@Field(() => String, { nullable: true })
-	text?: string;
-
-	@IsOptional()
-	@Field(() => String, { nullable: true })
-	reviewComments?: string;
-
-	@IsOptional()
-	@Field(() => String, { nullable: true })
-	memberId?: ObjectId;
+interface RSearch {
+  text?: string;
+  reviewComments?: string;
+  memberId?: string;
 }
 
-@InputType()
-export class ReviewInquiry {
-	@IsNotEmpty()
-	@Min(1)
-	@Field(() => Int)
-	page: number;
-
-	@IsNotEmpty()
-	@Min(1)
-	@Field(() => Int)
-	limit: number;
-
-	@IsOptional()
-	@IsIn(availableReviewSorts)
-	@Field(() => String, { nullable: true })
-	sort?: string;
-
-	@IsOptional()
-	@Field(() => Direction, { nullable: true })
-	directions?: Direction;
-
-	@IsNotEmpty()
-	@Field(() => RSearch)
-	search: RSearch;
+export interface ReviewInquiry {
+  page: number;
+  limit: number;
+  sort?: string;
+  directions?: Direction;
+  search: RSearch;
 }
 
-@InputType()
-export class DeleteReviewInput {
-	@Field(() => String)
-	id: string;
+export interface DeleteReviewInput {
+  id: string;
 }

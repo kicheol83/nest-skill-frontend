@@ -9,6 +9,11 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
+import { ProviderInquiry } from "@/libs/types/member/member.input";
+
+interface HeaderFilterProps {
+  initialInput: ProviderInquiry;
+}
 
 const HeaderFilter = () => {
   return (
@@ -16,7 +21,14 @@ const HeaderFilter = () => {
       <Stack className="job-search-bar">
         <Box className="search-fields">
           <TextField
-            sx={{ height: "56px" }}
+            sx={{
+              height: "56px",
+              "& .MuiOutlinedInput-root": {
+                "&.Mui-focused fieldset": {
+                  borderColor: "#007aff",
+                },
+              },
+            }}
             placeholder="Job title or keyword"
             variant="outlined"
             className="search-input"
@@ -30,15 +42,142 @@ const HeaderFilter = () => {
           />
 
           <Select
-            sx={{ height: "56px" }}
-            defaultValue="Florence, Italy"
+            sx={{
+              height: "56px",
+              "&.MuiOutlinedInput-root": {
+                "&.Mui-focused fieldset": {
+                  borderColor: "#007aff",
+                },
+              },
+            }}
+            defaultValue="SEOUL"
             className="location-select"
             displayEmpty
             startAdornment={<RoomOutlinedIcon className="location-icon" />}
           >
-            <MenuItem value="Florence, Italy">Florence, Italy</MenuItem>
-            <MenuItem value="Tashkent">Tashkent</MenuItem>
-            <MenuItem value="Seoul">Seoul</MenuItem>
+            <MenuItem
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#67a0f5a9",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#d0e7ff",
+                },
+              }}
+              value="SEOUL"
+            >
+              SEOUL
+            </MenuItem>
+            <MenuItem
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#e6f0ff",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#d0e7ff",
+                },
+              }}
+              value="BUSAN"
+            >
+              BUSAN
+            </MenuItem>
+            <MenuItem
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#e6f0ff",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#d0e7ff",
+                },
+              }}
+              value="INCHEON"
+            >
+              INCHEON
+            </MenuItem>
+
+            <MenuItem
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#e6f0ff",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#d0e7ff",
+                },
+              }}
+              value="DAEGU"
+            >
+              DAEGU
+            </MenuItem>
+
+            <MenuItem
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#e6f0ff",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#d0e7ff",
+                },
+              }}
+              value="GYEONGJU"
+            >
+              GYEONGJU
+            </MenuItem>
+
+            <MenuItem
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#e6f0ff",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#d0e7ff",
+                },
+              }}
+              value="GWANGJU"
+            >
+              GWANGJU
+            </MenuItem>
+
+            <MenuItem
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#e6f0ff",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#d0e7ff",
+                },
+              }}
+              value="CHONJU"
+            >
+              CHONJU
+            </MenuItem>
+
+            <MenuItem
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#e6f0ff",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#d0e7ff",
+                },
+              }}
+              value="DAEJON"
+            >
+              DAEJON
+            </MenuItem>
+
+            <MenuItem
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#e6f0ff",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#d0e7ff",
+                },
+              }}
+              value="JEJU"
+            >
+              JEJU
+            </MenuItem>
           </Select>
 
           <Button
