@@ -1,9 +1,20 @@
 import React, { useState } from "react";
-import { Checkbox, FormControlLabel, Box } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  Box,
+  OutlinedInput,
+  Stack,
+  Typography,
+  Tooltip,
+  IconButton,
+} from "@mui/material";
 import FilterSection from "../filter-section/FilterSection";
 import ProviderLevelFilter from "../filter-section/ProviderLevelFilter";
 import WorkTimePicker from "../filter-section/WorkTimeSection";
 import PriceSlider from "../filter-section/PriceSection";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 
 const weekdays = [
   "Monday",
@@ -31,6 +42,43 @@ export default function FilterSidebar() {
 
   return (
     <Box>
+      <Stack className={"find-your-home"} mb={"40px"}>
+        <Typography className={"title-main"}>Find Your Home</Typography>
+        <Stack className={"input-box"}>
+          <Stack
+            sx={{ position: "relative", width: "300px" }}
+            className="input-box"
+          >
+            <input
+              className="search-input"
+              type="text"
+              placeholder="What are you looking?"
+              style={{
+                width: "100%",
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+                outline: "none",
+              }}
+            />
+            <CancelRoundedIcon
+              sx={{
+                position: "absolute",
+                right: "10px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "#999",
+                cursor: "pointer",
+              }}
+            />
+          </Stack>
+          <img src={"/img/icons/search_icon.png"} alt={""} />
+          <Tooltip title="Reset">
+            <IconButton>
+              <RefreshIcon />
+            </IconButton>
+          </Tooltip>
+        </Stack>
+      </Stack>
       <FilterSection
         title="Location"
         options={[

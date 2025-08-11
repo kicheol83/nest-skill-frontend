@@ -23,6 +23,12 @@ const withLayoutNew = (Component: any) => {
         bgImage = "";
 
       switch (router.pathname) {
+        case "/service":
+          title = "Service Page";
+          desc = "Home / Service";
+          bgImage = "/img/banner/banner-s.jpg";
+
+          break;
         case "/provider":
           title = "Provider Page";
           desc = "Home / Provider / Detail";

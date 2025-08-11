@@ -13,6 +13,7 @@ import { NextPage } from "next";
 import { useState } from "react";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import withLayoutNew from "@/libs/components/layout/LayoutNew";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -57,7 +58,7 @@ const ServicePage: NextPage = () => {
                 <span className="text-bott">Showing 112 results</span>
               </Box>
               <Box className="left">
-                <Box display="flex" alignItems="center" mr={"10px"}>
+                <Box display="flex" alignItems="center">
                   <Typography color="text.secondary" fontSize="14px" mr={1}>
                     Sort by:
                   </Typography>
@@ -85,16 +86,6 @@ const ServicePage: NextPage = () => {
                     <MenuItem value="high_rating">Highest rated</MenuItem>
                     <MenuItem value="low_price">Lowest price</MenuItem>
                   </Select>
-                </Box>
-                <Box className="refresh-wrapper">
-                  <button
-                    onClick={handleClick}
-                    className={`refresh-btn ${spinning ? "spinning" : ""}`}
-                    aria-label="Reset"
-                  >
-                    <RefreshIcon />
-                  </button>
-                  <span className="tooltip">Reset</span>
                 </Box>
               </Box>
             </Box>
@@ -125,4 +116,4 @@ const ServicePage: NextPage = () => {
   );
 };
 
-export default withLayoutBasic(ServicePage);
+export default withLayoutNew(ServicePage);

@@ -25,7 +25,7 @@ const FilterSection = ({
   const [open, setOpen] = useState(true);
 
   return (
-    <Box mb={2}>
+    <Box mt={"13px"} mb={2}>
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <Typography fontWeight="bold">{title}</Typography>
         <IconButton onClick={() => setOpen(!open)} size="small">

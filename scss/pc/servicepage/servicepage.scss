@@ -87,30 +87,6 @@
               flex: none;
               order: 1;
               flex-grow: 0;
-              .refresh-wrapper {
-                position: relative;
-                display: inline-block;
-                cursor: pointer;
-              }
-              .refresh-btn {
-                margin-top: 10px;
-                font-size: 24px;
-                background: none;
-                border: none;
-                outline: none;
-                transition: transform 1s linear;
-              }
-              .refresh-btn.spinning {
-                animation: spin 1s linear forwards;
-              }
-              @keyframes spin {
-                from {
-                  transform: rotate(0deg);
-                }
-                to {
-                  transform: rotate(360deg);
-                }
-              }
               .tooltip {
                 position: absolute;
                 bottom: -1.5rem;
@@ -201,6 +177,7 @@
           }
         }
         .filter {
+          margin-top: 4px;
           position: relative;
           width: 301px;
           height: auto;

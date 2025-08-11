@@ -4,7 +4,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function PriceSlider() {
-  const [value, setValue] = useState<number[]>([0, 1500]);
+  const [value, setValue] = useState<number[]>([0, 500]);
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
@@ -18,7 +18,7 @@ export default function PriceSlider() {
   };
 
   const handleIncrease = () => {
-    setValue(([min, max]) => [Math.min(min + 1, max), Math.min(max + 1, 1500)]);
+    setValue(([min, max]) => [Math.min(min + 1, max), Math.min(max + 1, 500)]);
   };
 
   return (
@@ -49,7 +49,7 @@ export default function PriceSlider() {
         onChange={handleSliderChange}
         valueLabelDisplay="off"
         min={0}
-        max={1500}
+        max={500}
         sx={{
           color: "primary.main",
           height: 8,
