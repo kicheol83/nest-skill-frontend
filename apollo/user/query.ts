@@ -431,6 +431,14 @@ export const GET_VISITED = gql`
   }
 `;
 
+export const GET_PROVIDER_TYPE_COUNT = gql`
+  query GetProviderPostCount($type: ProviderType!) {
+    getProviderPostCount(type: $type) {
+      count
+    }
+  }
+`;
+
 /**************************
  *      BOARD-ARTICLE     *
  *************************/

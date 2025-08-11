@@ -1,12 +1,28 @@
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Box, Stack } from "@mui/material";
 import CategoryCard from "./CategoryCard";
+import { useRouter } from "next/router";
+import { ProviderJobsInquiry } from "@/libs/types/provider-post/provider-post.input";
 import { useState } from "react";
-import Pagination from "@mui/material/Pagination";
 
-const Category = () => {
+interface HeaderFilterProps {
+  initialInput: ProviderJobsInquiry;
+}
+
+const Category = (props: HeaderFilterProps) => {
+  const { initialInput } = props;
   const device = useDeviceDetect();
-  const [category, setCategory] = useState<number[]>([]);
+  const router = useRouter();
+  const [searchFilter, setSearchFilter] =
+    useState<ProviderJobsInquiry>(initialInput);
+
+  /** HANDLERS **/
+  const pushShowAllHandlers = async () => {
+    await router.push(
+      `/service?input=${JSON.stringify(searchFilter)}`,
+      `/service?input=${JSON.stringify(searchFilter)}`
+    );
+  };
 
   if (device === "mobile") {
     return <div>CATEGORY</div>;
@@ -19,7 +35,7 @@ const Category = () => {
               Explore by<span className="category-txt">category</span>{" "}
             </span>
             <Box className="show-all">
-              <span>Show all jobs </span>
+              <span onClick={() => pushShowAllHandlers()}>Show all jobs </span>
               <img src="/icons/Stroke.svg" alt="" />
             </Box>
           </Box>
@@ -32,6 +48,23 @@ const Category = () => {
       </Stack>
     );
   }
+};
+
+Category.defaultProps = {
+  initialInput: {
+    page: 1,
+    limit: 7,
+    search: {
+      workTimeRange: {
+        start: "06:00",
+        end: "18:00",
+      },
+      workPrice: {
+        start: 0,
+        end: 500,
+      },
+    },
+  },
 };
 
 export default Category;
