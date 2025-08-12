@@ -497,53 +497,60 @@ export const GET_BOARD_ARTICLE = gql`
 `;
 
 export const GET_BOARD_ARTICLES = gql`
-  query GetBoardArticle($input: String!) {
-    getBoardArticle(articleId: $input) {
-      _id
-      articleCategory
-      articleStatus
-      articleTitle
-      articleContent
-      articleImage
-      articleViews
-      articleLikes
-      articleComments
-      memberId
-      createdAt
-      updatedAt
-      memberData {
+  query GetBoardArticles($input: BoardArticlesInquiry!) {
+    getBoardArticles(input: $input) {
+      list {
         _id
-        memberType
-        memberStatus
-        memberAuthType
-        memberPhone
-        memberNick
-        memberFullName
-        memberImage
-        memberAddress
-        memberDesc
-        memberJobs
-        memberArticles
-        memberFollowers
-        memberFollowings
-        memberPoints
-        memberLikes
-        memberViews
-        memberComments
-        memberRank
-        memberWarnings
-        bannedAt
-        suspendedAt
-        deactivatedAt
-        deletedAt
+        articleCategory
+        articleStatus
+        articleTitle
+        articleContent
+        articleImage
+        articleViews
+        articleLikes
+        articleComments
+        memberId
         createdAt
         updatedAt
-        accessToken
+        memberData {
+          _id
+          memberType
+          memberStatus
+          memberAuthType
+          memberPhone
+          memberNick
+          memberFullName
+          memberImage
+          memberAddress
+          memberDesc
+          memberJobs
+          memberArticles
+          memberFollowers
+          memberFollowings
+          memberPoints
+          memberLikes
+          memberViews
+          memberComments
+          memberRank
+          memberWarnings
+          bannedAt
+          suspendedAt
+          deactivatedAt
+          deletedAt
+          createdAt
+          updatedAt
+          accessToken
+          memberEmail
+          googleId
+        }
+        meLiked {
+          memberId
+          likeRefId
+          myFavorite
+        }
       }
-      meLiked {
-        memberId
-        likeRefId
-        myFavorite
+      metaCounter {
+        total
       }
     }
   }
