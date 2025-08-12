@@ -1345,11 +1345,11 @@
           .popular-review-swiper {
             width: 100%;
             height: auto;
-            display: flex;
-            flex-direction: row;
             .review-cards-slide {
               display: flex;
               justify-content: center;
+              width: 300px;
+              flex-shrink: 0;
               .review-box {
                 width: 424px;
                 height: 294px;
@@ -1435,11 +1435,11 @@
                       text-align: left;
                     }
                     img {
-                      position: absolute;
+                      position: relative;
                       width: 36px;
                       height: 36px;
-                      left: 157px;
-                      top: 6px;
+                      bottom: 35px;
+                      left: 151px;
                     }
                   }
                 }
