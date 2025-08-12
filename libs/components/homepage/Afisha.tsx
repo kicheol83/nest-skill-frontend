@@ -1,8 +1,10 @@
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Box, Button, Stack } from "@mui/material";
+import { useRouter } from "next/router";
 
 const Afisha = () => {
   const device = useDeviceDetect();
+  const router = useRouter();
 
   if (device === "mobile") {
     return <div>AFISHA</div>;
@@ -16,7 +18,12 @@ const Afisha = () => {
               <span className="title-center">
                 Start posting jobs for only $10
               </span>
-              <Button className="button">Sign Up For Free</Button>
+              <Button
+                onClick={() => router.push("/account/join")}
+                className="button"
+              >
+                Sign Up For Free
+              </Button>
               <img src="/img/banner/dashboard.png" alt="" />
             </Box>
           </Stack>

@@ -43,7 +43,10 @@ const FeaturedCard = (props: FeaturedCardProps) => {
             {featured.providerWorkWeekday}
           </Button>
         </Box>
-        <Box className="box-title">
+        <Box
+          onClick={() => pushDetailHandler(featured._id)}
+          className="box-title"
+        >
           <span className="p-type">{featured.providerType}</span>
           <Stack
             className="title-location"

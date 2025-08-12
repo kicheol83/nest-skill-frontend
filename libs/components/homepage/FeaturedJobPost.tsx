@@ -76,9 +76,9 @@ const Featured = (props: FeaturedProps) => {
     event: ChangeEvent<unknown>,
     value: number
   ) => {
-    const newFilter = { ...initialInput, page: value }; // page ni yangilaymiz
-    setSearchFilter(newFilter); // state ga o'rnatamiz
-    setCurrentPage(value); // sahifa raqamini ham alohida saqlaymiz (agar kerak bo'lsa)
+    const newFilter = { ...initialInput, page: value };
+    setSearchFilter(newFilter);
+    setCurrentPage(value);
     await router.push(
       `/?input=${JSON.stringify(newFilter)}`,
       `/?input=${JSON.stringify(newFilter)}`,
