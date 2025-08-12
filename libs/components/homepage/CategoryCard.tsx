@@ -4,16 +4,13 @@ import { ProviderType } from "@/libs/enums/provider.enum";
 import { Box, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState, useCallback } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_PROVIDER_TYPE_COUNT } from "@/apollo/user/query";
 
 interface HeaderFilterProps {
   initialInput: ProviderJobsInquiry;
-  type: ProviderType;
 }
 
 const CategoryCard = (props: HeaderFilterProps) => {
-  const { initialInput, type } = props;
+  const { initialInput } = props;
   const device = useDeviceDetect();
   const router = useRouter();
   const [searchFilter, setSearchFilter] =
