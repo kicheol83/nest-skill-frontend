@@ -5,7 +5,7 @@
       top: 78px;
       position: relative;
       width: 100%;
-      height: 1900px;
+      height: 3000px;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
@@ -37,10 +37,12 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            padding: 0px;
+            padding: 0px 15px;
             flex: none;
             order: 0;
             flex-grow: 0;
+            background: #80808047;
+            border-radius: 10px;
             .right {
               position: relative;
               width: 146px;
@@ -227,7 +229,7 @@
               flex-direction: row;
               justify-content: space-between;
               align-items: center;
-              padding: 0px;
+              padding: 0px 15px;
               flex: none;
               order: 0;
               flex-grow: 0;
@@ -293,7 +295,6 @@
             flex: none;
             order: 1;
             flex-grow: 0;
-            margin: 32px 0px;
             .jobs-card {
               position: relative;
               width: 100%;
@@ -305,7 +306,7 @@
               flex: none;
               order: 0;
               flex-grow: 0;
-              margin: 16px 0px;
+              margin: 10px 0px;
               box-sizing: border-box;
               border: 1px solid rgb(214, 221, 235);
               background: rgb(255, 255, 255);
@@ -314,7 +315,7 @@
               transition: all 0.3s ease;
               overflow: hidden;
               &:hover {
-                transform: scale(1.05);
+                transform: scale(1.01);
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
               }
               .main-content {
@@ -611,7 +612,7 @@
                   letter-spacing: 0%;
                   text-align: center;
                   &:hover {
-                    transform: scale(1.05);
+                    transform: scale(1.01);
                     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
                   }
                 }
@@ -639,7 +640,7 @@
                   letter-spacing: 0%;
                   text-align: center;
                   &:hover {
-                    transform: scale(1.05);
+                    transform: scale(1.01);
                     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
                   }
                 }
@@ -647,6 +648,7 @@
             }
           }
           .pagination {
+            margin-top: 35px;
             width: auto;
             height: auto;
             display: flex;

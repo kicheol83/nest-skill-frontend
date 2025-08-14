@@ -349,132 +349,45 @@
 
 .filter {
   .find-your-home {
-    position: relative;
-    width: 100%;
-    height: 63px;
-    gap: 10px;
-    .property-location {
-      gap: 10px;
-      height: 115px;
-      overflow: hidden;
-      transition: 1s;
-      &:hover {
-        height: 253px;
-      }
+    background: #ffffff; // oq fon
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+    &:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     }
     .title-main {
-      width: 100%;
-      height: 25px;
-      color: #181a20;
-      font-family: $font-heading;
-      font-size: 16px;
-      font-style: normal;
+      font-size: 22px;
       font-weight: 700;
-      line-height: normal;
+      margin-bottom: 16px;
+      color: #333;
     }
     .title {
-      width: auto;
-      height: auto;
-      color: #181a20;
-      font-family: $font-heading;
-      font-size: 14px;
-      font-style: normal;
+      font-size: 18px;
       font-weight: 600;
-      line-height: normal;
+      margin-bottom: 12px;
+      color: #444;
+      border-left: 4px solid #4cafef;
+      padding-left: 8px;
     }
     .input-box {
-      position: relative;
-      width: 100%;
+      display: flex;
       flex-direction: row;
       align-items: center;
-      svg {
-        cursor: pointer;
-      }
-      .search-input {
-        width: 100%;
-        height: 53px;
-        border-radius: 8px;
-        outline: none;
-        padding-left: 43px;
-        color: #717171;
-        font-family: $font-heading;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 26px;
-      }
-      img {
-        position: absolute;
-        width: 18px;
-        height: 17px;
-        top: 18px;
-        left: 15px;
-      }
-      .property-checkbox {
-        width: 16px;
-        height: 15px;
-        border-radius: 12px;
-        margin-right: 10px;
-        svg {
-          width: 19px;
-        }
-      }
-    }
-    .city-select {
-      width: 100%;
-      height: 49px;
+      gap: 8px;
+      padding: 6px 8px;
       border-radius: 8px;
-      border: 1px solid #ddd;
-      background: #fff;
-      outline: none;
-      padding-left: 15px;
-      appearance: none;
-      cursor: pointer;
-      box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-      color: #717171;
-      font-family: $font-heading;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 26px;
-    }
-    .divider {
-      position: absolute;
-      height: 48px;
-      border-left: 1px solid #ddd;
-      right: 39px;
-      top: 31px;
-    }
-    .arrow-down {
-      position: absolute;
-      width: 15px;
-      height: 8px;
-      color: #ddd;
-      right: 13px;
-      top: 52px;
-    }
-    .property-type {
-      color: #181a20;
-      font-family: $font-heading;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 19px;
-    }
-    .button-group {
-      width: 100%;
-      height: 43.998px;
-      flex-direction: row;
-      button {
-        width: 100%;
-        color: #181a20;
-        text-align: center;
-        font-family: $font-heading;
-        font-size: 13px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
+      .property-checkbox {
+        padding: 0;
+        margin: 0;
+      }
+      .property_type {
+        font-size: 14px;
+        font-weight: 500;
+        color: #555;
+        cursor: pointer;
       }
     }
     .square-year-input {
@@ -507,5 +420,104 @@
         line-height: 26px;
       }
     }
+  }
+  .find-your-home-options {
+    background: #ffffff; // oq fon
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+    &:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+    .title-main {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #333;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #444;
+      border-left: 4px solid #4cafef;
+      padding-left: 8px;
+    }
+    .input-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 8px;
+      .property-checkbox {
+        padding: 0;
+        margin: 0;
+      }
+      .property_type {
+        font-size: 14px;
+        font-weight: 500;
+        color: #555;
+        cursor: pointer;
+      }
+    }
+  }
+  .find-your-home.expandable {
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .input-box.extra {
+      transition: all 0.3s ease;
+    }
+    .hidden {
+      display: none;
+    }
+    &:hover {
+      .hidden {
+        display: flex;
+      }
+    }
+  }
+
+  /* Search input style */
+  .search-input {
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.2s ease;
+
+    &:focus {
+      border-color: #4cafef;
+      box-shadow: 0 0 0 2px rgba(76, 175, 239, 0.2);
+    }
+  }
+
+  /* Tooltip and icon styles */
+  .MuiIconButton-root {
+    color: #555;
+    &:hover {
+      color: #4cafef;
+    }
+  }
+}
+
+.no-data {
+  padding: 30px 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 56px;
+    margin-bottom: 2px;
+  }
+  p {
+    color: #bdbdbd;
+    text-align: center;
   }
 }

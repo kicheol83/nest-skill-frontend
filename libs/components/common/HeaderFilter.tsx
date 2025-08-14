@@ -101,7 +101,11 @@ const HeaderFilter = (props: HeaderFilterProps) => {
             value={searchFilter?.search?.text ?? ""}
             sx={{
               height: "56px",
+
               "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "black", // default border
+                },
                 "&.Mui-focused fieldset": {
                   borderColor: "#007aff",
                 },
@@ -129,15 +133,24 @@ const HeaderFilter = (props: HeaderFilterProps) => {
             sx={{
               height: "56px",
               "&.MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "black", // default border
+                },
                 "&.Mui-focused fieldset": {
                   borderColor: "#007aff",
                 },
               },
             }}
-            defaultValue="SEOUL"
+            defaultValue="Location"
             className="location-select"
             displayEmpty
             startAdornment={<RoomOutlinedIcon className="location-icon" />}
+            renderValue={(selected) => {
+              if (!selected) {
+                return <span style={{ color: "#999" }}>Location</span>; // Placeholder text
+              }
+              return selected;
+            }}
           >
             {providerLocation.map((location: string) => {
               return (
@@ -189,7 +202,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 HeaderFilter.defaultProps = {
   initialInput: {
     page: 1,
-    limit: 7,
+    limit: 9,
     search: {
       workTimeRange: {
         start: "06:00",

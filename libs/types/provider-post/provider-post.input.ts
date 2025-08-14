@@ -45,7 +45,7 @@ interface PISearch {
   workWeekdayList?: ProviderWorkWeekday[];
   weekList?: ProviderWeekday[];
   rateRangeList?: ProviderRateType[];
-  options?: string[];
+  options?: number[];
   workTimeRange?: WorkTime;
   workPrice?: WorkPrice;
   text?: string;

@@ -23,6 +23,6 @@ export enum Message {
   DELETE_FAILED = "You can only delete your own reviews!",
 }
 export enum Direction {
-  ASC = 1,
-  DESC = -1,
+  ASC = "ASC",
+  DESC = "DESC",
 }
