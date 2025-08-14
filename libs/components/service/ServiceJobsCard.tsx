@@ -27,10 +27,10 @@ const ServiceJobsCard = (props: ServiceJobsCardProps) => {
     });
   };
 
-  const pushServiceDetailHandler = async (providerPostId: string) => {
+ const pushDetailHandler1 = async (serviceJobId: string) => {
     await router.push({
       pathname: "/service/detail",
-      query: { id: providerPostId },
+      query: { id: serviceJobId },
     });
   };
 
@@ -104,7 +104,7 @@ const ServiceJobsCard = (props: ServiceJobsCardProps) => {
             Order {providerPost.providerWorkPrice}$
           </Button>
           <Button
-            onClick={() => pushServiceDetailHandler(providerPost._id)}
+            onClick={() => pushDetailHandler1(providerPost._id)}
             className="payme1"
           >
             View

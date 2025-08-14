@@ -3,6 +3,7 @@ import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import {
   Box,
   Button,
+  CircularProgress,
   Link,
   Pagination,
   Stack,
@@ -11,22 +12,334 @@ import {
 import { Pagination as MuiPagination } from "@mui/material";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import StarsOutlinedIcon from "@mui/icons-material/StarsOutlined";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
 import EditCalendarOutlinedIcon from "@mui/icons-material/EditCalendarOutlined";
 import LatestJobsCard from "@/libs/components/homepage/LatestJobsCard";
-import { useState } from "react";
-import HeaderOther from "@/libs/components/header/HeaderOther";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useMutation, useQuery, useReactiveVar } from "@apollo/client";
+import { ProviderPost } from "@/libs/types/provider-post/provider-post";
+import { userVar } from "@/apollo/store";
+import {
+  CommentInput,
+  CommentsInquiry,
+} from "@/libs/types/comment/comment.input";
+import { Comment } from "@/libs/types/comment/comment";
+import { CommentGroup } from "@/libs/enums/comment.enum";
+import {
+  GET_COMMENTS,
+  GET_PROVIDER_POST,
+  GET_PROVIDER_POSTS,
+} from "@/apollo/user/query";
+import { Direction, Message } from "@/libs/enums/common.enum";
+import { T } from "@/libs/types/common";
+import {
+  CREATE_COMMENT,
+  LIKE_TARGET_PROVIDER_POST,
+} from "@/apollo/user/mutation";
+import {
+  sweetErrorHandling,
+  sweetMixinErrorAlert,
+  sweetTopSmallSuccessAlert,
+} from "@/libs/sweetAlert";
+import moment from "moment";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import Review from "@/libs/components/service/Review";
+import { REACT_APP_API_URL } from "@/libs/config";
+import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+import { NextPage } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-const ServiceDetailPage = () => {
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
+
+const ServiceDetailPage: NextPage = ({
+  initialComment,
+  initialInput,
+  ...props
+}: any) => {
+  console.log("props ichida nima bor:", props);
   const device = useDeviceDetect();
-  const [latestJobs, setLatestJobs] = useState<number[]>([
-    1, 2, 3, 4, 5, 6, 7, 8,
-  ]);
+  const router = useRouter();
+  const user = useReactiveVar(userVar);
+  const [providerPostId, setProviderPostId] = useState<string | null>(null);
+  const [providerPost, setProviderPost] = useState<ProviderPost | null>(null);
+  const [slideImage, setSlideImage] = useState<string>("");
+  const [destinationProviderPost, setDestinationProviderPost] = useState<
+    ProviderPost[]
+  >([]);
+  const [commentInquiry, setCommentInquiry] =
+    useState<CommentsInquiry>(initialComment);
+  const [providerPostComments, setProviderPostComments] = useState<Comment[]>(
+    []
+  );
+  const [commentTotal, setCommentTotal] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const [insertCommentData, setInsertCommentData] = useState<CommentInput>({
+    commentGroup: CommentGroup.PROVIDER,
+    commentContent: "",
+    commentRefId: "",
+  });
+  const [total, setTotal] = useState<number>(0);
+  const [searchFilter, setSearchFilter] = useState<any>(
+    router?.query?.input
+      ? JSON.parse(router?.query?.input as string)
+      : initialInput
+  );
+
+  /** CALCULATE FUNCTION **/
+  function calculateHourlyPayment(calculate: ProviderPost): string {
+    if (calculate.providerRateType !== "HOURLY") return "Not hourly";
+
+    if (!calculate.providerStartTime || !calculate.providerEndTime)
+      return "Time not set";
+
+    const start = new Date(calculate.providerStartTime);
+    const end = new Date(calculate.providerEndTime);
+
+    const diffInMs = end.getTime() - start.getTime();
+    const diffInHours = diffInMs / (1000 * 60 * 60);
+
+    const totalPrice = calculate.providerWorkPrice * diffInHours;
+
+    return `$${totalPrice.toFixed(2)}`;
+  }
+
+  const creationYear = providerPost?.createdAt
+    ? moment(providerPost.createdAt).format("YYYY")
+    : "No date";
+
+  const {
+    loading: getProviderPostsLoading,
+    data: getProviderPostsData,
+    error: gettProviderPostsError,
+    refetch: getProviderPostsRefetch,
+  } = useQuery(GET_PROVIDER_POSTS, {
+    fetchPolicy: "cache-and-network",
+    variables: {
+      input: {
+        page: 1,
+        limit: 4,
+        sort: "createdAt",
+        directions: Direction.DESC,
+        search: {
+          locationList: providerPost?.providerLocation
+            ? [providerPost?.providerLocation]
+            : [],
+        },
+      },
+    },
+    skip: !providerPostId && !providerPost,
+    notifyOnNetworkStatusChange: true,
+    onCompleted: (data: T) => {
+      if (data?.getProviderJobs?.list)
+        setDestinationProviderPost(data?.getProviderJobs?.list);
+    },
+  });
+
+  /** APOLLO REQUESTS **/
+  const [likeTargetProviderPost] = useMutation(LIKE_TARGET_PROVIDER_POST);
+  const [createComment] = useMutation(CREATE_COMMENT);
+
+  const {
+    loading: getProviderPostLoading,
+    data: getProviderPostData,
+    error: gettProviderPostError,
+    refetch: getProviderPostRefetch,
+  } = useQuery(GET_PROVIDER_POST, {
+    fetchPolicy: "network-only",
+    variables: { input: providerPostId },
+    skip: !providerPostId,
+    notifyOnNetworkStatusChange: true,
+    onCompleted: (data: T) => {
+      if (data?.getProvider) setProviderPost(data?.getProvider);
+      if (data?.getProvider)
+        setSlideImage(data?.getProvider?.providerImages[0]);
+    },
+  });
+
+  /** LIFECYCLES **/
+  useEffect(() => {
+    if (router.query.id) {
+      setProviderPostId(router.query.id as string);
+      setCommentInquiry({
+        ...commentInquiry,
+        search: {
+          commentRefId: router.query.id as string,
+        },
+      });
+      setInsertCommentData({
+        ...insertCommentData,
+        commentRefId: router.query.id as string,
+      });
+    }
+  }, [router]);
+
+  useEffect(() => {
+    if (commentInquiry?.search?.commentRefId) {
+      getCommentsRefetch({ input: commentInquiry });
+    }
+  }, [commentInquiry]);
+
+  /** HANDLERS **/
+  const changeImageHandler = (image: string) => {
+    setSlideImage(image);
+  };
+
+  const likePropertyHandler = async (user: T, id: string) => {
+    try {
+      if (!id) return;
+      if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+
+      await likeTargetProviderPost({
+        variables: { input: id },
+      });
+      await getProviderPostRefetch({ input: id });
+      await getProviderPostsRefetch({
+        input: {
+          page: 1,
+          limit: 4,
+          sort: "createdAt",
+          directions: Direction.DESC,
+          search: {
+            locationList: [providerPost?.providerLocation],
+          },
+        },
+      });
+      await sweetTopSmallSuccessAlert("success", 800);
+    } catch (err: any) {
+      console.log("ERROR, likePropertyHandler:", err.message);
+      sweetMixinErrorAlert(err.message).then();
+    }
+  };
+
+  const {
+    loading: getCommentsLoading,
+    data: getCommentsData,
+    error: gettCommentsError,
+    refetch: getCommentsRefetch,
+  } = useQuery(GET_COMMENTS, {
+    fetchPolicy: "cache-and-network",
+    variables: { input: initialComment },
+    skip: !(
+      commentInquiry &&
+      commentInquiry.search &&
+      commentInquiry.search.commentRefId
+    ),
+    notifyOnNetworkStatusChange: true,
+    onCompleted: (data: T) => {
+      if (data?.getComments?.list)
+        setProviderPostComments(data?.getComments?.list);
+      setCommentTotal(data?.getComments?.metaCounter[0]?.total ?? 0);
+    },
+  });
+
+  const commentPaginationChangeHandler = async (
+    event: ChangeEvent<unknown>,
+    value: number
+  ) => {
+    commentInquiry.page = value;
+    setCommentInquiry({ ...commentInquiry });
+  };
+
+  const paginationChangeHandler = async (
+    event: ChangeEvent<unknown>,
+    value: number
+  ) => {
+    const newFilter = { ...initialInput, page: value };
+    setSearchFilter(newFilter);
+    setCurrentPage(value);
+    await router.push(
+      `/service/detail/?input=${JSON.stringify(newFilter)}`,
+      `/service/detail/?input=${JSON.stringify(newFilter)}`,
+      { scroll: false }
+    );
+  };
+
+  const pushDetailHandler = async (orderId: string) => {
+    await router.push({
+      pathname: "/order",
+      query: { id: orderId },
+    });
+  };
+
+  const createCommentHandler = async () => {
+    try {
+      if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+      await createComment({ variables: { input: insertCommentData } });
+
+      setInsertCommentData({ ...insertCommentData, commentContent: "" });
+      console.log("commentInquiery =>", commentInquiry);
+      await getCommentsRefetch({ input: commentInquiry });
+    } catch (err: any) {
+      await sweetErrorHandling(err);
+    }
+  };
+
+  /** LATEST CARD  **/
+  /** APOLLO REQUEST **/
+  const [likeTargetProperty] = useMutation(LIKE_TARGET_PROVIDER_POST);
+
+  const {
+    loading: getLatestLoading,
+    data: getLatestData,
+    error: getLatestError,
+    refetch: getLatestRefetch,
+  } = useQuery(GET_PROVIDER_POSTS, {
+    fetchPolicy: "cache-and-network",
+    variables: { input: searchFilter },
+    notifyOnNetworkStatusChange: true,
+  });
+
+  useEffect(() => {
+    if (getLatestData?.getProviderJobs?.list) {
+      setDestinationProviderPost(getLatestData.getProviderJobs.list);
+      setTotal(getLatestData?.getProviderJobs.metaCounter[0]?.total);
+    }
+  }, [getLatestData]);
+
+  /** HANDLERS **/
+  const likeLatestHandler = async (user: T, id: string) => {
+    try {
+      if (!id) return;
+      if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+
+      await likeTargetProperty({
+        variables: { input: id },
+      });
+      await getLatestRefetch({ input: searchFilter });
+
+      await sweetTopSmallSuccessAlert("success", 800);
+    } catch (err: any) {
+      console.log("ERROR, likeFeaturedHandler:", err.message);
+      sweetMixinErrorAlert(err.message).then();
+    }
+  };
+
+  if (getProviderPostLoading) {
+    return (
+      <Stack
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: "1080px",
+        }}
+      >
+        <CircularProgress size={"4rem"} />
+      </Stack>
+    );
+  }
 
   if (device === "mobile") {
-    return <div>PROPERTY DETAIL PAGE</div>;
+    return <div>SERVICE DETAIL PAGE</div>;
   } else {
     return (
       <div id={"property-detail-page"}>
@@ -36,10 +349,12 @@ const ServiceDetailPage = () => {
               <Stack className={"info"}>
                 <Stack className={"left-box"}>
                   <Typography className={"title-main"}>
-                    Zor Provider Post
+                    {providerPost?.providerTitle}
                   </Typography>
                   <Stack className={"top-box"}>
-                    <Typography className={"city"}>SEOUL</Typography>
+                    <Typography className={"city"}>
+                      {providerPost?.providerLocation}
+                    </Typography>
                     <Stack className={"divider"}></Stack>
                     <Stack className={"buy-rent-box"}>
                       <>
@@ -81,53 +396,106 @@ const ServiceDetailPage = () => {
                         </clipPath>
                       </defs>
                     </svg>
-                    <Typography className={"date"}>7 days ago</Typography>
+                    <Typography className={"date"}>
+                      {moment().diff(providerPost?.createdAt, "days")} days ago
+                    </Typography>
                   </Stack>
                   <Stack className={"bottom-box"}>
                     <Stack className="option">
                       <img src="/img/icons/bed.svg" alt="" />{" "}
-                      <Typography>7 days limit</Typography>
+                      <Typography>
+                        {providerPost?.providerWorkDayLimit} days limit
+                      </Typography>
                     </Stack>
                     <Stack className="option">
                       <img src="/img/icons/room.svg" alt="" />{" "}
-                      <Typography>Start 06:00</Typography>
+                      <Typography>
+                        Start {providerPost?.providerStartTime}
+                      </Typography>
                     </Stack>
                     <Stack className="option">
                       <img src="/img/icons/expand.svg" alt="" />{" "}
-                      <Typography>End 16:00</Typography>
+                      <Typography>
+                        End {providerPost?.providerEndTime}
+                      </Typography>
                     </Stack>
                   </Stack>
                 </Stack>
                 <Stack className={"right-box"}>
                   <Stack className="buttons">
                     <Stack className="statsWrapper">
-                      <Box className="statItem">
-                        <FavoriteBorderIcon fontSize="small" />
-                        <Typography>11</Typography>
+                      <Box
+                        className="statItem"
+                        onClick={() =>
+                          likePropertyHandler(user, providerPost!._id)
+                        }
+                      >
+                        {providerPost?.meLiked &&
+                        providerPost?.meLiked[0]?.myFavorite ? (
+                          <FavoriteIcon
+                            className="icon"
+                            fontSize="small"
+                            sx={{ color: "red" }}
+                          />
+                        ) : (
+                          <FavoriteBorderOutlinedIcon
+                            className="icon"
+                            fontSize="small"
+                          />
+                        )}
+
+                        <Typography>{providerPost?.providerLikes}</Typography>
                       </Box>
                     </Stack>
 
-                    <Stack
-                      className="button-box"
-                      // @ts-ignore
-                      onClick={() => likePropertyHandler(user, property?._id)}
-                    >
+                    <Stack className="button-box">
                       <Box className="statItem1">
                         <VisibilityOutlinedIcon fontSize="small" />
-                        <Typography>12</Typography>
+                        <Typography>{providerPost?.providerViews}</Typography>
                       </Box>
                     </Stack>
                   </Stack>
-                  <Typography>200$</Typography>
+                  <Button
+                    size="large"
+                    sx={{
+                      borderRadius: "7px",
+                      background: "rgb(38, 164, 255)",
+                      fontSize: "20px",
+                      height: "40px",
+                      color: "darkblue",
+                      fontFamily: "Space Grotesk",
+                    }}
+                     onClick={() => pushDetailHandler(providerPost!._id)}
+                  >
+                    Pay {providerPost?.providerWorkPrice}$
+                  </Button>
                 </Stack>
               </Stack>
               <Stack className={"images"}>
                 <Stack className={"main-image"}>
-                  <img src="/img/banner/d.avif" alt="" />
+                  <img
+                    src={
+                      slideImage
+                        ? `${REACT_APP_API_URL}/${slideImage}`
+                        : "/img/banner/d.avif"
+                    }
+                    alt={"main-image"}
+                  />
                 </Stack>
                 <Stack className={"sub-images"}>
                   <Stack className={"sub-img-box"}>
-                    <img src="/img/banner/d.avif" alt={"sub-image"} />
+                    {providerPost?.providerImages.map((subImg: string) => {
+                      const imagePath: string = `${REACT_APP_API_URL}/${subImg}`;
+                      return (
+                        <Stack
+                          className={"sub-img-box"}
+                          onClick={() => changeImageHandler(subImg)}
+                          key={subImg}
+                        >
+                          <img src={imagePath} alt={"sub-image"} />
+                        </Stack>
+                      );
+                    })}
                   </Stack>
                 </Stack>
               </Stack>
@@ -141,7 +509,9 @@ const ServiceDetailPage = () => {
                     </Stack>
                     <Stack className={"option-includes"}>
                       <Typography className={"title"}>Days Limit</Typography>
-                      <Typography className={"option-data"}>14</Typography>
+                      <Typography className={"option-data"}>
+                        {providerPost?.providerWorkDayLimit}
+                      </Typography>
                     </Stack>
                   </Stack>
                   <Stack className={"option"}>
@@ -150,7 +520,9 @@ const ServiceDetailPage = () => {
                     </Stack>
                     <Stack className={"option-includes"}>
                       <Typography className={"title"}>Level</Typography>
-                      <Typography className={"option-data"}>SILVER</Typography>
+                      <Typography className={"option-data"}>
+                        {providerPost?.providerLevel}
+                      </Typography>
                     </Stack>
                   </Stack>
                   <Stack className={"option"}>
@@ -174,7 +546,10 @@ const ServiceDetailPage = () => {
                     </Stack>
                     <Stack className={"option-includes"}>
                       <Typography className={"title"}>Created Post</Typography>
-                      <Typography className={"option-data"}>2025</Typography>
+                      <Typography className={"option-data"}>
+                        {moment().diff(providerPost?.createdAt, "days")} days
+                        ago
+                      </Typography>
                     </Stack>
                   </Stack>
                   <Stack className={"option"}>
@@ -184,7 +559,7 @@ const ServiceDetailPage = () => {
                     <Stack className={"option-includes"}>
                       <Typography className={"title"}>Work Day</Typography>
                       <Typography className={"option-data"}>
-                        WEEKDAYS
+                        {providerPost?.providerWorkWeekday}
                       </Typography>
                     </Stack>
                   </Stack>
@@ -195,7 +570,7 @@ const ServiceDetailPage = () => {
                     <Stack className={"option-includes"}>
                       <Typography className={"title"}>Property Type</Typography>
                       <Typography className={"option-data"}>
-                        BABYSITTING
+                        {providerPost?.providerType}
                       </Typography>
                     </Stack>
                   </Stack>
@@ -206,8 +581,7 @@ const ServiceDetailPage = () => {
                       Provider Post Description
                     </Typography>
                     <Typography className={"desc"}>
-                      Apartment is situated in city center of Seoul. There a lot
-                      of facilities for everyone!
+                      {providerPost?.providerDesc}
                     </Typography>
                   </Stack>
                   <Stack className={"bottom"}>
@@ -216,28 +590,39 @@ const ServiceDetailPage = () => {
                       <Stack className={"left"}>
                         <Box component={"div"} className={"info"}>
                           <Typography className={"title"}>Price</Typography>
-                          <Typography className={"data"}>$200</Typography>
+                          <Typography className={"data"}>
+                            {providerPost?.providerWorkPrice}$
+                          </Typography>
                         </Box>
                         <Box component={"div"} className={"info"}>
-                          <Typography className={"title"}>
-                            Hour Price
+                          <Typography className={"title"}>Hourly</Typography>
+                          <Typography className={"data"} mt={"5px"}>
+                            {providerPost
+                              ? calculateHourlyPayment(providerPost)
+                              : "No data"}
                           </Typography>
-                          <Typography className={"data"}>$12</Typography>
                         </Box>
                         <Box component={"div"} className={"info"}>
                           <Typography className={"title"}>Rate Type</Typography>
-                          <Typography className={"data"}>FIXED</Typography>
+                          <Typography className={"data"}>
+                            {providerPost?.providerRateType}
+                          </Typography>
                         </Box>
                         <Box component={"div"} className={"info"}>
                           <Typography className={"title"}>
                             Days Limit
                           </Typography>
-                          <Typography className={"data"}>5</Typography>
-                        </Box>
-                        <Box component={"div"} className={"info"}>
-                          <Typography className={"title"}>Week Day</Typography>
                           <Typography className={"data"}>
-                            MON, THU, WEN, FRI
+                            {providerPost?.providerWorkDayLimit}
+                          </Typography>
+                        </Box>
+                        <Box component="div" className="info">
+                          <Typography className="title">Week Day</Typography>
+                          <Typography className="data">
+                            {providerPost?.providerWorkWeekday === "CUSTOM" &&
+                            providerPost?.providerWeekday
+                              ? providerPost.providerWeekday.join(", ")
+                              : "Not custom"}
                           </Typography>
                         </Box>
                       </Stack>
@@ -246,24 +631,29 @@ const ServiceDetailPage = () => {
                           <Typography className={"title"}>
                             Creation Year
                           </Typography>
-                          <Typography className={"data"}>2025</Typography>
+                          <Typography className={"data"}>
+                            {creationYear}
+                          </Typography>
                         </Box>
                         <Box component={"div"} className={"info"}>
                           <Typography className={"title"}>Post Type</Typography>
                           <Typography className={"data"}>
-                            BABYSITTING
+                            {providerPost?.providerType}
                           </Typography>
                         </Box>
                         <Box component={"div"} className={"info"}>
                           <Typography className={"title"}>Level</Typography>
-                          <Typography className={"data"}>BRONZE</Typography>
+                          <Typography className={"data"}>
+                            {providerPost?.providerLevel}
+                          </Typography>
                         </Box>{" "}
                         <Box component={"div"} className={"info"}>
                           <Typography className={"title"}>
                             Start:End Time
                           </Typography>
                           <Typography className={"data"}>
-                            06:00 - 16:00
+                            {providerPost?.providerStartTime} -{" "}
+                            {providerPost?.providerEndTime}
                           </Typography>
                         </Box>
                       </Stack>
@@ -285,59 +675,78 @@ const ServiceDetailPage = () => {
                     ></iframe>
                   </Stack>
                 </Stack>
-                {/* comment */}
-                <Stack className={"reviews-config"}>
-                  <Stack className={"filter-box"}>
-                    <Stack className={"review-cnt"}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="12"
-                        viewBox="0 0 16 12"
-                        fill="none"
-                      >
-                        <g clipPath="url(#clip0_6507_7309)">
-                          <path
-                            d="M15.7183 4.60288C15.6171 4.3599 15.3413 4.18787 15.0162 4.16489L10.5822 3.8504L8.82988 0.64527C8.7005 0.409792 8.40612 0.257812 8.07846 0.257812C7.7508 0.257812 7.4563 0.409792 7.32774 0.64527L5.57541 3.8504L1.14072 4.16489C0.815641 4.18832 0.540363 4.36035 0.438643 4.60288C0.337508 4.84586 0.430908 5.11238 0.676772 5.28084L4.02851 7.57692L3.04025 10.9774C2.96794 11.2275 3.09216 11.486 3.35771 11.636C3.50045 11.717 3.66815 11.7575 3.83643 11.7575C3.98105 11.7575 4.12577 11.7274 4.25503 11.667L8.07846 9.88098L11.9012 11.667C12.1816 11.7979 12.5342 11.7859 12.7992 11.636C13.0648 11.486 13.189 11.2275 13.1167 10.9774L12.1284 7.57692L15.4801 5.28084C15.7259 5.11238 15.8194 4.84641 15.7183 4.60288Z"
-                            fill="#181A20"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_6507_7309">
-                            <rect
-                              width="15.36"
-                              height="12"
-                              fill="white"
-                              transform="translate(0.398438)"
+                {commentTotal !== 0 && (
+                  <Stack className={"reviews-config"}>
+                    <Stack className={"filter-box"}>
+                      <Stack className={"review-cnt"}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="12"
+                          viewBox="0 0 16 12"
+                          fill="none"
+                        >
+                          <g clipPath="url(#clip0_6507_7309)">
+                            <path
+                              d="M15.7183 4.60288C15.6171 4.3599 15.3413 4.18787 15.0162 4.16489L10.5822 3.8504L8.82988 0.64527C8.7005 0.409792 8.40612 0.257812 8.07846 0.257812C7.7508 0.257812 7.4563 0.409792 7.32774 0.64527L5.57541 3.8504L1.14072 4.16489C0.815641 4.18832 0.540363 4.36035 0.438643 4.60288C0.337508 4.84586 0.430908 5.11238 0.676772 5.28084L4.02851 7.57692L3.04025 10.9774C2.96794 11.2275 3.09216 11.486 3.35771 11.636C3.50045 11.717 3.66815 11.7575 3.83643 11.7575C3.98105 11.7575 4.12577 11.7274 4.25503 11.667L8.07846 9.88098L11.9012 11.667C12.1816 11.7979 12.5342 11.7859 12.7992 11.636C13.0648 11.486 13.189 11.2275 13.1167 10.9774L12.1284 7.57692L15.4801 5.28084C15.7259 5.11238 15.8194 4.84641 15.7183 4.60288Z"
+                              fill="#181A20"
                             />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                      <Typography className={"reviews"}>20 reviews</Typography>
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_6507_7309">
+                              <rect
+                                width="15.36"
+                                height="12"
+                                fill="white"
+                                transform="translate(0.398438)"
+                              />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                        <Typography className={"reviews"}>
+                          {commentTotal} reviews
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                    <Stack className={"review-list"}>
+                      {providerPostComments?.map((comment: Comment) => {
+                        return <Review comment={comment} key={comment?._id} />;
+                      })}
+                      <Box component={"div"} className={"pagination-box"}>
+                        <MuiPagination
+                          page={commentInquiry.page}
+                          count={Math.ceil(commentTotal / commentInquiry.limit)}
+                          onChange={commentPaginationChangeHandler}
+                          shape="circular"
+                          color="primary"
+                        />
+                      </Box>
                     </Stack>
                   </Stack>
-                  <Stack className={"review-list"}>
-                    {/* {propertyComments?.map((comment: Comment) => {
-                        return <Review comment={comment} key={comment?._id} />;
-                      })} */}
-                    <Box component={"div"} className={"pagination-box"}>
-                      <MuiPagination
-                        page={1}
-                        count={10}
-                        shape="circular"
-                        color="primary"
-                      />
-                    </Box>
-                  </Stack>
-                </Stack>
-                {/* <Stack className={"leave-review-config"}>
+                )}
+                <Stack className={"leave-review-config"}>
                   <Typography className={"main-title"}>
                     Leave A Review
                   </Typography>
                   <Typography className={"review-title"}>Review</Typography>
-                  <textarea></textarea>
+                  <textarea
+                    onChange={({ target: { value } }: any) => {
+                      setInsertCommentData({
+                        ...insertCommentData,
+                        commentContent: value,
+                      });
+                    }}
+                    value={insertCommentData.commentContent}
+                  ></textarea>
                   <Box className={"submit-btn"} component={"div"}>
-                    <Button className={"submit-review"}>
+                    <Button
+                      className={"submit-review"}
+                      disabled={
+                        insertCommentData.commentContent === "" ||
+                        user?._id === ""
+                      }
+                      onClick={createCommentHandler}
+                    >
                       <Typography className={"title"}>Submit Review</Typography>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -365,7 +774,7 @@ const ServiceDetailPage = () => {
                       </svg>
                     </Button>
                   </Box>
-                </Stack> */}
+                </Stack>
               </Stack>
               <Stack className={"right-config"}>
                 <Stack className={"info-box"}>
@@ -373,10 +782,21 @@ const ServiceDetailPage = () => {
                     Get More Information
                   </Typography>
                   <Stack className={"image-info"}>
-                    <img className={"member-image"} src="/img/banner/d.avif" />
+                    <img
+                      className={"member-image"}
+                      src={
+                        providerPost?.memberData?.memberImage
+                          ? `${REACT_APP_API_URL}/${providerPost?.memberData?.memberImage}`
+                          : "/img/profile/defaultUser.svg"
+                      }
+                    />
                     <Stack className={"name-phone-listings"}>
-                      <Link href={`/member?memberId=`}>
-                        <Typography className={"name"}>Ned</Typography>
+                      <Link
+                        href={`/member?memberId=${providerPost?.memberData?._id}`}
+                      >
+                        <Typography className={"name"}>
+                          {providerPost?.memberData?.memberNick}
+                        </Typography>
                       </Link>
                       <Stack className={"phone-number"}>
                         <svg
@@ -404,7 +824,7 @@ const ServiceDetailPage = () => {
                           </defs>
                         </svg>
                         <Typography className={"number"}>
-                          01082333848
+                          {providerPost?.memberData?.memberPhone}
                         </Typography>
                       </Stack>
                       <Typography className={"listings"}>
@@ -430,7 +850,7 @@ const ServiceDetailPage = () => {
                   <textarea
                     placeholder={
                       "Hello, I am interested in \n" +
-                      "[Renovated property at  floor]"
+                      "[Renovated provider post at  floor]"
                     }
                   ></textarea>
                 </Stack>
@@ -467,44 +887,72 @@ const ServiceDetailPage = () => {
             </Stack>
           </Stack>
         </div>
-        <Stack className="latest">
-          <Stack className="container">
-            <Box className="latest-title">
-              <span>
-                Destination<span className="latest-txt">provider post</span>{" "}
-              </span>
-              <Box className="show-all">
-                <span>Show all jobs </span>
-                <img src="/icons/Stroke.svg" alt="" />
+        {destinationProviderPost.length !== 0 && (
+          <Stack className="latest">
+            <Stack className="container">
+              <Box className="latest-title">
+                <span>
+                  Destination<span className="latest-txt">provider post</span>{" "}
+                </span>
+                <Box className="show-all">
+                  <span onClick={() => router.push("/service")}>
+                    Show all jobs{" "}
+                  </span>
+                  <img src="/icons/Stroke.svg" alt="" />
+                </Box>
               </Box>
-            </Box>
-            <Box className="latest-card">
-              <Box className="latest-frame">
-                {latestJobs.map((category, index) => (
-                  <LatestJobsCard key={index} />
-                ))}
+              <Box className="latest-card">
+                <Box className="latest-frame">
+                  {destinationProviderPost.map((latest, index) => (
+                    <LatestJobsCard
+                      key={index}
+                      latest={latest}
+                      likeLatestHandler={likeLatestHandler}
+                    />
+                  ))}
+                </Box>
               </Box>
-            </Box>
-            <Stack className="pagination" spacing={2}>
-              <Pagination
-                className="pagi-count"
-                count={10}
-                variant="outlined"
-                shape="circular"
-                sx={{
-                  "& .MuiPaginationItem-root": {
-                    fontSize: "1rem",
-                    width: "38px",
-                    height: "38px",
-                  },
-                }}
-              />
+              <Stack className="pagination" spacing={2}>
+                <Pagination
+                  className="pagi-count"
+                  page={commentInquiry.page}
+                  count={Math.ceil(commentTotal / commentInquiry.limit)}
+                  onChange={commentPaginationChangeHandler}
+                  variant="outlined"
+                  shape="circular"
+                  sx={{
+                    "& .MuiPaginationItem-root": {
+                      fontSize: "1rem",
+                      width: "38px",
+                      height: "38px",
+                    },
+                  }}
+                />
+              </Stack>
             </Stack>
           </Stack>
-        </Stack>
+        )}
       </div>
     );
   }
+};
+ServiceDetailPage.defaultProps = {
+  initialComment: {
+    page: 1,
+    limit: 5,
+    sort: "createdAt",
+    directions: "DESC",
+    search: {
+      commentRefId: "",
+    },
+  },
+  initialInput: {
+    page: 1,
+    limit: 8,
+    sort: "createdAt",
+    directions: "DESC",
+    search: {},
+  },
 };
 
 export default withLayoutOther(ServiceDetailPage);

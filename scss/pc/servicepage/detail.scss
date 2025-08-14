@@ -7,6 +7,7 @@
       position: relative;
       padding-top: 87px;
       z-index: 1;
+
       .property-detail-config {
         width: 100%;
         height: auto;
@@ -87,6 +88,7 @@
                   flex-direction: row;
                   gap: 8px;
                   p {
+                    height: 21px;
                     color: #181a20;
                     font-family: $font-heading;
                     font-size: 15px;
@@ -418,6 +420,7 @@
               padding: 30px 38px 45px 38px;
               border-radius: 12px;
               border: 1px solid #c4c4c4;
+              background: #fff;
               .filter-box {
                 width: 100%;
                 height: auto;
