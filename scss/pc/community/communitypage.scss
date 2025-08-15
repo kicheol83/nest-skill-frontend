@@ -156,6 +156,10 @@
               flex-direction: row;
               flex-wrap: wrap;
               gap: 30px;
+              display: flex;
+              flex-wrap: wrap;
+              gap: 30px;
+              align-items: flex-start;
             }
           }
         }

@@ -5,8 +5,21 @@ import { Typography, Button, Pagination, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useRouter } from "next/router";
 import CommunityCard from "@/libs/components/common/CommunityCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { BoardArticlesInquiry } from "@/libs/types/board-article/board-article.input";
+import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
+import { BoardArticle } from "@/libs/types/board-article/board-article";
+import { useMutation, useQuery } from "@apollo/client";
+import { LIKE_TARGET_BOARD_ARTCILE } from "@/apollo/user/mutation";
+import { GET_BOARD_ARTICLES } from "@/apollo/user/query";
+import { T } from "@/libs/types/common";
+import { BoardArticleCategory } from "@/libs/enums/board-article.enum";
+import { Messages } from "@/libs/config";
+import {
+  sweetMixinErrorAlert,
+  sweetTopSmallSuccessAlert,
+} from "@/libs/sweetAlert";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -14,16 +27,94 @@ export const getStaticProps = async ({ locale }: any) => ({
   },
 });
 
-const Community: NextPage = () => {
+const Community: NextPage = ({ initialInput, ...props }: any) => {
+  const device = useDeviceDetect();
   const router = useRouter();
-  const [communityNew, setCommunityNew] = useState<number[]>([
-    1, 2, 3, 4, 5, 6,
-  ]);
+  const { query } = router;
+  const articleCategory = query?.articleCategory as string;
+  const [searchCommunity, setSearchCommunity] =
+    useState<BoardArticlesInquiry>(initialInput);
+  const [boardArticles, setBoardArticles] = useState<BoardArticle[]>([]);
+  const [totalCount, setTotalCount] = useState<number>(0);
+  if (articleCategory) initialInput.search.articleCategory = articleCategory;
+
+  /** APOLLO REQUESTS **/
+  const [likeTargetBoardArticle] = useMutation(LIKE_TARGET_BOARD_ARTCILE);
+
+  const {
+    loading: boardArticlesLoading,
+    data: boardArticlesData,
+    error: boardArticlesError,
+    refetch: boardArticlesRefetch,
+  } = useQuery(GET_BOARD_ARTICLES, {
+    fetchPolicy: "cache-and-network",
+    variables: { input: searchCommunity },
+    notifyOnNetworkStatusChange: true,
+    onCompleted: (data: T) => {
+      setBoardArticles(data?.getBoardArticles?.list);
+      setTotalCount(data?.getBoardArticles?.metaCounter[0]?.total);
+    },
+  });
+
+  /** LIFECYCLES **/
+  useEffect(() => {
+    if (!query?.articleCategory)
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { articleCategory: "FREE" },
+        },
+        router.pathname,
+        { shallow: true }
+      );
+  }, []);
+
+  /** HANDLERS **/
+  const tabChangeHandler = async (e: T, value: string) => {
+    console.log(value);
+
+    setSearchCommunity({
+      ...searchCommunity,
+      page: 1,
+      search: { articleCategory: value as BoardArticleCategory },
+    });
+    await router.push(
+      {
+        pathname: "/community",
+        query: { articleCategory: value },
+      },
+      router.pathname,
+      { shallow: true }
+    );
+  };
+
+  const paginationHandler = (e: T, value: number) => {
+    setSearchCommunity({ ...searchCommunity, page: value });
+  };
+
+  const likeArticleHandler = async (e: any, user: any, id: string) => {
+    try {
+      e.stopPropagation();
+      if (!user) return;
+      if (!user._id) throw new Error(Messages.error2);
+
+      await likeTargetBoardArticle({
+        variables: {
+          input: id,
+        },
+      });
+      await boardArticlesRefetch({ input: searchCommunity });
+      await sweetTopSmallSuccessAlert("success", 800);
+    } catch (err: any) {
+      console.log("ERROR, likeArticleHandler:", err.message);
+      sweetMixinErrorAlert(err.message).then();
+    }
+  };
 
   return (
     <Stack className="community-basic">
       <Stack className="container">
-        <TabContext value={"FREE"}>
+        <TabContext value={searchCommunity.search.articleCategory!}>
           <Stack className="main-box">
             <Stack className="left-config">
               <Stack className={"image-info"}>
@@ -41,22 +132,43 @@ const Community: NextPage = () => {
                 TabIndicatorProps={{
                   style: { display: "none" },
                 }}
+                onChange={tabChangeHandler}
               >
                 <Tab
                   value={"FREE"}
                   label={"Free Board"}
-                  className={"tab-button"}
+                  className={`tab-button ${
+                    searchCommunity.search.articleCategory == "FREE"
+                      ? "active"
+                      : ""
+                  }`}
                 />
                 <Tab
                   value={"RECOMMEND"}
                   label={"Recommendation"}
-                  className={"tab-button "}
+                  className={`tab-button ${
+                    searchCommunity.search.articleCategory == "RECOMMEND"
+                      ? "active"
+                      : ""
+                  }`}
                 />
-                <Tab value={"NEWS"} label={"News"} className={"tab-button"} />
+                <Tab
+                  value={"NEWS"}
+                  label={"News"}
+                  className={`tab-button ${
+                    searchCommunity.search.articleCategory == "NEWS"
+                      ? "active"
+                      : ""
+                  }`}
+                />
                 <Tab
                   value={"HUMOR"}
                   label={"Humor"}
-                  className={"tab-button "}
+                  className={`tab-button ${
+                    searchCommunity.search.articleCategory == "HUMOR"
+                      ? "active"
+                      : ""
+                  }`}
                 />
               </TabList>
             </Stack>
@@ -64,7 +176,9 @@ const Community: NextPage = () => {
               <Stack className="panel-config">
                 <Stack className="title-box">
                   <Stack className="left">
-                    <Typography className="title">FREE BOARD</Typography>
+                    <Typography className="title">
+                      {searchCommunity.search.articleCategory} BOARD
+                    </Typography>
                     <Typography className="sub-title">
                       Express your opinions freely here without content
                       restrictions
@@ -87,24 +201,82 @@ const Community: NextPage = () => {
 
                 <TabPanel value="FREE">
                   <Stack className="list-box">
-                    {communityNew.map((article, index) => {
-                      return <CommunityCard index={index} />;
-                    })}
+                    {totalCount ? (
+                      boardArticles?.map((boardArticle: BoardArticle) => {
+                        return (
+                          <CommunityCard
+                            boardArticle={boardArticle}
+                            likeArticleHandler={likeArticleHandler}
+                            key={boardArticle?._id}
+                          />
+                        );
+                      })
+                    ) : (
+                      <Stack className={"no-data"}>
+                        <img src="/img/icons/icoAlert.svg" alt="" />
+                        <p>No Article found!</p>
+                      </Stack>
+                    )}
                   </Stack>
                 </TabPanel>
                 <TabPanel value="RECOMMEND">
                   <Stack className="list-box">
-                    <CommunityCard />
+                    {totalCount ? (
+                      boardArticles?.map((boardArticle: BoardArticle) => {
+                        return (
+                          <CommunityCard
+                            boardArticle={boardArticle}
+                            likeArticleHandler={likeArticleHandler}
+                            key={boardArticle?._id}
+                          />
+                        );
+                      })
+                    ) : (
+                      <Stack className={"no-data"}>
+                        <img src="/img/icons/icoAlert.svg" alt="" />
+                        <p>No Article found!</p>
+                      </Stack>
+                    )}
                   </Stack>
                 </TabPanel>
                 <TabPanel value="NEWS">
                   <Stack className="list-box">
-                    <CommunityCard />
+                    {totalCount ? (
+                      boardArticles?.map((boardArticle: BoardArticle) => {
+                        return (
+                          <CommunityCard
+                            boardArticle={boardArticle}
+                            likeArticleHandler={likeArticleHandler}
+                            key={boardArticle?._id}
+                          />
+                        );
+                      })
+                    ) : (
+                      <Stack className={"no-data"}>
+                        <img src="/img/icons/icoAlert.svg" alt="" />
+                        <p>No Article found!</p>
+                      </Stack>
+                    )}
                   </Stack>
                 </TabPanel>
                 <TabPanel value="HUMOR">
                   <Stack className="list-box">
-                    <CommunityCard />
+                    {totalCount ? (
+                      boardArticles?.map((boardArticle: BoardArticle) => {
+                        return (
+                          <CommunityCard
+                            boardArticle={boardArticle}
+                            likeArticleHandler={likeArticleHandler}
+                            key={boardArticle?._id}
+                          />
+                        );
+                      })
+                    ) : (
+                      <Stack className={"no-data"}>
+                        <img src="/img/icons/icoAlert.svg" alt="" />
+                        <p>No Article found!</p>
+                      </Stack>
+                    )}
                   </Stack>
                 </TabPanel>
               </Stack>
@@ -112,17 +284,48 @@ const Community: NextPage = () => {
           </Stack>
         </TabContext>
 
-        <Stack className="pagination-config">
-          <Stack className="pagination-box">
-            <Pagination count={10} page={1} shape="circular" color="primary" />
+        {totalCount > 0 && (
+          <Stack className="pagination-config">
+            <Stack className="pagination-box">
+              <Pagination
+                count={Math.ceil(totalCount / searchCommunity.limit)}
+                page={searchCommunity.page}
+                shape="circular"
+                color="standard"
+                sx={{
+                  "& .MuiPaginationItem-root.Mui-selected": {
+                    backgroundColor: "#007aff",
+                    color: "#fff",
+                  },
+                  "& .MuiPaginationItem-root.Mui-selected:hover": {
+                    backgroundColor: "#0063cc",
+                  },
+                }}
+                onChange={paginationHandler}
+              />
+            </Stack>
+            <Stack className="total-result">
+              <Typography>
+                Total {totalCount} article{totalCount > 1 ? "s" : ""} available
+              </Typography>
+            </Stack>
           </Stack>
-          <Stack className="total-result">
-            <Typography>Total 1 article available</Typography>
-          </Stack>
-        </Stack>
+        )}
       </Stack>
     </Stack>
   );
+};
+
+Community.defaultProps = {
+  initialInput: {
+    page: 1,
+    limit: 6,
+    sort: "createdAt",
+    directions: "ASC",
+    search: {
+      articleCategory: "FREE",
+    },
+  },
 };
 
 export default withLayoutNew(Community);
