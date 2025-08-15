@@ -22,6 +22,7 @@ import { Member } from "@/libs/types/member/member";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useReactiveVar } from "@apollo/client";
 import { userVar } from "@/apollo/store";
+import { useRouter } from "next/router";
 
 interface ProviderCardProps {
   provider: any;
@@ -31,10 +32,18 @@ interface ProviderCardProps {
 const ProviderCard = (props: ProviderCardProps) => {
   const { provider, likeMemberHandler } = props;
   const device = useDeviceDetect();
+  const router = useRouter();
   const user = useReactiveVar(userVar);
   const [showMessageInput, setShowMessageInput] = useState(false);
   const [messageText, setMessageText] = useState("");
   const [isOnline, setIsOnline] = useState(true);
+
+  const pushDetailHandler = async (providerId: string) => {
+    await router.push({
+      pathname: "/provider/detail",
+      query: { id: providerId },
+    });
+  };
 
   if (device === "mobile") {
     return <div>PROVIDER C ARD</div>;
@@ -42,7 +51,12 @@ const ProviderCard = (props: ProviderCardProps) => {
     return (
       <Card className="provider-card">
         <Box className="image-wrapper">
-          <Avatar src="/img/banner/d.avif" alt="" className="avatar" />
+          <Avatar
+            src="/img/banner/d.avif"
+            alt=""
+            className="avatar"
+            onClick={() => pushDetailHandler(provider._id)}
+          />
           <Chip
             label={isOnline ? "Online" : "Offline"}
             icon={
