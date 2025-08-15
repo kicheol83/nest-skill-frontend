@@ -18,9 +18,20 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Member } from "@/libs/types/member/member";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "@/apollo/store";
 
-const ProviderCard = () => {
+interface ProviderCardProps {
+  provider: any;
+  likeMemberHandler: any;
+}
+
+const ProviderCard = (props: ProviderCardProps) => {
+  const { provider, likeMemberHandler } = props;
   const device = useDeviceDetect();
+  const user = useReactiveVar(userVar);
   const [showMessageInput, setShowMessageInput] = useState(false);
   const [messageText, setMessageText] = useState("");
   const [isOnline, setIsOnline] = useState(true);
@@ -51,24 +62,42 @@ const ProviderCard = () => {
         </Box>
         <CardContent className="card-content">
           <Typography variant="h6" className="name">
-            Jane Smith
+            {provider.memberNick}
           </Typography>
           <Typography variant="body2" className="title">
-            Math Tutor
+            {provider.memberJobs} jobs created
           </Typography>
-          <Chip label="PHOTOGRAPH" size="small" className="type-chip" />
+          <Chip label="AGENT" size="small" className="type-chip" />
 
-          <Stack direction="row" spacing={2} className="stats">
+          <Stack direction="row" spacing={2} className="stats" mt={4}>
             <Stack className="statsWrapper">
-              <Box className="statItem">
-                <FavoriteBorderOutlinedIcon className="icon" fontSize="small" />
-                <Typography>11</Typography>
+              <Box className="view-like">
+                <Box
+                  className="statItem"
+                  onClick={() => likeMemberHandler(user, provider?._id)}
+                >
+                  {provider?.meLiked && provider?.meLiked[0]?.myFavorite ? (
+                    <FavoriteIcon
+                      className="icon"
+                      fontSize="small"
+                      sx={{ color: "red" }}
+                    />
+                  ) : (
+                    <FavoriteBorderOutlinedIcon
+                      className="icon"
+                      fontSize="small"
+                    />
+                  )}
+
+                  <Typography>{provider.memberLikes}</Typography>
+                </Box>
+                <Box className="statItem1">
+                  <VisibilityOutlinedIcon className="icon" fontSize="small" />
+                  <Typography>{provider.memberViews}</Typography>
+                </Box>
               </Box>
             </Stack>
-            <Box className="statItem1">
-              <VisibilityOutlinedIcon className="icon" fontSize="small" />
-              <Typography>10</Typography>
-            </Box>
+
             <Box className="stat">
               <IconButton
                 onClick={() => setShowMessageInput(!showMessageInput)}

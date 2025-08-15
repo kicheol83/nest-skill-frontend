@@ -95,58 +95,59 @@
 
         .job-search-bar {
           width: 100%;
-          width: 900px;
+          width: 500px;
           margin-top: 20px;
-          border-radius: 20px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-          transition: all 0.3s ease;
+
           overflow: hidden;
           .search-fields {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            background: white;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            z-index: 2;
-            .search-input,
-            .location-select {
-              flex: 1;
-              min-width: 0;
+            padding: 6px;
+            .search-input {
+              transition: all 0.3s ease;
+
               .MuiOutlinedInput-root {
-                border-radius: 8px;
-                background-color: #f5f5fa;
-                height: 56px;
-              }
-            }
-            .location-icon {
-              margin-right: 8px;
-              color: #666;
-            }
-            .search-button {
-              padding: 0 24px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              border-radius: 8px;
-              font-size: 16px;
-              font-weight: 600;
-              font-family: $font-body;
-              background-color: #f0f0f0;
-              border: none;
-              cursor: pointer;
-              line-height: 1;
-              box-sizing: border-box;
-              margin-bottom: 5px;
-              background-color: #f0f0f0;
-              &:hover {
-                color: #fff;
-                background: #007aff;
+                background: #fff;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+                fieldset {
+                  border-color: #ccc;
+                  transition: border-color 0.3s ease;
+                }
+
+                &:hover fieldset {
+                  border-color: #007aff;
+                }
+
+                &.Mui-focused {
+                  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2);
+                  fieldset {
+                    border-color: #007aff;
+                  }
+
+                  .MuiSvgIcon-root {
+                    transform: scale(1.15);
+                    color: #007aff;
+                  }
+                }
+
+                input {
+                  font-size: 16px;
+                  padding: 14px 14px 14px 0;
+                  transition: all 0.3s ease;
+                }
+
+                .MuiInputAdornment-root {
+                  transition: transform 0.3s ease;
+                  .MuiSvgIcon-root {
+                    color: #666;
+                    transition: all 0.3s ease;
+                  }
+                }
               }
             }
           }
+
           .popular-keywords {
             margin-top: 0.75rem;
             font-size: 0.9rem;
@@ -284,7 +285,7 @@
             align-items: center;
             gap: 6px;
             order: 3;
-            margin-left: 60px;
+            margin-left: 30px;
             .statItem {
               width: auto;
               height: 29px;

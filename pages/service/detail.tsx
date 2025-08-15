@@ -465,7 +465,7 @@ const ServiceDetailPage: NextPage = ({
                       color: "darkblue",
                       fontFamily: "Space Grotesk",
                     }}
-                     onClick={() => pushDetailHandler(providerPost!._id)}
+                    onClick={() => pushDetailHandler(providerPost!._id)}
                   >
                     Pay {providerPost?.providerWorkPrice}$
                   </Button>
@@ -718,7 +718,16 @@ const ServiceDetailPage: NextPage = ({
                           count={Math.ceil(commentTotal / commentInquiry.limit)}
                           onChange={commentPaginationChangeHandler}
                           shape="circular"
-                          color="primary"
+                          color="standard"
+                          sx={{
+                            "& .MuiPaginationItem-root.Mui-selected": {
+                              backgroundColor: "#007aff",
+                              color: "#fff",
+                            },
+                            "& .MuiPaginationItem-root.Mui-selected:hover": {
+                              backgroundColor: "#0063cc",
+                            },
+                          }}
                         />
                       </Box>
                     </Stack>
@@ -925,6 +934,13 @@ const ServiceDetailPage: NextPage = ({
                       fontSize: "1rem",
                       width: "38px",
                       height: "38px",
+                      "& .MuiPaginationItem-root.Mui-selected": {
+                        backgroundColor: "#007aff",
+                        color: "#fff",
+                      },
+                      "& .MuiPaginationItem-root.Mui-selected:hover": {
+                        backgroundColor: "#0063cc",
+                      },
                     },
                   }}
                 />

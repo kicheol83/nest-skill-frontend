@@ -61,7 +61,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
     setWriteText(false);
   };
 
-  const propertyLocationSelectHandler = useCallback(
+  const providerLocationSelectHandler = useCallback(
     async (value: any) => {
       try {
         setSearchFilter({
@@ -73,7 +73,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
         });
         locationStateChangeHandler();
       } catch (err: any) {
-        console.log("ERROR, propertyLocationSelectHandler:", err);
+        console.log("ERROR, providerLocationSelectHandler:", err);
       }
     },
     [searchFilter]
@@ -104,7 +104,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "black", // default border
+                  borderColor: "black",
                 },
                 "&.Mui-focused fieldset": {
                   borderColor: "#007aff",
@@ -134,7 +134,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
               height: "56px",
               "&.MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "black", // default border
+                  borderColor: "black",
                 },
                 "&.Mui-focused fieldset": {
                   borderColor: "#007aff",
@@ -147,7 +147,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
             startAdornment={<RoomOutlinedIcon className="location-icon" />}
             renderValue={(selected) => {
               if (!selected) {
-                return <span style={{ color: "#999" }}>Location</span>; // Placeholder text
+                return <span style={{ color: "#999" }}>Location</span>;
               }
               return selected;
             }}
@@ -155,7 +155,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
             {providerLocation.map((location: string) => {
               return (
                 <MenuItem
-                  onClick={() => propertyLocationSelectHandler(location)}
+                  onClick={() => providerLocationSelectHandler(location)}
                   key={location}
                   sx={{
                     "&.Mui-selected": {

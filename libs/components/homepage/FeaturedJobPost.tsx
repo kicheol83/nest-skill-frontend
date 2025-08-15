@@ -140,11 +140,19 @@ const Featured = (props: FeaturedProps) => {
                 onChange={paginationChangeHandler}
                 variant="outlined"
                 shape="circular"
+                color="standard"
                 sx={{
                   "& .MuiPaginationItem-root": {
                     fontSize: "1rem",
                     width: "38px",
                     height: "38px",
+                    "& .MuiPaginationItem-root.Mui-selected": {
+                      backgroundColor: "#007aff",
+                      color: "#fff",
+                    },
+                    "& .MuiPaginationItem-root.Mui-selected:hover": {
+                      backgroundColor: "#0063cc",
+                    },
                   },
                 }}
               />
