@@ -7,7 +7,7 @@ import Divider from "@mui/material/Divider";
 import Select from "@mui/material/Select";
 import { TabContext } from "@mui/lab";
 import TablePagination from "@mui/material/TablePagination";
-import CommunityArticleList from "../../../libs/components/admin/community/CommunityArticleList";
+import CommunityArticleList from "../../../libs/components/admin/communitypage/CommunityArticleList";
 
 import { useMutation, useQuery } from "@apollo/client";
 import withAdminLayout from "@/libs/components/layout/LayoutAdmin";

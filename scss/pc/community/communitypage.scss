@@ -2,7 +2,7 @@
   .community-basic {
     position: relative;
     width: auto;
-    height: 1200px;
+    height: 1244px;
     background: rgb(248, 248, 253);
     background-size: cover;
     background-position: center;
@@ -14,6 +14,10 @@
       margin-top: 20px;
       flex-direction: column;
       align-items: center;
+      border: 1px solid;
+      border-radius: 57px;
+      padding: 15px;
+      background: #fff;
       .main-box {
         margin-top: 83px;
         flex-direction: row;

@@ -21,6 +21,7 @@ export enum Message {
   YOU_NOT_UPDATE_ORDER = "You are not authorized to update this order",
   REVIEW_UPDATE_YOUT_OWN_REVIEW = "You can only update your own review!",
   DELETE_FAILED = "You can only delete your own reviews!",
+  INSERT_ALL_INPUTS = "Please provide all inputs",
 }
 export enum Direction {
   ASC = "ASC",

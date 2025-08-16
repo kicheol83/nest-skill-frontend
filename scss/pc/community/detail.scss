@@ -58,7 +58,7 @@
             line-height: 150%;
             letter-spacing: -0.266px;
             &:hover {
-              background: #007aff;
+              background: #007bff73;
               color: #fff;
             }
           }
@@ -68,7 +68,7 @@
             padding: 0;
             justify-content: center;
             align-items: center;
-            background-color: #000000;
+            background-color: #007aff;
             color: #ffffff;
             border-radius: 6px;
             margin-bottom: 10px;
@@ -133,7 +133,7 @@
               box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
               .content-and-info {
                 width: 100%;
-                height: 126px;
+                height: auto;
                 padding: 35px 25px;
                 flex-direction: row;
                 justify-content: space-between;
@@ -175,7 +175,7 @@
                       background: #eee;
                     }
                     .time-added {
-                      color: #bdbdbd;
+                      color: #000000ad;
                       font-family: $font-heading;
                       font-size: 12px;
                       font-style: normal;
@@ -322,9 +322,10 @@
               height: auto;
               padding: 30px 24px;
               gap: 11px;
+              border: 1px solid rgba(0, 0, 0, 0.2);
               .title-text {
                 align-self: flex-start;
-                color: #000;
+                color: #007aff;
                 text-align: center;
                 font-family: $font-heading;
                 font-size: 17px;
@@ -339,7 +340,7 @@
                   height: 61px;
                   outline: none;
                   padding: 22px 17px;
-                  border: 1px solid #eee;
+                  border: 1px solid rgba(0, 0, 0, 0.2);
                   ::placeholder {
                     color: #c0c0c0;
                     font-family: $font-heading;
@@ -395,8 +396,8 @@
                 align-items: center;
                 justify-content: center;
                 padding: 16px 15px;
-                border-bottom: 2px solid #eb6753;
-                color: #eb6753;
+                border-bottom: 2px solid #007aff;
+                color: #007aff;
                 font-family: $font-heading;
                 font-size: 14px;
                 font-style: normal;
@@ -418,7 +419,7 @@
                 height: auto;
                 padding: 20px 24px;
                 gap: 17px;
-                border: 1px solid #efefef;
+                border: 1px solid #c4c4c4;
                 border-top: none;
                 .member-info {
                   width: 100%;
