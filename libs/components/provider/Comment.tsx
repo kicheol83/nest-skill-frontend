@@ -2,6 +2,7 @@ import React from "react";
 import { Avatar, Box, Typography, Stack, Paper } from "@mui/material";
 import { Comment } from "@/libs/types/comment/comment";
 import Moment from "react-moment";
+import { REACT_APP_API_URL } from "@/libs/config";
 
 interface CommentBoxProps {
   fromMyPage?: string;
@@ -14,8 +15,12 @@ const CommentBox = (props: CommentBoxProps) => {
     <Paper elevation={2} className="comment-box">
       <Stack direction="row" spacing={2}>
         <Avatar
-          src="/img/banner/d.avif"
-          alt="image"
+          src={
+            comment?.memberData?.memberImage
+              ? `${REACT_APP_API_URL}/${comment?.memberData?.memberImage}`
+              : "/img/profile/defaultUser.svg"
+          }
+          alt=""
           className="comment-avatar"
         />
         <Box>

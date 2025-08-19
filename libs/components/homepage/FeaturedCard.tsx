@@ -8,14 +8,16 @@ import { useReactiveVar } from "@apollo/client";
 import { userVar } from "@/apollo/store";
 import { REACT_APP_API_URL } from "@/libs/config";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 interface FeaturedCardProps {
   featured: ProviderPost;
   likeFeaturedHandler: any;
+  myFavorites?: boolean;
 }
 
 const FeaturedCard = (props: FeaturedCardProps) => {
-  const { featured, likeFeaturedHandler } = props;
+  const { featured, likeFeaturedHandler, myFavorites } = props;
   const device = useDeviceDetect();
   const router = useRouter();
   const user = useReactiveVar(userVar);
@@ -68,18 +70,25 @@ const FeaturedCard = (props: FeaturedCardProps) => {
               className="statItem"
               onClick={() => likeFeaturedHandler(user, featured?._id)}
             >
-              {featured?.meLiked && featured?.meLiked[0]?.myFavorite ? (
+              {myFavorites ? (
                 <FavoriteIcon
                   className="icon"
                   fontSize="small"
-                  sx={{ color: "red" }}
+                  color="primary"
+                />
+              ) : featured?.meLiked && featured?.meLiked[0]?.myFavorite ? (
+                <FavoriteIcon
+                  className="icon"
+                  fontSize="small"
+                  color="primary"
                 />
               ) : (
-                <FavoriteBorderOutlinedIcon className="icon" fontSize="small" />
+                <FavoriteBorderIcon />
               )}
 
-              <Typography>{featured.providerLikes}</Typography>
+              <Typography>{featured?.providerLikes}</Typography>
             </Box>
+
             <Box className="statItem1">
               <VisibilityOutlinedIcon className="icon" fontSize="small" />
               <Typography>{featured.providerViews}</Typography>

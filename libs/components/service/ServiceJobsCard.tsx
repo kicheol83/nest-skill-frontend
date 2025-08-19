@@ -27,7 +27,7 @@ const ServiceJobsCard = (props: ServiceJobsCardProps) => {
     });
   };
 
- const pushDetailHandler1 = async (serviceJobId: string) => {
+  const pushDetailHandler1 = async (serviceJobId: string) => {
     await router.push({
       pathname: "/service/detail",
       query: { id: serviceJobId },
@@ -42,8 +42,8 @@ const ServiceJobsCard = (props: ServiceJobsCardProps) => {
         <Box className="main-content">
           <Box className="card">
             <Avatar
-              alt="Remy Sharp"
-              src="/img/profile/men.webp"
+              src={`${process.env.REACT_APP_API_URL}/${providerPost.providerImages[0]}`}
+              alt=""
               sx={{ width: 64, height: 64, margin: "0px 4px" }}
             />
             <Box className="box-title">

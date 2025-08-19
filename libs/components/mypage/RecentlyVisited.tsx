@@ -2,17 +2,38 @@ import React, { useState } from "react";
 import { NextPage } from "next";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { Pagination, Stack, Typography } from "@mui/material";
-import LatestJobsCard from "../homepage/LatestJobsCard";
+import { T } from "../../types/common";
+import { GET_VISITED } from "../../../apollo/user/query";
+import { useQuery } from "@apollo/client";
 import RecentlyCard from "../common/RecentlyCard";
+import { ProviderPost } from "@/libs/types/provider-post/provider-post";
 
 const RecentlyVisited: NextPage = () => {
   const device = useDeviceDetect();
+  const [recentlyVisited, setRecentlyVisited] = useState<ProviderPost[]>([]);
   const [total, setTotal] = useState<number>(0);
-  const [recently, setRecently] = useState<number[]>([1, 2, 3]);
+  const [searchVisited, setSearchVisited] = useState<T>({ page: 1, limit: 6 });
 
   /** APOLLO REQUESTS **/
+  const {
+    loading: getVisitedLoading,
+    data: getVisitedData,
+    error: geVisitedError,
+    refetch: getVisitedRefetch,
+  } = useQuery(GET_VISITED, {
+    fetchPolicy: "network-only",
+    variables: { input: searchVisited },
+    notifyOnNetworkStatusChange: true,
+    onCompleted(data: T) {
+      setRecentlyVisited(data.getVisited?.list);
+      setTotal(data.getVisited?.metaCounter?.[0]?.total || 0);
+    },
+  });
 
   /** HANDLERS **/
+  const paginationHandler = (e: T, value: number) => {
+    setSearchVisited({ ...searchVisited, page: value });
+  };
 
   if (device === "mobile") {
     return <div>NESTAR MY FAVORITES MOBILE</div>;
@@ -28,25 +49,40 @@ const RecentlyVisited: NextPage = () => {
           </Stack>
         </Stack>
         <Stack className="favorites-list-box">
-          {recently.map((recently, index) => (
-            <RecentlyCard key={index} />
-          ))}
-          {/* <div className={"no-data"}>
-            <img src="/img/icons/icoAlert.svg" alt="" />
-            <p>No Recently Visited Properties found!</p>
-          </div> */}
+          {recentlyVisited?.length ? (
+            recentlyVisited?.map((providerPost: ProviderPost) => {
+              return (
+                <RecentlyCard
+                  providerPost={providerPost}
+                  recentlyVisited={true}
+                />
+              );
+            })
+          ) : (
+            <div className={"no-data"}>
+              <img src="/img/icons/icoAlert.svg" alt="" />
+              <p>No Recently Visited Properties found!</p>
+            </div>
+          )}
         </Stack>
-
-        <Stack className="pagination-config">
-          <Stack className="pagination-box">
-            <Pagination page={1} count={10} shape="circular" color="primary" />
+        {recentlyVisited?.length ? (
+          <Stack className="pagination-config">
+            <Stack className="pagination-box">
+              <Pagination
+                count={Math.ceil(total / searchVisited.limit)}
+                page={searchVisited.page}
+                shape="circular"
+                color="primary"
+                onChange={paginationHandler}
+              />
+            </Stack>
+            <Stack className="total-result">
+              <Typography>
+                Total {total} recently visited propert{total > 1 ? "ies" : "y"}
+              </Typography>
+            </Stack>
           </Stack>
-          <Stack className="total-result">
-            <Typography>
-              Total {total} recently visited propert{total > 1 ? "ies" : "y"}
-            </Typography>
-          </Stack>
-        </Stack>
+        ) : null}
       </div>
     );
   }

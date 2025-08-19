@@ -11,6 +11,7 @@ export interface CreateOrderInput {
 interface ORsearch {
   text?: string;
   orderStatus?: OrderStatus;
+  memberId?: string;
 }
 
 export interface OrderInquiry {

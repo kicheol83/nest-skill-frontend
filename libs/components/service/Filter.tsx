@@ -157,7 +157,7 @@ export default function FilterSidebar(props: FilterType) {
         .then();
     }
 
-      if (searchFilter?.search?.weekList?.length == 0) {
+    if (searchFilter?.search?.weekList?.length == 0) {
       delete searchFilter.search.weekList;
       router
         .push(
@@ -729,7 +729,7 @@ export default function FilterSidebar(props: FilterType) {
               }}
               style={{
                 width: "100%",
-                paddingLeft: "35px", 
+                paddingLeft: "35px",
                 paddingRight: "30px",
                 border: "1px solid #ccc",
                 borderRadius: "8px",
@@ -973,10 +973,10 @@ export default function FilterSidebar(props: FilterType) {
                   PaperProps: {
                     sx: {
                       "& .Mui-selected": {
-                        backgroundColor: "#1976d2",
-                        color: "#fff",
+                        backgroundColor: "transparent",
+                        color: "#000",
                         "&:hover": {
-                          backgroundColor: "#115293",
+                          backgroundColor: "#007aff",
                         },
                       },
                     },
@@ -1019,10 +1019,10 @@ export default function FilterSidebar(props: FilterType) {
                   PaperProps: {
                     sx: {
                       "& .Mui-selected": {
-                        backgroundColor: "#1976d2",
-                        color: "#fff",
+                        backgroundColor: "transparent",
+                        color: "#000",
                         "&:hover": {
-                          backgroundColor: "#115293",
+                          backgroundColor: "#007aff",
                         },
                       },
                     },

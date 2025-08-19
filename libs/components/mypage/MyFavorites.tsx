@@ -2,16 +2,64 @@ import React, { useState } from "react";
 import { NextPage } from "next";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { Pagination, Stack, Typography } from "@mui/material";
+import { T } from "../../types/common";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_FAVORITES } from "../../../apollo/user/query";
+import {
+  sweetMixinErrorAlert,
+  sweetTopSmallSuccessAlert,
+} from "../../sweetAlert";
+import { Message } from "../../enums/common.enum";
 import FeaturedCard from "../homepage/FeaturedCard";
+import { LIKE_TARGET_PROVIDER_POST } from "@/apollo/user/mutation";
+import { ProviderPost } from "@/libs/types/provider-post/provider-post";
 
 const MyFavorites: NextPage = () => {
   const device = useDeviceDetect();
+  const [myFavorites, setMyFavorites] = useState<Property[]>([]);
   const [total, setTotal] = useState<number>(0);
-  const [featured, setFeatured] = useState<number[]>([1, 2, 3]);
+  const [searchFavorites, setSearchFavorites] = useState<T>({
+    page: 1,
+    limit: 6,
+  });
 
   /** APOLLO REQUESTS **/
+  const [likeTargetProperty] = useMutation(LIKE_TARGET_PROVIDER_POST);
+
+  const {
+    loading: getFavoritesLoading,
+    data: getFavoritesData,
+    error: geFavoritesError,
+    refetch: getFavoritesRefetch,
+  } = useQuery(GET_FAVORITES, {
+    fetchPolicy: "network-only",
+    variables: { input: searchFavorites },
+    notifyOnNetworkStatusChange: true,
+    onCompleted(data: T) {
+      setMyFavorites(data.getFavorites?.list);
+      setTotal(data.getFavorites?.metaCounter?.[0]?.total || 0);
+    },
+  });
 
   /** HANDLERS **/
+  const paginationHandler = (e: T, value: number) => {
+    setSearchFavorites({ ...searchFavorites, page: value });
+  };
+
+  const likeFeaturedHandler = async (user: T, id: string) => {
+    try {
+      if (!id) return;
+      if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+
+      await likeTargetProperty({
+        variables: { input: id },
+      });
+      await getFavoritesRefetch({ input: searchFavorites });
+    } catch (err: any) {
+      console.log("ERROR, likeFeaturedHandler:", err.message);
+      sweetMixinErrorAlert(err.message).then();
+    }
+  };
 
   if (device === "mobile") {
     return <div>NESTAR MY FAVORITES MOBILE</div>;
@@ -27,25 +75,41 @@ const MyFavorites: NextPage = () => {
           </Stack>
         </Stack>
         <Stack className="favorites-list-box">
-          {featured.map((category, index) => (
-            <FeaturedCard key={index} />
-          ))}
-          {/* <div className={"no-data"}>
-            <img src="/img/icons/icoAlert.svg" alt="" />
-            <p>No Favorites found!</p>
-          </div> */}
+          {myFavorites?.length ? (
+            myFavorites?.map((featured: ProviderPost) => {
+              return (
+                <FeaturedCard
+                  featured={featured}
+                  likeFeaturedHandler={likeFeaturedHandler}
+                  myFavorites={true}
+                />
+              );
+            })
+          ) : (
+            <div className={"no-data"}>
+              <img src="/img/icons/icoAlert.svg" alt="" />
+              <p>No Favorites found!</p>
+            </div>
+          )}
         </Stack>
-
-        <Stack className="pagination-config">
-          <Stack className="pagination-box">
-            <Pagination page={1} count={10} shape="circular" color="primary" />
+        {myFavorites?.length ? (
+          <Stack className="pagination-config">
+            <Stack className="pagination-box">
+              <Pagination
+                count={Math.ceil(total / searchFavorites.limit)}
+                page={searchFavorites.page}
+                shape="circular"
+                color="primary"
+                onChange={paginationHandler}
+              />
+            </Stack>
+            <Stack className="total-result">
+              <Typography>
+                Total {total} favorite propert{total > 1 ? "ies" : "y"}
+              </Typography>
+            </Stack>
           </Stack>
-          <Stack className="total-result">
-            <Typography>
-              Total {total} favorite propert{total > 1 ? "ies" : "y"}
-            </Typography>
-          </Stack>
-        </Stack>
+        ) : null}
       </div>
     );
   }

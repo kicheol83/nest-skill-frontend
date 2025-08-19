@@ -4,7 +4,6 @@ import { NextPage } from "next";
 import { Typography, Button, Pagination, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useRouter } from "next/router";
-import CommunityCard from "@/libs/components/common/CommunityCard";
 import { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { BoardArticlesInquiry } from "@/libs/types/board-article/board-article.input";
@@ -20,6 +19,8 @@ import {
   sweetMixinErrorAlert,
   sweetTopSmallSuccessAlert,
 } from "@/libs/sweetAlert";
+import CommunityCard from "@/libs/components/homepage/CommunityCard";
+import CommunityCardMyPage from "@/libs/components/common/CommunityCardMyPage";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -204,7 +205,7 @@ const Community: NextPage = ({ initialInput, ...props }: any) => {
                     {totalCount ? (
                       boardArticles?.map((boardArticle: BoardArticle) => {
                         return (
-                          <CommunityCard
+                          <CommunityCardMyPage
                             boardArticle={boardArticle}
                             likeArticleHandler={likeArticleHandler}
                             key={boardArticle?._id}
@@ -224,7 +225,7 @@ const Community: NextPage = ({ initialInput, ...props }: any) => {
                     {totalCount ? (
                       boardArticles?.map((boardArticle: BoardArticle) => {
                         return (
-                          <CommunityCard
+                          <CommunityCardMyPage
                             boardArticle={boardArticle}
                             likeArticleHandler={likeArticleHandler}
                             key={boardArticle?._id}
@@ -244,7 +245,7 @@ const Community: NextPage = ({ initialInput, ...props }: any) => {
                     {totalCount ? (
                       boardArticles?.map((boardArticle: BoardArticle) => {
                         return (
-                          <CommunityCard
+                          <CommunityCardMyPage
                             boardArticle={boardArticle}
                             likeArticleHandler={likeArticleHandler}
                             key={boardArticle?._id}
@@ -264,7 +265,7 @@ const Community: NextPage = ({ initialInput, ...props }: any) => {
                     {totalCount ? (
                       boardArticles?.map((boardArticle: BoardArticle) => {
                         return (
-                          <CommunityCard
+                          <CommunityCardMyPage
                             boardArticle={boardArticle}
                             likeArticleHandler={likeArticleHandler}
                             key={boardArticle?._id}

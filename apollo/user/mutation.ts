@@ -760,7 +760,7 @@ export const UPDATE_REVIEW = gql`
   }
 `;
 
-export const DELETE_MY_ORDER = gql`
+export const DELETE_MY_REVIEW = gql`
   mutation DeleteMyReview($input: String!) {
     deleteMyReview(_id: $input)
   }

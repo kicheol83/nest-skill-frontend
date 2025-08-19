@@ -4,10 +4,26 @@ import useDeviceDetect from "../../hooks/useDeviceDetect";
 import IconButton from "@mui/material/IconButton";
 import ModeIcon from "@mui/icons-material/Mode";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { formatterStr } from "../../utils";
 import Moment from "react-moment";
 import { useRouter } from "next/router";
+import { ProviderPost } from "@/libs/types/provider-post/provider-post";
+import { ProviderStatus } from "@/libs/enums/provider.enum";
 
-export const MyProviderCard = () => {
+interface PropertyCardProps {
+  providerPost: ProviderPost;
+  deleteProviderPostHandler?: any;
+  memberPage?: boolean;
+  updateProviderPostHandler?: any;
+}
+
+export const MyProviderPostCard = (props: PropertyCardProps) => {
+  const {
+    providerPost,
+    deleteProviderPostHandler,
+    memberPage,
+    updateProviderPostHandler,
+  } = props;
   const device = useDeviceDetect();
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -15,10 +31,22 @@ export const MyProviderCard = () => {
 
   /** HANDLERS **/
   const pushEditProviderPost = async (id: string) => {
+    console.log("+pushEditProviderPost: ", id);
     await router.push({
       pathname: "/mypage",
-      query: { category: "addPost", propertyId: id },
+      query: { category: "addPost", providerId: id },
     });
+  };
+
+  console.log("pushEditProviderPost =>", pushEditProviderPost);
+
+  const pushServiceDetail = async (id: string) => {
+    if (memberPage)
+      await router.push({
+        pathname: "/service/detail",
+        query: { id: id },
+      });
+    else return;
   };
 
   const handleClick = (event: any) => {
@@ -34,20 +62,30 @@ export const MyProviderCard = () => {
   } else
     return (
       <Stack className="provider-card-box">
-        <Stack className="image-box">
-          <img src="/img/banner/d.avif" alt="" />
+        <Stack
+          className="image-box"
+          onClick={() => pushServiceDetail(providerPost?._id)}
+        >
+          <img
+            src={`${process.env.REACT_APP_API_URL}/${providerPost.providerImages[0]}`}
+            alt=""
+          />
         </Stack>
-        <Stack className="information-box">
-          <Typography className="name">The best Photograph</Typography>
-          <Typography className="address"></Typography>
-          Seoul Ganwon 200-17
+        <Stack
+          className="information-box"
+          onClick={() => pushServiceDetail(providerPost?._id)}
+        >
+          <Typography className="name">{providerPost.providerTitle}</Typography>
+          <Typography className="address">
+            {providerPost.providerAddress}
+          </Typography>
           <Typography className="price">
-            <strong style={{ color: "green" }}>$200</strong>
+            <strong>${formatterStr(providerPost?.providerWorkPrice)}</strong>
           </Typography>
         </Stack>
         <Stack className="date-box">
           <Typography className="date">
-            <Moment format="DD MMMM, YYYY">20025.08.07</Moment>
+            <Moment format="DD MMMM, YYYY">{providerPost.createdAt}</Moment>
           </Typography>
         </Stack>
         <Stack className="status-box">
@@ -57,54 +95,71 @@ export const MyProviderCard = () => {
             onClick={handleClick}
           >
             <Typography className="status" sx={{ color: "#3554d1" }}>
-              ACTIVE
+              {providerPost.providerStatus}
             </Typography>
           </Stack>
         </Stack>
-        <Menu
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          PaperProps={{
-            elevation: 0,
-            sx: {
-              width: "120px",
-              mt: 1,
-              ml: -1,
-              overflow: "visible",
-              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            },
-            style: {
-              padding: 0,
-              display: "flex",
-              justifyContent: "center",
-            },
-          }}
-        >
-          <>
-            <MenuItem
-              disableRipple
-              onClick={() => {
-                handleClose();
-              }}
-              sx={{ width: "115px" }}
-            >
-              DEACTIVATED
-            </MenuItem>
-          </>
-        </Menu>
+        {!memberPage && providerPost.providerStatus !== "DEACTIVATED" && (
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                width: "150px",
+                mt: 1,
+                ml: "10px",
+                overflow: "visible",
+                filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+              },
+              style: {
+                padding: 0,
+                display: "flex",
+                justifyContent: "center",
+              },
+            }}
+          >
+            {providerPost.providerStatus === "ACTIVE" && (
+              <>
+                <MenuItem
+                  disableRipple
+                  onClick={() => {
+                    handleClose();
+                    updateProviderPostHandler(
+                      ProviderStatus.DEACTIVATED,
+                      providerPost?._id
+                    );
+                  }}
+                >
+                  DEACTIVATED
+                </MenuItem>
+              </>
+            )}
+          </Menu>
+        )}
 
         <Stack className="views-box">
-          <Typography className="views">11</Typography>
+          <Typography className="views">
+            {providerPost.providerViews.toLocaleString()}
+          </Typography>
         </Stack>
-        <Stack className="action-box">
-          <IconButton className="icon-button">
-            <ModeIcon className="buttons" />
-          </IconButton>
-          <IconButton className="icon-button">
-            <DeleteIcon className="buttons" />
-          </IconButton>
-        </Stack>
+        {!memberPage && providerPost.providerStatus === ProviderStatus.ACTIVE && (
+          <Stack className="action-box">
+            <IconButton
+              className="icon-button"
+              onClick={() => pushEditProviderPost(providerPost._id)}
+            >
+              <ModeIcon className="buttons" />
+            </IconButton>
+            <IconButton
+              className="icon-button"
+              onClick={() => deleteProviderPostHandler(providerPost._id)}
+            >
+              <DeleteIcon className="buttons" />
+            </IconButton>
+          </Stack>
+        )}
       </Stack>
     );
 };

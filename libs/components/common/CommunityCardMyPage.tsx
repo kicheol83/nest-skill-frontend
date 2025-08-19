@@ -16,7 +16,7 @@ interface CommunityCardProps {
   likeArticleHandler: any;
 }
 
-const CommunityCard = (props: CommunityCardProps) => {
+const CommunityCardMyPage = (props: CommunityCardProps) => {
   const { boardArticle, likeArticleHandler } = props;
   const device = useDeviceDetect();
   const router = useRouter();
@@ -83,7 +83,7 @@ const CommunityCard = (props: CommunityCardProps) => {
         <Box className="view-like">
           <Box
             className="statItem"
-         onClick={(e) => likeArticleHandler(e, user, boardArticle?._id)}
+            onClick={(e) => likeArticleHandler(e, user, boardArticle?._id)}
           >
             {boardArticle?.meLiked && boardArticle?.meLiked[0]?.myFavorite ? (
               <FavoriteIcon
@@ -107,4 +107,4 @@ const CommunityCard = (props: CommunityCardProps) => {
   );
 };
 
-export default CommunityCard;
+export default CommunityCardMyPage;

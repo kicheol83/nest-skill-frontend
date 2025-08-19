@@ -1,33 +1,247 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { Button, FormControl, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import axios from "axios";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import { ProviderPostInput } from "@/libs/types/provider-post/provider-post.input";
+import {
+  ProviderLevel,
+  ProviderLocation,
+  ProviderRateType,
+  ProviderType,
+  ProviderWeekday,
+  ProviderWorkWeekday,
+} from "@/libs/enums/provider.enum";
+import { getJwtToken } from "@/libs/auth";
+import { useMutation, useQuery, useReactiveVar } from "@apollo/client";
+import { userVar } from "@/apollo/store";
+import {
+  CREATE_PROVIDER_POST,
+  UPDATE_PROVIDER_POST,
+} from "@/apollo/user/mutation";
+import { GET_PROVIDER_POST } from "@/apollo/user/query";
+import {
+  sweetErrorHandling,
+  sweetMixinErrorAlert,
+  sweetMixinSuccessAlert,
+} from "@/libs/sweetAlert";
+import { REACT_APP_API_URL } from "@/libs/config";
 
-const weekdays = [
-  { label: "MONDAY", value: "mon" },
-  { label: "TUESDAY", value: "tue" },
-  { label: "WEDNESDAY", value: "wed" },
-  { label: "THURSDAY", value: "thu" },
-  { label: "FRIDAY", value: "fri" },
-  { label: "SATURDAY", value: "sat" },
-  { label: "SUNDAY", value: "sun" },
-];
-
-const AddProperty = ({ initialValues, ...props }: any) => {
+const AddProviderPost = ({ initialValues, ...props }: any) => {
   const device = useDeviceDetect();
   const router = useRouter();
   const inputRef = useRef<any>(null);
-  const [open, setOpen] = useState(false);
-  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+  const [insertProviderPostData, setInsertProviderPostData] =
+    useState<ProviderPostInput>(initialValues);
+  const [providerPostType, setProviderPostType] = useState<ProviderType[]>(
+    Object.values(ProviderType)
+  );
+  const [providerPostLocation, setProviderPostLocation] = useState<
+    ProviderLocation[]
+  >(Object.values(ProviderLocation));
+  const [providerWorkWeekDay, setProviderWorkWeekDay] = useState<
+    ProviderWorkWeekday[]
+  >(Object.values(ProviderWorkWeekday));
+  const [providerPostWeekDay, setProviderPostWeekDay] = useState<
+    ProviderWeekday[]
+  >(Object.values(ProviderWeekday));
+  const [providerRateType, setProviderRateType] = useState<ProviderRateType[]>(
+    Object.values(ProviderRateType)
+  );
+  const token = getJwtToken();
+  const user = useReactiveVar(userVar);
+
+  /** APOLLO REQUESTS **/
+  const [createProviderPost] = useMutation(CREATE_PROVIDER_POST);
+  const [updateProviderPost] = useMutation(UPDATE_PROVIDER_POST);
+  const {
+    loading: getProviderPostLoading,
+    data: getProviderPostData,
+    error: getProviderPostError,
+    refetch: getProviderPostRefetch,
+  } = useQuery(GET_PROVIDER_POST, {
+    fetchPolicy: "network-only",
+    variables: { input: router.query.providerId },
+  });
+  console.log("router.query =>", router.query.providerId);
+
+  /** LIFECYCLES **/
+  useEffect(() => {
+    setInsertProviderPostData({
+      ...insertProviderPostData,
+      providerTitle: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerTitle
+        : "",
+      providerWorkPrice: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerWorkPrice
+        : 0,
+      providerType: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerType
+        : "",
+      providerLocation: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerLocation
+        : "",
+      providerAddress: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerAddress
+        : "",
+      providerDesc: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerDesc
+        : "",
+      providerImages: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerImages
+        : [],
+      providerEndTime: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerEndTime
+        : "",
+      providerStartTime: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerStartTime
+        : "",
+      providerRateType: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerRateType
+        : "",
+      providerWeekday: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerWeekday
+        : "",
+      providerWorkDayLimit: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerWorkDayLimit
+        : 0,
+      providerWorkWeekday: getProviderPostData?.getProvider
+        ? getProviderPostData?.getProvider?.providerWorkWeekday
+        : "",
+    });
+  }, [getProviderPostLoading, getProviderPostData]);
 
   /** HANDLERS **/
-  const toggleDay = (value: string) => {
-    setSelectedDays((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+  async function uploadImages() {
+    try {
+      const formData = new FormData();
+      const selectedFiles = inputRef.current.files;
+
+      if (selectedFiles.length == 0) return false;
+      if (selectedFiles.length > 5)
+        throw new Error("Cannot upload more than 5 images!");
+
+      formData.append(
+        "operations",
+        JSON.stringify({
+          query: `mutation ImagesUploader($files: [Upload!]!, $target: String!) { 
+						imagesUploader(files: $files, target: $target)
+				  }`,
+          variables: {
+            files: [null, null, null, null, null],
+            target: "provider",
+          },
+        })
+      );
+      formData.append(
+        "map",
+        JSON.stringify({
+          "0": ["variables.files.0"],
+          "1": ["variables.files.1"],
+          "2": ["variables.files.2"],
+          "3": ["variables.files.3"],
+          "4": ["variables.files.4"],
+        })
+      );
+      for (const key in selectedFiles) {
+        if (/^\d+$/.test(key)) formData.append(`${key}`, selectedFiles[key]);
+      }
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_GRAPHQL_URL}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "apollo-require-preflight": true,
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const responseImages = response.data.data.imagesUploader;
+
+      console.log("+responseImages: ", responseImages);
+      setInsertProviderPostData({
+        ...insertProviderPostData,
+        providerImages: responseImages,
+      });
+    } catch (err: any) {
+      console.log("err: ", err.message);
+      await sweetMixinErrorAlert(err.message);
+    }
+  }
+
+  const doDisabledCheck = () => {
+    return (
+      insertProviderPostData.providerTitle === "" ||
+      insertProviderPostData.providerWorkPrice === 0 || // @ts-ignore
+      insertProviderPostData.providerType === "" || // @ts-ignore
+      insertProviderPostData.providerLocation === "" ||
+      insertProviderPostData.providerAddress === "" ||
+      insertProviderPostData.providerEndTime === "" ||
+      insertProviderPostData.providerStartTime === "" || // @ts-ignore
+      insertProviderPostData.providerRateType === "" || // @ts-ignore
+      insertProviderPostData.providerWeekday === "" ||
+      insertProviderPostData.providerDesc === "" || // @ts-ignore
+      insertProviderPostData.providerWorkWeekday === "" ||
+      insertProviderPostData.providerWorkDayLimit === 0 ||
+      insertProviderPostData.providerImages.length === 0
     );
   };
+  console.log("Disabled check:", doDisabledCheck());
+  console.log("Data:", insertProviderPostData);
+
+  const insertProviderHandler = useCallback(async () => {
+    try {
+      const result = await createProviderPost({
+        variables: {
+          input: insertProviderPostData,
+        },
+      });
+
+      await sweetMixinSuccessAlert(
+        "This property has been created successfuly"
+      );
+      await router.push({
+        pathname: "/mypage",
+        query: {
+          category: "myPosts",
+        },
+      });
+    } catch (err: any) {
+      sweetErrorHandling(err).then();
+    }
+  }, [insertProviderPostData]);
+
+  const updateProviderHandler = useCallback(async () => {
+    try {
+      // @ts-ignore
+      insertProviderPostData._id = getProviderPostData?.getProvider?._id;
+      const result = await updateProviderPost({
+        variables: {
+          input: insertProviderPostData,
+        },
+      });
+
+      await sweetMixinSuccessAlert(
+        "This property has been updated successfully"
+      );
+      await router.push({
+        pathname: "/mypage",
+        query: {
+          category: "myPosts",
+        },
+      });
+    } catch (err: any) {
+      sweetErrorHandling(err).then();
+    }
+  }, [insertProviderPostData]);
+
+  if (user?.memberType !== "PROVIDER") {
+    router.back();
+  }
 
   if (device === "mobile") {
     return <div>ADD NEW PROPERTY MOBILE PAGE</div>;
@@ -50,6 +264,13 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                   type="text"
                   className="description-input"
                   placeholder={"Title"}
+                  value={insertProviderPostData.providerTitle}
+                  onChange={({ target: { value } }) =>
+                    setInsertProviderPostData({
+                      ...insertProviderPostData,
+                      providerTitle: value,
+                    })
+                  }
                 />
               </Stack>
 
@@ -60,19 +281,39 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                     type="text"
                     className="description-input"
                     placeholder={"Price"}
+                    value={insertProviderPostData.providerWorkPrice}
+                    onChange={({ target: { value } }) =>
+                      setInsertProviderPostData({
+                        ...insertProviderPostData,
+                        providerWorkPrice: parseInt(value),
+                      })
+                    }
                   />
                 </Stack>
                 <Stack className="price-year-after-price">
                   <Typography className="title">Select Type</Typography>
-                  <select className={"select-description"}>
+                  <select
+                    className={"select-description"}
+                    defaultValue={
+                      insertProviderPostData.providerType || "select"
+                    }
+                    value={insertProviderPostData.providerType || "select"}
+                    onChange={({ target: { value } }) =>
+                      setInsertProviderPostData({
+                        ...insertProviderPostData,
+                        providerType: value,
+                      })
+                    }
+                  >
                     <>
                       <option selected={true} disabled={true} value={"select"}>
                         Select
                       </option>
-                      <option value={""}>CLEANING</option>
-                      <option value={""}>BABYSITTING</option>
-                      <option value={""}>TUTORING</option>
-                      <option value={""}>GARDENING</option>
+                      {providerPostType.map((type: any) => (
+                        <option value={`${type}`} key={type}>
+                          {type}
+                        </option>
+                      ))}
                     </>
                   </select>
                   <div className={"divider"} style={{ top: "38px" }}></div>
@@ -87,20 +328,28 @@ const AddProperty = ({ initialValues, ...props }: any) => {
               <Stack className="config-row">
                 <Stack className="price-year-after-price">
                   <Typography className="title">Select Location</Typography>
-                  <select className={"select-description"}>
+                  <select
+                    className={"select-description"}
+                    defaultValue={
+                      insertProviderPostData.providerLocation || "select"
+                    }
+                    value={insertProviderPostData.providerLocation || "select"}
+                    onChange={({ target: { value } }) =>
+                      setInsertProviderPostData({
+                        ...insertProviderPostData,
+                        providerLocation: value,
+                      })
+                    }
+                  >
                     <>
                       <option selected={true} disabled={true} value={"select"}>
                         Select
                       </option>
-                      <option value="seoul">SEOUL</option>
-                      <option value="pusan">PUSAN</option>
-                      <option value="incheon">INCHEON</option>
-                      <option value="deagu">DEAGU</option>
-                      <option value="gyeongju">GYEONGJU</option>
-                      <option value="gwangju">GWANGJU</option>
-                      <option value="chonju">CHONJU</option>
-                      <option value="deajon">DAEJON</option>
-                      <option value="jeju">JEJU</option>
+                      {providerPostLocation.map((location: any) => (
+                        <option value={`${location}`} key={location}>
+                          {location}
+                        </option>
+                      ))}
                     </>
                   </select>
                   <div className={"divider"} style={{ top: "38px" }}></div>
@@ -112,6 +361,13 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                     type="text"
                     className="description-input"
                     placeholder={"Address"}
+                    value={insertProviderPostData.providerAddress}
+                    onChange={({ target: { value } }) =>
+                      setInsertProviderPostData({
+                        ...insertProviderPostData,
+                        providerAddress: value,
+                      })
+                    }
                   />
                 </Stack>
               </Stack>
@@ -119,16 +375,29 @@ const AddProperty = ({ initialValues, ...props }: any) => {
               <Stack className="config-row1">
                 <Stack className="price-year-after-price1">
                   <Typography className="title">Work Week Day</Typography>
-                  <select className={"select-description"}>
-                    <option disabled={true} selected={true}>
+                  <select
+                    className="select-description"
+                    value={
+                      insertProviderPostData.providerWorkWeekday || "select"
+                    }
+                    onChange={({ target: { value } }) =>
+                      setInsertProviderPostData({
+                        ...insertProviderPostData,
+                        providerWorkWeekday: value,
+                      })
+                    }
+                  >
+                    <option disabled value="select">
                       Select
                     </option>
-                    <option value={"weekdays"}>WEEKDAYS</option>
-                    <option value={"weekends"}>WEEKENDS</option>
-                    <option value={"full-week"}>FULL_WEEK</option>
-                    <option value={"custom"}>CUSTOM</option>
+                    {providerWorkWeekDay.map((weekDay: string) => (
+                      <option value={weekDay} key={weekDay}>
+                        {weekDay}
+                      </option>
+                    ))}
                   </select>
-                  <div className={"divider"} style={{ top: "38px" }}></div>
+                  <div className="divider" style={{ top: "38px" }} />
+
                   <img
                     src={"/img/icons/Vector.svg"}
                     className={"arrow-down"}
@@ -138,36 +407,52 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                 <Stack className="price-year-after-price2">
                   <Typography className="title">Week Day</Typography>
 
-                  <div className="dropdown" onClick={() => setOpen(!open)}>
-                    <div className="placeholder">
-                      {selectedDays.length
-                        ? selectedDays.join(", ").toUpperCase()
-                        : "Select"}
-                    </div>
-                    <img
-                      src="/img/icons/Vector.svg"
-                      className="arrow-down"
-                      style={{ top: "58px" }}
-                    />
-                  </div>
+                  <div
+                    className="checkbox-list-container"
+                    style={{
+                      maxHeight:
+                        insertProviderPostData.providerWorkWeekday === "CUSTOM"
+                          ? "350px"
+                          : "0",
+                      overflow: "hidden",
+                      transition: "max-height 0.7s ease",
+                    }}
+                  >
+                    {Object.values(providerPostWeekDay).map((day: string) => (
+                      <FormControlLabel
+                        key={day}
+                        control={
+                          <Checkbox
+                            checked={
+                              insertProviderPostData.providerWeekday?.includes(
+                                day
+                              ) || false
+                            }
+                            onChange={(e) => {
+                              let updatedDays =
+                                insertProviderPostData.providerWeekday || [];
 
-                  {open && (
-                    <div className="menu">
-                      {weekdays.map((day) => (
-                        <FormControlLabel
-                          key={day.value}
-                          control={
-                            <Checkbox
-                              checked={selectedDays.includes(day.value)}
-                              onChange={() => toggleDay(day.value)}
-                            />
-                          }
-                          label={day.label}
-                          className="checkboxItem"
-                        />
-                      ))}
-                    </div>
-                  )}
+                              if (e.target.checked) {
+                                updatedDays = [...updatedDays, day];
+                              } else {
+                                updatedDays = updatedDays.filter(
+                                  (d) => d !== day
+                                );
+                              }
+
+                              setInsertProviderPostData({
+                                ...insertProviderPostData,
+                                providerWeekday: updatedDays,
+                              });
+                            }}
+                          />
+                        }
+                        label={day.charAt(0) + day.slice(1).toLowerCase()}
+                        className="checkboxItem"
+                        sx={{ marginLeft: "5px" }}
+                      />
+                    ))}
+                  </div>
 
                   <div
                     className="divider"
@@ -179,15 +464,27 @@ const AddProperty = ({ initialValues, ...props }: any) => {
               <Stack className="config-row">
                 <Stack className="price-year-after-price">
                   <Typography className="title">Rate Type</Typography>
-                  <select className={"select-description"}>
-                    <option disabled={true} selected={true} value={"select"}>
+                  <select
+                    className="select-description"
+                    value={insertProviderPostData.providerRateType || "select"}
+                    onChange={({ target: { value } }) =>
+                      setInsertProviderPostData({
+                        ...insertProviderPostData,
+                        providerRateType: value,
+                      })
+                    }
+                  >
+                    <option disabled value="select">
                       Select
                     </option>
-                    <option value="hourly">HOURLY</option>
-                    <option value="fixed">FIXED</option>
-                    <option value="negotiable">NEGOTIABLE</option>
+                    {providerRateType.map((rateType: string) => (
+                      <option value={rateType} key={rateType}>
+                        {rateType}
+                      </option>
+                    ))}
                   </select>
-                  <div className={"divider"} style={{ top: "38px" }}></div>
+                  <div className="divider" style={{ top: "38px" }} />
+
                   <img
                     src={"/img/icons/Vector.svg"}
                     className={"arrow-down"}
@@ -196,18 +493,30 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                 </Stack>
                 <Stack className="price-year-after-price">
                   <Typography className="title">Work Day Limit</Typography>
-                  <select className={"select-description"}>
-                    <option selected={true} value={"one"}>
-                      1
+                  <select
+                    className={"select-description"}
+                    value={
+                      insertProviderPostData.providerWorkDayLimit || "select"
+                    }
+                    defaultValue={
+                      insertProviderPostData.providerWorkDayLimit || "select"
+                    }
+                    onChange={({ target: { value } }) =>
+                      setInsertProviderPostData({
+                        ...insertProviderPostData,
+                        providerWorkDayLimit: parseInt(value),
+                      })
+                    }
+                  >
+                    <option disabled={true} selected={true} value={"select"}>
+                      Select
                     </option>
-                    <option value="two">2</option>
-                    <option value="three">3</option>
-                    <option value="four">4</option>
-                    <option value="five">5</option>
-                    <option value="six">6</option>
-                    <option value="seven">7</option>
+                    {[1, 2, 3, 4, 5, 6, 7].map((room: number) => (
+                      <option value={`${room}`}>{room}</option>
+                    ))}
                   </select>
-                  <div className={"divider"} style={{ top: "38px" }}></div>
+                  <div className="divider" style={{ top: "38px" }} />
+
                   <img
                     src={"/img/icons/Vector.svg"}
                     className={"arrow-down"}
@@ -217,18 +526,56 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                 <Stack className="price-year-after-price">
                   <Stack className="time-wrapper">
                     <Typography className="time">Start Time</Typography>
-                    <input
-                      type="time"
-                      className="input"
-                      defaultValue="09:00"
-                    />
+                    <FormControl size="small" sx={{ minWidth: 120 }}>
+                      <Select
+                        value={
+                          insertProviderPostData.providerStartTime || "06:00"
+                        }
+                        onChange={(e) =>
+                          setInsertProviderPostData({
+                            ...insertProviderPostData,
+                            providerStartTime: e.target.value,
+                          })
+                        }
+                      >
+                        {Array.from({ length: 13 }, (_, i) => i + 6).map(
+                          (h) => {
+                            const hour = h.toString().padStart(2, "0");
+                            return (
+                              <MenuItem key={hour} value={`${hour}:00`}>
+                                {hour}:00
+                              </MenuItem>
+                            );
+                          }
+                        )}
+                      </Select>
+                    </FormControl>
 
                     <Typography className="time">End Time</Typography>
-                    <input
-                      type="time"
-                      className="input"
-                      defaultValue="18:00"
-                    />
+                    <FormControl size="small" sx={{ minWidth: 120 }}>
+                      <Select
+                        value={
+                          insertProviderPostData.providerEndTime || "18:00"
+                        }
+                        onChange={(e) =>
+                          setInsertProviderPostData({
+                            ...insertProviderPostData,
+                            providerEndTime: e.target.value,
+                          })
+                        }
+                      >
+                        {Array.from({ length: 13 }, (_, i) => i + 6).map(
+                          (h) => {
+                            const hour = h.toString().padStart(2, "0");
+                            return (
+                              <MenuItem key={hour} value={`${hour}:00`}>
+                                {hour}:00
+                              </MenuItem>
+                            );
+                          }
+                        )}
+                      </Select>
+                    </FormControl>
                   </Stack>
                 </Stack>
               </Stack>
@@ -238,7 +585,18 @@ const AddProperty = ({ initialValues, ...props }: any) => {
               </Typography>
               <Stack className="config-column">
                 <Typography className="title">Description</Typography>
-                <textarea name="" id="" className="description-text"></textarea>
+                <textarea
+                  name=""
+                  id=""
+                  className="description-text"
+                  value={insertProviderPostData.providerDesc}
+                  onChange={({ target: { value } }) =>
+                    setInsertProviderPostData({
+                      ...insertProviderPostData,
+                      providerDesc: value,
+                    })
+                  }
+                ></textarea>
               </Stack>
             </Stack>
 
@@ -321,6 +679,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                     type="file"
                     hidden={true}
                     multiple={true}
+                    onChange={uploadImages}
                     accept="image/jpg, image/jpeg, image/png"
                   />
                   <svg
@@ -345,20 +704,36 @@ const AddProperty = ({ initialValues, ...props }: any) => {
                 </Button>
               </Stack>
               <Stack className="gallery-box">
-                <Stack className="image-box">
-                  <img src="/img/banner/d.avif" alt="" />
-                </Stack>
+                {insertProviderPostData?.providerImages.map((image: string) => {
+                  const imagePath: string = `${REACT_APP_API_URL}/${image}`;
+                  return (
+                    <Stack className="image-box">
+                      <img src={imagePath} alt="" />
+                    </Stack>
+                  );
+                })}
               </Stack>
             </Stack>
+          </Stack>
 
-            <Stack className="buttons-row">
-              <Button className="next-button">
+          <Stack className="buttons-row">
+            {router.query.providerId ? (
+              <Button
+                className="next-button"
+                disabled={doDisabledCheck()}
+                onClick={updateProviderHandler}
+              >
                 <Typography className="next-button-text">Save</Typography>
               </Button>
-              <Button className="next-button">
+            ) : (
+              <Button
+                className="next-button"
+                disabled={doDisabledCheck()}
+                onClick={insertProviderHandler}
+              >
                 <Typography className="next-button-text">Save</Typography>
               </Button>
-            </Stack>
+            )}
           </Stack>
         </div>
       </div>
@@ -366,4 +741,22 @@ const AddProperty = ({ initialValues, ...props }: any) => {
   }
 };
 
-export default AddProperty;
+AddProviderPost.defaultProps = {
+  initialValues: {
+    providerType: "",
+    providerLocation: "",
+    providerWorkWeekday: "",
+    providerWeekday: "",
+    providerRateType: "",
+    providerWorkDayLimit: 0,
+    providerStartTime: "",
+    providerEndTime: "",
+    providerAddress: "",
+    providerTitle: "",
+    providerWorkPrice: 0,
+    providerDesc: "",
+    providerImages: [],
+  },
+};
+
+export default AddProviderPost;

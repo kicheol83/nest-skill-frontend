@@ -130,7 +130,7 @@ const ServicePage: NextPage = ({ initialInput, ...props }) => {
         setSearchFilter({
           ...searchFilter,
           sort: "createdAt",
-          directions: Direction.ASC,
+          directions: Direction.DESC,
         });
         setFilterSortName("New");
         break;

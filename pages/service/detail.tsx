@@ -80,6 +80,8 @@ const ServiceDetailPage: NextPage = ({
   );
   const [commentTotal, setCommentTotal] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [latestPage, setLatestPage] = useState<number>(1);
+  const [commentPage, setCommentPage] = useState<number>(1);
 
   const [insertCommentData, setInsertCommentData] = useState<CommentInput>({
     commentGroup: CommentGroup.PROVIDER,
@@ -240,21 +242,22 @@ const ServiceDetailPage: NextPage = ({
     },
   });
 
-  const commentPaginationChangeHandler = async (
+  const commentPaginationChangeHandler = (
     event: ChangeEvent<unknown>,
     value: number
   ) => {
-    commentInquiry.page = value;
-    setCommentInquiry({ ...commentInquiry });
+    setCommentPage(value);
+    setCommentInquiry({ ...commentInquiry, page: value });
   };
 
-  const paginationChangeHandler = async (
+  const latestPaginationChangeHandler = async (
     event: ChangeEvent<unknown>,
     value: number
   ) => {
+    setLatestPage(value);
     const newFilter = { ...initialInput, page: value };
     setSearchFilter(newFilter);
-    setCurrentPage(value);
+
     await router.push(
       `/service/detail/?input=${JSON.stringify(newFilter)}`,
       `/service/detail/?input=${JSON.stringify(newFilter)}`,
@@ -714,7 +717,7 @@ const ServiceDetailPage: NextPage = ({
                       })}
                       <Box component={"div"} className={"pagination-box"}>
                         <MuiPagination
-                          page={commentInquiry.page}
+                          page={commentPage}
                           count={Math.ceil(commentTotal / commentInquiry.limit)}
                           onChange={commentPaginationChangeHandler}
                           shape="circular"
@@ -924,9 +927,9 @@ const ServiceDetailPage: NextPage = ({
               <Stack className="pagination" spacing={2}>
                 <Pagination
                   className="pagi-count"
-                  page={commentInquiry.page}
+                  page={latestPage}
                   count={Math.ceil(commentTotal / commentInquiry.limit)}
-                  onChange={commentPaginationChangeHandler}
+                  onChange={latestPaginationChangeHandler}
                   variant="outlined"
                   shape="circular"
                   sx={{

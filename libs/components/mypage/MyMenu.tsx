@@ -9,14 +9,27 @@ import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCheckoutOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "@/apollo/store";
+import { REACT_APP_API_URL } from "@/libs/config";
+import { sweetConfirmAlert } from "@/libs/sweetAlert";
+import { logOut } from "@/libs/auth";
 
 const MyMenu = () => {
   const device = useDeviceDetect();
   const router = useRouter();
   const pathname = router.query.category ?? "myProfile";
   const category: any = router.query?.category ?? "myProfile";
+  const user = useReactiveVar(userVar);
 
   /** HANDLERS **/
+  const logoutHandler = async () => {
+    try {
+      if (await sweetConfirmAlert("Do you want to logout?")) logOut();
+    } catch (err: any) {
+      console.log("ERROR, logoutHandler:", err.message);
+    }
+  };
 
   if (device === "mobile") {
     return <div>MY MENU</div>;
@@ -25,115 +38,128 @@ const MyMenu = () => {
       <Stack width={"100%"} padding={"30px 24px"}>
         <Stack className={"profile"}>
           <Box component={"div"} className={"profile-img"}>
-            <img src="/img/banner/d.avif" alt={"member-photo"} />
+            <img
+              src={
+                user?.memberImage
+                  ? `${REACT_APP_API_URL}/${user?.memberImage}`
+                  : "/img/profile/defaultUser.svg"
+              }
+              alt={"member-photo"}
+            />
           </Box>
           <Stack className={"user-info"}>
-            <Typography className={"user-name"}>Ned</Typography>
+            <Typography className={"user-name"}>{user?.memberNick}</Typography>
             <Box component={"div"} className={"user-phone"}>
               <img src={"/img/icons/call.svg"} alt={"icon"} />
-              <Typography className={"p-number"}>01082333848</Typography>
+              <Typography className={"p-number"}>
+                {user?.memberPhone}
+              </Typography>
             </Box>
-            {/* {user?.memberType === "ADMIN" ? (
+            {user?.memberType === "ADMIN" ? (
               <a href="/_admin/users" target={"_blank"}>
                 <Typography className={"view-list"}>
                   {user?.memberType}
                 </Typography>
               </a>
-            ) : ( */}
-            <Typography className={"view-list"}>USER</Typography>
-            {/* )} */}
+            ) : (
+              <Typography className={"view-list"}>
+                {user?.memberType}
+              </Typography>
+            )}
           </Stack>
         </Stack>
         <Stack className={"sections"}>
           <Stack
             className={"section"}
-            // style={{ height: user.memberType === "AGENT" ? "228px" : "153px" }}
+            style={{ height: user.memberType === "PROVIDER" ? "auto" : "153px" }}
           >
             <Typography className="title" variant={"h5"}>
               MANAGE LISTINGS
             </Typography>
             <List className={"sub-section"}>
-              <>
-                <ListItem className={pathname === "addPost" ? "focus" : ""}>
-                  <Link
-                    href={{
-                      pathname: "/mypage",
-                      query: { category: "addPost" },
-                    }}
-                    scroll={false}
-                  >
-                    <div className={"flex-box"}>
-                      {category === "addPost" ? (
-                        <img
-                          className={"com-icon"}
-                          src={"/img/icons/whiteTab.svg"}
-                          alt={"com-icon"}
-                        />
-                      ) : (
-                        <img
-                          className={"com-icon"}
-                          src={"/img/icons/newTab.svg"}
-                          alt={"com_icon"}
-                        />
-                      )}
-                      <Typography
-                        className={"sub-title"}
-                        variant={"subtitle1"}
-                        component={"p"}
-                      >
-                        Add Post
-                      </Typography>
-                      <IconButton aria-label="delete" sx={{ ml: "40px" }}>
-                        <PortraitIcon style={{ color: "red" }} />
-                      </IconButton>
-                    </div>
-                  </Link>
-                </ListItem>
+              {user.memberType === "PROVIDER" && (
+                <>
+                  <ListItem className={pathname === "addPost" ? "focus" : ""}>
+                    <Link
+                      href={{
+                        pathname: "/mypage",
+                        query: { category: "addPost" },
+                      }}
+                      scroll={false}
+                    >
+                      <div className={"flex-box"}>
+                        {category === "addPost" ? (
+                          <img
+                            className={"com-icon"}
+                            src={"/img/icons/whiteTab.svg"}
+                            alt={"com-icon"}
+                          />
+                        ) : (
+                          <img
+                            className={"com-icon"}
+                            src={"/img/icons/newTab.svg"}
+                            alt={"com_icon"}
+                          />
+                        )}
+                        <Typography
+                          className={"sub-title"}
+                          variant={"subtitle1"}
+                          component={"p"}
+                        >
+                          Add Post
+                        </Typography>
+                        <IconButton aria-label="delete" sx={{ ml: "40px" }}>
+                          <PortraitIcon style={{ color: "red" }} />
+                        </IconButton>
+                      </div>
+                    </Link>
+                  </ListItem>
 
-                <ListItem
-                  className={pathname === "myPosts" ? "focus" : ""}
-                >
-                  <Link
-                    href={{
-                      pathname: "/mypage",
-                      query: { category: "myPosts" },
-                    }}
-                    scroll={false}
-                  >
-                    <div className={"flex-box"}>
-                      {category === "myPosts" ? (
-                        <WorkOutlineIcon
-                          sx={{
-                            width: "16px",
-                            height: "16px",
-                            color: "#fff",
-                            marginLeft: "11px",
-                          }}
-                        />
-                      ) : (
-                        <WorkOutlineIcon
-                          sx={{
-                            width: "16px",
-                            height: "16px",
-                            color: "black",
-                            marginLeft: "11px",
-                          }}
-                        />
-                      )}
-                      <Typography
-                        className={"sub-title"}
-                        variant={"subtitle1"}
-                        component={"p"}
-                      >
-                        My Posts
-                      </Typography>
-                      <IconButton aria-label="delete" sx={{ ml: "36px" }}>
-                        <PortraitIcon style={{ color: "red", marginLeft: "2px" }} />
-                      </IconButton>
-                    </div>
-                  </Link>
-                </ListItem>
-              </>
+                  <ListItem className={pathname === "myPosts" ? "focus" : ""}>
+                    <Link
+                      href={{
+                        pathname: "/mypage",
+                        query: { category: "myPosts" },
+                      }}
+                      scroll={false}
+                    >
+                      <div className={"flex-box"}>
+                        {category === "myPosts" ? (
+                          <WorkOutlineIcon
+                            sx={{
+                              width: "16px",
+                              height: "16px",
+                              color: "#fff",
+                              marginLeft: "11px",
+                            }}
+                          />
+                        ) : (
+                          <WorkOutlineIcon
+                            sx={{
+                              width: "16px",
+                              height: "16px",
+                              color: "black",
+                              marginLeft: "11px",
+                            }}
+                          />
+                        )}
+                        <Typography
+                          className={"sub-title"}
+                          variant={"subtitle1"}
+                          component={"p"}
+                        >
+                          My Posts
+                        </Typography>
+                        <IconButton aria-label="delete" sx={{ ml: "36px" }}>
+                          <PortraitIcon
+                            style={{ color: "red", marginLeft: "3px" }}
+                          />
+                        </IconButton>
+                      </div>
+                    </Link>
+                  </ListItem>
+                </>
+              )}
 
               <ListItem className={pathname === "myFavorites" ? "focus" : ""}>
                 <Link
@@ -432,7 +458,11 @@ const MyMenu = () => {
             </List>
           </Stack>
           <Stack className={"section"} sx={{ marginTop: "100px" }}>
-            <div>
+            <div
+              style={{
+                marginTop: user?.memberType === "PROVIDER" ? "194px" : "15px",
+              }}
+            >
               <Typography className="title" variant={"h5"}>
                 Community
               </Typography>
@@ -544,7 +574,7 @@ const MyMenu = () => {
                   </div>
                 </Link>
               </ListItem>
-              <ListItem>
+              <ListItem onClick={logoutHandler}>
                 <div className={"flex-box"}>
                   <img
                     className={"com-icon"}
