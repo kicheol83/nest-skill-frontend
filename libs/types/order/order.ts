@@ -1,6 +1,5 @@
 import { OrderStatus } from "../../enums/order.enum";
 import { Member, TotalCounter } from "../member/member";
-import { ProviderPost } from "../provider-post/provider-post";
 
 export interface Order {
   _id: string;

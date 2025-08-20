@@ -285,6 +285,38 @@ export const GET_ALL_REVIEWS_BY_ADMIN = gql`
         memberId
         createdAt
         updatedAt
+        memberData {
+          _id
+          memberType
+          memberStatus
+          memberAuthType
+          memberPhone
+          memberNick
+          memberFullName
+          memberImage
+          memberAddress
+          memberDesc
+          memberJobs
+          memberArticles
+          memberFollowers
+          memberFollowings
+          memberPoints
+          memberLikes
+          memberViews
+          memberComments
+          memberRank
+          memberWarnings
+          memberBlocks
+          bannedAt
+          suspendedAt
+          deactivatedAt
+          deletedAt
+          createdAt
+          updatedAt
+          accessToken
+          memberEmail
+          googleId
+        }
       }
       metaCounter {
         total

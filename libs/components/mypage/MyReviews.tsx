@@ -410,7 +410,6 @@ const ReviewDashboard: NextPage = ({
             </Box>
           </Box>
 
-          {/* ACTION BUTTONS */}
           <Box display="flex" gap={2}>
             <Button
               variant="contained"

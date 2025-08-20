@@ -22,7 +22,7 @@ import { ProviderLocation, ProviderStatus } from "@/libs/enums/provider.enum";
 import { ProviderPostUpdate } from "@/libs/types/provider-post/provider-post.update";
 import { ProviderPostPanelList } from "@/libs/components/admin/provider-posts/PropertyList";
 
-const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
+const AdminMemberPost: NextPage = ({ initialInquiry, ...props }: any) => {
   const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);
   const [providerJobsInquiry, setProviderJobsInquiry] =
     useState<AllProviderJobsInquiry>(initialInquiry);
@@ -40,10 +40,10 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
   const [removePropertyByAdmin] = useMutation(UPDATE_PROVIDER_POSTS_BY_ADMIN);
 
   const {
-    loading: getAllPropertiesByAdminLoading,
-    data: getAllPropertiesByAdminData,
+    loading: getAllProviderPostByAdminLoading,
+    data: getAllProviderPostByAdminData,
     error: getAllPropertiesByAdminError,
-    refetch: getAllPropertiesByAdminRefetch,
+    refetch: getAllProviderPostByAdminRefetch,
   } = useQuery(GET_ALL_PROVIDER_JOBS_BY_ADMIN, {
     fetchPolicy: "network-only",
     variables: { input: providerJobsInquiry },
@@ -58,13 +58,13 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
 
   /** LIFECYCLES **/
   useEffect(() => {
-    getAllPropertiesByAdminRefetch({ input: providerJobsInquiry });
+    getAllProviderPostByAdminRefetch({ input: providerJobsInquiry });
   }, [providerJobsInquiry]);
 
   /** HANDLERS **/
   const changePageHandler = async (event: unknown, newPage: number) => {
     providerJobsInquiry.page = newPage + 1;
-    await getAllPropertiesByAdminRefetch({ input: providerJobsInquiry });
+    await getAllProviderPostByAdminRefetch({ input: providerJobsInquiry });
     setProviderJobsInquiry({ ...providerJobsInquiry });
   };
 
@@ -73,7 +73,7 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
   ) => {
     providerJobsInquiry.limit = parseInt(event.target.value, 10);
     providerJobsInquiry.page = 1;
-    await getAllPropertiesByAdminRefetch({ input: providerJobsInquiry });
+    await getAllProviderPostByAdminRefetch({ input: providerJobsInquiry });
     setProviderJobsInquiry({ ...providerJobsInquiry });
   };
 
@@ -182,7 +182,7 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
         },
       });
       menuIconCloseHandler();
-      await getAllPropertiesByAdminRefetch({ input: providerJobsInquiry });
+      await getAllProviderPostByAdminRefetch({ input: providerJobsInquiry });
     } catch (err: any) {
       menuIconCloseHandler();
       sweetErrorHandling(err).then();
@@ -296,7 +296,7 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
   );
 };
 
-AdminProperties.defaultProps = {
+AdminMemberPost.defaultProps = {
   initialInquiry: {
     page: 1,
     limit: 10,
@@ -306,4 +306,4 @@ AdminProperties.defaultProps = {
   },
 };
 
-export default withAdminLayout(AdminProperties);
+export default withAdminLayout(AdminMemberPost);
