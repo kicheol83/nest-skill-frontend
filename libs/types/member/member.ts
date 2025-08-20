@@ -30,6 +30,7 @@ export interface Member {
   memberComments: number;
   memberRank: number;
   memberWarnings: number;
+  memberBlocks: number;
   bannedAt?: Date;
   suspendedAt?: Date;
   deactivatedAt?: Date;

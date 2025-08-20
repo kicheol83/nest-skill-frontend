@@ -96,13 +96,13 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
   }
 
   if (device === "mobile") {
-    return <div>NESTAR PROPERTIES MOBILE</div>;
+    return <div>SKIL NEST PROVIDER POST MOBILE</div>;
   } else {
     return (
       <div id="my-property-page">
         <Stack className="main-title-box">
           <Stack className="right-box">
-            <Typography className="main-title">My Properties</Typography>
+            <Typography className="main-title">My Provider Post</Typography>
             <Typography className="sub-title">
               We are glad to see you again!
             </Typography>

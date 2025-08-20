@@ -26,6 +26,7 @@ export const UPDATE_MEMBER_BY_ADMIN = gql`
       memberComments
       memberRank
       memberWarnings
+      memberBlocks
       deletedAt
       createdAt
       updatedAt
@@ -145,6 +146,7 @@ export const REMOVE_PROVIDER_POST_BY_ADMIN = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -196,6 +198,7 @@ export const UPDATE_BOARD_ARTICLE_BY_ADMIN = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -244,6 +247,7 @@ export const REMOVE_BOARD_ARTICLE_BY_ADMIN = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -291,6 +295,7 @@ export const REMOVE_COMMENT_BY_ADMIN = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -338,6 +343,7 @@ export const UPDATE_ORDER_BY_ADMIN = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -386,6 +392,7 @@ export const UPDATE_REVIEW_BY_ADMIN = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -431,6 +438,7 @@ export const DELETE_REVIEW_BY_ADMIN = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt

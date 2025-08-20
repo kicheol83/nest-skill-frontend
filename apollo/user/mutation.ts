@@ -37,6 +37,7 @@ export const SIGN_UP = gql`
       memberComments
       memberRank
       memberWarnings
+      memberBlocks
       bannedAt
       suspendedAt
       deactivatedAt
@@ -71,6 +72,7 @@ export const LOGIN = gql`
       memberComments
       memberRank
       memberWarnings
+      memberBlocks
       bannedAt
       suspendedAt
       deactivatedAt
@@ -105,6 +107,7 @@ export const UPDATE_MEMBER = gql`
       memberComments
       memberRank
       memberWarnings
+      memberBlocks
       deletedAt
       createdAt
       updatedAt
@@ -136,6 +139,7 @@ export const LIKE_TARGET_MEMBER = gql`
       memberComments
       memberRank
       memberWarnings
+      memberBlocks
       bannedAt
       suspendedAt
       deactivatedAt
@@ -261,6 +265,7 @@ export const LIKE_TARGET_PROVIDER_POST = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -313,6 +318,7 @@ export const CREATE_BOARD_ARTICLE = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -361,6 +367,7 @@ export const UPDATE_BOARD_ARTICLE = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -409,6 +416,7 @@ export const LIKE_TARGET_BOARD_ARTCILE = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -457,6 +465,7 @@ export const CREATE_COMMENT = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -501,6 +510,7 @@ export const UPDATE_COMMENT = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -546,6 +556,7 @@ export const SUBSICRIBE = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -587,6 +598,7 @@ export const UNSUBSCRIBE = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -640,6 +652,7 @@ export const CREATE_ORDER = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -684,6 +697,7 @@ export const UPDATE_ORDER = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -748,6 +762,7 @@ export const UPDATE_REVIEW = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt

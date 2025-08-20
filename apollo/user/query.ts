@@ -28,6 +28,7 @@ export const GET_PROVIDER = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -76,6 +77,7 @@ export const GET_MEMBER = gql`
       memberComments
       memberRank
       memberWarnings
+      memberBlocks
       bannedAt
       suspendedAt
       deactivatedAt
@@ -149,6 +151,7 @@ export const GET_PROVIDER_POST = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -215,6 +218,7 @@ export const GET_PROVIDER_POSTS = gql`
           memberComments
           memberRank
           memberWarnings
+          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt
@@ -285,6 +289,7 @@ export const GET_PROVIDER_MEMBER_POSTS = gql`
           memberComments
           memberRank
           memberWarnings
+          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt
@@ -350,6 +355,7 @@ export const GET_FAVORITES = gql`
           memberComments
           memberRank
           memberWarnings
+          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt
@@ -415,6 +421,7 @@ export const GET_VISITED = gql`
           memberComments
           memberRank
           memberWarnings
+          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt
@@ -479,6 +486,7 @@ export const GET_BOARD_ARTICLE = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -533,6 +541,7 @@ export const GET_BOARD_ARTICLES = gql`
           memberComments
           memberRank
           memberWarnings
+          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt
@@ -593,6 +602,7 @@ export const GET_COMMENTS = gql`
           memberComments
           memberRank
           memberWarnings
+          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt
@@ -652,6 +662,7 @@ export const GET_MEMBER_FOLLOWERS = gql`
           memberComments
           memberRank
           memberWarnings
+          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt
@@ -708,6 +719,7 @@ export const GET_MEMBER_FOLLOWINGS = gql`
           memberComments
           memberRank
           memberWarnings
+          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt
@@ -759,6 +771,7 @@ export const GET_MY_ORDER = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -804,6 +817,7 @@ export const GET_MY_ORDERS = gql`
           memberComments
           memberRank
           memberWarnings
+          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt
@@ -856,6 +870,7 @@ export const GET_REVIEW = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -902,6 +917,7 @@ export const GET_REVIEWS = gql`
           memberComments
           memberRank
           memberWarnings
+          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt

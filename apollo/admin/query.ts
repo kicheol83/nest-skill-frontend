@@ -28,6 +28,7 @@ export const GET_ALL_MEMBERS_BY_ADMIN = gql`
         memberComments
         memberRank
         memberWarnings
+        memberBlocks
         deletedAt
         createdAt
         updatedAt

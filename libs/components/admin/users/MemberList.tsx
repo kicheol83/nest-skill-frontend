@@ -15,6 +15,9 @@ import {
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
+import { Member } from "../../../types/member/member";
+import { REACT_APP_API_URL } from "../../../config";
+import { MemberStatus, MemberType } from "../../../enums/member.enum";
 
 interface Data {
   id: string;
@@ -97,16 +100,21 @@ const headCells: readonly HeadCell[] = [
   },
 ];
 
-// interface EnhancedTableProps {
-// 	numSelected: number;
-// 	onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
-// 	onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-// 	order: Order;
-// 	orderBy: string;
-// 	rowCount: number;
-// }
+interface EnhancedTableProps {
+  numSelected: number;
+  onRequestSort: (
+    event: React.MouseEvent<unknown>,
+    property: keyof Data
+  ) => void;
+  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  order: Order;
+  orderBy: string;
+  rowCount: number;
+}
 
-function EnhancedTableHead() {
+function EnhancedTableHead(props: EnhancedTableProps) {
+  const { onSelectAllClick } = props;
+
   return (
     <TableHead>
       <TableRow>
@@ -124,22 +132,22 @@ function EnhancedTableHead() {
   );
 }
 
-// interface MemberPanelListType {
-//   members: Member[];
-//   anchorEl: any;
-//   menuIconClickHandler: any;
-//   menuIconCloseHandler: any;
-//   updateMemberHandler: any;
-// }
+interface MemberPanelListType {
+  members: Member[];
+  anchorEl: any;
+  menuIconClickHandler: any;
+  menuIconCloseHandler: any;
+  updateMemberHandler: any;
+}
 
-export const MemberPanelList = () => {
-  //   const {
-  //     members,
-  //     anchorEl,
-  //     menuIconClickHandler,
-  //     menuIconCloseHandler,
-  //     updateMemberHandler,
-  //   } = props;
+export const MemberPanelList = (props: MemberPanelListType) => {
+  const {
+    members,
+    anchorEl,
+    menuIconClickHandler,
+    menuIconCloseHandler,
+    updateMemberHandler,
+  } = props;
 
   return (
     <Stack>
@@ -152,79 +160,141 @@ export const MemberPanelList = () => {
           {/*@ts-ignore*/}
           <EnhancedTableHead />
           <TableBody>
-            <TableRow>
-              <TableCell align="center" colSpan={8}>
-                <span className={"no-data"}>data not found!</span>
-              </TableCell>
-            </TableRow>
+            {members.length === 0 && (
+              <TableRow>
+                <TableCell align="center" colSpan={8}>
+                  <span className={"no-data"}>data not found!</span>
+                </TableCell>
+              </TableRow>
+            )}
 
-            <TableRow
-              hover
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell align="left">12345</TableCell>
+            {members.length !== 0 &&
+              members.map((member: Member, index: number) => {
+                const member_image = member.memberImage
+                  ? `${REACT_APP_API_URL}/${member.memberImage}`
+                  : "/img/profile/defaultUser.svg";
+                return (
+                  <TableRow
+                    hover
+                    key={member?._id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="left">{member._id}</TableCell>
 
-              <TableCell align="left" className={"name"}>
-                <Stack direction={"row"}>
-                  <Link href={`/member?memberId=`}>
-                    <div>
-                      <Avatar
-                        alt="Remy Sharp"
-                        src="/img/banner/d.avif"
-                        sx={{ ml: "2px", mr: "10px" }}
-                      />
-                    </div>
-                  </Link>
-                  <Link href={`/member?memberId=`}>
-                    <div>Ned</div>
-                  </Link>
-                </Stack>
-              </TableCell>
+                    <TableCell align="left" className={"name"}>
+                      <Stack direction={"row"}>
+                        <Link href={`/member?memberId=${member._id}`}>
+                          <div>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={member_image}
+                              sx={{ ml: "2px", mr: "10px" }}
+                            />
+                          </div>
+                        </Link>
+                        <Link href={`/member?memberId=${member._id}`}>
+                          <div>{member.memberNick}</div>
+                        </Link>
+                      </Stack>
+                    </TableCell>
 
-              <TableCell align="center">Ned Usmonov</TableCell>
-              <TableCell align="left">01082333848</TableCell>
+                    <TableCell align="center">
+                      {member.memberFullName ?? "-"}
+                    </TableCell>
+                    <TableCell align="left">{member.memberPhone}</TableCell>
 
-              <TableCell align="center">
-                <Button className={"badge success"}>COOK</Button>
+                    <TableCell align="center">
+                      <Button
+                        onClick={(e: any) => menuIconClickHandler(e, index)}
+                        className={"badge success"}
+                      >
+                        {member.memberType}
+                      </Button>
 
-                <Menu
-                  open
-                  className={"menu-modal"}
-                  MenuListProps={{
-                    "aria-labelledby": "fade-button",
-                  }}
-                  TransitionComponent={Fade}
-                  sx={{ p: 1 }}
-                >
-                  <MenuItem>
-                    <Typography variant={"subtitle1"} component={"span"}>
-                      PHOTO
-                    </Typography>
-                  </MenuItem>
-                </Menu>
-              </TableCell>
+                      <Menu
+                        className={"menu-modal"}
+                        MenuListProps={{
+                          "aria-labelledby": "fade-button",
+                        }}
+                        anchorEl={anchorEl[index]}
+                        open={Boolean(anchorEl[index])}
+                        onClose={menuIconCloseHandler}
+                        TransitionComponent={Fade}
+                        sx={{ p: 1 }}
+                      >
+                        {Object.values(MemberType)
+                          .filter((ele) => ele !== member?.memberType)
+                          .map((type: string) => (
+                            <MenuItem
+                              onClick={() =>
+                                updateMemberHandler({
+                                  _id: member._id,
+                                  memberType: type,
+                                })
+                              }
+                              key={type}
+                            >
+                              <Typography
+                                variant={"subtitle1"}
+                                component={"span"}
+                              >
+                                {type}
+                              </Typography>
+                            </MenuItem>
+                          ))}
+                      </Menu>
+                    </TableCell>
 
-              <TableCell align="center">1</TableCell>
-              <TableCell align="center">1</TableCell>
-              <TableCell align="center">
-                <Button className={"badge success"}>ACTIVE</Button>
+                    <TableCell align="center">
+                      {member.memberWarnings}
+                    </TableCell>
+                    <TableCell align="center">{member.memberBlocks}</TableCell>
+                    <TableCell align="center">
+                      <Button
+                        onClick={(e: any) =>
+                          menuIconClickHandler(e, member._id)
+                        }
+                        className={"badge success"}
+                      >
+                        {member.memberStatus}
+                      </Button>
 
-                <Menu
-                  open
-                  className={"menu-modal"}
-                  MenuListProps={{
-                    "aria-labelledby": "fade-button",
-                  }}
-                  sx={{ p: 1 }}
-                >
-                  <MenuItem>
-                    <Typography variant={"subtitle1"} component={"span"}>
-                      ACTIVE
-                    </Typography>
-                  </MenuItem>
-                </Menu>
-              </TableCell>
-            </TableRow>
+                      <Menu
+                        className={"menu-modal"}
+                        MenuListProps={{
+                          "aria-labelledby": "fade-button",
+                        }}
+                        anchorEl={anchorEl[member._id]}
+                        open={Boolean(anchorEl[member._id])}
+                        onClose={menuIconCloseHandler}
+                        TransitionComponent={Fade}
+                        sx={{ p: 1 }}
+                      >
+                        {Object.values(MemberStatus)
+                          .filter((ele: string) => ele !== member?.memberStatus)
+                          .map((status: string) => (
+                            <MenuItem
+                              onClick={() =>
+                                updateMemberHandler({
+                                  _id: member._id,
+                                  memberStatus: status,
+                                })
+                              }
+                              key={status}
+                            >
+                              <Typography
+                                variant={"subtitle1"}
+                                component={"span"}
+                              >
+                                {status}
+                              </Typography>
+                            </MenuItem>
+                          ))}
+                      </Menu>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
