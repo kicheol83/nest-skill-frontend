@@ -1,78 +1,145 @@
 import * as React from "react";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import {
+  Paper,
+  Stack,
+  Typography,
+  Grid,
+  Divider,
+  Box,
+  Button,
+} from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PaidIcon from "@mui/icons-material/Paid";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import { useRouter } from "next/router";
 
-const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
-const payments = [
-  { name: "Card type:", detail: "Visa" },
-  { name: "Card holder:", detail: "Mr. John Smith" },
-  { name: "Card number:", detail: "xxxx-xxxx-xxxx-1234" },
-  { name: "Expiry date:", detail: "04/2024" },
-];
+interface Address {
+  fullName: string;
+  phone: string;
+  city: string;
+  street: string;
+  zipcode?: string;
+}
 
-export default function Review() {
+interface Payment {
+  paymentMethod: string;
+  paymentAmount: number;
+  transactionId: string;
+  createdAt: string;
+}
+
+interface Order {
+  _id: string;
+  address: Address;
+  payment?: Payment | null;
+  totalPrice: number;
+}
+
+interface ReviewProps {
+  providerPost: any;
+  address?: Address;
+  payment?: Payment | null;
+  order?: Order;
+  total?: number;
+}
+
+export default function Review({
+  providerPost,
+  address,
+  payment,
+  order,
+  total,
+}: ReviewProps) {
+  const router = useRouter();
+  const displayAddress = address || order?.address;
+  const displayPayment = payment || order?.payment;
+  const displayTotal = total || order?.totalPrice || 0;
+
+  if (!displayAddress) return <Typography>No address provided</Typography>;
+
   return (
-    <Stack spacing={2}>
-      <List disablePadding>
-        <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Products" secondary="4 selected" />
-          <Typography variant="body2">$134.98</Typography>
-        </ListItem>
-        <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Shipping" secondary="Plus taxes" />
-          <Typography variant="body2">$9.99</Typography>
-        </ListItem>
-        <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Total" />
-          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            $144.97
+    <Grid container spacing={3} sx={{ mt: 2, width: "100%" }}>
+      <Grid item xs={12}>
+        <Paper sx={{ p: { xs: 2, md: 4 }, maxWidth: 600, mx: "auto" }}>
+          <Typography variant="h6" gutterBottom>
+            Review Your Order
           </Typography>
-        </ListItem>
-      </List>
-      <Divider />
-      <Stack
-        direction="column"
-        divider={<Divider flexItem />}
-        spacing={2}
-        sx={{ my: 2 }}
-      >
-        <div>
-          <Typography variant="subtitle2" gutterBottom>
-            Shipment details
-          </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom sx={{ color: "text.secondary" }}>
-            {addresses.join(", ")}
-          </Typography>
-        </div>
-        <div>
-          <Typography variant="subtitle2" gutterBottom>
-            Payment details
-          </Typography>
-          <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  useFlexGap
-                  sx={{ width: "100%", mb: 1 }}
-                >
-                  <Typography variant="body1" sx={{ color: "text.secondary" }}>
-                    {payment.name}
+          <Stack spacing={3} mt={2}>
+            <Box display="flex" alignItems="center" gap={1}>
+              <AccountCircleIcon color="primary" />
+              <Typography>
+                Provider:{" "}
+                <strong>{providerPost?.memberData?.memberNick}</strong>
+              </Typography>
+            </Box>
+
+            <Box display="flex" alignItems="center" gap={1}>
+              <LocationOnIcon color="secondary" />
+              <Typography>
+                Shipping Address: <strong>{displayAddress.fullName}</strong>,{" "}
+                {displayAddress.street}, {displayAddress.city}{" "}
+                {displayAddress.zipcode || ""}
+              </Typography>
+            </Box>
+
+            {displayPayment && (
+              <Box display="flex" flexDirection="column" gap={1}>
+                <Box display="flex" alignItems="center" gap={1}>
+                  {displayPayment.paymentMethod === "CARD" ? (
+                    <CreditCardIcon color="action" />
+                  ) : (
+                    <AccountBalanceWalletIcon color="action" />
+                  )}
+                  <Typography>
+                    Payment Method:{" "}
+                    <strong>
+                      {displayPayment.paymentMethod === "CARD"
+                        ? "Credit / Debit Card"
+                        : "Wallet / Balance"}
+                    </strong>
                   </Typography>
-                  <Typography variant="body2">{payment.detail}</Typography>
-                </Stack>
-              </React.Fragment>
-            ))}
-          </Grid>
-        </div>
-      </Stack>
-    </Stack>
+                </Box>
+                <Typography>
+                  Transaction ID:{" "}
+                  <strong>{displayPayment.transactionId}</strong>
+                </Typography>
+                <Typography>
+                  Paid Amount:{" "}
+                  <strong>${displayPayment.paymentAmount + 10}</strong>
+                </Typography>
+                <Typography>
+                  Paid At:{" "}
+                  <strong>
+                    {new Date(displayPayment.createdAt).toLocaleString()}
+                  </strong>
+                </Typography>
+              </Box>
+            )}
+
+            <Divider />
+            <Box display="flex" alignItems="center" gap={1}>
+              <PaidIcon color="success" />
+              <Typography variant="h6">
+                Total: <strong>${displayTotal + 10}</strong>
+              </Typography>
+              <Button
+                sx={{
+                  background: "green",
+                  color: "#fff",
+                  "&:hover": {
+                    background: "green", // hover bo'lganda ham rang o'zgarmaydi
+                  },
+                }}
+                onClick={() => router.push("/")}
+              >
+                Go Home
+              </Button>
+            </Box>
+          </Stack>
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }

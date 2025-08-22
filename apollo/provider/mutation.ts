@@ -35,7 +35,6 @@ export const UPDATE_MY_ORDER_BY_PROVIDER = gql`
         memberComments
         memberRank
         memberWarnings
-        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -43,6 +42,13 @@ export const UPDATE_MY_ORDER_BY_PROVIDER = gql`
         createdAt
         updatedAt
         accessToken
+      }
+      address {
+        fullName
+        phone
+        city
+        street
+        zipcode
       }
     }
   }

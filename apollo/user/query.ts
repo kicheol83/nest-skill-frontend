@@ -771,7 +771,6 @@ export const GET_MY_ORDER = gql`
         memberComments
         memberRank
         memberWarnings
-        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -779,6 +778,13 @@ export const GET_MY_ORDER = gql`
         createdAt
         updatedAt
         accessToken
+      }
+      address {
+        fullName
+        phone
+        city
+        street
+        zipcode
       }
     }
   }
@@ -817,7 +823,6 @@ export const GET_MY_ORDERS = gql`
           memberComments
           memberRank
           memberWarnings
-          memberBlocks
           bannedAt
           suspendedAt
           deactivatedAt
@@ -825,6 +830,13 @@ export const GET_MY_ORDERS = gql`
           createdAt
           updatedAt
           accessToken
+        }
+        address {
+          fullName
+          phone
+          city
+          street
+          zipcode
         }
       }
       metaCounter {
@@ -925,6 +937,112 @@ export const GET_REVIEWS = gql`
           createdAt
           updatedAt
           accessToken
+        }
+      }
+      metaCounter {
+        total
+      }
+    }
+  }
+`;
+
+/**************************
+ *         PAYMENT        *
+ *************************/
+export const GET_PAYMENT = gql`
+  query GetPayment($input: String!) {
+    getPayment(paymentId: $input) {
+      _id
+      paymentAmount
+      paymentStatus
+      paymentMethod
+      transactionId
+      orderId
+      memberId
+      deletedAt
+      updatedAt
+      createdAt
+      memberData {
+        _id
+        memberType
+        memberStatus
+        memberAuthType
+        memberPhone
+        memberNick
+        memberFullName
+        memberImage
+        memberAddress
+        memberDesc
+        memberJobs
+        memberArticles
+        memberFollowers
+        memberFollowings
+        memberPoints
+        memberLikes
+        memberViews
+        memberComments
+        memberRank
+        memberWarnings
+        memberBlocks
+        bannedAt
+        suspendedAt
+        deactivatedAt
+        deletedAt
+        createdAt
+        updatedAt
+        accessToken
+        memberEmail
+        googleId
+      }
+    }
+  }
+`;
+
+export const GET_PAYMENTS = gql`
+  query GetPayments($input: PaymentInquiry!) {
+    getPayments(input: $input) {
+      list {
+        _id
+        paymentAmount
+        paymentStatus
+        paymentMethod
+        transactionId
+        orderId
+        memberId
+        deletedAt
+        updatedAt
+        createdAt
+        memberData {
+          _id
+          memberType
+          memberStatus
+          memberAuthType
+          memberPhone
+          memberNick
+          memberFullName
+          memberImage
+          memberAddress
+          memberDesc
+          memberJobs
+          memberArticles
+          memberFollowers
+          memberFollowings
+          memberPoints
+          memberLikes
+          memberViews
+          memberComments
+          memberRank
+          memberWarnings
+          memberBlocks
+          bannedAt
+          suspendedAt
+          deactivatedAt
+          deletedAt
+          createdAt
+          updatedAt
+          accessToken
+          memberEmail
+          googleId
         }
       }
       metaCounter {

@@ -652,7 +652,6 @@ export const CREATE_ORDER = gql`
         memberComments
         memberRank
         memberWarnings
-        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -660,6 +659,13 @@ export const CREATE_ORDER = gql`
         createdAt
         updatedAt
         accessToken
+      }
+      address {
+        fullName
+        phone
+        city
+        street
+        zipcode
       }
     }
   }
@@ -697,7 +703,6 @@ export const UPDATE_ORDER = gql`
         memberComments
         memberRank
         memberWarnings
-        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -705,6 +710,13 @@ export const UPDATE_ORDER = gql`
         createdAt
         updatedAt
         accessToken
+      }
+      address {
+        fullName
+        phone
+        city
+        street
+        zipcode
       }
     }
   }
@@ -778,5 +790,112 @@ export const UPDATE_REVIEW = gql`
 export const DELETE_MY_REVIEW = gql`
   mutation DeleteMyReview($input: String!) {
     deleteMyReview(_id: $input)
+  }
+`;
+
+/**************************
+ *          PAYMENT       *
+ *************************/
+export const CREATE_PAYMENT = gql`
+  mutation CreatePayment($input: CreatePaymentInput!) {
+    createPayment(input: $input) {
+      _id
+      paymentAmount
+      paymentStatus
+      paymentMethod
+      transactionId
+      orderId
+      memberId
+      deletedAt
+      updatedAt
+      createdAt
+      memberData {
+        _id
+        memberType
+        memberStatus
+        memberAuthType
+        memberPhone
+        memberNick
+        memberFullName
+        memberImage
+        memberAddress
+        memberDesc
+        memberJobs
+        memberArticles
+        memberFollowers
+        memberFollowings
+        memberPoints
+        memberLikes
+        memberViews
+        memberComments
+        memberRank
+        memberWarnings
+        memberBlocks
+        bannedAt
+        suspendedAt
+        deactivatedAt
+        deletedAt
+        createdAt
+        updatedAt
+        accessToken
+        memberEmail
+        googleId
+      }
+    }
+  }
+`;
+
+export const UPDATE_PAYMENT = gql`
+  mutation UpdatePayment($input: UpdatePaymentInput!) {
+    updatePayment(input: $input) {
+      _id
+      paymentAmount
+      paymentStatus
+      paymentMethod
+      transactionId
+      orderId
+      memberId
+      deletedAt
+      updatedAt
+      createdAt
+      memberData {
+        _id
+        memberType
+        memberStatus
+        memberAuthType
+        memberPhone
+        memberNick
+        memberFullName
+        memberImage
+        memberAddress
+        memberDesc
+        memberJobs
+        memberArticles
+        memberFollowers
+        memberFollowings
+        memberPoints
+        memberLikes
+        memberViews
+        memberComments
+        memberRank
+        memberWarnings
+        memberBlocks
+        bannedAt
+        suspendedAt
+        deactivatedAt
+        deletedAt
+        createdAt
+        updatedAt
+        accessToken
+        memberEmail
+        googleId
+      }
+    }
+  }
+`;
+
+export const DELETE_PAYMENT = gql`
+  mutation DeletePayment($input: String!) {
+    deletePayment(paymentId: $input)
   }
 `;

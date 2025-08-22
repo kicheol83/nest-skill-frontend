@@ -261,6 +261,13 @@ export const GET_ALL_ORDERS_BY_ADMIN = gql`
           updatedAt
           accessToken
         }
+        address {
+          fullName
+          phone
+          city
+          street
+          zipcode
+        }
       }
       metaCounter {
         total
@@ -320,6 +327,112 @@ export const GET_ALL_REVIEWS_BY_ADMIN = gql`
       }
       metaCounter {
         total
+      }
+    }
+  }
+`;
+
+/**************************
+ *         PAYMENT        *
+ *************************/
+export const GET_PAYMENTS_BY_ADMIN = gql`
+  query GetPaymentsByAdmin($input: PaymentInquiry!) {
+    getPaymentsByAdmin(input: $input) {
+      list {
+        _id
+        paymentAmount
+        paymentStatus
+        paymentMethod
+        transactionId
+        orderId
+        memberId
+        deletedAt
+        updatedAt
+        createdAt
+        memberData {
+          _id
+          memberType
+          memberStatus
+          memberAuthType
+          memberPhone
+          memberNick
+          memberFullName
+          memberImage
+          memberAddress
+          memberDesc
+          memberJobs
+          memberArticles
+          memberFollowers
+          memberFollowings
+          memberPoints
+          memberLikes
+          memberViews
+          memberComments
+          memberRank
+          memberWarnings
+          memberBlocks
+          bannedAt
+          suspendedAt
+          deactivatedAt
+          deletedAt
+          createdAt
+          updatedAt
+          accessToken
+          memberEmail
+          googleId
+        }
+      }
+      metaCounter {
+        total
+      }
+    }
+  }
+`;
+
+export const GET_PAYMENT_BY_ID_ADMIN = gql`
+  query GetPaymentByAdmin($input: String!) {
+    getPaymentByAdmin(paymentId: $input) {
+      _id
+      paymentAmount
+      paymentStatus
+      paymentMethod
+      transactionId
+      orderId
+      memberId
+      deletedAt
+      updatedAt
+      createdAt
+      memberData {
+        _id
+        memberType
+        memberStatus
+        memberAuthType
+        memberPhone
+        memberNick
+        memberFullName
+        memberImage
+        memberAddress
+        memberDesc
+        memberJobs
+        memberArticles
+        memberFollowers
+        memberFollowings
+        memberPoints
+        memberLikes
+        memberViews
+        memberComments
+        memberRank
+        memberWarnings
+        memberBlocks
+        bannedAt
+        suspendedAt
+        deactivatedAt
+        deletedAt
+        createdAt
+        updatedAt
+        accessToken
+        memberEmail
+        googleId
       }
     }
   }

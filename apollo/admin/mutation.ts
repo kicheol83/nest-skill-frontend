@@ -343,7 +343,6 @@ export const UPDATE_ORDER_BY_ADMIN = gql`
         memberComments
         memberRank
         memberWarnings
-        memberBlocks
         bannedAt
         suspendedAt
         deactivatedAt
@@ -351,6 +350,13 @@ export const UPDATE_ORDER_BY_ADMIN = gql`
         createdAt
         updatedAt
         accessToken
+      }
+      address {
+        fullName
+        phone
+        city
+        street
+        zipcode
       }
     }
   }
@@ -448,5 +454,14 @@ export const DELETE_REVIEW_BY_ADMIN = gql`
         accessToken
       }
     }
+  }
+`;
+
+/**************************
+ *         PAYMENT        *
+ *************************/
+export const DELETE_PAYMENT_BY_ADMIN = gql`
+  mutation DeletePaymentByAdmin($input: String!) {
+    deletePaymentByAdmin(paymentId: $input)
   }
 `;
