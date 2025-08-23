@@ -109,7 +109,7 @@ const ReviewDashboard: NextPage = ({
     } catch (err: any) {
       await sweetErrorHandling(err);
     } finally {
-      setOpen(false); // har doim modal yopiladi
+      setOpen(false);
     }
   };
 

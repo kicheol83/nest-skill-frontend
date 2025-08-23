@@ -838,6 +838,15 @@ export const GET_MY_ORDERS = gql`
           street
           zipcode
         }
+
+        orderItems {
+          _id
+          itemPrice
+          orderId
+          providerId
+          createdAt
+          updatedAt
+        }
       }
       metaCounter {
         total

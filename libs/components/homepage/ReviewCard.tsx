@@ -1,3 +1,4 @@
+import { REACT_APP_API_URL } from "@/libs/config";
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Review } from "@/libs/types/review-post/review";
 import { Avatar, Box, Stack } from "@mui/material";
@@ -27,7 +28,11 @@ const ReviewCard = (props: ReviewPostCard) => {
         <Box className="avatar">
           <Avatar
             alt="Remy Sharp"
-            src="/img/profile/men.webp"
+            src={
+              review?.memberData?.memberImage
+                ? `${REACT_APP_API_URL}/${review?.memberData?.memberImage}`
+                : `/img/profile/defaultUser.svg`
+            }
             sx={{ width: 48, height: 48 }}
           />
           <Box className="name">
