@@ -14,7 +14,7 @@ class ORDsearch {
   paymentMethod?: PaymentMethod;
 }
 
-export interface ReviewInquiry {
+export interface PaymentInquiry {
   page: number;
   limit: number;
   sort?: string;
@@ -22,13 +22,13 @@ export interface ReviewInquiry {
   search?: ORDsearch;
 }
 
-interface ORDAsearch {
+class ORDAsearch {
   text?: string;
   paymentStatus?: PaymentStatus;
   paymentMethod?: PaymentMethod;
 }
 
-export interface AllReviewsInquiry {
+export interface AllPaymentsInquiry {
   page: number;
   limit: number;
   sort?: string;
