@@ -465,3 +465,104 @@ export const DELETE_PAYMENT_BY_ADMIN = gql`
     deletePaymentByAdmin(paymentId: $input)
   }
 `;
+
+/**************************
+ *         NOTICE         *
+ *************************/
+export const CREATE_NOTICE_BY_ADMIN = gql`
+  mutation CreateNotice($input: CreateNotice!) {
+    createNotice(input: $input) {
+      _id
+      noticeCategory
+      noticeStatus
+      noticeTitle
+      noticeContent
+      createdAt
+      updatedAt
+      memberData {
+        _id
+        memberType
+        memberStatus
+        memberAuthType
+        memberPhone
+        memberNick
+        memberFullName
+        memberImage
+        memberAddress
+        memberDesc
+        memberJobs
+        memberArticles
+        memberFollowers
+        memberFollowings
+        memberPoints
+        memberLikes
+        memberViews
+        memberComments
+        memberRank
+        memberWarnings
+        memberBlocks
+        bannedAt
+        suspendedAt
+        deactivatedAt
+        deletedAt
+        createdAt
+        updatedAt
+        accessToken
+        memberEmail
+        googleId
+      }
+    }
+  }
+`;
+
+export const UPDATE_NOTICE_BY_ADMIN = gql`
+  mutation UpdateNotice($input: NoticeUpdate!) {
+    updateNotice(input: $input) {
+      _id
+      noticeCategory
+      noticeStatus
+      noticeTitle
+      noticeContent
+      createdAt
+      updatedAt
+      memberData {
+        _id
+        memberType
+        memberStatus
+        memberAuthType
+        memberPhone
+        memberNick
+        memberFullName
+        memberImage
+        memberAddress
+        memberDesc
+        memberJobs
+        memberArticles
+        memberFollowers
+        memberFollowings
+        memberPoints
+        memberLikes
+        memberViews
+        memberComments
+        memberRank
+        memberWarnings
+        memberBlocks
+        bannedAt
+        suspendedAt
+        deactivatedAt
+        deletedAt
+        createdAt
+        updatedAt
+        accessToken
+        memberEmail
+        googleId
+      }
+    }
+  }
+`;
+
+export const DELETE_NOTICE_BY_ADMIN = gql`
+  mutation DeleteNotice($input: String!) {
+    deleteNotice(_id: $input)
+  }
+`;

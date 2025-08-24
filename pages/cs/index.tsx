@@ -7,6 +7,7 @@ import withLayoutNew from "@/libs/components/layout/LayoutNew";
 import Notice from "@/libs/components/cs/Notice";
 import Faq from "@/libs/components/cs/Faq";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import TermsInquiry from "@/libs/components/cs/TermsInquiry";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -59,6 +60,14 @@ const CS: NextPage = () => {
               >
                 FAQ
               </div>
+              <div
+                className={tab == "terms" ? "active" : ""}
+                onClick={() => {
+                  changeTabHandler("terms");
+                }}
+              >
+                Terms & Inquiry
+              </div>
             </Box>
           </Box>
 
@@ -66,6 +75,8 @@ const CS: NextPage = () => {
             {tab === "notice" && <Notice />}
 
             {tab === "faq" && <Faq />}
+
+            {tab === "terms" && <TermsInquiry />}
           </Box>
         </Stack>
       </Stack>

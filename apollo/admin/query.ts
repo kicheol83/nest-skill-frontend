@@ -437,3 +437,103 @@ export const GET_PAYMENT_BY_ID_ADMIN = gql`
     }
   }
 `;
+
+/**************************
+ *         NOTICE         *
+ *************************/
+export const GET_NOTICES_BY_ADMIN = gql`
+  query GetNoticesForAdmin($input: NoticeInquiry!) {
+    getNoticesForAdmin(input: $input) {
+      list {
+        _id
+        noticeCategory
+        noticeStatus
+        noticeTitle
+        noticeContent
+        createdAt
+        updatedAt
+        memberData {
+          _id
+          memberType
+          memberStatus
+          memberAuthType
+          memberPhone
+          memberNick
+          memberFullName
+          memberImage
+          memberAddress
+          memberDesc
+          memberJobs
+          memberArticles
+          memberFollowers
+          memberFollowings
+          memberPoints
+          memberLikes
+          memberViews
+          memberComments
+          memberRank
+          memberWarnings
+          memberBlocks
+          bannedAt
+          suspendedAt
+          deactivatedAt
+          deletedAt
+          createdAt
+          updatedAt
+          accessToken
+          memberEmail
+          googleId
+        }
+      }
+      metaCounter {
+        total
+      }
+    }
+  }
+`;
+
+export const GET_NOTICE_BY_ID_ADMIN = gql`
+  query GetNoticeById($input: String!) {
+    getNoticeById(_id: $input) {
+      _id
+      noticeCategory
+      noticeStatus
+      noticeTitle
+      noticeContent
+      createdAt
+      updatedAt
+      memberData {
+        _id
+        memberType
+        memberStatus
+        memberAuthType
+        memberPhone
+        memberNick
+        memberFullName
+        memberImage
+        memberAddress
+        memberDesc
+        memberJobs
+        memberArticles
+        memberFollowers
+        memberFollowings
+        memberPoints
+        memberLikes
+        memberViews
+        memberComments
+        memberRank
+        memberWarnings
+        memberBlocks
+        bannedAt
+        suspendedAt
+        deactivatedAt
+        deletedAt
+        createdAt
+        updatedAt
+        accessToken
+        memberEmail
+        googleId
+      }
+    }
+  }
+`;

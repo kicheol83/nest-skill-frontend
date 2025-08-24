@@ -60,7 +60,7 @@
             letter-spacing: 0.42px;
             &.active {
               border: 1px solid #725ce8;
-              background: #007aff;;
+              background: #007aff;
               color: #fff;
             }
           }
@@ -196,9 +196,14 @@
               margin: 0 24px;
               display: inline-block;
               padding: 4px 10px;
-              border: 1px solid #725ce8;
-              border-radius: 7px;
-              color: #725ce8;
+              color: #007aff;
+            }
+            .badge1 {
+              margin: 0 24px;
+              display: inline-block;
+              padding: 4px 10px;
+              color: #007aff;
+              border: 1px solid;
             }
             .question {
               .badge {
