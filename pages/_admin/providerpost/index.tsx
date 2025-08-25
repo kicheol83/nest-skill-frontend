@@ -20,7 +20,7 @@ import { ProviderPost } from "@/libs/types/provider-post/provider-post";
 import { AllProviderJobsInquiry } from "@/libs/types/provider-post/provider-post.input";
 import { ProviderLocation, ProviderStatus } from "@/libs/enums/provider.enum";
 import { ProviderPostUpdate } from "@/libs/types/provider-post/provider-post.update";
-import { ProviderPostPanelList } from "@/libs/components/admin/provider-posts/PropertyList";
+import { ProviderPostPanelList } from "@/libs/components/admin/provider-posts/ProviderList";
 
 const AdminMemberPost: NextPage = ({ initialInquiry, ...props }: any) => {
   const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);

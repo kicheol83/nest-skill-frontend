@@ -47,7 +47,7 @@ const TermsInquiry = () => {
   const [notices, setNotices] = useState<Notice[]>([]);
   const [searchNotice, setSearchNotice] = useState<T>({
     page: 1,
-    limit: 6,
+    limit: 20,
     search: {},
   });
 
@@ -55,14 +55,33 @@ const TermsInquiry = () => {
   const { data } = useQuery(GET_NOTICES_BY_ADMIN, {
     fetchPolicy: "network-only",
     variables: { input: searchNotice },
-    onCompleted(data: T) {
-      setNotices(data.getNoticesForAdmin?.list || []);
-      const openPanels = (data.getNoticesForAdmin?.list || [])
+    onCompleted: (data: T) => {
+      console.log("Full data from backend:", data);
+
+      const allNotices = data?.getNoticesForAdmin?.list || [];
+      console.log("allNotices length:", allNotices.length);
+      console.log(
+        "TERMS only:",
+        allNotices.filter((n: any) => n.noticeCategory === "TERMS").length
+      );
+      console.log(
+        "INQUIRY only:",
+        allNotices.filter((n: any) => n.noticeCategory === "INQUIRY").length
+      );
+      console.log(
+        "FAQ only:",
+        allNotices.filter((n: any) => n.noticeCategory === "FAQ").length
+      );
+
+      setNotices(allNotices);
+
+      const openPanels = allNotices
         .filter(
-          (n: Notice) =>
+          (n: any) =>
             n.noticeCategory === "TERMS" || n.noticeCategory === "INQUIRY"
         )
-        .map((n: Notice) => n._id);
+        .map((n: any) => n._id);
+
       setExpandedPanels(openPanels);
     },
   });

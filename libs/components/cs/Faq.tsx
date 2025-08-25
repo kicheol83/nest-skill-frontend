@@ -48,16 +48,16 @@ const Faq = () => {
   const [notices, setNotices] = useState<Notice[]>([]);
   const [searchNotice, setSearchNotice] = useState<T>({
     page: 1,
-    limit: 6,
+    limit: 20,
     search: {},
   });
 
   /** APOLLO REQUESTS **/
   const {
-    loading: getVisitedLoading,
-    data: getVisitedData,
-    error: geVisitedError,
-    refetch: getVisitedRefetch,
+    loading: getFaqLoading,
+    data: getFaqData,
+    error: geFaqError,
+    refetch: getFaqRefetch,
   } = useQuery(GET_NOTICES_BY_ADMIN, {
     fetchPolicy: "network-only",
     variables: { input: searchNotice },

@@ -1,19 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import type { NextPage } from "next";
 import withAdminLayout from "../../../libs/components/layout/LayoutAdmin";
-import { MemberPanelList } from "../../../libs/components/admin/users/MemberList";
-import { Box, InputAdornment, List, ListItem, Stack } from "@mui/material";
+import { Box, InputAdornment, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import { TabContext } from "@mui/lab";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import TablePagination from "@mui/material/TablePagination";
 import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
-import { MembersInquiry } from "../../../libs/types/member/member.input";
-import { Member } from "../../../libs/types/member/member";
-import { MemberStatus, MemberType } from "../../../libs/enums/member.enum";
 import {
   sweetConfirmAlert,
   sweetErrorHandling,
@@ -22,13 +16,9 @@ import { MemberUpdate } from "../../../libs/types/member/member.update";
 import { useMutation, useQuery } from "@apollo/client";
 import {
   DELETE_REVIEW_BY_ADMIN,
-  UPDATE_MEMBER_BY_ADMIN,
   UPDATE_REVIEW_BY_ADMIN,
 } from "../../../apollo/admin/mutation";
-import {
-  GET_ALL_MEMBERS_BY_ADMIN,
-  GET_ALL_REVIEWS_BY_ADMIN,
-} from "../../../apollo/admin/query";
+import { GET_ALL_REVIEWS_BY_ADMIN } from "../../../apollo/admin/query";
 import { T } from "../../../libs/types/common";
 import { ReviewInquiry } from "@/libs/types/review-post/review.input";
 import { Review } from "@/libs/types/review-post/review";
@@ -46,7 +36,6 @@ const AdminReviews: NextPage = ({ initialInquiry, ...props }: any) => {
       : "ALL"
   );
   const [searchText, setSearchText] = useState("");
-  const [searchType, setSearchType] = useState("ALL");
 
   /** APOLLO REQUESTS **/
   const [updateReviewByAdmin] = useMutation(UPDATE_REVIEW_BY_ADMIN);
