@@ -6,9 +6,13 @@ import "swiper/css/navigation";
 import Footer from "../Footer";
 import Top from "../Top";
 import HeaderOther from "../header/HeaderOther";
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "@/apollo/store";
+import Chat from "../socket/Socket";
 
 const withLayoutOther = (Component: any) => {
   return (props: any) => {
+    const user = useReactiveVar(userVar);
     return (
       <>
         <Head>
@@ -27,6 +31,7 @@ const withLayoutOther = (Component: any) => {
           <Stack id="main">
             <Component {...props} />
           </Stack>
+          {user?._id && <Chat />}
 
           <Stack id={"footer"}>
             <Footer />

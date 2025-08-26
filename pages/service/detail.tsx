@@ -48,7 +48,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Review from "@/libs/components/service/Review";
 import { REACT_APP_API_URL } from "@/libs/config";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 

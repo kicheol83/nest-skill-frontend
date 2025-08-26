@@ -7,7 +7,6 @@ import withLayoutMain from "@/libs/components/layout/LayoutHome";
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Stack } from "@mui/material";
 import { NextPage } from "next";
-import Review from "@/libs/components/homepage/Review";
 import CommunityBoard from "@/libs/components/homepage/Community";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import ReviewPost from "@/libs/components/homepage/Review";

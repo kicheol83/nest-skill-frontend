@@ -9,10 +9,14 @@ import { useTranslation } from "next-i18next";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "@/apollo/store";
+import Chat from "../socket/Socket";
 
 const withLayoutNew = (Component: any) => {
   return (props: any) => {
     const router = useRouter();
+    const user = useReactiveVar(userVar);
     const { t, i18n } = useTranslation("common");
     const device = useDeviceDetect();
     const [authHeader, setAuthHeader] = useState<boolean>(false);
@@ -140,6 +144,8 @@ const withLayoutNew = (Component: any) => {
             <Stack id={"main"}>
               <Component {...props} />
             </Stack>
+
+            {user?._id && <Chat />}
 
             <Stack id={"footer"}>
               <Footer />
