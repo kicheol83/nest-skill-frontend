@@ -10,19 +10,18 @@ import {
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CloseIcon from "@mui/icons-material/Close";
 import { getSocket } from "@/libs/config";
-
-interface Notification {
-  title: string;
-  message: string;
-  timestamp: string;
-}
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "@/apollo/store";
+import { Notification } from "@/libs/types/notification/notification";
 
 export const NotificationBell = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [open, setOpen] = useState(false);
+  const user = useReactiveVar(userVar);
 
   useEffect(() => {
-    const socket = getSocket();
+    if (!user?._id) return;
+    const socket = getSocket(user._id);
 
     socket.on("notification", (notif: Notification) => {
       setNotifications((prev) => [notif, ...prev]);
@@ -52,9 +51,9 @@ export const NotificationBell = () => {
         <Paper
           elevation={4}
           sx={{
-            position: "absolute", // Bell icon ga nisbatan joylashadi
-            top: "50px", // icon ostida 50px pastda
-            right: 0, // o‘ng tomonda hizalanadi
+            position: "absolute",
+            top: "50px",
+            right: 0,
             width: 300,
             maxHeight: 400,
             overflowY: "auto",
@@ -90,9 +89,9 @@ export const NotificationBell = () => {
                 <CloseIcon fontSize="small" />
               </IconButton>
               <Typography variant="subtitle2" fontWeight="bold">
-                {notif.title}
+                {notif.notificationTitle}
               </Typography>
-              <Typography variant="body2">{notif.message}</Typography>
+              <Typography variant="body2">{notif.notificationDesc}</Typography>
             </Box>
           ))}
         </Paper>

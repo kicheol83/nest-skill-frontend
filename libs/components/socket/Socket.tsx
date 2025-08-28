@@ -30,7 +30,7 @@ export default function FloatingChat() {
     if (!user?.memberNick) return;
     setUsername(user.memberNick);
 
-    const socket = getSocket(); // global ulanish
+    const socket = getSocket(user._id);
     socketRef.current = socket;
 
     socket.on("onlineUsers", (count: number) => setOnlineUsers(count));
@@ -43,7 +43,6 @@ export default function FloatingChat() {
     });
 
     return () => {
-      // component unmount bo‘lganda faqat eventlarni tozalash
       socket.off("onlineUsers");
       socket.off("chatMessage");
     };
@@ -98,7 +97,6 @@ export default function FloatingChat() {
             overflow: "hidden",
           }}
         >
-          {/* Header */}
           <div
             style={{
               backgroundColor: "#1976d2",

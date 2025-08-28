@@ -12,9 +12,11 @@ import { io, Socket } from "socket.io-client";
 
 let socket: Socket | null = null;
 
-export const getSocket = (): Socket => {
+export const getSocket = (userId?: string) => {
   if (!socket) {
-    socket = io(REACT_APP_API_URL);
+    socket = io(REACT_APP_API_URL, {
+      query: { userId: userId || "" },
+    });
   }
   return socket;
 };
