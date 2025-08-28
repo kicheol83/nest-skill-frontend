@@ -1,5 +1,5 @@
 import { userVar } from "@/apollo/store";
-import { REACT_APP_API_URL } from "@/libs/config";
+import { getSocket, REACT_APP_API_URL } from "@/libs/config";
 import { useReactiveVar } from "@apollo/client";
 import { useEffect, useState, useRef } from "react";
 import { io, Socket } from "socket.io-client";
@@ -29,7 +29,8 @@ export default function FloatingChat() {
   useEffect(() => {
     if (!user?.memberNick) return;
     setUsername(user.memberNick);
-    const socket = io(REACT_APP_API_URL);
+
+    const socket = getSocket(); // global ulanish
     socketRef.current = socket;
 
     socket.on("onlineUsers", (count: number) => setOnlineUsers(count));
@@ -41,7 +42,11 @@ export default function FloatingChat() {
       else setMessages((prev) => [...prev, msg]);
     });
 
-    return () => socket.disconnect();
+    return () => {
+      // component unmount bo‘lganda faqat eventlarni tozalash
+      socket.off("onlineUsers");
+      socket.off("chatMessage");
+    };
   }, [user]);
 
   useEffect(() => {

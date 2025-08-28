@@ -7,3 +7,14 @@ export const Messages = {
   error4: "Message is empty!",
   error5: "Only images with jpeg, jpg, png format allowed!",
 };
+
+import { io, Socket } from "socket.io-client";
+
+let socket: Socket | null = null;
+
+export const getSocket = (): Socket => {
+  if (!socket) {
+    socket = io(REACT_APP_API_URL);
+  }
+  return socket;
+};

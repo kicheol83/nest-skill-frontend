@@ -1,16 +1,7 @@
-
 export enum NotificationType {
-  LIKE = "LIKE",
-  COMMENT = "COMMENT",
-}
-
-export enum NotificationStatus {
-  WAIT = "WAIT",
-  READ = "READ",
-}
-
-export enum NotificationGroup {
-  MEMBER = "MEMBER",
+  MEMBER = "MESSAGES",
   ARTICLE = "ARTICLE",
-  PROVIDER = "PROVIDER",
+  ORDER = "ORDER",
+  PAYMENT = "PAYMENT",
+  REVIEW = "REVIEW",
 }

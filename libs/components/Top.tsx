@@ -21,6 +21,7 @@ import { useReactiveVar } from "@apollo/client";
 import { userVar } from "@/apollo/store";
 import { REACT_APP_API_URL } from "../config";
 import { AccountCircle, Logout } from "@mui/icons-material";
+import { NotificationBell } from "./socket/Notifications";
 
 const Top = () => {
   const router = useRouter();
@@ -244,9 +245,7 @@ const Top = () => {
             )}
 
             <Box className="lang-box">
-              {user?._id && (
-                <NotificationsOutlinedIcon className="notification-icon" />
-              )}
+              {user?._id && <NotificationBell />}
               <Button disableRipple className="lang-btn" onClick={langClick}>
                 <Box className="flag" sx={{ marginLeft: "8px" }}>
                   <img
