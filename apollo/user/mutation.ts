@@ -899,3 +899,114 @@ export const DELETE_PAYMENT = gql`
     deletePayment(paymentId: $input)
   }
 `;
+
+/**************************
+ *    NOTIFICATION        *
+ *************************/
+export const CREATE_NOTIFIACTION = gql`
+  mutation CreateNotification($input: NotificationInput!) {
+    createNotification(input: $input) {
+      _id
+      notificationType
+      notificationTitle
+      notificationDesc
+      senderId
+      receiverId
+      isRead
+      createdAt
+      updatedAt
+      memberData {
+        _id
+        memberType
+        memberStatus
+        memberAuthType
+        memberPhone
+        memberNick
+        memberFullName
+        memberImage
+        memberAddress
+        memberDesc
+        memberJobs
+        memberArticles
+        memberFollowers
+        memberFollowings
+        memberPoints
+        memberLikes
+        memberViews
+        memberComments
+        memberRank
+        memberWarnings
+        memberBlocks
+        bannedAt
+        suspendedAt
+        deactivatedAt
+        deletedAt
+        createdAt
+        updatedAt
+        accessToken
+        memberEmail
+        googleId
+      }
+    }
+  }
+`;
+
+export const UPDATE_NOTIFICATION = gql`
+  mutation UpdateNotification($input: NotificationUpdate!) {
+    updateNotification(input: $input) {
+      _id
+      notificationType
+      notificationTitle
+      notificationDesc
+      senderId
+      receiverId
+      isRead
+      createdAt
+      updatedAt
+      memberData {
+        _id
+        memberType
+        memberStatus
+        memberAuthType
+        memberPhone
+        memberNick
+        memberFullName
+        memberImage
+        memberAddress
+        memberDesc
+        memberJobs
+        memberArticles
+        memberFollowers
+        memberFollowings
+        memberPoints
+        memberLikes
+        memberViews
+        memberComments
+        memberRank
+        memberWarnings
+        memberBlocks
+        bannedAt
+        suspendedAt
+        deactivatedAt
+        deletedAt
+        createdAt
+        updatedAt
+        accessToken
+        memberEmail
+        googleId
+      }
+    }
+  }
+`;
+
+export const DELETE_NOTIFICATION = gql`
+  mutation DeleteNotification($input: String!) {
+    deleteNotification(id: $input)
+  }
+`;
+
+export const MARK_ALL_READ = gql`
+  mutation MarkAllAsRead($input: String!) {
+    markAllAsRead(id: $input)
+  }
+`;
