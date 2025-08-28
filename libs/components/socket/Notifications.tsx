@@ -34,6 +34,7 @@ export const NotificationBell = ({ initialInput, ...props }: any) => {
       ? JSON.parse(router?.query?.input as string)
       : initialInput
   );
+  const [markNotificationRead] = useMutation(MARK_NOTIFICAION_READ);
 
   const { data, refetch } = useQuery(GET_NOTIFICATIONS, {
     variables: { input: searchFilter },
@@ -44,8 +45,6 @@ export const NotificationBell = ({ initialInput, ...props }: any) => {
   const [markAllRead] = useMutation(MARK_ALL_READ, {
     variables: { input: user?._id },
   });
-
-  const [markNotificationRead] = useMutation(MARK_NOTIFICAION_READ);
 
   useEffect(() => {
     if (data?.getNotifications) {

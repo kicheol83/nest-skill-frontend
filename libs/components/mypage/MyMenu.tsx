@@ -14,6 +14,7 @@ import { userVar } from "@/apollo/store";
 import { REACT_APP_API_URL } from "@/libs/config";
 import { sweetConfirmAlert } from "@/libs/sweetAlert";
 import { logOut } from "@/libs/auth";
+import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 
 const MyMenu = () => {
   const device = useDeviceDetect();
@@ -71,7 +72,9 @@ const MyMenu = () => {
         <Stack className={"sections"}>
           <Stack
             className={"section"}
-            style={{ height: user.memberType === "PROVIDER" ? "auto" : "153px" }}
+            style={{
+              height: user.memberType === "PROVIDER" ? "auto" : "153px",
+            }}
           >
             <Typography className="title" variant={"h5"}>
               MANAGE LISTINGS
@@ -275,29 +278,29 @@ const MyMenu = () => {
                 </Link>
               </ListItem>
 
-              <ListItem className={pathname === "myMessage" ? "focus" : ""}>
+              <ListItem className={pathname === "notification" ? "focus" : ""}>
                 <Link
                   href={{
                     pathname: "/mypage",
-                    query: { category: "myMessage" },
+                    query: { category: "notification" },
                   }}
                   scroll={false}
                 >
                   <div className={"flex-box"}>
-                    {category === "myMessage" ? (
-                      <ChatOutlinedIcon
+                    {category === "notification" ? (
+                      <NotificationsOutlinedIcon
                         sx={{
-                          width: "16px",
-                          height: "16px",
+                          width: "19px",
+                          height: "19px",
                           color: "#fff",
                           marginLeft: "11px",
                         }}
                       />
                     ) : (
-                      <ChatOutlinedIcon
+                      <NotificationsOutlinedIcon
                         sx={{
-                          width: "16px",
-                          height: "16px",
+                          width: "19px",
+                          height: "19px",
                           color: "black",
                           marginLeft: "11px",
                         }}
@@ -309,7 +312,7 @@ const MyMenu = () => {
                       variant={"subtitle1"}
                       component={"p"}
                     >
-                      My Message
+                      Notification
                     </Typography>
                   </div>
                 </Link>

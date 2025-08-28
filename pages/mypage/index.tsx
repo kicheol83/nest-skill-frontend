@@ -16,7 +16,6 @@ import MemberFollowers from "@/libs/components/mypage/MemberFollowers";
 import MemberFollowings from "@/libs/components/mypage/MemberFollowings";
 import ReviewDashboard from "@/libs/components/mypage/MyReviews";
 import MyOrder from "@/libs/components/mypage/MyOrder";
-import MyMessages from "@/libs/components/mypage/MyMessages";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useMutation, useReactiveVar } from "@apollo/client";
 import {
@@ -31,6 +30,7 @@ import {
   sweetMixinErrorAlert,
   sweetTopSmallSuccessAlert,
 } from "@/libs/sweetAlert";
+import NotificationPanel from "@/libs/components/mypage/Notifiaction";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -158,7 +158,7 @@ const MyPage: NextPage = () => {
                   )}
                   {category === "reviews" && <ReviewDashboard />}
                   {category === "myOrder" && <MyOrder />}
-                  {category === "myMessage" && <MyMessages />}
+                  {category === "notification" && <NotificationPanel />}
                 </Stack>
               </Stack>
             </Stack>
