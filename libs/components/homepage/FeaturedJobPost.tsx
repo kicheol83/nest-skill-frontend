@@ -34,7 +34,7 @@ const Featured = (props: FeaturedProps) => {
   );
 
   /** APOLLO REQUEST **/
-  const [likeTargetProperty] = useMutation(LIKE_TARGET_PROVIDER_POST);
+  const [likeTargetProviderPost] = useMutation(LIKE_TARGET_PROVIDER_POST);
 
   const {
     loading: getFeaturedLoading,
@@ -60,7 +60,7 @@ const Featured = (props: FeaturedProps) => {
       if (!id) return;
       if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
 
-      await likeTargetProperty({
+      await likeTargetProviderPost({
         variables: { input: id },
       });
       await getFeaturedRefetch({ input: searchFilter });

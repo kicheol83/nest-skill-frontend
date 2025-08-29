@@ -230,272 +230,152 @@
             }
           }
         }
-        .featured-box {
-          margin-top: 5px;
-          position: relative;
-          width: 318px;
-          height: 283px;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          align-items: flex-start;
-          gap: 16;
-          padding: 24px;
-          flex: none;
-          order: 0;
-          box-sizing: border-box;
-          border: 1px solid rgb(214, 221, 235);
-          background: rgb(255, 255, 255);
-          border-radius: 20px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-          transition: all 0.3s ease;
-          overflow: hidden;
-          &:hover {
-            background: rgb(248, 248, 253);
-            transform: scale(1.01);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-          }
-          .top-info {
-            position: relative;
-            width: auto;
-            height: 48px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 0px;
-            flex: none;
-            order: 0;
-            align-self: stretch;
-            flex-grow: 0;
-            .info-button {
-              margin: -8px -24px;
+       .featured-box {
               position: relative;
-              width: auto;
-              height: 28px;
+              width: 318px;
+              height: 413px;
               display: flex;
-              flex-direction: row;
-              justify-content: center;
-              align-items: center;
-              gap: 8;
-              padding: 4px 12px 4px 12px;
-              flex: none;
-              order: 1;
-              flex-grow: 0;
-              margin: 0px 10px;
-              box-sizing: border-box;
-              border: 1px solid rgb(70, 64, 222);
-              color: rgb(70, 64, 222);
-              font-family: $font-body;
-              font-size: 16px;
-              font-weight: 400;
-              line-height: 160%;
-              letter-spacing: 0%;
-              text-align: center;
+              flex-direction: column;
+              border: 1px solid rgb(214, 221, 235);
               border-radius: 20px;
               box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-              transition: all 0.3s ease;
+              background: #fff;
               overflow: hidden;
-              &:hover {
-                background: rgb(248, 248, 253);
-                transform: scale(1.05);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-              }
-            }
-          }
-          .box-title {
-            position: relative;
-            width: 184px;
-            height: 57px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 2;
-            padding: 0px;
-            flex: none;
-            order: 1;
-            flex-grow: 0;
-            .p-type {
-              position: relative;
-              width: auto;
-              height: 29px;
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
-              align-items: flex-start;
-              gap: 2;
-              padding: 0px;
-              flex: none;
-              order: 0;
-              flex-grow: 0;
-              margin: 10px 0px;
-              color: rgb(37, 50, 75);
-              font-family: $font-body;
-              font-size: 18px;
-              font-weight: 600;
-              line-height: 160%;
-              letter-spacing: 0%;
-              text-align: left;
-            }
-            .title-location {
-              position: relative;
-              width: auto;
-              height: 26px;
-              gap: 18px;
-              padding: 0px;
-              flex: none;
-              order: 1;
-              flex-grow: 0;
-              margin: 2px 0px;
-              color: rgb(81, 91, 111);
-              font-family: $font-body;
-              font-size: 16px;
-              font-weight: 400;
-              line-height: 160%;
-              letter-spacing: 0%;
-              text-align: left;
-            }
-            .desc {
-              margin-top: 7px;
-              position: relative;
-              width: 232px;
-              height: 40px;
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
-              align-items: flex-start;
-              gap: 16;
-              flex: none;
-              order: 2;
-              flex-grow: 0;
-              color: rgb(124, 132, 147);
-              font-family: $font-heading;
-              font-size: 16px;
-              font-weight: 400;
-              line-height: 160%;
-              letter-spacing: 0%;
-              text-align: left;
-            }
-          }
-          .button {
-            position: relative;
-            width: auto;
-            height: 30px;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 8;
-            flex: none;
-            order: 3;
-            flex-grow: 0;
-            margin-top: 100px;
-            padding: 4px 16px 4px 0;
+              transition: all 0.3s ease;
 
-            .level {
-              position: relative;
-              width: auto;
-              height: 30px;
-              display: flex;
-              flex-direction: row;
-              justify-content: center;
-              align-items: center;
-              gap: 8;
-              padding: 4px 16px 4px 16px;
-              flex: none;
-              order: 0;
-              flex-grow: 0;
-              margin: 0px 8px;
-              border-radius: 80px;
-              background: rgba(235, 133, 51, 0.1);
-              color: rgb(255, 184, 54);
-              font-family: $font-body;
-              font-size: 14px;
-              font-weight: 600;
-              line-height: 160%;
-              letter-spacing: 0%;
-              text-align: left;
               &:hover {
-                color: white;
-                background: #ffb836;
-                transform: scale(1.05);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                transform: scale(1);
+                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
               }
-            }
-            .view-like {
-              display: flex;
-              flex-direction: row;
-              align-items: center;
-              gap: 6px;
-              .statItem {
-                width: auto;
-                height: 29px;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                padding: 4px 10px;
-                border: 1px solid #dedede;
-                border-radius: 24px;
-                color: #ccc;
-                background: rgba(255, 255, 255, 0.05);
-                font-size: 14px;
-                p {
-                  color: #181a20;
-                  text-align: right;
-                  font-family: $font-heading;
-                  font-size: 18px;
-                  font-style: normal;
-                  font-weight: 400;
-                  line-height: normal;
-                  letter-spacing: 0.52px;
-                  text-transform: capitalize;
+
+              .card-image {
+                height: 60%; // yuqori qism (rasm)
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  transition: all 0.4s ease;
                 }
-                .icon {
-                  font-size: 23px;
-                  transition: all 0.3s ease;
-                  cursor: pointer;
-                  &:hover {
-                    border-color: #888;
-                    background: rgba(255, 255, 255, 0.1);
+
+                &:hover img {
+                  transform: scale(1.05);
+                }
+
+                // overlay badge
+                .provider-type {
+                  position: absolute;
+                  bottom: 12px;
+                  left: 12px;
+                  background: rgba(0, 0, 0, 0.6);
+                  color: #fff;
+                  font-size: 14px;
+                  font-weight: 600;
+                  padding: 4px 10px;
+                  border-radius: 6px;
+                }
+              }
+
+              .card-content {
+                flex: 1;
+                padding: 16px 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .top-info {
+                  display: flex;
+                  justify-content: flex-end;
+                  margin-bottom: 8px;
+                  .info-button {
+                    border: 1px solid rgb(70, 64, 222);
+                    color: rgb(70, 64, 222);
+                    border-radius: 20px;
+                    padding: 4px 12px;
+                    font-size: 13px;
+                    font-weight: 500;
+                    background: #f8f8fd;
+                  }
+                }
+
+                .box-title {
+                  margin-bottom: 12px;
+                  .title-location {
+                    .location-item {
+                      display: flex;
+                      align-items: center;
+                      gap: 6px;
+                      color: #333;
+                      font-family: $font-heading;
+                    }
+                  }
+                  .desc {
+                    font-size: 1rem;
+                    line-height: 1.6;
+                    color: #555;
+                    font-family: $font-heading;
+                  }
+                  .desc {
+                    margin-top: 6px;
+                    font-size: 17px;
+                    line-height: 1.5;
+                    color: rgb(124, 132, 147);
+                    font-family: $font-heading;
+                  }
+                }
+                .button {
+                  margin-top: auto;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  .level {
+                    background: rgba(235, 133, 51, 0.1);
+                    color: rgb(255, 184, 54);
+                    border-radius: 80px;
+                    padding: 4px 16px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    &:hover {
+                      background: #ffb836;
+                      color: #fff;
+                    }
+                  }
+                  .level1 {
+                    background: rgba(51, 131, 235, 0.315);
+                    color: rgba(30, 130, 252, 0.723);
+                    border-radius: 80px;
+                    padding: 4px 16px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    &:hover {
+                      background: rgba(51, 131, 235, 0.315);
+                      color: rgba(30, 130, 252, 0.723);
+                    }
+                  }
+                  .view-like {
+                    display: flex;
+                    .statItem,
+                    .statItem1 {
+                      display: flex;
+                      align-items: center;
+                      border: 1px solid #dedede;
+                      border-radius: 24px;
+                      padding: 4px 10px;
+                      background: #fff;
+                      font-size: 14px;
+
+                      .icon {
+                        font-size: 20px;
+                        cursor: pointer;
+                        transition: 0.3s;
+                      }
+                    }
                   }
                 }
               }
-              .statItem1 {
-                width: auto;
-                height: 29px;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                padding: 4px 10px;
-                border: 1px solid #dedede;
-                border-radius: 24px;
-                color: #ccc;
-                background: rgba(255, 255, 255, 0.05);
-                font-size: 14px;
-                p {
-                  color: #181a20;
-                  text-align: right;
-                  font-family: $font-heading;
-                  font-size: 18px;
-                  font-style: normal;
-                  font-weight: 400;
-                  line-height: normal;
-                  letter-spacing: 0.52px;
-                  text-transform: capitalize;
-                }
-                .icon {
-                  font-size: 23px;
-                  transition: all 0.3s ease;
-                  &:hover {
-                    border-color: #888;
-                    background: rgba(255, 255, 255, 0.1);
-                  }
-                }
-              }
             }
-          }
-        }
       }
       .pagination-config {
         width: 100%;

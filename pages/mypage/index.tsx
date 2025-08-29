@@ -4,7 +4,6 @@ import { NextPage } from "next";
 import { Stack } from "@mui/material";
 import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import MyMenu from "@/libs/components/mypage/MyMenu";
-import AddProperty from "@/libs/components/mypage/AddProviderPost";
 import withLayoutNew from "@/libs/components/layout/LayoutNew";
 import MyPosts from "@/libs/components/mypage/MyPosts";
 import MyFavorites from "@/libs/components/mypage/MyFavorites";
@@ -31,6 +30,7 @@ import {
   sweetTopSmallSuccessAlert,
 } from "@/libs/sweetAlert";
 import NotificationPanel from "@/libs/components/mypage/Notifiaction";
+import AddProviderPost from "@/libs/components/mypage/AddProviderPost";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -133,7 +133,7 @@ const MyPage: NextPage = () => {
               </Stack>
               <Stack className="main-config" mb={"76px"}>
                 <Stack className={"list-config"}>
-                  {category === "addPost" && <AddProperty />}
+                  {category === "addPost" && <AddProviderPost />}
                   {category === "myPosts" && <MyPosts />}
                   {category === "myFavorites" && <MyFavorites />}
                   {category === "recentlyVisited" && <RecentlyVisited />}

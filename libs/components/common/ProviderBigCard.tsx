@@ -47,8 +47,12 @@ const ProviderPostCard = (props: ProviderBigCard) => {
           height="200"
           image={`${REACT_APP_API_URL}/${providerPost?.providerImages?.[0]}`}
           alt=""
+          onClick={() => goProviderPostDetatilPage(providerPost._id)}
         />
-        <Chip label="100$" className="price-chip" />
+        <Chip
+          label={`$${providerPost?.providerWorkPrice}`}
+          className="price-chip"
+        />
       </Box>
 
       <CardContent className="content">

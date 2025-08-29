@@ -5,7 +5,7 @@
       top: 78px;
       position: relative;
       width: 100%;
-      height: 3000px;
+      height: 1900px;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
@@ -294,6 +294,7 @@
             padding: 0px;
             flex: none;
             order: 1;
+            margin-top: 17px;
             flex-grow: 0;
             .jobs-card {
               position: relative;

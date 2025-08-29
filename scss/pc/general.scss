@@ -385,11 +385,11 @@
       gap: 8px;
       padding: 6px 8px;
       border-radius: 8px;
-      .property-checkbox {
+      .provider-checkbox {
         padding: 0;
         margin: 0;
       }
-      .property_type {
+      .provider_type {
         font-size: 14px;
         font-weight: 500;
         color: #555;
@@ -458,11 +458,11 @@
       gap: 8px;
       padding: 6px 8px;
       border-radius: 8px;
-      .property-checkbox {
+      .provider-checkbox {
         padding: 0;
         margin: 0;
       }
-      .property_type {
+      .provider_type {
         font-size: 14px;
         font-weight: 500;
         color: #555;
@@ -484,6 +484,7 @@
     &:hover {
       .hidden {
         display: flex;
+        transition: opacity 5.5s ease;
       }
     }
   }
@@ -527,4 +528,3 @@
     text-align: center;
   }
 }
-

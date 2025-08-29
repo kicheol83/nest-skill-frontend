@@ -25,7 +25,7 @@ import {
   ReviewInquiry,
 } from "@/libs/types/review-post/review.input";
 import { Review } from "@/libs/types/review-post/review";
-import { GET_REVIEW, GET_REVIEWS } from "@/apollo/user/query";
+import { GET_REVIEWS } from "@/apollo/user/query";
 import { T } from "@/libs/types/common";
 import {
   sweetConfirmAlert,
@@ -194,7 +194,7 @@ const ReviewDashboard: NextPage = ({
       </Box>
 
       {/* REVIEW CARD */}
-      {reviews?.length === 0 ? (
+      {myReviews?.length === 0 ? (
         <div className={"no-data"}>
           <img src="/img/icons/icoAlert.svg" alt="" />
           <p>No Review found!</p>
@@ -259,7 +259,7 @@ const ReviewDashboard: NextPage = ({
         ))
       )}
 
-      {reviews.length !== 0 && (
+      {myReviews.length !== 0 && (
         <Stack className="pagination-config-review">
           <Stack className="pagination-box">
             <Pagination

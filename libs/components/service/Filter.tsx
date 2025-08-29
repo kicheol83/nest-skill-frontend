@@ -777,7 +777,7 @@ export default function FilterSidebar(props: FilterType) {
               >
                 <Checkbox
                   id={location}
-                  className="property-checkbox"
+                  className="provider-checkbox"
                   color="default"
                   size="small"
                   value={location}
@@ -786,7 +786,7 @@ export default function FilterSidebar(props: FilterType) {
                     location as ProviderLocation
                   )}
                 />
-                <Typography className="property_type">{location}</Typography>
+                <Typography className="provider_type">{location}</Typography>
               </label>
             ))}
           </div>
@@ -803,7 +803,7 @@ export default function FilterSidebar(props: FilterType) {
               >
                 <Checkbox
                   id={type}
-                  className="property-checkbox"
+                  className="provider-checkbox"
                   color="default"
                   size="small"
                   value={type}
@@ -812,7 +812,7 @@ export default function FilterSidebar(props: FilterType) {
                     type as ProviderType
                   )}
                 />
-                <Typography className="property_type">{type}</Typography>
+                <Typography className="provider_type">{type}</Typography>
               </label>
             ))}
           </div>
@@ -825,7 +825,7 @@ export default function FilterSidebar(props: FilterType) {
             <Stack className="input-box" key={level}>
               <Checkbox
                 id={level}
-                className="property-checkbox"
+                className="provider-checkbox"
                 color="default"
                 size="small"
                 value={level}
@@ -835,7 +835,7 @@ export default function FilterSidebar(props: FilterType) {
                 )}
               />
               <label htmlFor={level} style={{ cursor: "pointer" }}>
-                <Typography className="property_type">{level}</Typography>
+                <Typography className="provider_type">{level}</Typography>
               </label>
             </Stack>
           ))}
@@ -848,7 +848,7 @@ export default function FilterSidebar(props: FilterType) {
             <Stack className="input-box" key={day}>
               <Checkbox
                 id={day}
-                className="property-checkbox"
+                className="provider-checkbox"
                 color="default"
                 size="small"
                 value={day}
@@ -858,7 +858,7 @@ export default function FilterSidebar(props: FilterType) {
                 )}
               />
               <label htmlFor={day} style={{ cursor: "pointer" }}>
-                <Typography className="property_type">{day}</Typography>
+                <Typography className="provider_type">{day}</Typography>
               </label>
             </Stack>
           ))}
@@ -869,7 +869,7 @@ export default function FilterSidebar(props: FilterType) {
                 <Stack className="input-box" key={day}>
                   <Checkbox
                     id={`custom-${day}`}
-                    className="property-checkbox"
+                    className="provider-checkbox"
                     color="default"
                     size="small"
                     value={day}
@@ -882,7 +882,7 @@ export default function FilterSidebar(props: FilterType) {
                     htmlFor={`custom-${day}`}
                     style={{ cursor: "pointer" }}
                   >
-                    <Typography className="property_type">{day}</Typography>
+                    <Typography className="provider_type">{day}</Typography>
                   </label>
                 </Stack>
               ))}
@@ -896,7 +896,7 @@ export default function FilterSidebar(props: FilterType) {
             <Stack className="input-box" key={rate}>
               <Checkbox
                 id={rate}
-                className="property-checkbox"
+                className="provider-checkbox"
                 color="default"
                 size="small"
                 value={rate}
@@ -906,7 +906,7 @@ export default function FilterSidebar(props: FilterType) {
                 )}
               />
               <label htmlFor={rate} style={{ cursor: "pointer" }}>
-                <Typography className="property_type">{rate}</Typography>
+                <Typography className="provider_type">{rate}</Typography>
               </label>
             </Stack>
           ))}

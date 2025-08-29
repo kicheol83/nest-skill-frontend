@@ -10,14 +10,14 @@ import { useRouter } from "next/router";
 import { ProviderPost } from "@/libs/types/provider-post/provider-post";
 import { ProviderStatus } from "@/libs/enums/provider.enum";
 
-interface PropertyCardProps {
+interface ProviderPostCardProps {
   providerPost: ProviderPost;
   deleteProviderPostHandler?: any;
   memberPage?: boolean;
   updateProviderPostHandler?: any;
 }
 
-export const MyProviderPostCard = (props: PropertyCardProps) => {
+export const MyProviderPostCard = (props: ProviderPostCardProps) => {
   const {
     providerPost,
     deleteProviderPostHandler,
@@ -58,7 +58,7 @@ export const MyProviderPostCard = (props: PropertyCardProps) => {
   };
 
   if (device === "mobile") {
-    return <div>MOBILE PROPERTY CARD</div>;
+    return <div>MOBILE PROVIDER CARD</div>;
   } else
     return (
       <Stack className="provider-card-box">

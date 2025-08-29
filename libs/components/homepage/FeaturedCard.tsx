@@ -1,6 +1,5 @@
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
-import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { Avatar, Box, Button, Divider, Stack, Typography } from "@mui/material";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { ProviderPost } from "@/libs/types/provider-post/provider-post";
 import { useRouter } from "next/router";
@@ -9,6 +8,8 @@ import { userVar } from "@/apollo/store";
 import { REACT_APP_API_URL } from "@/libs/config";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 
 interface FeaturedCardProps {
   featured: ProviderPost;
@@ -35,65 +36,114 @@ const FeaturedCard = (props: FeaturedCardProps) => {
   } else {
     return (
       <Stack className="featured-box" key={featured._id}>
-        <Box className="top-info">
-          <Avatar
-            alt="Remy Sharp"
+        <Box className="card-image">
+          <img
             src={`${REACT_APP_API_URL}/${featured.providerImages[0]}`}
-            sx={{ width: 48, height: 48 }}
+            alt={featured.providerType}
           />
-          <Button className="info-button">
-            {featured.providerWorkWeekday}
-          </Button>
+          <span className="provider-type">{featured.providerType}</span>
         </Box>
-        <Box
-          onClick={() => pushDetailHandler(featured._id)}
-          className="box-title"
-        >
-          <span className="p-type">{featured.providerType}</span>
-          <Stack
-            className="title-location"
-            display={"flex"}
-            flexDirection={"row"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
+        <Box className="card-content p-4">
+          <Box
+            onClick={() => pushDetailHandler(featured._id)}
+            className="box-title"
           >
-            <span>{featured.providerRateType}</span>
-            <img src="/img/job/black.svg" alt="" />
-            <span>{featured.providerLocation}</span>
-          </Stack>
-          <span className="desc">{featured.providerDesc}</span>
-        </Box>
-        <Box className="button">
-          <Button className="level">{featured.providerLevel}</Button>
-          <Box className="view-like">
-            <Box
-              className="statItem"
-              onClick={() => likeFeaturedHandler(user, featured?._id)}
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="flex-start"
+              spacing={3}
+              className="title-location"
             >
-              {myFavorites ? (
-                <FavoriteIcon
-                  className="icon"
-                  fontSize="small"
-                  color="primary"
-                />
-              ) : featured?.meLiked && featured?.meLiked[0]?.myFavorite ? (
-                <FavoriteIcon
-                  className="icon"
-                  fontSize="small"
-                  color="primary"
-                />
-              ) : (
-                <FavoriteBorderIcon />
-              )}
-
-              <Typography>{featured?.providerLikes}</Typography>
-            </Box>
-
-            <Box className="statItem1">
-              <VisibilityOutlinedIcon className="icon" fontSize="small" />
-              <Typography>{featured.providerViews}</Typography>
-            </Box>
+              <Box
+                display="flex"
+                alignItems="center"
+                gap={1}
+                className="location-item"
+              >
+                <AccessTimeOutlinedIcon fontSize="medium" color="action" />
+                <Typography
+                  fontFamily={"Space Grotesk"}
+                  variant="h5"
+                  fontWeight={500}
+                >
+                  {featured.providerRateType}
+                </Typography>
+              </Box>
+              <Divider orientation="vertical" flexItem />
+              <Box
+                display="flex"
+                alignItems="center"
+                gap={1}
+                className="location-item"
+              >
+                <PlaceOutlinedIcon fontSize="medium" color="action" />
+                <Typography
+                  fontFamily={"Space Grotesk"}
+                  variant="h5"
+                  fontWeight={500}
+                >
+                  {featured.providerLocation}
+                </Typography>
+              </Box>
+            </Stack>
+            <Typography
+              variant="body1"
+              mt={2}
+              mb={2}
+              fontWeight={500}
+              fontSize="16px"
+              color="text.secondary"
+              className="desc"
+            >
+              {featured.providerDesc}
+            </Typography>
           </Box>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            mt={2}
+            className="button"
+          >
+            <Button variant="contained" size="small" className="level">
+              {featured.providerLevel}
+            </Button>
+            <Button variant="contained" size="small" className="level1">
+              {featured.providerRateType}
+            </Button>
+
+            <Stack direction="row" spacing={2} className="view-like">
+              <Box
+                display="flex"
+                alignItems="center"
+                gap={0.5}
+                className="statItem"
+                onClick={() => likeFeaturedHandler(user, featured?._id)}
+              >
+                {myFavorites || featured?.meLiked?.[0]?.myFavorite ? (
+                  <FavoriteIcon color="primary" />
+                ) : (
+                  <FavoriteBorderIcon />
+                )}
+                <Typography variant="body2">
+                  {featured?.providerLikes}
+                </Typography>
+              </Box>
+
+              <Box
+                display="flex"
+                alignItems="center"
+                gap={0.5}
+                className="statItem1"
+              >
+                <VisibilityOutlinedIcon />
+                <Typography variant="body2">
+                  {featured.providerViews}
+                </Typography>
+              </Box>
+            </Stack>
+          </Stack>
         </Box>
       </Stack>
     );

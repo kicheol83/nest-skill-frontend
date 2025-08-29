@@ -1,4 +1,3 @@
-import withLayoutOther from "@/libs/components/layout/LayoutOther";
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import {
   Box,
@@ -15,7 +14,6 @@ import StarsOutlinedIcon from "@mui/icons-material/StarsOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
 import EditCalendarOutlinedIcon from "@mui/icons-material/EditCalendarOutlined";
-import LatestJobsCard from "@/libs/components/homepage/LatestJobsCard";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation, useQuery, useReactiveVar } from "@apollo/client";
@@ -50,6 +48,8 @@ import Review from "@/libs/components/service/Review";
 import { REACT_APP_API_URL } from "@/libs/config";
 import { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import withLayoutNew from "@/libs/components/layout/LayoutNew";
+import UserCard from "@/libs/components/homepage/LatestCards";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -78,7 +78,6 @@ const ServiceDetailPage: NextPage = ({
     []
   );
   const [commentTotal, setCommentTotal] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [latestPage, setLatestPage] = useState<number>(1);
   const [commentPage, setCommentPage] = useState<number>(1);
 
@@ -193,7 +192,7 @@ const ServiceDetailPage: NextPage = ({
     setSlideImage(image);
   };
 
-  const likePropertyHandler = async (user: T, id: string) => {
+  const likeProviderHandler = async (user: T, id: string) => {
     try {
       if (!id) return;
       if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
@@ -215,7 +214,7 @@ const ServiceDetailPage: NextPage = ({
       });
       await sweetTopSmallSuccessAlert("success", 800);
     } catch (err: any) {
-      console.log("ERROR, likePropertyHandler:", err.message);
+      console.log("ERROR, likeProviderHandler:", err.message);
       sweetMixinErrorAlert(err.message).then();
     }
   };
@@ -284,9 +283,8 @@ const ServiceDetailPage: NextPage = ({
     }
   };
 
-  /** LATEST CARD  **/
   /** APOLLO REQUEST **/
-  const [likeTargetProperty] = useMutation(LIKE_TARGET_PROVIDER_POST);
+  const [likeTargetProvider] = useMutation(LIKE_TARGET_PROVIDER_POST);
 
   const {
     loading: getLatestLoading,
@@ -312,14 +310,14 @@ const ServiceDetailPage: NextPage = ({
       if (!id) return;
       if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
 
-      await likeTargetProperty({
+      await likeTargetProvider({
         variables: { input: id },
       });
       await getLatestRefetch({ input: searchFilter });
 
       await sweetTopSmallSuccessAlert("success", 800);
     } catch (err: any) {
-      console.log("ERROR, likeFeaturedHandler:", err.message);
+      console.log("ERROR, likeLatestHandler:", err.message);
       sweetMixinErrorAlert(err.message).then();
     }
   };
@@ -344,10 +342,10 @@ const ServiceDetailPage: NextPage = ({
     return <div>SERVICE DETAIL PAGE</div>;
   } else {
     return (
-      <div id={"property-detail-page"}>
+      <div id={"provider-detail-page"}>
         <div className={"container"}>
-          <Stack className={"property-detail-config"}>
-            <Stack className={"property-info-config"}>
+          <Stack className={"provider-detail-config"}>
+            <Stack className={"v-info-config"}>
               <Stack className={"info"}>
                 <Stack className={"left-box"}>
                   <Typography className={"title-main"}>
@@ -429,7 +427,7 @@ const ServiceDetailPage: NextPage = ({
                       <Box
                         className="statItem"
                         onClick={() =>
-                          likePropertyHandler(user, providerPost!._id)
+                          likeProviderHandler(user, providerPost!._id)
                         }
                       >
                         {providerPost?.meLiked &&
@@ -502,7 +500,7 @@ const ServiceDetailPage: NextPage = ({
                 </Stack>
               </Stack>
             </Stack>
-            <Stack className={"property-desc-config"}>
+            <Stack className={"provider-desc-config"}>
               <Stack className={"left-config"}>
                 <Stack className={"options-config"}>
                   <Stack className={"option"}>
@@ -570,7 +568,7 @@ const ServiceDetailPage: NextPage = ({
                       <EngineeringOutlinedIcon />
                     </Stack>
                     <Stack className={"option-includes"}>
-                      <Typography className={"title"}>Property Type</Typography>
+                      <Typography className={"title"}>Provider Type</Typography>
                       <Typography className={"option-data"}>
                         {providerPost?.providerType}
                       </Typography>
@@ -899,7 +897,7 @@ const ServiceDetailPage: NextPage = ({
           </Stack>
         </div>
         {destinationProviderPost.length !== 0 && (
-          <Stack className="latest">
+          <Stack className="latest1">
             <Stack className="container">
               <Box className="latest-title">
                 <span>
@@ -915,7 +913,7 @@ const ServiceDetailPage: NextPage = ({
               <Box className="latest-card">
                 <Box className="latest-frame">
                   {destinationProviderPost.map((latest, index) => (
-                    <LatestJobsCard
+                    <UserCard
                       key={index}
                       latest={latest}
                       likeLatestHandler={likeLatestHandler}
@@ -973,4 +971,4 @@ ServiceDetailPage.defaultProps = {
   },
 };
 
-export default withLayoutOther(ServiceDetailPage);
+export default withLayoutNew(ServiceDetailPage);

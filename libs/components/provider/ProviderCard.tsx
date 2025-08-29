@@ -23,6 +23,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useReactiveVar } from "@apollo/client";
 import { userVar } from "@/apollo/store";
 import { useRouter } from "next/router";
+import { REACT_APP_API_URL } from "@/libs/config";
 
 interface ProviderCardProps {
   provider: any;
@@ -45,14 +46,18 @@ const ProviderCard = (props: ProviderCardProps) => {
     });
   };
 
+  const imagePath: string = provider?.memberImage
+    ? `${REACT_APP_API_URL}/${provider?.memberImage}`
+    : "/img/profile/defaultUser.svg";
+
   if (device === "mobile") {
-    return <div>PROVIDER C ARD</div>;
+    return <div>PROVIDER CARD</div>;
   } else {
     return (
       <Card className="provider-card">
         <Box className="image-wrapper">
           <Avatar
-            src="/img/banner/d.avif"
+            src={imagePath}
             alt=""
             className="avatar"
             onClick={() => pushDetailHandler(provider._id)}
@@ -78,10 +83,14 @@ const ProviderCard = (props: ProviderCardProps) => {
           <Typography variant="h6" className="name">
             {provider.memberNick}
           </Typography>
-          <Typography variant="body2" className="title">
+          <Typography
+            variant="body1"
+            className="title"
+            sx={{ fontFamily: "Space Grotesk" }}
+          >
             {provider.memberJobs} jobs created
           </Typography>
-          <Chip label="AGENT" size="small" className="type-chip" />
+          <Chip label="PROVIDER" size="small" className="type-chip" />
 
           <Stack direction="row" spacing={2} className="stats" mt={4}>
             <Stack className="statsWrapper">

@@ -10,6 +10,8 @@ import { NextPage } from "next";
 import CommunityBoard from "@/libs/components/homepage/Community";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import ReviewPost from "@/libs/components/homepage/Review";
+import Advertisement from "@/libs/components/homepage/Advertisement";
+import Events from "@/libs/components/homepage/Events";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -29,9 +31,11 @@ const Home: NextPage = () => {
         <Category />
         <Afisha />
         <Featured />
+        <Advertisement />
         <LatestJobs />
         <CommunityBoard />
         <ReviewPost />
+        <Events />
       </Stack>
     );
   }

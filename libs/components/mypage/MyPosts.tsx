@@ -28,7 +28,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
   const router = useRouter();
 
   /** APOLLO REQUESTS **/
-  const [updateProperty] = useMutation(UPDATE_PROVIDER_POST);
+  const [updateProviderPost] = useMutation(UPDATE_PROVIDER_POST);
 
   const {
     loading: getProviderMemberPostsLoading,
@@ -57,7 +57,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
   const deleteProviderPostHandler = async (id: string) => {
     try {
       if (await sweetConfirmAlert("are you sure to delete this post")) {
-        await updateProperty({
+        await updateProviderPost({
           variables: {
             input: {
               _id: id,
@@ -76,7 +76,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
   const updateProviderPostHandler = async (status: string, id: string) => {
     try {
       if (await sweetConfirmAlert(`are you sure change to ${status} status`)) {
-        await updateProperty({
+        await updateProviderPost({
           variables: {
             input: {
               _id: id,
@@ -99,7 +99,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
     return <div>SKIL NEST PROVIDER POST MOBILE</div>;
   } else {
     return (
-      <div id="my-property-page">
+      <div id="my-providerpost-page">
         <Stack className="main-title-box">
           <Stack className="right-box">
             <Typography className="main-title">My Provider Post</Typography>
@@ -108,7 +108,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
             </Typography>
           </Stack>
         </Stack>
-        <Stack className="property-list-box">
+        <Stack className="providerpost-list-box">
           <Stack className="tab-name-box">
             <Typography
               onClick={() => changeStatusHandler(ProviderStatus.ACTIVE)}
@@ -145,7 +145,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
             {providerPost?.length === 0 ? (
               <div className={"no-data"}>
                 <img src="/img/icons/icoAlert.svg" alt="" />
-                <p>No Property found!</p>
+                <p>No Post found!</p>
               </div>
             ) : (
               providerPost.map((providerPost: ProviderPost) => {
@@ -171,7 +171,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
                   />
                 </Stack>
                 <Stack className="total-result">
-                  <Typography>{total} property available</Typography>
+                  <Typography>{total} post available</Typography>
                 </Stack>
               </Stack>
             )}

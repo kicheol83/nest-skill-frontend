@@ -116,7 +116,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-interface PropertyPanelListType {
+interface ProviderPanelListType {
   providerJobs: ProviderPost[];
   anchorEl: any;
   menuIconClickHandler: any;
@@ -125,7 +125,7 @@ interface PropertyPanelListType {
   removeProviderJobsHandler: any;
 }
 
-export const ProviderPostPanelList = (props: PropertyPanelListType) => {
+export const ProviderPostPanelList = (props: ProviderPanelListType) => {
   const {
     providerJobs,
     anchorEl,

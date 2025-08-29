@@ -30,35 +30,41 @@ const withLayoutNew = (Component: any) => {
         case "/service":
           title = "Service Page";
           desc = "Home / Service";
-          bgImage = "/img/banner/banner-s.jpg";
+          bgImage = "/img/banner/gardening.jpg";
+
+          break;
+        case "/service/detail":
+          title = "Service Page";
+          desc = "Home / Service";
+          bgImage = "/img/banner/home-banner.png";
 
           break;
         case "/provider":
           title = "Provider Page";
           desc = "Home / Provider / Detail";
-          bgImage = "/img/banner/banner-new.avif";
+          bgImage = "/img/banner/provider.jpg";
 
           break;
         case "/provider/detail":
           title = "Provider Detail Page";
           desc = "Home / Provider / Detail";
-          bgImage = "/img/banner/banner1.png";
+          bgImage = "/img/banner/provider.jpg";
 
           break;
         case "/mypage":
           title = "My Page";
           desc = "Home / My Page";
-          bgImage = "/img/banner/dash.avif";
+          bgImage = "/img/banner/deleveriy.jpg";
           break;
         case "/community":
           title = "Community Page";
           desc = "Home / Community";
-          bgImage = "/img/banner/banner1.png";
+          bgImage = "/img/banner/community.jpg";
           break;
         case "/community/detail":
           title = "Community Detail";
           desc = "Home / Community / Detail";
-          bgImage = "/img/banner/banner1.png";
+          bgImage = "/img/banner/community.jpg";
           break;
         case "/cs":
           title = "CS Page";
@@ -68,19 +74,18 @@ const withLayoutNew = (Component: any) => {
         case "/account/join":
           title = "Login / Signup";
           desc = "Authentication Process";
-          bgImage = "/img/banner/banner-login.avif";
+          bgImage = "/img/banner/provider.jpg";
           setAuthHeader(true);
           break;
         case "/member":
           title = "Member Page";
           desc = "Home / Member";
-          bgImage = "/img/banner/header1.svg";
-          break;
+          bgImage = "/img/banner/provider.jpg";
           break;
         case "/order":
           title = "Order Page";
           desc = "Home / Order";
-          bgImage = "/img/banner/banner-login.avif";
+          bgImage = "/img/banner/order.jpg";
           break;
         default:
           break;

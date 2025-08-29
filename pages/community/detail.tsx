@@ -24,9 +24,6 @@ import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineR
 
 import EditIcon from "@mui/icons-material/Edit";
 import withLayoutNew from "@/libs/components/layout/LayoutNew";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import { useMutation, useQuery, useReactiveVar } from "@apollo/client";
 import { userVar } from "@/apollo/store";
 import {
@@ -512,7 +509,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
                     <Typography className="comments-title">Comments</Typography>
                   </Stack>
                 )}
-                {comments?.map((commentData: Comment, index) => {
+                {comments?.map((commentData: Comment) => {
                   return (
                     <Stack className="comments-box" key={commentData?._id}>
                       <Stack className="main-comment">

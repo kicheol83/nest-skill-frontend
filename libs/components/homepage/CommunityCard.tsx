@@ -21,13 +21,13 @@ export default function FlippingCards(props: BoardArticleCardProps) {
           }}
         >
           <div className="inner">
-            <p>{article.articleTitle}</p>
+            <p>{article.articleCategory}</p>
             <span>{article?.memberData?.memberNick}</span>
           </div>
         </div>
         <div className="back">
           <div className="inner">
-            <p>{article.articleContent}</p>
+            <p>{article.articleTitle}</p>
           </div>
         </div>
       </div>

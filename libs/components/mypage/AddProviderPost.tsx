@@ -1,6 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { Button, FormControl, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import axios from "axios";
 import { Checkbox, FormControlLabel } from "@mui/material";
@@ -202,7 +210,7 @@ const AddProviderPost = ({ initialValues, ...props }: any) => {
       });
 
       await sweetMixinSuccessAlert(
-        "This property has been created successfuly"
+        "This provider post has been created successfuly"
       );
       await router.push({
         pathname: "/mypage",
@@ -226,7 +234,7 @@ const AddProviderPost = ({ initialValues, ...props }: any) => {
       });
 
       await sweetMixinSuccessAlert(
-        "This property has been updated successfully"
+        "This provider post has been updated successfully"
       );
       await router.push({
         pathname: "/mypage",
@@ -244,10 +252,10 @@ const AddProviderPost = ({ initialValues, ...props }: any) => {
   }
 
   if (device === "mobile") {
-    return <div>ADD NEW PROPERTY MOBILE PAGE</div>;
+    return <div>ADD NEW PROVIDE POST MOBILE PAGE</div>;
   } else {
     return (
-      <div id="add-property-page">
+      <div id="add-provider-page">
         <Stack className="main-title-box">
           <Typography className="main-title">Add New Provider Post</Typography>
           <Typography className="sub-title">
@@ -722,16 +730,32 @@ const AddProviderPost = ({ initialValues, ...props }: any) => {
                 className="next-button"
                 disabled={doDisabledCheck()}
                 onClick={updateProviderHandler}
+                sx={{
+                  width: "60px",
+                  background: "#007aff",
+                  marginTop: "20px",
+                  borderRadius: "10px",
+                }}
               >
-                <Typography className="next-button-text">Save</Typography>
+                <Typography className="next-button-text" sx={{ color: "#fff" }}>
+                  Save
+                </Typography>
               </Button>
             ) : (
               <Button
                 className="next-button"
                 disabled={doDisabledCheck()}
                 onClick={insertProviderHandler}
+                sx={{
+                  width: "60px",
+                  background: "gray",
+                  marginTop: "20px",
+                  borderRadius: "10px",
+                }}
               >
-                <Typography className="next-button-text">Save</Typography>
+                <Typography className="next-button-text" sx={{ color: "#fff" }}>
+                  Save
+                </Typography>
               </Button>
             )}
           </Stack>

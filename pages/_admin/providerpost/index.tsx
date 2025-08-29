@@ -36,8 +36,7 @@ const AdminMemberPost: NextPage = ({ initialInquiry, ...props }: any) => {
   const [searchType, setSearchType] = useState("ALL");
 
   /** APOLLO REQUESTS **/
-  const [updatePropertyByAdmin] = useMutation(UPDATE_PROVIDER_POSTS_BY_ADMIN);
-  const [removePropertyByAdmin] = useMutation(UPDATE_PROVIDER_POSTS_BY_ADMIN);
+  const [updateProviderByAdmin] = useMutation(UPDATE_PROVIDER_POSTS_BY_ADMIN);
 
   const {
     loading: getAllProviderPostByAdminLoading,
@@ -176,7 +175,7 @@ const AdminMemberPost: NextPage = ({ initialInquiry, ...props }: any) => {
   const updateProviderJobsHandler = async (updateData: ProviderPostUpdate) => {
     try {
       console.log("+updateData: ", updateData);
-      await updatePropertyByAdmin({
+      await updateProviderByAdmin({
         variables: {
           input: updateData,
         },

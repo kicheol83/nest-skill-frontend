@@ -1,6 +1,6 @@
 #pc-wrap {
   #my-page {
-    #add-property-page {
+    #add-provider-page {
       width: 100%;
       height: auto;
       display: flex;
@@ -109,7 +109,7 @@
 
           .buttons-row {
             margin-top: 40px;
-            width: 100%;
+            width: 20%;
             height: auto;
             flex-direction: row;
             justify-content: flex-end;
@@ -719,7 +719,7 @@
             flex-direction: row;
             gap: 16px;
             align-items: center;
-            .property-checkbox {
+            .provider-checkbox {
               width: 18px;
               height: 19px;
               border-radius: 12px;

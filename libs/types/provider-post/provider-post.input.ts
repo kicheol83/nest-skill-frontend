@@ -61,6 +61,7 @@ export interface ProviderJobsInquiry {
 
 interface APISearch {
   providerStatus?: ProviderStatus;
+  memberId?: string;
 }
 
 export interface ProviderMemberInquiry {

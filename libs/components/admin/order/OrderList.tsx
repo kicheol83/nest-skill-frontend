@@ -118,7 +118,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-interface PropertyPanelListType {
+interface ProviderPanelListType {
   orders: Order[];
   anchorEl: any;
   menuIconClickHandler: any;
@@ -127,7 +127,7 @@ interface PropertyPanelListType {
   removeOrdersHandler: any;
 }
 
-export const OrderPanelList = (props: PropertyPanelListType) => {
+export const OrderPanelList = (props: ProviderPanelListType) => {
   const {
     orders,
     anchorEl,

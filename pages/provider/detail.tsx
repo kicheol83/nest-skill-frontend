@@ -211,13 +211,13 @@ const AgentDetail: NextPage = ({
 
       await sweetTopSmallSuccessAlert("success", 800);
     } catch (err: any) {
-      console.log("ERROR, likePropertyHandler:", err.message);
+      console.log("ERROR, likeProviderPostHandler:", err.message);
       sweetMixinErrorAlert(err.message).then();
     }
   };
 
   if (device === "mobile") {
-    return <div>AGENT DETAIL PAGE MOBILE</div>;
+    return <div>PROVIDER DETAIL PAGE MOBILE</div>;
   } else {
     return (
       <Stack className={"provider-detail-page"}>

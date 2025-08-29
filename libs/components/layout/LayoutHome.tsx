@@ -24,10 +24,9 @@ const withLayoutMain = (Component: any) => {
           </Stack>
 
           <Stack className="header-main">
-            <div className="rectangle"></div>
             <Stack className="container">
               <Box className="header-title">
-                <div className="big-text">
+                <div className="big-text" >
                   Discover <br />
                   more than <div className="blue-text">5000+ Jobs</div>
                 </div>
@@ -42,11 +41,7 @@ const withLayoutMain = (Component: any) => {
                 </span>
               </Box>
               <Box className="banner">
-                <img src="/img/banner/banner-people.png" alt="" />
-                <img className="rec1" src="/rectangle/rec1.svg" alt="" />
-                <img className="rec2" src="/rectangle/rec2.svg" alt="" />
-                <img className="rec3" src="/rectangle/rec3.svg" alt="" />
-                <img className="rec4" src="/rectangle/rec4.svg" alt="" />
+                <img src="/img/service-img/plumbing.png" alt="" />
               </Box>
               <HeaderFilter />
             </Stack>

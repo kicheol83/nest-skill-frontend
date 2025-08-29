@@ -159,7 +159,7 @@ const Provider: NextPage = ({ initialInput, ...props }: any) => {
       await getProvidersRefetch({ input: searchFilter });
       await sweetTopSmallSuccessAlert("success", 800);
     } catch (err: any) {
-      console.log("ERROR, likePropertyHandler:", err.messsage);
+      console.log("ERROR, likeProviderHandler:", err.messsage);
       sweetMixinErrorAlert(err.messsage).then();
     }
   };

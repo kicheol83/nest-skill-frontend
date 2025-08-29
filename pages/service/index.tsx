@@ -26,6 +26,7 @@ import {
   sweetTopSmallSuccessAlert,
 } from "@/libs/sweetAlert";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import ServiceCards from "@/libs/components/service/ServiceCard";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -33,7 +34,7 @@ export const getStaticProps = async ({ locale }: any) => ({
   },
 });
 
-const ServicePage: NextPage = ({ initialInput, ...props }) => {
+const ServicePage: NextPage = ({ initialInput, ...props }: any) => {
   const router = useRouter();
   const [searchFilter, setSearchFilter] = useState<ProviderJobsInquiry>(
     router?.query?.input
@@ -240,7 +241,7 @@ const ServicePage: NextPage = ({ initialInput, ...props }) => {
               </div>
             ) : (
               serviceJobs.map((providerPost: ProviderPost) => (
-                <ServiceJobsCard
+                <ServiceCards
                   key={providerPost._id}
                   providerPost={providerPost}
                   likeProviderPostHandler={likeProviderPostHandler}

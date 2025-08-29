@@ -13,6 +13,7 @@ import { ProviderJobsInquiry } from "@/libs/types/provider-post/provider-post.in
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { ProviderLocation } from "@/libs/enums/provider.enum";
+import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined";
 
 interface HeaderFilterProps {
   initialInput: ProviderJobsInquiry;
@@ -101,10 +102,10 @@ const HeaderFilter = (props: HeaderFilterProps) => {
             value={searchFilter?.search?.text ?? ""}
             sx={{
               height: "56px",
-
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
                   borderColor: "black",
+                  top: -5,
                 },
                 "&.Mui-focused fieldset": {
                   borderColor: "#007aff",
@@ -132,9 +133,10 @@ const HeaderFilter = (props: HeaderFilterProps) => {
           <Select
             sx={{
               height: "56px",
-              "&.MuiOutlinedInput-root": {
+              "&.MuiOutlinedInput-root, & .MuiOutlinedInput-root": {
                 "& fieldset": {
                   borderColor: "black",
+                  top: -5,
                 },
                 "&.Mui-focused fieldset": {
                   borderColor: "#007aff",
@@ -152,25 +154,23 @@ const HeaderFilter = (props: HeaderFilterProps) => {
               return selected;
             }}
           >
-            {providerLocation.map((location: string) => {
-              return (
-                <MenuItem
-                  onClick={() => providerLocationSelectHandler(location)}
-                  key={location}
-                  sx={{
-                    "&.Mui-selected": {
-                      backgroundColor: "#67a0f5a9",
-                    },
-                    "&.Mui-selected:hover": {
-                      backgroundColor: "#d0e7ff",
-                    },
-                  }}
-                  value={location}
-                >
-                  {location}
-                </MenuItem>
-              );
-            })}
+            {providerLocation.map((location: string) => (
+              <MenuItem
+                onClick={() => providerLocationSelectHandler(location)}
+                key={location}
+                sx={{
+                  "&.Mui-selected": {
+                    backgroundColor: "#67a0f5a9",
+                  },
+                  "&.Mui-selected:hover": {
+                    backgroundColor: "#d0e7ff",
+                  },
+                }}
+                value={location}
+              >
+                {location}
+              </MenuItem>
+            ))}
           </Select>
 
           <Button
@@ -187,7 +187,10 @@ const HeaderFilter = (props: HeaderFilterProps) => {
             }}
             onClick={pushSearchHandler}
           >
-            Search my job
+            Searching
+            <ManageSearchOutlinedIcon
+              sx={{ marginLeft: "5px", marginBottom: "3px" }}
+            />
           </Button>
         </Box>
 

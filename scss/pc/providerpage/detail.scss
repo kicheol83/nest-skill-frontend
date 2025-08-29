@@ -198,9 +198,9 @@
                 object-fit: cover;
               }
               .price-chip {
-                position: absolute;
-                bottom: 12px;
-                left: 12px;
+                position: relative;
+                bottom: 35px;
+                margin-left: 12px;
                 background-color: #ffffff;
                 color: #000;
                 font-weight: 600;

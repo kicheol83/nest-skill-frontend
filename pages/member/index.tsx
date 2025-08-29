@@ -23,6 +23,7 @@ import {
 } from "../../apollo/user/mutation";
 import { Messages } from "../../libs/config";
 import MemberPosts from "@/libs/components/member/MemberPost";
+import withLayoutNew from "@/libs/components/layout/LayoutNew";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -162,4 +163,4 @@ const MemberPage: NextPage = () => {
   }
 };
 
-export default withLayoutBasic(MemberPage);
+export default withLayoutNew(MemberPage);

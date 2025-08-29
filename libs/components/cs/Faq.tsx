@@ -43,7 +43,6 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 const Faq = () => {
   const device = useDeviceDetect();
   const router = useRouter();
-  const [category, setCategory] = useState<string>("property");
   const [expanded, setExpanded] = useState<string | false>("panel1");
   const [notices, setNotices] = useState<Notice[]>([]);
   const [searchNotice, setSearchNotice] = useState<T>({
@@ -66,13 +65,6 @@ const Faq = () => {
       setNotices(data.getNoticesForAdmin?.list);
     },
   });
-
-  /** LIFECYCLES **/
-
-  /** HANDLERS **/
-  const changeCategoryHandler = (category: string) => {
-    setCategory(category);
-  };
 
   const handleChange =
     (panel: string) => (event: SyntheticEvent, newExpanded: boolean) => {

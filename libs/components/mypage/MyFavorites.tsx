@@ -7,7 +7,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_FAVORITES } from "../../../apollo/user/query";
 import {
   sweetMixinErrorAlert,
-  sweetTopSmallSuccessAlert,
 } from "../../sweetAlert";
 import { Message } from "../../enums/common.enum";
 import FeaturedCard from "../homepage/FeaturedCard";
@@ -16,7 +15,7 @@ import { ProviderPost } from "@/libs/types/provider-post/provider-post";
 
 const MyFavorites: NextPage = () => {
   const device = useDeviceDetect();
-  const [myFavorites, setMyFavorites] = useState<Property[]>([]);
+  const [myFavorites, setMyFavorites] = useState<ProviderPost[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [searchFavorites, setSearchFavorites] = useState<T>({
     page: 1,
@@ -24,7 +23,7 @@ const MyFavorites: NextPage = () => {
   });
 
   /** APOLLO REQUESTS **/
-  const [likeTargetProperty] = useMutation(LIKE_TARGET_PROVIDER_POST);
+  const [likeTargetProviderPost] = useMutation(LIKE_TARGET_PROVIDER_POST);
 
   const {
     loading: getFavoritesLoading,
@@ -51,7 +50,7 @@ const MyFavorites: NextPage = () => {
       if (!id) return;
       if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
 
-      await likeTargetProperty({
+      await likeTargetProviderPost({
         variables: { input: id },
       });
       await getFavoritesRefetch({ input: searchFavorites });
@@ -105,7 +104,7 @@ const MyFavorites: NextPage = () => {
             </Stack>
             <Stack className="total-result">
               <Typography>
-                Total {total} favorite propert{total > 1 ? "ies" : "y"}
+                Total {total} favorite post{total > 1 ? "ies" : "y"}
               </Typography>
             </Stack>
           </Stack>

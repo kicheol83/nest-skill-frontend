@@ -4,4 +4,7 @@ export enum NotificationType {
   ORDER = "ORDER",
   PAYMENT = "PAYMENT",
   REVIEW = "REVIEW",
+  COMMENT = "COMMENT",
+  FOLLOW = "FOLLOW",
+  UN_FOLLOW = "UN_FOLLOW",
 }

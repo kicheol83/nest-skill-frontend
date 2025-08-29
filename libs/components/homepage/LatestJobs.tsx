@@ -15,6 +15,7 @@ import {
   sweetMixinErrorAlert,
   sweetTopSmallSuccessAlert,
 } from "@/libs/sweetAlert";
+import UserCard from "./LatestCards";
 
 interface LatestProps {
   initialInput: ProviderJobsInquiry;
@@ -34,7 +35,7 @@ const LatestJobs = (props: LatestProps) => {
   );
 
   /** APOLLO REQUEST **/
-  const [likeTargetProperty] = useMutation(LIKE_TARGET_PROVIDER_POST);
+  const [likeTargetProviderPost] = useMutation(LIKE_TARGET_PROVIDER_POST);
 
   const {
     loading: getLatestLoading,
@@ -60,7 +61,7 @@ const LatestJobs = (props: LatestProps) => {
       if (!id) return;
       if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
 
-      await likeTargetProperty({
+      await likeTargetProviderPost({
         variables: { input: id },
       });
       await getLatestRefetch({ input: searchFilter });
@@ -126,7 +127,7 @@ const LatestJobs = (props: LatestProps) => {
           <Box className="latest-card">
             <Box className="latest-frame">
               {latestJobs.map((latest: ProviderPost) => (
-                <LatestJobsCard
+                <UserCard
                   key={latest._id}
                   latest={latest}
                   likeLatestHandler={likeLatestHandler}

@@ -43,7 +43,7 @@ const MemberFollowers = (props: MemberFollowsProps) => {
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			setMemberFollowers(data?.getMemberFollowers?.list);
-			setTotal(data?.getAgentProperties?.metaCounter[0]?.total);
+			setTotal(data?.getMemberFollowers?.metaCounter[0]?.total);
 		},
 	});
 
@@ -169,7 +169,7 @@ const MemberFollowers = (props: MemberFollowsProps) => {
 								count={Math.ceil(total / followInquiry.limit)}
 								onChange={paginationHandler}
 								shape="circular"
-								color="primary"
+								color="secondary"
 							/>
 						</Stack>
 						<Stack className="total-result">

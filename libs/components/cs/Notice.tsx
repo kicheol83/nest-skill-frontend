@@ -12,8 +12,6 @@ import TurnedInIcon from "@mui/icons-material/TurnedIn";
 const NoticeList = () => {
   const device = useDeviceDetect();
   const router = useRouter();
-  const [category, setCategory] = useState<string>("property");
-  const [expanded, setExpanded] = useState<string | false>("panel1");
   const [notices, setNotices] = useState<Notice[]>([]);
   const [searchNotice, setSearchNotice] = useState<T>({
     page: 1,
@@ -35,32 +33,6 @@ const NoticeList = () => {
       setNotices(data.getNoticesForAdmin?.list);
     },
   });
-
-  /** LIFECYCLES **/
-
-  /** HANDLERS **/
-  const changeCategoryHandler = (category: string) => {
-    setCategory(category);
-  };
-
-  const handleChange =
-    (panel: string) => (event: SyntheticEvent, newExpanded: boolean) => {
-      setExpanded(newExpanded ? panel : false);
-    };
-
-  const data = [
-    {
-      no: 1,
-      event: true,
-      title: "Register to use and get discounts",
-      date: "01.03.2024",
-    },
-    {
-      no: 2,
-      title: "It's absolutely free to upload and trade properties",
-      date: "31.03.2024",
-    },
-  ];
 
   if (device === "mobile") {
     return <div>NOTICE MOBILE</div>;

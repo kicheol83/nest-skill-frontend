@@ -1,19 +1,19 @@
 #pc-wrap {
   #main {
     background: rgb(248, 248, 253);
-    #property-detail-page {
+    #provider-detail-page {
       display: flex;
       flex-direction: column;
       position: relative;
       padding-top: 87px;
       z-index: 1;
 
-      .property-detail-config {
+      .provider-detail-config {
         width: 100%;
         height: auto;
         padding-top: 56px;
         gap: 30px;
-        .property-info-config {
+        .provider-info-config {
           width: 100%;
           height: auto;
           gap: 30px;
@@ -235,7 +235,7 @@
             }
           }
         }
-        .property-desc-config {
+        .provider-desc-config {
           width: 100%;
           height: auto;
           flex-direction: row;
@@ -802,7 +802,7 @@
         }
       }
     }
-    .latest {
+    .latest1 {
       margin-top: 125px;
       position: relative;
       width: auto;
