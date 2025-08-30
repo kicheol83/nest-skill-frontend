@@ -7,7 +7,6 @@ import PortraitIcon from "@mui/icons-material/Portrait";
 import IconButton from "@mui/material/IconButton";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCheckoutOutlined";
-import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import { useReactiveVar } from "@apollo/client";
 import { userVar } from "@/apollo/store";
@@ -15,6 +14,8 @@ import { REACT_APP_API_URL } from "@/libs/config";
 import { sweetConfirmAlert } from "@/libs/sweetAlert";
 import { logOut } from "@/libs/auth";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 const MyMenu = () => {
   const device = useDeviceDetect();
@@ -73,7 +74,7 @@ const MyMenu = () => {
           <Stack
             className={"section"}
             style={{
-              height: user.memberType === "PROVIDER" ? "auto" : "153px",
+              height: user.memberType === "PROVIDER" ? "100px" : "153px",
             }}
           >
             <Typography className="title" variant={"h5"}>
@@ -156,6 +157,50 @@ const MyMenu = () => {
                         <IconButton aria-label="delete" sx={{ ml: "36px" }}>
                           <PortraitIcon
                             style={{ color: "red", marginLeft: "3px" }}
+                          />
+                        </IconButton>
+                      </div>
+                    </Link>
+                  </ListItem>
+
+                  <ListItem className={pathname === "memberOrder" ? "focus" : ""}>
+                    <Link
+                      href={{
+                        pathname: "/mypage",
+                        query: { category: "memberOrder" },
+                      }}
+                      scroll={false}
+                    >
+                      <div className={"flex-box"}>
+                        {category === "memberOrder" ? (
+                          <ShoppingCartCheckoutOutlinedIcon
+                            sx={{
+                              width: "16px",
+                              height: "16px",
+                              color: "#fff",
+                              marginLeft: "11px",
+                            }}
+                          />
+                        ) : (
+                          <ShoppingCartCheckoutOutlinedIcon
+                            sx={{
+                              width: "16px",
+                              height: "16px",
+                              color: "black",
+                              marginLeft: "11px",
+                            }}
+                          />
+                        )}
+                        <Typography
+                          className={"sub-title"}
+                          variant={"subtitle1"}
+                          component={"p"}
+                        >
+                          Member Order
+                        </Typography>
+                        <IconButton aria-label="delete" sx={{ ml: "36px" }}>
+                          <InventoryOutlinedIcon
+                            style={{ color: "red", marginLeft: "-35px" }}
                           />
                         </IconButton>
                       </div>
@@ -248,7 +293,7 @@ const MyMenu = () => {
                 >
                   <div className={"flex-box"}>
                     {category === "myOrder" ? (
-                      <ShoppingCartCheckoutOutlinedIcon
+                      <ShoppingCartOutlinedIcon
                         sx={{
                           width: "16px",
                           height: "16px",
@@ -257,7 +302,7 @@ const MyMenu = () => {
                         }}
                       />
                     ) : (
-                      <ShoppingCartCheckoutOutlinedIcon
+                      <ShoppingCartOutlinedIcon
                         sx={{
                           width: "16px",
                           height: "16px",

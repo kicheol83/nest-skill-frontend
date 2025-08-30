@@ -1,5 +1,6 @@
 import { OrderStatus } from "../../enums/order.enum";
 import { Member, TotalCounter } from "../member/member";
+import { ProviderPost } from "../provider-post/provider-post";
 
 export interface Address {
   fullName: string;
@@ -30,6 +31,8 @@ export interface Order {
   memberData?: Member;
   address?: Address;
   orderItems?: OrderItem[];
+  orderData?: Order[];
+  providerData?: ProviderPost[];
 }
 
 export interface Orders {

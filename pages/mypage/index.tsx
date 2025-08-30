@@ -31,6 +31,7 @@ import {
 } from "@/libs/sweetAlert";
 import NotificationPanel from "@/libs/components/mypage/Notifiaction";
 import AddProviderPost from "@/libs/components/mypage/AddProviderPost";
+import MemberOrder from "@/libs/components/mypage/MemberOrder";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -157,6 +158,7 @@ const MyPage: NextPage = () => {
                     />
                   )}
                   {category === "reviews" && <ReviewDashboard />}
+                  {category === "memberOrder" && <MemberOrder />}
                   {category === "myOrder" && <MyOrder />}
                   {category === "notification" && <NotificationPanel />}
                 </Stack>

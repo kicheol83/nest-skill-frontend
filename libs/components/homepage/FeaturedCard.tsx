@@ -67,7 +67,7 @@ const FeaturedCard = (props: FeaturedCardProps) => {
                   variant="h5"
                   fontWeight={500}
                 >
-                  {featured.providerRateType}
+                  {featured.providerStartTime}: {featured.providerEndTime}
                 </Typography>
               </Box>
               <Divider orientation="vertical" flexItem />
