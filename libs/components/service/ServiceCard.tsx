@@ -79,11 +79,10 @@ export default function ServiceCards(props: ServiceJobsCardProps) {
           alt={providerPost.providerTitle}
         />
 
-        {/* Content */}
         <CardContent
           sx={{
             flex: "1 1 auto",
-            "&:last-child": { paddingBottom: "14px" }, // siz aytgandek padding
+            "&:last-child": { paddingBottom: "14px" },
           }}
         >
           <Typography
@@ -111,7 +110,6 @@ export default function ServiceCards(props: ServiceJobsCardProps) {
             {providerPost?.providerDesc}
           </Typography>
 
-          {/* Info Box (Sheet o‘rniga Paper ishlatyapmiz) */}
           <Paper
             variant="outlined"
             sx={{
@@ -208,7 +206,7 @@ export default function ServiceCards(props: ServiceJobsCardProps) {
                 },
               }}
             >
-              Order
+              Order - {providerPost?.providerWorkPrice}$
             </Button>
 
             <Box

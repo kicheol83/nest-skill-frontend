@@ -16,7 +16,7 @@ export default function FlippingCards(props: BoardArticleCardProps) {
             backgroundImage: `url(${
               article?.articleImage
                 ? `${REACT_APP_API_URL}/${article.articleImage}`
-                : "/img/board-article.webp"
+                : "/img/article-img.avif"
             })`,
           }}
         >

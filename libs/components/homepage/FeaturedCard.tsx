@@ -70,7 +70,7 @@ const FeaturedCard = (props: FeaturedCardProps) => {
                   {featured.providerStartTime}: {featured.providerEndTime}
                 </Typography>
               </Box>
-              <Divider orientation="vertical" flexItem />
+              <Divider orientation="vertical" flexItem sx={{ mx: "20px" }} />
               <Box
                 display="flex"
                 alignItems="center"

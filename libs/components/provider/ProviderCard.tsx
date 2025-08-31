@@ -37,7 +37,7 @@ const ProviderCard = (props: ProviderCardProps) => {
   const user = useReactiveVar(userVar);
   const [showMessageInput, setShowMessageInput] = useState(false);
   const [messageText, setMessageText] = useState("");
-  const [isOnline, setIsOnline] = useState(true);
+  const [isOnline, setIsOnline] = useState(false);
 
   const pushDetailHandler = async (providerId: string) => {
     await router.push({

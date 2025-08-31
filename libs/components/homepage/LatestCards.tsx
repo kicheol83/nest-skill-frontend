@@ -39,7 +39,7 @@ export default function UserCard(props: LatestCardProps) {
       sx={{
         display: "flex",
         flexDirection: { xs: "column", sm: "row" },
-        width: "50%",
+        width: "49%",
         borderRadius: 2,
         overflow: "hidden",
         boxShadow: 3,
@@ -48,9 +48,10 @@ export default function UserCard(props: LatestCardProps) {
       <CardMedia
         component="img"
         sx={{
-          width: { xs: "100%", sm: 182 },
-          height: "207px",
+          width: "40%",
+          height: 218, 
           objectFit: "cover",
+          borderRadius: 2,
         }}
         image={
           latest?.providerImages?.[0]

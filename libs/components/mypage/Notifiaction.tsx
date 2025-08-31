@@ -61,7 +61,7 @@ export default function NotificationPanel({ initialInput, ...props }: any) {
   const handleFilter = (type?: string) => {
     const newFilter = {
       ...searchFilter,
-      search: type ? { notificationType: type } : {}, // type berilsa filter bo‘ladi
+      search: type ? { notificationType: type } : {},
       page: 1,
     };
     setSearchFilter(newFilter);
@@ -134,6 +134,39 @@ export default function NotificationPanel({ initialInput, ...props }: any) {
           >
             Review
           </Button>
+          <Button
+            variant={
+              searchFilter.search?.notificationType === "COMMENT"
+                ? "contained"
+                : "outlined"
+            }
+            className="chip"
+            onClick={() => handleFilter("COMMENT")}
+          >
+            Comment
+          </Button>
+          <Button
+            variant={
+              searchFilter.search?.notificationType === "FOLLOW"
+                ? "contained"
+                : "outlined"
+            }
+            className="chip"
+            onClick={() => handleFilter("FOLLOW")}
+          >
+            Follow
+          </Button>
+          <Button
+            variant={
+              searchFilter.search?.notificationType === "UN_FOLLOW"
+                ? "contained"
+                : "outlined"
+            }
+            className="chip"
+            onClick={() => handleFilter("UN_FOLLOW")}
+          >
+            Un Follow
+          </Button>
         </div>
 
         <div className="right">
@@ -169,7 +202,7 @@ export default function NotificationPanel({ initialInput, ...props }: any) {
                   {notif.notificationDesc}
                 </Typography>
                 <Typography variant="caption" className="notif-time">
-                  {moment(notif.createdAt).fromNow()} {/* 1 soat oldin */}
+                  {moment(notif.createdAt).fromNow()}
                 </Typography>
               </CardContent>
               <Box className="notif-actions">

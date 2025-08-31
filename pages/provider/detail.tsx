@@ -339,7 +339,7 @@ const AgentDetail: NextPage = ({
                 "& span": {
                   fontSize: "28px",
                   fontWeight: 700,
-                  color: "#007AFF", // ko'k rang
+                  color: "#007AFF",
                   letterSpacing: "1px",
                 },
                 "& p": {

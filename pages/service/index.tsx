@@ -282,7 +282,7 @@ const ServicePage: NextPage = ({ initialInput, ...props }: any) => {
 ServicePage.defaultProps = {
   initialInput: {
     page: 1,
-    limit: 9,
+    limit: 7,
     directions: "DESC",
     search: {
       workTimeRange: {

@@ -78,7 +78,7 @@ const ServiceDetailPage: NextPage = ({
     []
   );
   const [commentTotal, setCommentTotal] = useState<number>(0);
-  const [latestPage, setLatestPage] = useState<number>(1);
+  const [latestPage, setLatestPage] = useState<number>(0);
   const [commentPage, setCommentPage] = useState<number>(1);
 
   const [insertCommentData, setInsertCommentData] = useState<CommentInput>({
@@ -276,7 +276,6 @@ const ServiceDetailPage: NextPage = ({
       await createComment({ variables: { input: insertCommentData } });
 
       setInsertCommentData({ ...insertCommentData, commentContent: "" });
-      console.log("commentInquiery =>", commentInquiry);
       await getCommentsRefetch({ input: commentInquiry });
     } catch (err: any) {
       await sweetErrorHandling(err);
@@ -342,10 +341,10 @@ const ServiceDetailPage: NextPage = ({
     return <div>SERVICE DETAIL PAGE</div>;
   } else {
     return (
-      <div id={"provider-detail-page"}>
+      <div id={"provider1-detail-page"}>
         <div className={"container"}>
           <Stack className={"provider-detail-config"}>
-            <Stack className={"v-info-config"}>
+            <Stack className={"provider-info-config"}>
               <Stack className={"info"}>
                 <Stack className={"left-box"}>
                   <Typography className={"title-main"}>
@@ -924,25 +923,11 @@ const ServiceDetailPage: NextPage = ({
               <Stack className="pagination" spacing={2}>
                 <Pagination
                   className="pagi-count"
-                  page={latestPage}
+                  page={commentTotal}
                   count={Math.ceil(commentTotal / commentInquiry.limit)}
                   onChange={latestPaginationChangeHandler}
-                  variant="outlined"
                   shape="circular"
-                  sx={{
-                    "& .MuiPaginationItem-root": {
-                      fontSize: "1rem",
-                      width: "38px",
-                      height: "38px",
-                      "& .MuiPaginationItem-root.Mui-selected": {
-                        backgroundColor: "#007aff",
-                        color: "#fff",
-                      },
-                      "& .MuiPaginationItem-root.Mui-selected:hover": {
-                        backgroundColor: "#0063cc",
-                      },
-                    },
-                  }}
+                  color="secondary"
                 />
               </Stack>
             </Stack>
@@ -964,7 +949,7 @@ ServiceDetailPage.defaultProps = {
   },
   initialInput: {
     page: 1,
-    limit: 8,
+    limit: 6,
     sort: "createdAt",
     directions: "DESC",
     search: {},

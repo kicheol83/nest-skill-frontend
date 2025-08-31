@@ -140,15 +140,8 @@ const LatestJobs = (props: LatestProps) => {
               className="pagi-count"
               count={Math.ceil(total / initialInput.limit)}
               onChange={paginationChangeHandler}
-              variant="outlined"
               shape="circular"
-              sx={{
-                "& .MuiPaginationItem-root": {
-                  fontSize: "1rem",
-                  width: "38px",
-                  height: "38px",
-                },
-              }}
+              color="secondary"
             />
           </Stack>
         </Stack>

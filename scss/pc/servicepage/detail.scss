@@ -1,13 +1,12 @@
 #pc-wrap {
   #main {
     background: rgb(248, 248, 253);
-    #provider-detail-page {
+    #provider1-detail-page {
       display: flex;
       flex-direction: column;
       position: relative;
       padding-top: 87px;
       z-index: 1;
-
       .provider-detail-config {
         width: 100%;
         height: auto;
@@ -333,7 +332,7 @@
                   width: 100%;
                   height: auto;
                   flex-direction: row;
-                  gap: 230px;
+                  gap: 127px;
                   .left,
                   .right {
                     .info {
@@ -904,7 +903,7 @@
             flex-direction: row;
             justify-content: center;
             align-items: flex-start;
-            gap: 32px;
+            gap: 17px;
             padding: 0px;
             flex: none;
             order: 1;
