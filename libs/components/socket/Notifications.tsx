@@ -220,7 +220,7 @@ export const NotificationBell = ({ initialInput, ...props }: any) => {
 NotificationBell.defaultProps = {
   initialInput: {
     page: 1,
-    limit: 5,
+    limit: 30,
     sort: "createdAt",
     directions: "DESC",
     search: {},
