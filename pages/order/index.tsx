@@ -144,7 +144,7 @@ function Checkout() {
   return (
     <Grid
       container
-      sx={{ display: "flex", minHeight: "70vh", backgroundColor: "#f4f6f8" }}
+      sx={{ display: "flex", minHeight: "84vh", backgroundColor: "#f4f6f8" }}
     >
       {/* Left panel */}
       <Grid

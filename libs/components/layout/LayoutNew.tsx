@@ -85,7 +85,7 @@ const withLayoutNew = (Component: any) => {
         case "/order":
           title = "Order Page";
           desc = "Home / Order";
-          bgImage = "/img/banner/order.jpg";
+          bgImage = "/img/banner/deleveriy.jpg";
           break;
         default:
           break;
