@@ -8,7 +8,6 @@ import { useState } from "react";
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardContent,
   Chip,
@@ -18,7 +17,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Member } from "@/libs/types/member/member";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useReactiveVar } from "@apollo/client";
 import { userVar } from "@/apollo/store";

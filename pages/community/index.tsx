@@ -19,7 +19,6 @@ import {
   sweetMixinErrorAlert,
   sweetTopSmallSuccessAlert,
 } from "@/libs/sweetAlert";
-import CommunityCard from "@/libs/components/homepage/CommunityCard";
 import CommunityCardMyPage from "@/libs/components/common/CommunityCardMyPage";
 
 export const getStaticProps = async ({ locale }: any) => ({

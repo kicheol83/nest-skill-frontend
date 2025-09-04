@@ -14,11 +14,11 @@ const Company = () => {
             <span>Companies we helped grow</span>
           </Box>
           <Box className="company-logo">
-            <img src="/icons/service/VADAFONE.SVG" alt="" />
-            <img className="logo" src="/icons/service/INTEL.SVG" alt="" />
-            <img className="logo" src="/icons/service/TESLA.SVG" alt="" />
-            <img className="logo" src="/icons/service/AMD.SVG" alt="" />
-            <img className="logo" src="/icons/service/TALKIT.SVG" alt="" />
+            <img src="/icons/service/VADAFONE.svg" alt="" />
+            <img className="logo" src="/icons/service/INTEL.svg" alt="" />
+            <img className="logo" src="/icons/service/TESLA.svg" alt="" />
+            <img className="logo" src="/icons/service/AMD.svg" alt="" />
+            <img className="logo" src="/icons/service/TALKIT.svg" alt="" />
           </Box>
         </Stack>
       </Stack>

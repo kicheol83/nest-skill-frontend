@@ -14,10 +14,7 @@ const Footer = () => {
           <Box className="app-name">
             <div className="skill-logo">
               {" "}
-              <img
-                src="/icons/nest-logo.svg"
-                alt="Logo"
-              />
+              <img src="/icons/nest-logo.svg" alt="Logo" />
               <p>Skill Nest</p>
             </div>
             <div className="title">
@@ -56,7 +53,7 @@ const Footer = () => {
 
               <Button className="subscribe-btn">
                 <svg
-                  xmlns=""
+                  xmlns="http://www.w3.org/2000/svg"
                   width="30"
                   height="10"
                   viewBox="0 0 38 15"
@@ -64,8 +61,8 @@ const Footer = () => {
                 >
                   <path
                     fill="currentColor"
-                    d="M10 7.519l-.939-.344h0l.939.344zm14.386-1.205l-.981-.192.981.192zm1.276 5.509l.537.843..."
-                  ></path>
+                    d="M0 7.5 L36 7.5 M30 3 L36 7.5 L30 12"
+                  />
                 </svg>
                 Subscribe
               </Button>

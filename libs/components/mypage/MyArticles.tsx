@@ -11,7 +11,6 @@ import {
   sweetMixinErrorAlert,
   sweetTopSmallSuccessAlert,
 } from "../../sweetAlert";
-import { Message } from "../../enums/common.enum";
 import CommunityCardMyPage from "../common/CommunityCardMyPage";
 import { LIKE_TARGET_BOARD_ARTCILE } from "@/apollo/user/mutation";
 import { Messages } from "@/libs/config";

@@ -34,7 +34,6 @@ interface NoticeListProps {
   notices: Notice[];
   removeFaqHandler: any;
   updateFaqHandler?: any;
-  onSave: (data: NoticeUpdate) => void;
 }
 
 const style = {

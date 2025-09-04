@@ -15,7 +15,6 @@ import {
   Rating,
 } from "@mui/material";
 import {
-  Delete,
   ArrowDropDown,
   LocationOn,
   AttachMoney,
@@ -39,7 +38,6 @@ import {
 import { Order, OrderItem } from "@/libs/types/order/order";
 import { OrderInquiry } from "@/libs/types/order/order.input";
 import { T } from "@/libs/types/common";
-import { Review } from "@/libs/types/review-post/review";
 import axios from "axios";
 import { getJwtToken } from "@/libs/auth";
 import { CreateReviewInput } from "@/libs/types/review-post/review.input";

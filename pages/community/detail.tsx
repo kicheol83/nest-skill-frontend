@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
-import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
 import {
   Button,
   Stack,
@@ -38,7 +37,7 @@ import {
 } from "@/apollo/user/mutation";
 import { GET_BOARD_ARTICLE, GET_COMMENTS } from "@/apollo/user/query";
 import { T } from "@/libs/types/common";
-import { Messages } from "@/libs/config";
+import { Messages, REACT_APP_API_URL } from "@/libs/config";
 import {
   sweetConfirmAlert,
   sweetMixinErrorAlert,
@@ -352,7 +351,11 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
                       </Typography>
                       <Stack className="member-info">
                         <img
-                          src={memberImage}
+                          src={
+                            boardArticle?.memberData?.memberImage
+                              ? `${REACT_APP_API_URL}/${boardArticle?.memberData?.memberImage}`
+                              : "/img/profile/defaultUser.svg"
+                          }
                           alt=""
                           className="member-img"
                           onClick={() =>
@@ -388,6 +391,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
                         ) : (
                           <ThumbUpOffAltIcon
                             onClick={() =>
+                              // @ts-ignore
                               likeBoArticleHandler(user, boardArticle._id!)
                             }
                           />
@@ -447,6 +451,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
                         ) : (
                           <ThumbUpOffAltIcon
                             onClick={() =>
+                              // @ts-ignore
                               likeBoArticleHandler(user, boardArticle._id!)
                             }
                             sx={{

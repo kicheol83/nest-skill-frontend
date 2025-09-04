@@ -12,7 +12,6 @@ import {
 import { useRouter, withRouter } from "next/router";
 import { CaretDown } from "phosphor-react";
 import React, { useEffect, useState, useCallback } from "react";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
@@ -112,7 +111,6 @@ const Top = () => {
     <Stack className="navbar">
       <Stack className={`navbar-main ${colorChange ? "scrolled" : ""}`}>
         <Stack className="container">
-          {/* Logo */}
           <Box component="div" className="logo-box">
             <Link href="/" className="logo">
               <img src="/icons/nest-logo.svg" alt="Logo" />
@@ -120,7 +118,6 @@ const Top = () => {
             </Link>
           </Box>
 
-          {/* Menu Links */}
           <Box component="div" className="router-box">
             <Link href="/">
               <div>{t("Home")}</div>
@@ -159,7 +156,6 @@ const Top = () => {
               </Box>
             ) : user?._id ? (
               <>
-                {/* Avatar va profil menyu */}
                 <Box
                   className="auth-box"
                   sx={{

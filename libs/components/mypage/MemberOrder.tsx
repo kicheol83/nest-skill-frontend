@@ -69,7 +69,7 @@ const MemberOrder: NextPage = ({ initialInput, ...props }: any) => {
     return (
       <Box ml={40} textAlign="center" mt={15}>
         <Typography sx={{ fontFamily: "Space Grotesk" }} variant="h1" mb={3}>
-          Provider - Orders
+          Member - Orders
         </Typography>
         <div className={"no-data"}>
           <img src="/img/icons/icoAlert.svg" alt="" />
@@ -82,7 +82,7 @@ const MemberOrder: NextPage = ({ initialInput, ...props }: any) => {
   return (
     <Box p={3}>
       <Typography sx={{ fontFamily: "Space Grotesk" }} variant="h1" mb={3}>
-        Provider - Orders
+        Member - Orders
       </Typography>
 
       {orders.map((order: Order) => (
@@ -194,7 +194,6 @@ const MemberOrder: NextPage = ({ initialInput, ...props }: any) => {
       {orders.length !== 0 && (
         <Stack
           className="pagination-config-orders"
-          ml={"50%"}
           mt={3}
           alignItems="center"
         >

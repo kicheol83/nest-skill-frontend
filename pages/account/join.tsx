@@ -7,9 +7,8 @@ import withLayoutNew from "@/libs/components/layout/LayoutNew";
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { logIn, signUp } from "@/libs/auth";
 import { sweetMixinErrorAlert } from "@/libs/sweetAlert";
-import { useMutation } from "@apollo/client";
-import { GOOGLE_LOGIN } from "@/apollo/user/mutation";
-import GoogleButtonWithLogin from "@/libs/hooks/useGoogleButton";
+// import GoogleButtonWithLogin from "@/libs/hooks/useGoogleButton";
+import GoogleButtonViewOnly from "@/libs/hooks/useGoogleButton";
 
 export const getStaticProps = async ({ locale }: any) => ({
   props: {
@@ -108,7 +107,7 @@ const JoinPage: NextPage = () => {
                 <span className="txt">
                   {isLogin ? "Welcome back!" : "Get more opportunities"}
                 </span>
-                <GoogleButtonWithLogin isLogin={isLogin} />
+                <GoogleButtonViewOnly isLogin={isLogin} />
               </Box>
 
               <Box className="bott-line">

@@ -104,15 +104,8 @@ const CommunityBoard = (props: BoardArticleProps) => {
               page={currentPage}
               count={Math.ceil(total / initialInput.limit)}
               onChange={paginationChangeHandler}
-              variant="outlined"
               shape="circular"
-              sx={{
-                "& .MuiPaginationItem-root": {
-                  fontSize: "1rem",
-                  width: "38px",
-                  height: "38px",
-                },
-              }}
+              color="secondary"
             />
           </Stack>
         </Stack>

@@ -1,5 +1,4 @@
 import Filter from "@/libs/components/service/Filter";
-import ServiceJobsCard from "@/libs/components/service/ServiceJobsCard";
 import {
   Box,
   Button,
@@ -255,15 +254,8 @@ const ServicePage: NextPage = ({ initialInput, ...props }: any) => {
               page={currentPage}
               count={Math.ceil(total / searchFilter.limit)}
               onChange={handlePaginationChange}
-              variant="outlined"
               shape="circular"
-              sx={{
-                "& .MuiPaginationItem-root": {
-                  fontSize: "1rem",
-                  width: "38px",
-                  height: "38px",
-                },
-              }}
+              color="secondary"
             />
           </Stack>
         </Stack>

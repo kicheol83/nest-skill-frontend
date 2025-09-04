@@ -14,6 +14,7 @@ interface ChatMessage {
   message: string;
   timestamp: string;
   memberImage?: string;
+  memberId?: string;
 }
 
 export default function FloatingChat() {
@@ -22,6 +23,11 @@ export default function FloatingChat() {
   const [onlineUsers, setOnlineUsers] = useState<number>(0);
   const [input, setInput] = useState("");
   const [username, setUsername] = useState(user?.memberNick);
+  const [image, setImage] = useState(
+    user?.memberImage
+      ? `${REACT_APP_API_URL}/${user.memberImage}`
+      : "/img/profile/defaultUser.svg"
+  );
   const [open, setOpen] = useState(false);
   const socketRef = useRef<Socket | null>(null);
   const bottomRef = useRef<HTMLDivElement | null>(null);
@@ -29,6 +35,11 @@ export default function FloatingChat() {
   useEffect(() => {
     if (!user?.memberNick) return;
     setUsername(user.memberNick);
+    setImage(
+      user?.memberImage
+        ? `${REACT_APP_API_URL}/${user.memberImage}`
+        : "/img/profile/defaultUser.svg"
+    );
 
     const socket = getSocket(user._id);
     socketRef.current = socket;
@@ -57,10 +68,9 @@ export default function FloatingChat() {
     const msg: ChatMessage = {
       sender: username!,
       message: input,
+      memberId: user?._id,
       timestamp: new Date().toISOString(),
-      memberImage: user?.memberImage
-        ? `${REACT_APP_API_URL}/${user.memberImage}`
-        : "/img/profile/defaultUser.svg",
+      memberImage: image,
     };
     socketRef.current.emit("sendMessage", msg);
     setInput("");
@@ -135,12 +145,7 @@ export default function FloatingChat() {
                 }}
               >
                 <Avatar
-                  src={
-                    ""
-                    // msg.memberImage
-                    //   ? `${REACT_APP_API_URL}/${msg.memberImage}`
-                    //   : "/img/profile/defaultUser.svg"
-                  }
+                  src={msg.memberImage}
                   alt={msg.sender}
                   sx={{
                     width: 32,

@@ -309,7 +309,7 @@ const AddProviderPost = ({ initialValues, ...props }: any) => {
                     onChange={({ target: { value } }) =>
                       setInsertProviderPostData({
                         ...insertProviderPostData,
-                        providerType: value,
+                        providerType: value as ProviderType,
                       })
                     }
                   >
@@ -345,7 +345,7 @@ const AddProviderPost = ({ initialValues, ...props }: any) => {
                     onChange={({ target: { value } }) =>
                       setInsertProviderPostData({
                         ...insertProviderPostData,
-                        providerLocation: value,
+                        providerLocation: value as ProviderLocation,
                       })
                     }
                   >
@@ -391,7 +391,7 @@ const AddProviderPost = ({ initialValues, ...props }: any) => {
                     onChange={({ target: { value } }) =>
                       setInsertProviderPostData({
                         ...insertProviderPostData,
-                        providerWorkWeekday: value,
+                        providerWorkWeekday: value as ProviderWorkWeekday,
                       })
                     }
                   >
@@ -433,7 +433,7 @@ const AddProviderPost = ({ initialValues, ...props }: any) => {
                           <Checkbox
                             checked={
                               insertProviderPostData.providerWeekday?.includes(
-                                day
+                                day as ProviderWeekday
                               ) || false
                             }
                             onChange={(e) => {
@@ -441,7 +441,7 @@ const AddProviderPost = ({ initialValues, ...props }: any) => {
                                 insertProviderPostData.providerWeekday || [];
 
                               if (e.target.checked) {
-                                updatedDays = [...updatedDays, day];
+                                updatedDays = [...updatedDays, day as ProviderWeekday];
                               } else {
                                 updatedDays = updatedDays.filter(
                                   (d) => d !== day
@@ -478,7 +478,7 @@ const AddProviderPost = ({ initialValues, ...props }: any) => {
                     onChange={({ target: { value } }) =>
                       setInsertProviderPostData({
                         ...insertProviderPostData,
-                        providerRateType: value,
+                        providerRateType: value as ProviderRateType,
                       })
                     }
                   >

@@ -180,7 +180,13 @@ export const NotificationBell = ({ initialInput, ...props }: any) => {
 
                 <Stack direction="row" alignItems="center" spacing={1}>
                   <Avatar sx={{ width: 32, height: 32, bgcolor: "#1976d2" }}>
-                    {notif.notificationTitle.charAt(0)}
+                    <Avatar
+                      sx={{ width: 32, height: 32, bgcolor: "#1976d2" }}
+                      src={notif.memberData?.memberImage || undefined}
+                    >
+                      {!notif.memberData?.memberImage &&
+                        notif.notificationTitle.charAt(0)}
+                    </Avatar>
                   </Avatar>
                   <Box>
                     <Typography

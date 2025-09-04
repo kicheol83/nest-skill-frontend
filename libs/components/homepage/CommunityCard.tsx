@@ -1,5 +1,6 @@
 import { REACT_APP_API_URL } from "@/libs/config";
 import { BoardArticle } from "@/libs/types/board-article/board-article";
+import { useRouter } from "next/router";
 
 interface BoardArticleCardProps {
   article: BoardArticle;
@@ -7,9 +8,30 @@ interface BoardArticleCardProps {
 
 export default function FlippingCards(props: BoardArticleCardProps) {
   const { article } = props;
+  const router = useRouter();
+  /** HANDLERS **/
+  const chooseArticleHandler = (
+    e: React.SyntheticEvent,
+    article: BoardArticle
+  ) => {
+    router.push(
+      {
+        pathname: "/community/detail",
+        query: {
+          articleCategory: article?.articleCategory,
+          id: article?._id,
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
+  };
   return (
     <div className="col">
-      <div className="container1">
+      <div
+        className="container1"
+        onClick={(e: any) => chooseArticleHandler(e, article)}
+      >
         <div
           className="front"
           style={{

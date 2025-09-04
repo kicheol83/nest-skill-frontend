@@ -451,9 +451,6 @@ const FaqArticles: NextPage = (props: any) => {
               notices={notices.filter(
                 (n) => n.noticeCategory === NoticeCategory.NOTICE
               )}
-              anchorEl={anchorEl}
-              menuIconClickHandler={menuIconClickHandler}
-              menuIconCloseHandler={menuIconCloseHandler}
               updateFaqHandler={updateFaqHandler}
               removeFaqHandler={removeFaqHandler}
             />

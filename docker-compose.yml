@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  nest-skill-frontend:
+    container_name: nest-skill-frontend
+    restart: always
+    image: node:20.10.0
+    ports:
+      - "4000:3000"
+    environment:
+      - PORT=3000
+    volumes:
+      - ./:/usr/src/nest-skill-frontend
+    working_dir: /usr/src/nest-skill-frontend
+
+    networks:
+      - client_network
+
+    # FOR PRODUCTION
+    command: bash -c "yarn && yarn run build && yarn run start"
+
+networks:
+  client_network:
+    driver: bridge

@@ -15,9 +15,7 @@ import {
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
-import { Member } from "../../../types/member/member";
 import { REACT_APP_API_URL } from "../../../config";
-import { MemberStatus, MemberType } from "../../../enums/member.enum";
 import { Payment } from "@/libs/types/payment/payment";
 import { PaymentMethod, PaymentStatus } from "@/libs/enums/payment.enum";
 

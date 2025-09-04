@@ -196,11 +196,11 @@ const withAdminLayout = (Component: ComponentType) => {
           </Drawer>
 
           <Box component={"div"} id="bunker" sx={{ flexGrow: 1 }}>
-            {/*@ts-ignore*/}
             <Component
               {...props}
-              setSnackbar={setSnackbar}
-              setTitle={setTitle}
+              // @ts-ignore
+              setSnackbar={setSnackbar as any}
+              setTitle={setTitle as any}
             />
           </Box>
         </Box>

@@ -110,7 +110,7 @@ const FeaturedCard = (props: FeaturedCardProps) => {
               {featured.providerLevel}
             </Button>
             <Button variant="contained" size="small" className="level1">
-              {featured.providerRateType}
+              {featured.providerWorkPrice}$
             </Button>
 
             <Stack direction="row" spacing={2} className="view-like">
