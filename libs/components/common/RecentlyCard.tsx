@@ -1,7 +1,5 @@
 import useDeviceDetect from "@/libs/hooks/useDeviceDetect";
 import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { ProviderPost } from "@/libs/types/provider-post/provider-post";
 interface RecentlyCardProps {
   providerPost: ProviderPost;
@@ -23,7 +21,7 @@ const RecentlyCard = (props: RecentlyCardProps) => {
         <Box className="latest-box">
           <Avatar
             alt="Remy Sharp"
-            src="/img/profile/men.webp"
+            src={providerPost?.providerImages[0]}
             sx={{ width: 64, height: 64, margin: "0px 4px" }}
           />
           <Box className="box-title">

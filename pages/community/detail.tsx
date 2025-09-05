@@ -49,6 +49,11 @@ import { CommentUpdate } from "@/libs/types/comment/comment.update";
 import { Comment } from "@/libs/types/comment/comment";
 import dynamic from "next/dynamic";
 
+const ToastViewerComponent = dynamic(
+  () => import("../../libs/components/community/TViewer"),
+  { ssr: false }
+);
+
 const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
   const device = useDeviceDetect();
   const router = useRouter();
@@ -77,10 +82,6 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
   const [updatedCommentId, setUpdatedCommentId] = useState<string>("");
   const [likeLoading, setLikeLoading] = useState<boolean>(false);
   const [boardArticle, setBoardArticle] = useState<BoardArticle>();
-  const ToastViewerComponent = dynamic(
-    () => import("../../libs/components/community/TViewer"),
-    { ssr: false }
-  );
 
   /** APOLLO REQUESTS **/
   const [likeTargetBoardArticle] = useMutation(LIKE_TARGET_BOARD_ARTCILE);
